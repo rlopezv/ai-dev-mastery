@@ -10,37 +10,38 @@ Update this file at the end of each working session to capture:
 ## Last session
 
 **Date:** 2026-04-15
-**Phase:** Infrastructure cleanup — devcontainer and docker-compose
+**Phase:** Fase 3 — Module 2 documentation complete (llm-apis)
 
 ### Completed
 
-- `infrastructure/docker-compose.yml` — finalized: two profiles (`light`, `full`), `ollama-init` service handles model pulling (depends on `ollama` healthcheck), ChromaDB and Open WebUI included, all config via env vars
-- `.devcontainer/devcontainer.json` — updated to reference `Dockerfile` and `post-create.sh`, `remoteEnv` aligned with docker-compose env vars
-- `.devcontainer/post-create.sh` — simplified: removed Ollama wait loop and model pull (steps 2–3); only installs Python dependencies; model pulling is now the responsibility of `ollama-init` in docker-compose
+- `docs/llm-apis/README.md` — step-readme: overview, concept map, learning flow, labs table
+- `docs/llm-apis/openai-api.md` — topic: Chat Completions API, message roles, usage metadata, finish_reason
+- `docs/llm-apis/ollama-api.md` — topic: OpenAI-compatible interface, native API, model management
+- `docs/llm-apis/anthropic-api.md` — topic: Messages API schema differences vs OpenAI (system field, content blocks, usage field names)
+- `docs/llm-apis/streaming.md` — topic: SSE, token deltas, first-token latency, chunk accumulation
+- `docs/llm-apis/api-patterns.md` — topic: retry with backoff, conversation accumulation, provider abstraction
+- `docs/llm-apis/architecture.md` — system-level view: 5-component model, batch and streaming data flows
+- `docs/llm-apis/implementation-reference.md` — ChatResponse dataclass, component mapping, design decisions
+- `docs/llm-apis/validation.md` — conceptual, practical, lab, and integration validation criteria
+- `docs/reference/glossary.md` — 17 new entries added for llm-apis concepts
+- `CLAUDE.md` — updated: SESSION-CONTEXT.md update added to all task workflows + general rule for ad-hoc tasks
+- `.devcontainer/post-create.sh` — simplified: removed Ollama wait loop and model pull
 
-### Key decision
+### Key decisions
 
-The devcontainer is responsible only for the dev environment (Python deps).
-Ollama lifecycle (start, model pull) is handled by docker-compose, which is
-optional and run separately. The devcontainer does not depend on Ollama being up.
+- `ChatResponse` dataclass as normalization boundary between providers
+- `stop_reason` normalized at abstraction layer (`"stop"`/`"length"` canonical)
+- Conversation history as plain `list[dict]` — lifecycle management deferred to application layer
 
 ---
 
 ## Pending — next session
 
-### 1. Continue module content (Fase 3)
+### 1. Module 3 — prompt-engineering
 
-`llm-fundamentals` is complete. Next module: `llm-apis`.
+`llm-apis` is fully complete (docs + labs). Next module:
+> `/write-module prompt-engineering`
 
-Recommended task:
-> `/write-module llm-apis`
+### 2. Glossary
 
-### 2. Populate glossary incrementally
-
-`docs/reference/glossary.md` is in progress (`🔄`).
-Add entries as each module is written — never in one pass.
-
-### 3. Infrastructure: verify docker-compose profiles before next lab
-
-Run `docker compose --profile light up` and confirm `ollama-init` pulls the
-model correctly before writing the first `llm-apis` lab.
+`docs/reference/glossary.md` — 17 llm-apis entries added. Continue populating per module.

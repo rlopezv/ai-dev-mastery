@@ -225,6 +225,13 @@ Core engineering topics must not remain unmapped.
 | `scaling-strategies.md` | `lab-scaling` | implementation | optional |
 | `infrastructure-as-code.md` | `lab-iac` | implementation | optional |
 
+> **Scope note:** `deployment-patterns.md` or `scaling-strategies.md` must explicitly cover
+> async LLM workload patterns: task queues (e.g. Celery, ARQ), message brokers (e.g. Redis,
+> RabbitMQ), and webhook/callback patterns for long-running generations. These are the
+> production-grade alternatives to synchronous streaming when clients may disconnect,
+> generation time exceeds HTTP timeouts, or multiple consumers need to receive results.
+> Origin: decision from `llm-apis` module review (2026-04-15).
+
 ---
 
 ### observability-mlops

@@ -44,7 +44,7 @@ Do not edit manually unless correcting an error.
 | Module | README | Topics | Architecture | Impl. Ref. | Validation | Labs |
 |--------|--------|--------|--------------|------------|------------|------|
 | `llm-fundamentals` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `llm-apis` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| `llm-apis` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `prompt-engineering` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `structured-outputs` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `rag` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -64,5 +64,5 @@ Do not edit manually unless correcting an error.
 
 ## Last updated
 
-Session: Fase 3 — Module 1 complete (llm-fundamentals: 10 docs ✅ + 5 labs ✅)
+Session: Fase 3 — Module 2 fully complete (llm-apis: 9 docs ✅ + 5 labs ✅)
 Date: 2026-04-15

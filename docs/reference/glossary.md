@@ -10,6 +10,91 @@ Use the canonical name as defined here. Do not paraphrase or rename existing ent
 
 <!-- Entries are added here alphabetically as modules are written -->
 
+### Anthropic Messages API
+The HTTP API exposed by Anthropic for interacting with Claude models, distinguished from the OpenAI Chat Completions API by a separate top-level `system` field, a content block response structure, and different field names for token usage and stop reasons.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/anthropic-api.md`
+
+### API client
+A language-level library that wraps the raw HTTP calls to an LLM provider's API, handling authentication, serialization, and often retry logic; the OpenAI Python SDK and the Anthropic Python SDK are the primary clients used in this tutorial.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/openai-api.md`
+
+### chat completion API
+An HTTP interface for LLM interaction in which the caller sends an ordered list of role-labeled messages and receives a generated assistant reply; the API is stateless, and the caller is responsible for managing conversation history.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/openai-api.md`
+
+### content block
+A typed response unit in the Anthropic Messages API that encapsulates a single piece of generated output — text, tool call, or image — allowing a model response to contain multiple heterogeneous elements in a single call.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/anthropic-api.md`
+
+### conversation accumulation
+The pattern of appending each user message and assistant reply to a growing message list before every subsequent API call, enabling stateful multi-turn conversations over a stateless API.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/api-patterns.md`
+
+### first-token latency
+The elapsed time between sending an API request and receiving the first token of the response; in streaming mode this is typically under 500ms regardless of response length, whereas in batch mode it grows with total output length.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/streaming.md`
+
+### local LLM runtime
+A process that runs open-weight language models on local hardware and exposes them via an HTTP API, enabling offline development without cloud provider accounts or per-request costs; Ollama is the local runtime used in this tutorial.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/ollama-api.md`
+
+### message role
+A label on each message in a chat completion request that declares its origin and purpose: `system` for developer instructions, `user` for end-user input, and `assistant` for model replies or injected context.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/openai-api.md`
+
+### OpenAI-compatible API
+A REST API that implements the same request and response schema as the OpenAI Chat Completions endpoint, allowing client code written for OpenAI to run against other providers — such as Ollama — by changing only the `base_url` parameter.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/ollama-api.md`
+
+### provider abstraction
+A design pattern that normalizes provider-specific API schemas into a common response structure, localizing schema differences and enabling application logic to switch between providers without modification.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/api-patterns.md`
+
+### rate limiting
+A server-enforced constraint on the number of API requests or tokens a client may send within a time window, returning HTTP 429 when exceeded; transient and recoverable by retrying after a delay.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/api-patterns.md`
+
+### retry with backoff
+A resilience pattern that catches transient API errors and re-sends the request after an increasing delay — typically doubling on each attempt — to avoid overwhelming a rate-limited or temporarily unavailable endpoint.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/api-patterns.md`
+
+### server-sent events
+An HTTP mechanism in which the server writes a sequence of data lines to an open connection over time rather than closing it after a single response, used by LLM APIs to transmit token deltas as they are generated.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/streaming.md`
+
+### streaming
+A delivery mode for LLM API responses in which token deltas are transmitted over a persistent HTTP connection as they are generated, reducing first-token latency without changing total generation time.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/streaming.md`
+
+### system prompt
+The developer-controlled instruction text that establishes model behavior, persona, and constraints before the conversation begins; in the OpenAI API it is a message with `role: system`, and in the Anthropic API it is a separate top-level `system` field.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/anthropic-api.md`
+
+### token delta
+A partial response chunk transmitted during streaming, containing the one or more tokens generated since the previous chunk; the full response is reconstructed by concatenating all deltas received before the stream closes.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/streaming.md`
+
+### usage metadata
+The token count fields returned in every LLM API response — prompt tokens consumed and completion tokens generated — used for cost tracking, context budget management, and rate limit monitoring.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/openai-api.md`
+
 ### catastrophic forgetting
 The degradation of a model's general capabilities caused by heavy fine-tuning on a narrow domain, where the new weight updates overwrite patterns needed for tasks outside the training distribution.
 - **Origin:** `llm-fundamentals`
