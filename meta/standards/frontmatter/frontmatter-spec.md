@@ -48,11 +48,12 @@ The following learner-facing document types are recognized:
 - `step-readme`
 - `topic`
 - `architecture`
+- `reference-architecture`
 - `implementation-reference`
 - `validation`
 - `lab-readme`
 
-Every document under `docs/<step>/` MUST declare one of these values in frontmatter.
+Every document under `docs/<module>/` MUST declare one of these values in frontmatter.
 
 ---
 
@@ -66,10 +67,10 @@ Example:
 
 ```yaml
 ---
-id: "05-rag-embeddings-and-vector-search"
+id: "rag-embeddings-and-vector-search"
 title: "Embeddings and Vector Search"
 type: "topic"
-step: "05-rag"
+step: "rag"
 path: "docs/05-rag/embeddings-and-vector-search.md"
 status: "draft"
 level: "intermediate"
@@ -77,7 +78,7 @@ concepts:
   - "embeddings"
   - "vector-search"
 prerequisites:
-  - "04-tools-and-structured-outputs"
+  - "structured-outputs"
 next:
   - "05-rag/context-assembly"
 related:
@@ -188,6 +189,7 @@ title: "Context Management"
 - `step-readme`
 - `topic`
 - `architecture`
+- `reference-architecture`
 - `implementation-reference`
 - `validation`
 
@@ -211,14 +213,14 @@ Must match the parent step directory.
 #### Format
 
 ```text
-NN-kebab-case
+kebab-case
 ```
 
 #### Examples
 
 ```yaml
-step: "01-foundations"
-step: "05-rag"
+step: "llm-fundamentals"
+step: "rag"
 ```
 
 ---
@@ -599,7 +601,7 @@ Reason:
 
 ```yaml
 ---
-step: "04-tools-and-structured-outputs"
+step: "structured-outputs"
 path: "docs/05-rag/embeddings-and-vector-search.md"
 ---
 ```
@@ -618,7 +620,7 @@ Reason:
 id: "05-rag-readme"
 title: "RAG"
 type: "step-readme"
-step: "05-rag"
+step: "rag"
 path: "docs/05-rag/README.md"
 status: "draft"
 level: "intermediate"
@@ -627,7 +629,7 @@ concepts:
   - "retrieval"
   - "context-assembly"
 prerequisites:
-  - "04-tools-and-structured-outputs"
+  - "structured-outputs"
 next:
   - "05-rag/rag-system-components.md"
 related:
@@ -644,10 +646,10 @@ summary: "Introduces retrieval-augmented generation and the structure of this st
 
 ```yaml
 ---
-id: "05-rag-embeddings-and-vector-search"
+id: "rag-embeddings-and-vector-search"
 title: "Embeddings and Vector Search"
 type: "topic"
-step: "05-rag"
+step: "rag"
 path: "docs/05-rag/embeddings-and-vector-search.md"
 status: "draft"
 level: "intermediate"

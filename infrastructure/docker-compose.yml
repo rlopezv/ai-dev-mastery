@@ -29,6 +29,22 @@ services:
       retries: 10
       start_period: 30s
 
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: ollama-init
+    profiles: ["light", "full"]
+    volumes:
+      - ollama_data:/root/.ollama
+      - ./ollama/pull-model.sh:/pull-model.sh:ro
+    environment:
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.2}
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: ["sh", "/pull-model.sh"]
+    depends_on:
+      ollama:
+        condition: service_healthy
+    restart: "no"
+
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
