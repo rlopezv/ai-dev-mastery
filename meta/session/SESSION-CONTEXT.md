@@ -37,11 +37,11 @@ Update this file at the end of each working session to capture:
 
 ## Pending — next session
 
-### 1. Module 3 — prompt-engineering
+### 1. Module 4 — structured-outputs
 
-`llm-apis` is fully complete (docs + labs). Next module:
-> `/write-module prompt-engineering`
+`prompt-engineering` is fully complete (docs + labs). Next:
+> `/write-module structured-outputs`
 
 ### 2. Glossary
 
-`docs/reference/glossary.md` — 17 llm-apis entries added. Continue populating per module.
+`docs/reference/glossary.md` — 19 prompt-engineering entries added (2026-04-15).

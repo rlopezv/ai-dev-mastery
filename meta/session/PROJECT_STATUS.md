@@ -45,7 +45,7 @@ Do not edit manually unless correcting an error.
 |--------|--------|--------|--------------|------------|------------|------|
 | `llm-fundamentals` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `llm-apis` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `prompt-engineering` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| `prompt-engineering` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `structured-outputs` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `rag` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `memory-context` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -64,5 +64,5 @@ Do not edit manually unless correcting an error.
 
 ## Last updated
 
-Session: Fase 3 — Module 2 fully complete (llm-apis: 9 docs ✅ + 5 labs ✅)
+Session: Fase 3 — Module 3 fully complete (prompt-engineering: 9 docs ✅ + 4 labs ✅)
 Date: 2026-04-15

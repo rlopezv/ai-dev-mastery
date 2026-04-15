@@ -10,6 +10,96 @@ Use the canonical name as defined here. Do not paraphrase or rename existing ent
 
 <!-- Entries are added here alphabetically as modules are written -->
 
+### chain-of-thought
+A prompting technique that asks the model to produce intermediate reasoning steps before the final answer, externalizing the reasoning process so each step becomes context for the next and enabling reliable multi-step inference.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/chain-of-thought.md`
+
+### context
+The background information or input material included in a prompt that the model needs to complete the task but does not already know, such as the text to classify, the code to review, or the document to summarize.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-anatomy.md`
+
+### few-shot prompting
+A technique that provides labeled input/output examples inside the prompt so the model can infer the expected task pattern from demonstration rather than from explicit instruction.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/few-shot.md`
+
+### in-context learning
+The ability of a language model to adapt its behavior to a task by observing examples provided in the prompt, without any change to the model's weights.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/few-shot.md`
+
+### instruction
+The explicit task directive within a prompt that tells the model what action to perform — classify, summarize, translate, extract, generate — and what the expected output shape is.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-anatomy.md`
+
+### instruction conflict
+A prompt design failure mode in which two instructions cannot both be satisfied simultaneously, causing the model to arbitrarily satisfy one and ignore the other.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-pitfalls.md`
+
+### intermediate reasoning steps
+The sequence of explicit reasoning operations a model produces before a final answer when chain-of-thought is elicited, each step serving as input context for the next.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/chain-of-thought.md`
+
+### output-format specification
+An explicit instruction within a prompt that defines the required structure of the model's response — JSON schema, bullet list, single word, or a specific template — to ensure the output can be parsed reliably.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-patterns.md`
+
+### over-specification
+A prompt design failure mode in which too many constraints are placed on the model's response, creating geometrically incompatible requirements that cause some constraints to be silently violated.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-pitfalls.md`
+
+### prompt anatomy
+The internal structure of a prompt as a composition of five functional components — system prompt, instruction, context, examples, and output format specification — each communicating a distinct signal to the model.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-anatomy.md`
+
+### prompt injection
+An attack in which user-provided content introduces new instructions into the prompt that override or extend the original developer instructions, causing the model to behave outside its intended scope.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-pitfalls.md`
+
+### prompt pattern
+A reusable structural template for a prompt that separates the invariant scaffolding — role, format, process — from the variable task content, enabling the pattern to be tested and versioned independently.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-patterns.md`
+
+### role prompting
+A prompting technique that assigns the model a specific professional identity with relevant expertise and behavioral constraints, anchoring the response vocabulary, tone, and assumed knowledge base.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-patterns.md`
+
+### scratchpad
+The space in a model's generated output where chain-of-thought reasoning is written, serving as external working memory that the model attends to when generating subsequent tokens.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/chain-of-thought.md`
+
+### shot
+A single labeled input/output example included in a prompt; the number of shots determines the technique name: zero-shot (no examples), one-shot (one example), few-shot (two to five), many-shot (ten or more).
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/few-shot.md`
+
+### step-by-step instruction
+A prompting pattern that decomposes a task into an explicit numbered sequence of steps the model must follow in order, prescribing the reasoning process rather than leaving it implicit.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-patterns.md`
+
+### under-specification
+A prompt design failure mode in which instructions are too vague or incomplete, allowing multiple valid interpretations and causing inconsistent output across runs.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-pitfalls.md`
+
+### zero-shot prompting
+A prompting approach that provides only an instruction with no examples, relying on the model's training to interpret and execute the task without demonstrated patterns.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-anatomy.md`
+
 ### Anthropic Messages API
 The HTTP API exposed by Anthropic for interacting with Claude models, distinguished from the OpenAI Chat Completions API by a separate top-level `system` field, a content block response structure, and different field names for token usage and stop reasons.
 - **Origin:** `llm-apis`
