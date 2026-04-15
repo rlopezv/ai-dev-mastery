@@ -1,0 +1,56 @@
+{
+  "name": "AI Dev Mastery",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11-bookworm",
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "ms-python.flake8",
+        "charliermarsh.ruff",
+        "ms-toolsai.jupyter",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "redhat.vscode-yaml",
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "christian-kohler.path-intellisense",
+        "usernamehw.errorlens",
+        "gruntfuggly.todo-tree",
+        "humao.rest-client"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": true,
+        "editor.rulers": [88],
+        "files.trimTrailingWhitespace": true,
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter"
+        },
+        "[markdown]": {
+          "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+        }
+      }
+    }
+  },
+
+  "postCreateCommand": "pip install --upgrade pip && bash -c 'source infrastructure/.env 2>/dev/null || true; docker exec ollama ollama pull ${OLLAMA_MODEL:-mistral}'",
+
+  "remoteEnv": {
+    "OLLAMA_BASE_URL": "http://host.docker.internal:11434"
+  },
+
+  "forwardPorts": [11434, 3000, 8000],
+
+  "portsAttributes": {
+    "11434": { "label": "Ollama API" },
+    "3000":  { "label": "Open WebUI" },
+    "8000":  { "label": "ChromaDB" }
+  }
+}
