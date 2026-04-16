@@ -1,4 +1,4 @@
-# validation-template.md
+# validation-scaffold.md
 
 ## Frontmatter (MANDATORY)
 

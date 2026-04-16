@@ -33,13 +33,13 @@ meta/
 │   │   └── frontmatter-spec.md        # frontmatter contract (mandatory)
 │   ├── writing/
 │   │   ├── writing-style.md           # writing style guide
-│   │   ├── topic-template.md          # topic template
-│   │   ├── step-readme-template.md    # module README template
-│   │   ├── architecture-template.md   # architecture template
-│   │   ├── implementation-reference-template.md
-│   │   ├── validation-template.md     # validation template
-│   │   ├── lab-entry-readme-template.md    # module lab README template (labs/<module>/README.md)
-│   │   └── lab-individual-readme-template.md  # individual lab README template (labs/<module>/lab-xxx/README.md)
+│   │   ├── topic-guide.md             # topic writing guide
+│   │   ├── step-readme-guide.md       # module README writing guide
+│   │   ├── architecture-guide.md      # architecture writing guide
+│   │   ├── implementation-reference-guide.md
+│   │   ├── validation-guide.md        # validation writing guide
+│   │   ├── lab-entry-readme-guide.md       # module lab README writing guide (labs/<module>/README.md)
+│   │   └── lab-individual-readme-guide.md  # individual lab README writing guide (labs/<module>/lab-xxx/README.md)
 │   ├── validation/
 │   │   ├── docs-checklist.md          # docs validation checklist
 │   │   └── labs-checklist.md          # labs validation checklist

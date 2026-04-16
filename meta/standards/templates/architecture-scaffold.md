@@ -1,4 +1,4 @@
-# architecture-template.md
+# architecture-scaffold.md
 
 ## Frontmatter (MANDATORY)
 

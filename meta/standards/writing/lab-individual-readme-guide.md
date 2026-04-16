@@ -1,4 +1,4 @@
-# lab-individual-readme-template.md
+# lab-individual-readme-guide.md
 
 ## Purpose
 
@@ -40,13 +40,13 @@ summary: "<One sentence: what the lab implements and what it demonstrates.>"
 
 ---
 
-## Overview
+## 1. Overview
 
 What this lab implements, what the learner will observe, and what is explicitly out of scope.
 
 ---
 
-## Concepts
+## 2. Concepts
 
 Table mapping each concept demonstrated to where it appears in the code.
 
@@ -56,7 +56,7 @@ Table mapping each concept demonstrated to where it appears in the code.
 
 ---
 
-## Setup
+## 3. Setup
 
 Infrastructure and dependency commands required before running the lab.
 
@@ -67,7 +67,7 @@ pip install <dependencies>
 
 ---
 
-## Run
+## 4. Run
 
 ```bash
 cd labs/<module>/lab-<name>
@@ -78,7 +78,7 @@ Environment variable overrides if applicable.
 
 ---
 
-## Expected Output
+## 5. Expected Output
 
 Annotated sample output showing what a successful run produces.
 Use `...` to omit repetitive lines. Annotate non-obvious values inline.
@@ -93,12 +93,12 @@ Final result line
 
 ---
 
-## What to observe
+## 6. What to observe
 
 Interpretive guidance — what to actively look for while the lab runs.
 Focus on behavioral differences, not just that the script completed.
 
-- What changes as the lab progresses (e.g. token count, output format, retrieval distance)
+- What changes as the lab progresses
 - What signals indicate the concept is working correctly
 - What to compare across runs or configurations
 - What failure looks like even when the script exits cleanly
@@ -107,7 +107,7 @@ Do not just read the final result — observe the intermediate outputs.
 
 ---
 
-## Concepts verified
+## 7. Concepts verified
 
 Checklist of what a successful run confirms.
 
@@ -116,7 +116,7 @@ Checklist of what a successful run confirms.
 
 ---
 
-## Failure case
+## 8. Failure case
 
 Active experiment: modify `main.py` at the marked `# FAILURE CASE` block and re-run.
 
@@ -129,8 +129,34 @@ Restore the original values after the experiment.
 
 ---
 
-## Infrastructure
+## 9. Infrastructure
 
 | Service | Purpose |
 |---------|---------|
 | `<service>` | `<what it does in this lab>` |
+
+---
+
+## Structural Rules
+
+This document MUST:
+
+- include complete frontmatter
+- follow section order 1–9 without gaps
+- contain specific, non-generic content in `## What to observe` and `## Failure case`
+- describe the failure case in terms of the lab's own concept, not a generic example
+
+This document MUST NOT:
+
+- replace the concept explanation from `docs/`
+- contain placeholder text (`<...>`, TBD, TODO)
+- omit `## Failure case` — it is mandatory for all labs
+
+---
+
+## Writing Rules
+
+- `## Expected Output` uses real output from a test run, not invented values
+- `## What to observe` targets behavioral observation, not just correctness
+- `## Failure case` names the exact block in `main.py` where the modification goes
+- `## Concepts verified` uses checkboxes — the learner marks them after running

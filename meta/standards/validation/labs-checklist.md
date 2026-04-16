@@ -190,7 +190,7 @@ FINAL SCORE = weighted sum (0–10)
 ### DA-4 Lab README is accurate and complete
 
 * **Severity:** Major
-* Individual lab README (`labs/<module>/lab-<name>/README.md`) must include all mandatory sections from `lab-individual-readme-template.md` in order:
+* Individual lab README (`labs/<module>/lab-<name>/README.md`) must include all mandatory sections from `lab-individual-readme-scaffold.md` in order:
   1. Frontmatter
   2. Overview
   3. Concepts (table)

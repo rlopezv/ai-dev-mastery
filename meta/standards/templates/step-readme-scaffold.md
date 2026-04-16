@@ -1,4 +1,4 @@
-# step-readme-template.md
+# step-readme-scaffold.md
 
 ## Frontmatter (MANDATORY)
 

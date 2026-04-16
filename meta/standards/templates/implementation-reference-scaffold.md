@@ -1,4 +1,4 @@
-# implementation-reference-template.md
+# implementation-reference-scaffold.md
 
 ## Scope
 

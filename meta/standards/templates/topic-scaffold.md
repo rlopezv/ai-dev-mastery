@@ -1,4 +1,4 @@
-# topic-template.md
+# topic-scaffold.md
 
 ## Frontmatter (MANDATORY)
 

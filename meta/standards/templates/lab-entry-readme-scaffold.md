@@ -1,4 +1,4 @@
-# lab-entry-readme-template.md
+# lab-entry-readme-scaffold.md
 
 ## Frontmatter (MANDATORY)
 

@@ -190,14 +190,14 @@ meta/
 │   │   ├── writing-style.md
 │   │   └── lab-code-style.md
 │   ├── templates/
-│   │   ├── topic-template.md
-│   │   ├── step-readme-template.md
-│   │   ├── architecture-template.md
-│   │   ├── reference-architecture-template.md
-│   │   ├── implementation-reference-template.md
-│   │   ├── validation-template.md
-│   │   ├── lab-entry-readme-template.md
-│   │   └── lab-individual-readme-template.md
+│   │   ├── topic-scaffold.md
+│   │   ├── step-readme-scaffold.md
+│   │   ├── architecture-scaffold.md
+│   │   ├── reference-architecture-scaffold.md
+│   │   ├── implementation-reference-scaffold.md
+│   │   ├── validation-scaffold.md
+│   │   ├── lab-entry-readme-scaffold.md
+│   │   └── lab-individual-readme-scaffold.md
 │   ├── validation/
 │   │   ├── docs-checklist.md
 │   │   └── labs-checklist.md

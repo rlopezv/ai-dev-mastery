@@ -54,14 +54,14 @@ Do not invent structure outside the template.
 
 ```
 meta/standards/templates/
-├── topic-template.md
-├── step-readme-template.md
-├── architecture-template.md
-├── reference-architecture-template.md
-├── implementation-reference-template.md
-├── validation-template.md
-├── lab-entry-readme-template.md
-└── lab-individual-readme-template.md
+├── topic-scaffold.md
+├── step-readme-scaffold.md
+├── architecture-scaffold.md
+├── reference-architecture-scaffold.md
+├── implementation-reference-scaffold.md
+├── validation-scaffold.md
+├── lab-entry-readme-scaffold.md
+└── lab-individual-readme-scaffold.md
 ```
 
 ---
@@ -207,7 +207,7 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 ### Design labs for a module
 
 1. Read the architecture and implementation-reference docs for that module
-2. Read `meta/standards/templates/lab-entry-readme-template.md`
+2. Read `meta/standards/templates/lab-entry-readme-scaffold.md`
 3. Define each lab: name, type, objective, components, expected outputs
 4. Write `labs/<module>/README.md`
 5. Validate with `meta/standards/validation/labs-checklist.md`
@@ -218,7 +218,7 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 
 1. Read the corresponding doc from `meta/system-design/DOCS_LABS_MAP.md`
 2. Read `meta/standards/writing/lab-code-style.md`
-3. Read `meta/standards/templates/lab-individual-readme-template.md`
+3. Read `meta/standards/templates/lab-individual-readme-scaffold.md`
 4. Implement `main.py`, `README.md`, and `requests.http` if applicable
 4. Validate with `meta/standards/validation/labs-checklist.md`
 5. Update `meta/session/PROJECT_STATUS.md`
