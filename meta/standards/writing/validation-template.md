@@ -51,7 +51,7 @@ implementation_refs:
 
 validation_refs:
   - "meta/standards/validation/docs-checklist.md"
-  - "meta/standards/validation/lab-checklist.md"
+  - "meta/standards/validation/labs-checklist.md"
 
 summary: "Defines criteria to validate understanding and implementation for this step."
 ---

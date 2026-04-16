@@ -1,39 +1,133 @@
-# Meta — Estándares y plantillas
+# meta/
 
-Este directorio contiene los estándares de calidad, plantillas y protocolos de revisión del repositorio.
+## Purpose
 
-## Contenido
+`meta/` contains the **internal build system** used to design, validate, and evolve this repository.
+
+It defines:
+
+* repository structure (system-design)
+* alignment between documentation and labs
+* editorial and implementation standards
+* workflow for working with Claude Code
+* session state and progress tracking
+
+This directory is **part of the authoring process only**.
+
+It is **not included in the final learner-facing repository**, which consists of:
+
+* `docs/`
+* `labs/`
+* `infrastructure/`
+
+---
+
+## Structure
 
 ```text
 meta/
-└── standards/
-    ├── frontmatter/
-    │   └── frontmatter-spec.md        ← contrato de frontmatter (obligatorio)
-    ├── writing/
-    │   ├── writing-style.md           ← guía de estilo de escritura
-    │   ├── topic-template.md          ← plantilla para topics
-    │   ├── step-readme-template.md    ← plantilla para README de módulo
-    │   ├── architecture-template.md   ← plantilla para architecture.md
-    │   ├── implementation-reference-template.md
-    │   ├── validation-template.md     ← plantilla para validation.md
-    │   └── lab-readme-template.md     ← plantilla para README de labs
-    ├── validation/
-    │   ├── docs-checklist.md          ← checklist de validación de docs
-    │   └── lab-checklist.md           ← checklist de validación de labs
-    └── review/
-        └── review-protocol.md         ← protocolo de revisión
+├── session/        # execution state and continuity
+├── system-design/  # canonical structure and alignment rules
+├── standards/      # contracts, templates, and validation rules
+│   ├── frontmatter/
+│   │   └── frontmatter-spec.md        # frontmatter contract (mandatory)
+│   ├── writing/
+│   │   ├── writing-style.md           # writing style guide
+│   │   ├── topic-template.md          # topic template
+│   │   ├── step-readme-template.md    # module README template
+│   │   ├── architecture-template.md   # architecture template
+│   │   ├── implementation-reference-template.md
+│   │   ├── validation-template.md     # validation template
+│   │   └── lab-readme-template.md     # lab README template
+│   ├── validation/
+│   │   ├── docs-checklist.md          # docs validation checklist
+│   │   └── labs-checklist.md          # labs validation checklist
+│   └── review/
+│       └── review-protocol.md         # review protocol
+└── workflow/       # operational model (Claude Code usage)
 ```
 
-## Reglas fundamentales
+---
 
-- Todo fichero bajo `docs/` debe incluir frontmatter válido según `frontmatter-spec.md`
-- Todo artefacto debe seguir la plantilla correspondiente en `writing/`
-- Los checklists en `validation/` son la referencia para aprobar un artefacto
+## Canonical vs Operational Files
 
-## Pendientes
+### Canonical (source of truth)
 
-- [ ] `writing-style.md` — completar con reglas acordadas
-- [ ] `docs-checklist.md` — definir criterios de validación
-- [ ] `lab-checklist.md` — definir criterios de validación de labs
-- [ ] `review-protocol.md` — definir protocolo de revisión
-- [ ] `reference-architecture-template.md` — template para módulo 15
+These files define the system and MUST be consistent:
+
+* `system-design/REPOSITORY_LAYOUT.md`
+  → defines repository structure
+
+* `system-design/DOCS_LABS_MAP.md`
+  → defines module sequence and docs↔labs alignment
+
+* `session/PROJECT_STATUS.md`
+  → defines overall project completion status
+
+---
+
+### Operational (non-canonical)
+
+These files support execution but are not authoritative:
+
+* `session/WORKPLAN.md`
+  → internal execution tracking (manual)
+
+* `session/SESSION-CONTEXT.md`
+  → session continuity and pending alignment
+
+* `workflow/CLAUDE-CODE-WORKFLOW.md`
+  → operational guidance for working with Claude Code
+
+---
+
+## Standards Layer
+
+`meta/standards/` defines the **normative layer of the build system**.
+
+It includes:
+
+* **contracts**
+  → frontmatter specification
+
+* **templates**
+  → reusable structures for docs and labs
+
+* **validation**
+  → checklists to enforce quality
+
+* **review**
+  → protocols for systematic review
+
+These rules are **expected to be followed by both humans and Claude Code** during content creation.
+
+---
+
+## Usage Model
+
+* `meta/` is used during **content construction**
+* `docs/`, `labs/`, and `infrastructure/` form the **final deliverable**
+* `CLAUDE.md` defines how the agent interacts with this system
+
+---
+
+## Important
+
+* `meta/` is required for authoring
+* `meta/` is not required for learners
+* `meta/` is excluded from the final distribution repository
+
+---
+
+## Design Principle
+
+This repository is built using a **separation of concerns between construction and delivery**:
+
+* **Build system** → `meta/`, `CLAUDE.md`, `.claude/`
+* **Delivery system** → `docs/`, `labs/`, `infrastructure/`
+
+This separation ensures:
+
+* consistency during authoring
+* clarity for learners
+* clean final distribution

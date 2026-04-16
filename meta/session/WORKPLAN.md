@@ -1,9 +1,22 @@
 # WORKPLAN.md
 
 Tracks all work units for the AI Dev Mastery tutorial, from first module to final project.
-Updated at the end of each session alongside `PROJECT_STATUS.md`.
+May be updated alongside `PROJECT_STATUS.md`, but does not define canonical completion status.
 
 **Legend:** ⬜ not started · 🔄 in progress · ✅ complete
+
+## Role
+
+This file is an **internal execution tracker**.
+
+- It is NOT a source of truth for completion status
+- It may contain incomplete, manual, or exploratory work
+- It is maintained as a working document during repository construction
+
+Canonical project status is defined in:
+
+→ `meta/session/PROJECT_STATUS.md`
+
 
 ---
 

@@ -30,7 +30,7 @@ implementation_refs:
 
 validation_refs:
   - "meta/standards/validation/docs-checklist.md"
-  - "meta/standards/validation/lab-checklist.md"
+  - "meta/standards/validation/labs-checklist.md"
 
 summary: "Defines criteria to validate understanding and implementation for this step."
 ---
@@ -46,8 +46,8 @@ What the learner should be able to do and what level of mastery is expected.
 
 ## 2. Conceptual Validation
 
-| Concept | Validation Method |
-|---------|------------------|
+| Concept     | Validation Method                 |
+| ----------- | --------------------------------- |
 | \<concept\> | explanation / reasoning / example |
 
 ---
@@ -65,10 +65,10 @@ Expected: Uses embeddings + vector search + context injection
 
 ## 4. Lab Validation
 
-| Lab | Validation Criteria |
-|-----|---------------------|
-| lab-01 | expected output |
-| lab-02 | expected behavior |
+| Lab    | Validation Criteria |
+| ------ | ------------------- |
+| lab-01 | expected output     |
+| lab-02 | expected behavior   |
 
 ---
 
@@ -87,6 +87,7 @@ Common misconceptions and incorrect implementations to watch for.
 ## 7. Completion Criteria (MANDATORY)
 
 A step is complete when:
+
 - All core concepts can be explained
 - Required labs execute correctly
 - Implementation tasks are completed
