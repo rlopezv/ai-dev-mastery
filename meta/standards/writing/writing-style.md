@@ -2,8 +2,9 @@
 
 ## Purpose
 
-This document defines the writing rules for all learner-facing documentation
-under `docs/`. Writing style is separate from document structure — structure
+This document defines the writing rules for all learner-facing content in the
+repository: `docs/`, `labs/`, `README.md` files at any level, and
+`infrastructure/`. Writing style is separate from document structure — structure
 is governed by templates. This document governs tone, language, and content
 quality within each section.
 

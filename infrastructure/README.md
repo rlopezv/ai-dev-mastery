@@ -1,39 +1,40 @@
 # Infrastructure
 
-Entorno local para ejecutar los laboratorios sin dependencias sobre proveedores externos.
+Local environment for running the labs without dependencies on external providers.
 
-## Servicios
+## Services
 
-| Servicio | Perfil | Puerto | Propósito |
-|----------|--------|--------|-----------|
-| Ollama | light, full | 11434 | LLM runtime local |
-| Open WebUI | light, full | 3000 | Interfaz web para interactuar con modelos |
-| ChromaDB | full | 8000 | Base de datos vectorial (módulos RAG+) |
+| Service | Profile | Port | Purpose |
+|---------|---------|------|---------|
+| Ollama | light, full | 11434 | Local LLM runtime |
+| Open WebUI | light, full | 3000 | Web interface for interacting with models |
+| ChromaDB | full | 8000 | Vector database (RAG modules and later) |
 
-## Inicio rápido
+## Quick start
 
 ```bash
 cd infrastructure
 cp .env.example .env
-# Edita .env según tu hardware (ver sección de configuración)
+# Edit .env for your hardware (see configuration section below)
 docker-compose --profile light up -d
 ```
 
-## Perfiles
+## Profiles
 
 ```bash
-# Módulos 01-08 o recursos limitados
+# Modules 01–04 or limited hardware
 docker-compose --profile light up -d
 
-# Módulos RAG, Agents, Memory (requiere ChromaDB)
+# Modules 05 RAG, Agents, Memory (requires ChromaDB)
 docker-compose --profile full up -d
 ```
 
-## Configuración por hardware
+## Hardware configuration
 
-Edita `infrastructure/.env` antes de arrancar. El modelo configurado en `OLLAMA_MODEL` se descargará automáticamente al abrir el devcontainer.
+Edit `infrastructure/.env` before starting. The model set in `OLLAMA_MODEL` is
+downloaded automatically when the devcontainer opens.
 
-### CPU only (sin GPU)
+### CPU only (no GPU)
 
 ```bash
 OLLAMA_MODEL=tinyllama
@@ -42,9 +43,10 @@ OLLAMA_NUM_PARALLEL=1
 OLLAMA_CONTEXT_LENGTH=2048
 ```
 
-> `tinyllama` es el más ligero (~600MB). Suficiente para validar el pipeline pero con menor calidad de respuesta.
+> `tinyllama` is the lightest option (~600MB). Sufficient to validate the pipeline
+> but with lower response quality.
 
-### NVIDIA GPU con 4-6GB VRAM (ej: RTX 3060, GTX 1080)
+### NVIDIA GPU with 4–6 GB VRAM (e.g. RTX 3060, GTX 1080)
 
 ```bash
 OLLAMA_MODEL=mistral
@@ -53,7 +55,7 @@ OLLAMA_NUM_PARALLEL=1
 OLLAMA_CONTEXT_LENGTH=4096
 ```
 
-### NVIDIA GPU con 8GB+ VRAM (ej: RTX 3060 Ti, RTX 3070, RTX 4070)
+### NVIDIA GPU with 8 GB+ VRAM (e.g. RTX 3060 Ti, RTX 3070, RTX 4070)
 
 ```bash
 OLLAMA_MODEL=mistral
@@ -62,7 +64,7 @@ OLLAMA_NUM_PARALLEL=2
 OLLAMA_CONTEXT_LENGTH=8192
 ```
 
-### NVIDIA GPU con 16GB+ VRAM (ej: RTX 3090, RTX 4090)
+### NVIDIA GPU with 16 GB+ VRAM (e.g. RTX 3090, RTX 4090)
 
 ```bash
 OLLAMA_MODEL=llama3
@@ -71,47 +73,47 @@ OLLAMA_NUM_PARALLEL=4
 OLLAMA_CONTEXT_LENGTH=16384
 ```
 
-## Modelos disponibles
+## Available models
 
-| Modelo | Tamaño | VRAM mínima | Calidad |
-|--------|--------|-------------|---------|
-| tinyllama | ~600MB | 2GB | Básica |
-| mistral | ~4GB | 4GB | Buena (recomendado) |
-| llama3 | ~4.7GB | 6GB | Muy buena |
-| llama3:70b | ~40GB | 24GB | Excelente |
+| Model | Size | Minimum VRAM | Quality |
+|-------|------|-------------|---------|
+| tinyllama | ~600 MB | 2 GB | Basic |
+| mistral | ~4 GB | 4 GB | Good (recommended) |
+| llama3 | ~4.7 GB | 6 GB | Very good |
+| llama3:70b | ~40 GB | 24 GB | Excellent |
 
-Cambia de modelo en cualquier momento editando `OLLAMA_MODEL` en `.env` y ejecutando:
+To change model at any time, edit `OLLAMA_MODEL` in `.env` and run:
 
 ```bash
-docker exec -it ollama ollama pull <modelo>
+docker exec -it ollama ollama pull <model>
 ```
 
-## Verificar que los servicios están activos
+## Verify services are running
 
 ```bash
 # Ollama
 curl http://localhost:11434/api/tags
 
-# Modelos cargados
+# Loaded models
 curl http://localhost:11434/api/tags | python -m json.tool
 
 # Open WebUI
 open http://localhost:3000    # macOS
 start http://localhost:3000   # Windows
 
-# ChromaDB (solo profile full)
+# ChromaDB (full profile only)
 curl http://localhost:8000/api/v1/heartbeat
 ```
 
-## Parar servicios
+## Stop services
 
 ```bash
-docker-compose down           # para los contenedores
-docker-compose down -v        # para + elimina volúmenes (reset completo)
+docker-compose down           # stop containers
+docker-compose down -v        # stop + delete volumes (full reset)
 ```
 
-## Servicios futuros
+## Upcoming services
 
-A medida que avance el tutorial se añadirán:
-- **n8n** — orquestación de workflows (módulos avanzados)
-- Otros proveedores de vector DB según necesidades
+Additional services will be added as the tutorial progresses:
+- **n8n** — workflow orchestration (advanced modules)
+- Additional vector database providers as needed

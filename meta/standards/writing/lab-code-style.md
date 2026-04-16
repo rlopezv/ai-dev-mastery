@@ -143,7 +143,60 @@ Only `shared/` is a valid cross-lab dependency.
 
 ---
 
-## 9. What to Avoid
+## 9. corpus/ convention
+
+Use a `corpus/` directory at the module level when a lab set requires a fixed
+knowledge base — a set of documents that the learner reads before running the labs
+and that the code loads at runtime.
+
+```text
+labs/<module>/corpus/
+├── <topic-a>.md
+├── <topic-b>.md
+└── <topic-c>.md
+```
+
+**When to use it.** A `corpus/` is appropriate when:
+- Multiple labs in the module operate on the same document set.
+- The document content affects observable output (retrieval results, evaluation scores).
+- You want the learner to be able to predict results by reading the files first.
+
+**When not to use it.** If only one lab needs external documents and they are
+generated programmatically (e.g., synthetic data), keep the data inside that
+lab's own directory.
+
+**Loading convention.** Each `shared/config.py` that serves a module with a corpus
+should expose a `load_corpus()` function:
+
+```python
+import pathlib
+
+CORPUS_DIR = pathlib.Path(__file__).parent.parent / "corpus"
+
+def load_corpus(corpus_dir: pathlib.Path = CORPUS_DIR) -> list[dict]:
+    """
+    Load all .md files from corpus_dir.
+    Returns list of dicts with 'source' (filename) and 'text' (content) keys.
+    """
+    docs = []
+    for path in sorted(corpus_dir.glob("*.md")):
+        docs.append({"source": path.name, "text": path.read_text(encoding="utf-8")})
+    return docs
+```
+
+**Labs README requirement.** Every module with a `corpus/` must include a
+"Read the corpus before running the labs" section in `labs/<module>/README.md`
+that lists the files and explains why reading them first matters.
+
+**Content rules:**
+- Files are plain Markdown. No frontmatter.
+- Content is learner-facing: a human should be able to read and learn from it.
+- Technical depth must be preserved — formulas, complexity bounds, exact terms.
+- Each file covers exactly one concept at the level of the corresponding `docs/` topic.
+
+---
+
+## 10. What to Avoid
 
 | Anti-pattern | Why |
 |--------------|-----|

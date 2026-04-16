@@ -1,0 +1,57 @@
+# Documentation
+
+The `docs/` directory contains the conceptual foundation for every module. Each module
+has its own directory with a set of documents that explain the what, why, and how before
+you run the labs.
+
+---
+
+## How to navigate
+
+Within each module, read documents in this order:
+
+| Step | Document | Purpose |
+|------|----------|---------|
+| 1 | `README.md` | Module overview, concept map, learning sequence |
+| 2 | Topic files (`<concept>.md`) | One concept per file, in the order listed in the README |
+| 3 | `architecture.md` | How the components fit together as a system |
+| 4 | `implementation-reference.md` | Patterns, data structures, and trade-offs used in the labs |
+| 5 | `validation.md` | What to verify before moving to the next module |
+
+The labs implement what the docs explain. Open the corresponding lab only after reading
+the topic document it maps to.
+
+---
+
+## Document types
+
+| Type | What it contains |
+|------|-----------------|
+| `README.md` | Module scope, concept map, reading order, lab inventory |
+| Topic (`<concept>.md`) | One concept: why it exists, how it works, minimal code example |
+| `architecture.md` | Component diagram, data flows, integration points |
+| `implementation-reference.md` | Concrete patterns, schema definitions, execution flows used across the labs |
+| `validation.md` | Practical tasks, lab criteria, integration scenarios, self-assessment |
+
+---
+
+## Modules
+
+| Module | Description | Status |
+|--------|-------------|:------:|
+| [LLM Fundamentals](llm-fundamentals/README.md) | Tokens, context windows, inference, sampling strategies | ✅ |
+| [LLM APIs](llm-apis/README.md) | OpenAI-compatible API, streaming, tool calling, client patterns | ✅ |
+| [Prompt Engineering](prompt-engineering/README.md) | Prompt structure, chain-of-thought, few-shot, system prompts | ✅ |
+| [Structured Outputs & Tool Usage](structured-outputs/README.md) | JSON schema enforcement, function calling, output validation | ✅ |
+| [RAG](rag/README.md) | Embeddings, chunking, retrieval strategies, context assembly, evaluation | ✅ |
+| Memory & Context Management | Conversation history, external memory stores, context window management | ⬜ |
+| AI Agents | Tool use, planning, multi-step execution, agent loops | ⬜ |
+| Frameworks & Tools | LangChain, LlamaIndex, orchestration patterns | ⬜ |
+| AI with Java | Spring AI, LangChain4j, Java client patterns | ⬜ |
+| Evaluation & Testing | Automated evaluation, regression testing, benchmark design | ⬜ |
+| Safety & Guardrails | Input/output filtering, alignment techniques, red-teaming | ⬜ |
+| Performance & Optimization | Quantization, batching, latency profiling | ⬜ |
+| Deployment & Scaling | Containerization, inference servers, scaling strategies | ⬜ |
+| Observability & MLOps | Tracing, logging, drift detection, model lifecycle | ⬜ |
+| Reference Architectures | End-to-end system designs combining multiple modules | ⬜ |
+| Real-World Projects | Full production scenarios with evaluation and deployment | ⬜ |

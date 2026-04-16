@@ -46,8 +46,8 @@ Do not edit manually unless correcting an error.
 | `llm-fundamentals` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `llm-apis` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `prompt-engineering` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `structured-outputs` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| `rag` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| `structured-outputs` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `rag` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `memory-context` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `ai-agents` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `frameworks-tools` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -64,5 +64,5 @@ Do not edit manually unless correcting an error.
 
 ## Last updated
 
-Session: Fase 3 — Module 3 fully complete (prompt-engineering: 9 docs ✅ + 4 labs ✅)
-Date: 2026-04-15
+Session: Fase 4 — rag module complete (all docs ✅, all 5 labs ✅)
+Date: 2026-04-16

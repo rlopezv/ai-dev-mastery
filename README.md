@@ -1,51 +1,60 @@
 # AI Dev Mastery
 
-Una hoja de ruta progresiva para dominar el desarrollo de soluciones con Inteligencia Artificial — desde los fundamentos hasta producción.
+A progressive learning path for building AI-powered systems — from LLM fundamentals
+to production-grade architectures. Designed for enterprise software architects with
+a Java background who want to develop practical AI engineering skills.
 
-## Estructura del repositorio
+---
+
+## Repository Structure
 
 ```text
 ai-dev-mastery/
-├── docs/          ← documentación teórica por módulo
-├── labs/          ← laboratorios prácticos por módulo
-├── infrastructure/← entorno local (Ollama, WebUI, ChromaDB)
-├── meta/          ← estándares de calidad y plantillas
-└── .devcontainer/ ← configuración de entorno VSCode
+├── docs/           → conceptual documentation, one directory per module
+├── labs/           → executable labs, one directory per module
+├── infrastructure/ → local environment (Ollama, ChromaDB, Open WebUI)
+└── meta/           → editorial standards and templates (not learner-facing)
 ```
 
-## Módulos
+---
 
-| # | Módulo | Nivel |
-|---|--------|-------|
-| 01 | [LLM Fundamentals](docs/01-llm-fundamentals/README.md) | Foundational |
-| 02 | [LLM APIs](docs/02-llm-apis/README.md) | Foundational |
-| 03 | [Prompt Engineering](docs/03-prompt-engineering/README.md) | Foundational |
-| 04 | [Structured Outputs & Tool Usage](docs/04-structured-outputs/README.md) | Intermediate |
-| 05 | [RAG](docs/05-rag/README.md) | Intermediate |
-| 06 | [Memory & Context Management](docs/06-memory-context/README.md) | Intermediate |
-| 07 | [AI Agents](docs/07-ai-agents/README.md) | Intermediate |
-| 08 | [Frameworks & Tools](docs/08-frameworks-tools/README.md) | Intermediate |
-| 09 | [AI con Java](docs/09-ai-java/README.md) | Intermediate |
-| 10 | [Evaluation & Testing](docs/10-evaluation-testing/README.md) | Advanced |
-| 11 | [Safety & Guardrails](docs/11-safety-guardrails/README.md) | Advanced |
-| 12 | [Performance & Optimization](docs/12-performance-optimization/README.md) | Advanced |
-| 13 | [Deployment & Scaling](docs/13-deployment-scaling/README.md) | Advanced |
-| 14 | [Observabilidad y MLOps](docs/14-observabilidad-mlops/README.md) | Advanced |
-| 15 | [Arquitecturas de Referencia](docs/15-reference-architectures/README.md) | Advanced |
-| 16 | [Real-World Projects](docs/16-real-world-projects/README.md) | Advanced |
+## Modules
 
-## Cómo empezar
+| # | Module | Level | Docs | Labs |
+|---|--------|-------|:----:|:----:|
+| 01 | [LLM Fundamentals](docs/llm-fundamentals/README.md) | Foundational | ✅ | ✅ |
+| 02 | [LLM APIs](docs/llm-apis/README.md) | Foundational | ✅ | ✅ |
+| 03 | [Prompt Engineering](docs/prompt-engineering/README.md) | Foundational | ✅ | ✅ |
+| 04 | [Structured Outputs & Tool Usage](docs/structured-outputs/README.md) | Intermediate | ✅ | ✅ |
+| 05 | [RAG](docs/rag/README.md) | Intermediate | ✅ | ✅ |
+| 06 | Memory & Context Management | Intermediate | ⬜ | ⬜ |
+| 07 | AI Agents | Intermediate | ⬜ | ⬜ |
+| 08 | Frameworks & Tools | Intermediate | ⬜ | ⬜ |
+| 09 | AI with Java | Intermediate | ⬜ | ⬜ |
+| 10 | Evaluation & Testing | Advanced | ⬜ | ⬜ |
+| 11 | Safety & Guardrails | Advanced | ⬜ | ⬜ |
+| 12 | Performance & Optimization | Advanced | ⬜ | ⬜ |
+| 13 | Deployment & Scaling | Advanced | ⬜ | ⬜ |
+| 14 | Observability & MLOps | Advanced | ⬜ | ⬜ |
+| 15 | Reference Architectures | Advanced | ⬜ | ⬜ |
+| 16 | Real-World Projects | Advanced | ⬜ | ⬜ |
 
-### 1. Configurar el entorno
+Follow the modules in order — each one builds on the previous.
 
-Requisitos previos:
+---
+
+## Getting Started
+
+### 1. Set up the environment
+
+Prerequisites:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [VSCode](https://code.visualstudio.com/)
-- [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [VSCode](https://code.visualstudio.com/) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-→ Consulta la [Guía de VSCode y DevContainers](docs/guides/vscode-devcontainer.md) para instrucciones detalladas.
+Open the repository in a Dev Container — VSCode will detect `.devcontainer/` and
+prompt you to reopen inside the container.
 
-### 2. Levantar la infraestructura local
+### 2. Start the local infrastructure
 
 ```bash
 cd infrastructure
@@ -53,20 +62,44 @@ cp .env.example .env
 docker-compose --profile light up -d
 ```
 
-Servicios disponibles:
-- **Ollama** → http://localhost:11434 (API de modelos locales)
-- **Open WebUI** → http://localhost:3000 (interfaz web)
+See [infrastructure/README.md](infrastructure/README.md) for hardware configuration,
+available profiles, and model selection.
 
-### 3. Seguir el índice
+### 3. Read the docs, run the labs
 
-Empieza por el módulo 01 y sigue el orden — cada módulo construye sobre el anterior.
+Each module has a `docs/<module>/README.md` that lists what to read and in what order.
+Labs for that module live in `labs/<module>/README.md`.
 
-## Documentación
+→ Start with [docs/llm-fundamentals/README.md](docs/llm-fundamentals/README.md)
 
-- [Guía de VSCode y DevContainers](docs/guides/vscode-devcontainer.md)
-- [Estándares de documentación](meta/README.md)
-- [Infraestructura local](infrastructure/README.md)
+---
 
-## Laboratorios
+## Documentation
 
-→ Ver [índice de laboratorios](labs/README.md)
+The `docs/` directory contains the conceptual foundation for every module.
+→ See [docs/README.md](docs/README.md) for how to navigate and what each document type covers.
+
+---
+
+## Labs
+
+| # | Module | Labs | Status |
+|---|--------|------|:------:|
+| 01 | [LLM Fundamentals](labs/llm-fundamentals/README.md) | lab-tokenization, lab-context-window, lab-inference-parameters | ✅ |
+| 02 | [LLM APIs](labs/llm-apis/README.md) | lab-chat-completion, lab-streaming, lab-tool-calling | ✅ |
+| 03 | [Prompt Engineering](labs/prompt-engineering/README.md) | lab-prompt-anatomy, lab-chain-of-thought, lab-few-shot | ✅ |
+| 04 | [Structured Outputs](labs/structured-outputs/README.md) | lab-json-mode, lab-function-calling, lab-output-validation | ✅ |
+| 05 | [RAG](labs/rag/README.md) | lab-embeddings, lab-chunking-strategies, lab-retrieval-playground, lab-query-pipeline, lab-rag-evaluation | ✅ |
+| 06 | Memory & Context Management | — | ⬜ |
+| 07 | AI Agents | — | ⬜ |
+| 08 | Frameworks & Tools | — | ⬜ |
+| 09 | AI with Java | — | ⬜ |
+| 10 | Evaluation & Testing | — | ⬜ |
+| 11 | Safety & Guardrails | — | ⬜ |
+| 12 | Performance & Optimization | — | ⬜ |
+| 13 | Deployment & Scaling | — | ⬜ |
+| 14 | Observability & MLOps | — | ⬜ |
+| 15 | Reference Architectures | — | ⬜ |
+| 16 | Real-World Projects | — | ⬜ |
+
+→ See [labs/README.md](labs/README.md) for infrastructure requirements and conventions.

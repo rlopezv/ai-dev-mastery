@@ -9,39 +9,57 @@ Update this file at the end of each working session to capture:
 
 ## Last session
 
-**Date:** 2026-04-15
-**Phase:** Fase 3 — Module 2 documentation complete (llm-apis)
+**Date:** 2026-04-16
+**Phase:** Fase 4 — rag module complete + repo-wide structural and editorial fixes
 
-### Completed
+---
 
-- `docs/llm-apis/README.md` — step-readme: overview, concept map, learning flow, labs table
-- `docs/llm-apis/openai-api.md` — topic: Chat Completions API, message roles, usage metadata, finish_reason
-- `docs/llm-apis/ollama-api.md` — topic: OpenAI-compatible interface, native API, model management
-- `docs/llm-apis/anthropic-api.md` — topic: Messages API schema differences vs OpenAI (system field, content blocks, usage field names)
-- `docs/llm-apis/streaming.md` — topic: SSE, token deltas, first-token latency, chunk accumulation
-- `docs/llm-apis/api-patterns.md` — topic: retry with backoff, conversation accumulation, provider abstraction
-- `docs/llm-apis/architecture.md` — system-level view: 5-component model, batch and streaming data flows
-- `docs/llm-apis/implementation-reference.md` — ChatResponse dataclass, component mapping, design decisions
-- `docs/llm-apis/validation.md` — conceptual, practical, lab, and integration validation criteria
-- `docs/reference/glossary.md` — 17 new entries added for llm-apis concepts
-- `CLAUDE.md` — updated: SESSION-CONTEXT.md update added to all task workflows + general rule for ad-hoc tasks
-- `.devcontainer/post-create.sh` — simplified: removed Ollama wait loop and model pull
+### Completed — rag module
+
+- All 5 rag labs written and validated: lab-embeddings, lab-chunking-strategies, lab-retrieval-playground, lab-query-pipeline, lab-rag-evaluation
+- Bug fixed: `labs/rag/lab-rag-evaluation/main.py` — removed invalid conditional import for `SYSTEM_PROMPT`
+
+---
+
+### Completed — repo-wide fixes
+
+**Language rule formalized:**
+- `CLAUDE.md` — new section 5 "Language": all learner-facing output in English regardless of conversation language; covers `docs/`, `labs/`, `infrastructure/`, all `README.md` files
+- `meta/standards/writing/writing-style.md` — scope expanded from "docs/ only" to all learner-facing files in the repository
+
+**corpus/ convention documented:**
+- `meta/standards/writing/lab-code-style.md` — new section 9: when to use corpus/, `load_corpus()` signature convention, README requirement, content rules
+- `labs/rag/README.md` — removed reference to `meta/` (not learner-facing); corpus section now stands on its own
+
+**README files written:**
+- `README.md` — rewritten in English: intro, repo structure, Modules table (#/Module/Level/Docs/Labs with ✅/⬜), Getting Started, Labs table (#/Module/Labs/Status), links to docs/README and labs/README
+- `docs/README.md` — new: navigation order within a module, document types table, module index with descriptions and status
+- `labs/README.md` — new: infrastructure profiles (light/full) mapped to modules, runtime prerequisites, conventions (shared/, corpus/, .env, execution order), module index with lab names and status
+- `infrastructure/README.md` — translated to English (services, profiles, hardware config, models, verification commands)
 
 ### Key decisions
 
-- `ChatResponse` dataclass as normalization boundary between providers
-- `stop_reason` normalized at abstraction layer (`"stop"`/`"length"` canonical)
-- Conversation history as plain `list[dict]` — lifecycle management deferred to application layer
+- Root README is the master index (Modules + Labs tables). `docs/README.md` and `labs/README.md` have their own indexes with different columns — not duplication, different views.
+- Labs section in root README follows same table structure as Modules section (was a loose link before).
+- `corpus/` is a per-module convention, not a shared global resource. Each module that needs a fixed document set gets its own `corpus/` under `labs/<module>/`.
+- `meta/` files are internal — never referenced from learner-facing content.
 
 ---
 
 ## Pending — next session
 
-### 1. Module 4 — structured-outputs
+### 1. meta/ review pass (BEFORE writing any new module)
 
-`prompt-engineering` is fully complete (docs + labs). Next:
-> `/write-module structured-outputs`
+Several conventions changed this session. Review `meta/` for consistency before proceeding:
+- README conventions reflected in `REPOSITORY_LAYOUT.md` and templates
+- corpus/ pattern added to `labs-checklist.md`
+- Language rule added to `lab-code-style.md` (currently missing there)
+- Status columns in learner-facing tables vs `PROJECT_STATUS.md` as source of truth
+- `infrastructure/README.md` reflected in `REPOSITORY_LAYOUT.md`
 
-### 2. Glossary
+See memory file `project_meta_review_pending.md` for full checklist.
 
-`docs/reference/glossary.md` — 19 prompt-engineering entries added (2026-04-15).
+### 2. Module 6: `memory-context`
+
+> `/write-module memory-context`
+> `/design-labs memory-context`

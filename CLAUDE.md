@@ -83,7 +83,16 @@ No placeholders. No `TBD`. No `...`.
 
 ---
 
-## 5. Writing rules
+## 5. Language
+
+All learner-facing output is written in **English** — without exception and regardless
+of the language used in the conversation. This applies to every file under `docs/`,
+`labs/`, `infrastructure/`, and any `README.md` at any level of the repository.
+Files under `meta/` are internal and may use any language.
+
+---
+
+## 6. Writing rules
 
 For `topic` documents, apply this mandatory structure in section 2 (Explanation):
 
@@ -99,7 +108,7 @@ Full rules:
 
 ---
 
-## 6. Glossary — mandatory check on every doc write
+## 7. Glossary — mandatory check on every doc write
 
 `docs/reference/glossary.md` is the canonical source of term definitions across all modules.
 
@@ -114,7 +123,7 @@ Only add new entries or flag conflicts for human review.
 
 ---
 
-## 7. Validation
+## 8. Validation
 
 Before marking any task complete, validate the output.
 
@@ -143,7 +152,7 @@ If the result is FAIL, fix the issues before finishing.
 
 ---
 
-## 8. Tasks
+## 9. Tasks
 
 **After completing any task — whether listed here or ad-hoc (infrastructure changes,
 config edits, refactors, etc.) — update `meta/session/SESSION-CONTEXT.md` with:**
@@ -214,7 +223,7 @@ config edits, refactors, etc.) — update `meta/session/SESSION-CONTEXT.md` with
 
 ---
 
-## 9. Lab conventions
+## 10. Lab conventions
 
 - Each lab lives in its own folder: `labs/<module>/lab-<n>/`
 - Shared utilities go in `labs/<module>/shared/` — never in individual labs
@@ -224,7 +233,7 @@ config edits, refactors, etc.) — update `meta/session/SESSION-CONTEXT.md` with
 
 ---
 
-## 10. What NOT to do
+## 11. What NOT to do
 
 - Do not write content without reading the template first
 - Do not invent document structure outside the template
@@ -238,7 +247,7 @@ config edits, refactors, etc.) — update `meta/session/SESSION-CONTEXT.md` with
 
 ---
 
-## 11. When you are blocked
+## 12. When you are blocked
 
 If something is missing or ambiguous, stop and report:
 

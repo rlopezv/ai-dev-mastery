@@ -340,6 +340,246 @@ A neural network design that uses self-attention to allow each token in a sequen
 - **Origin:** `llm-fundamentals`
 - **Doc:** `docs/llm-fundamentals/llm-architecture.md`
 
+### field-selection
+The schema design practice of declaring only the fields an application will actually use, limiting the surface area where a model can hallucinate or default to plausible-but-incorrect values.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/schema-design.md`
+
+### function-calling
+The OpenAI/Anthropic term for the mechanism by which a model emits a structured function invocation — specifying function name and JSON-serialized arguments — instead of generating a text response; the application executes the function and returns the result.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-usage.md`
+
+### json-mode
+An API-level constraint that forces a model to return syntactically valid JSON without imposing a specific schema; guarantees parseable output but does not constrain field names, nesting, or types.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/structured-outputs.md`
+
+### json-schema
+A vocabulary for describing the structure, types, and constraints of JSON data, used both for structured output enforcement (response format) and for declaring tool parameter shapes.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/schema-design.md`
+
+### parallel-tools
+A tool use pattern in which the model emits multiple independent tool calls in a single response turn; the application executes all calls (potentially concurrently), appends one result message per call, and resumes the model with the full result set.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-patterns.md`
+
+### pydantic-model
+A Python class inheriting from `pydantic.BaseModel` that declares field types and constraints, generates JSON Schema via `model_json_schema()`, and validates deserialized data via `model_validate()` — used as the single source of truth for both API schema declarations and application-side validation.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/schema-design.md`
+
+### response-format
+An API request parameter that attaches a JSON Schema to the request, instructing the provider to enforce structural conformance before returning the response; stronger than JSON mode because it guarantees both valid JSON and schema compliance.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/structured-outputs.md`
+
+### router-pattern
+A tool use pattern in which multiple tools are declared and the model selects which tool applies based on the user query; the application does not pre-select the tool but relies on the model's reasoning to dispatch to the appropriate capability.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-patterns.md`
+
+### schema-constraints
+Restrictions added to a JSON Schema declaration — such as `enum`, `minimum`, `maximum`, `maxLength`, and `additionalProperties: false` — that narrow the range of values a model can generate, reducing hallucination surface area.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/schema-design.md`
+
+### sequential-chain
+A tool use pattern in which the application hard-codes a pipeline of tool calls where the output of one step is the input to the next; the model is not involved in step ordering, trading model agency for application predictability.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-patterns.md`
+
+### single-tool
+The baseline tool use pattern in which the model emits one tool call per turn; the application executes it, appends the result, and calls the model again until `finish_reason` is `"stop"`.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-patterns.md`
+
+### structured-output
+A model response that conforms to a declared JSON Schema, enforced at the API level so that invalid responses are rejected or corrected before being returned to the caller.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/structured-outputs.md`
+
+### tool-call
+The structured object emitted by a model when it decides to invoke a tool, containing the tool name and JSON-serialized arguments that conform to the declared parameter schema.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-usage.md`
+
+### tool-declaration
+The structured definition of a tool provided to the model at request time, consisting of a name, a description (which the model reads to decide relevance), and a JSON Schema describing the expected parameter shape.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-usage.md`
+
+### tool-patterns
+Recurring compositions of tool calls — single tool, parallel tools, sequential chain, and router — each with a distinct message accumulation strategy and trade-off between model agency and application control.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-patterns.md`
+
+### tool-result
+The application-generated message appended to the conversation history after a tool executes, containing the function's return value and the `tool_call_id` that links it to the originating tool call.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-usage.md`
+
+### tool-use
+The mechanism by which a model, instead of generating a text response, generates a structured function call specifying which tool to invoke and what arguments to pass; the application executes the tool and returns the result for the model to incorporate into its response.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/tool-usage.md`
+
+### answer-faithfulness
+A generation quality metric that measures whether every claim in a generated answer is supported by the retrieved context, with no fabricated or ungrounded statements; typically assessed by an LLM-as-judge grader given the context and the answer.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-evaluation-and-metrics.md`
+
+### answer-relevance
+A generation quality metric that measures whether the generated answer addresses the user's question, independent of whether the answer is grounded; a faithful but off-topic answer scores low on relevance.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-evaluation-and-metrics.md`
+
+### bm25
+A sparse retrieval algorithm that scores documents by a weighted, length-normalized sum of term-frequency and inverse-document-frequency values for each query term; excels at exact-term matching and does not require an embedding model.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/retrieval-strategies.md`
+
+### chunk-deduplication
+The process of identifying and removing near-duplicate chunks from a retrieval candidate list before context assembly, typically by applying a cosine similarity threshold to prevent the same information from occupying multiple slots in the context block.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/context-assembly.md`
+
+### chunk-overlap
+A chunking parameter that causes consecutive chunks to share a fixed number of tokens at their boundary, preventing facts that span a chunk boundary from being retrieved in incomplete form.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/document-processing-and-chunking.md`
+
+### chunk-size
+The maximum number of tokens or characters in a single chunk; the primary parameter controlling the granularity of retrieval units, with smaller values increasing embedding precision and larger values preserving more surrounding context per retrieved unit.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/document-processing-and-chunking.md`
+
+### chunking
+The process of splitting source documents into smaller, retrievable segments whose size and boundaries are tuned to maximize embedding focus and retrieval precision.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/document-processing-and-chunking.md`
+
+### context-assembly
+The pipeline step that selects, deduplicates, orders, and formats retrieved chunks into a context block that fits within the model's token budget, ready to be injected into the generation prompt.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/context-assembly.md`
+
+### cosine-similarity
+A distance metric between two vectors that measures the cosine of the angle between them, producing a value between -1 and 1; used to rank stored chunk vectors by semantic proximity to a query vector.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/embeddings-and-vector-search.md`
+
+### dense-retrieval
+A retrieval approach that encodes the query and all corpus chunks as dense embedding vectors and finds the most semantically similar chunks using approximate nearest-neighbor search; captures semantic similarity and paraphrase but may miss rare exact-term matches.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/retrieval-strategies.md`
+
+### document-loader
+The ingestion pipeline component that reads source documents from files, databases, or APIs and extracts clean plain text, handling format-specific concerns such as PDF multi-column layout, HTML boilerplate removal, and Markdown header preservation.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/document-processing-and-chunking.md`
+
+### embedding
+A dense vector representation of a text segment produced by an embedding model, encoding semantic meaning as a point in high-dimensional space such that semantically similar texts are geometrically close.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/embeddings-and-vector-search.md`
+
+### embedding-model
+A neural network trained to map text inputs to dense vectors, where geometric proximity in the output space corresponds to semantic similarity in meaning; must remain consistent between index build time and query time.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/embeddings-and-vector-search.md`
+
+### evaluation-dataset
+A fixed set of (query, relevant_chunk_ids, expected_answer) triples used to measure RAG pipeline quality; must be static across pipeline comparisons to ensure metric scores are comparable.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-evaluation-and-metrics.md`
+
+### hallucination
+A model output that contains statements not supported by the provided context or training data, presented with unwarranted confidence; in RAG systems, reduced by grounding generation in retrieved content and instructing the model to answer only from the provided context.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-fundamentals.md`
+
+### hybrid-retrieval
+A retrieval strategy that runs both dense (embedding-based) and sparse (BM25) retrieval and merges the two ranked result lists, recovering candidates that each approach would miss individually.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/retrieval-strategies.md`
+
+### knowledge-grounding
+The property of a generated response whereby every factual claim can be traced to a specific piece of retrieved source content, making the response auditable and its claims verifiable.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-fundamentals.md`
+
+### lost-in-the-middle
+An empirically observed LLM attention pattern in which the model assigns lower weight to content placed in the middle of a long context window compared to content at the beginning and end, causing relevant chunks placed in the middle to be under-utilized in generation.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/context-assembly.md`
+
+### non-parametric-memory
+Knowledge provided to a model at inference time through the context window — such as retrieved documents — as opposed to knowledge encoded in model weights; available for the duration of a single call and updatable without retraining.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-fundamentals.md`
+
+### parametric-memory
+Knowledge encoded in a model's weights during training, always available at inference time but static — it does not change unless the model is retrained or fine-tuned.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-fundamentals.md`
+
+### prompt-context-block
+The formatted section of a RAG prompt that contains the numbered, assembled retrieved chunks, presented before the user query and wrapped in framing instructions that direct the model to reason from the provided content.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/context-assembly.md`
+
+### reciprocal-rank-fusion
+A rank aggregation algorithm that merges multiple ranked lists by summing `1/(k + rank)` scores per document across lists, using only rank positions (not raw scores) and therefore robust to score scale differences between retrieval systems.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/retrieval-strategies.md`
+
+### recursive-chunking
+A chunking strategy that applies a priority-ordered list of split delimiters — paragraph break, sentence boundary, word boundary — and splits on the coarsest delimiter that keeps chunks within the target size, producing chunks that respect natural text structure.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/document-processing-and-chunking.md`
+
+### reranking
+A second-pass relevance scoring step that applies a cross-encoder model to the top-k retrieval candidates, attending jointly to the query and each chunk to produce more accurate relevance scores than cosine similarity alone.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/retrieval-strategies.md`
+
+### retrieval-augmented-generation
+A pattern that augments a language model's generation by retrieving relevant documents from an external knowledge store at query time and injecting them as context in the prompt, enabling grounded responses from up-to-date or private information without retraining the model.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-fundamentals.md`
+
+### retrieval-precision
+A retrieval quality metric measuring what fraction of the top-k retrieved chunks are relevant to the query; high precision means few irrelevant chunks reach the context assembler.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-evaluation-and-metrics.md`
+
+### retrieval-recall
+A retrieval quality metric measuring what fraction of all relevant chunks in the index appear in the top-k retrieved results; low recall means the correct information is in the store but the retrieval step fails to surface it.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/rag-evaluation-and-metrics.md`
+
+### sparse-retrieval
+A retrieval approach that builds an inverted index of term frequencies and ranks documents by BM25 score; excels at exact keyword matching and does not require an embedding model, but cannot capture synonyms or paraphrase.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/retrieval-strategies.md`
+
+### token-budget
+The number of tokens available for retrieved context in a RAG prompt, calculated as the context window size minus the system prompt tokens, query tokens, and output reservation; determines how many chunks can be included before the context overflows.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/context-assembly.md`
+
+### vector-index
+A data structure that stores embedding vectors and supports efficient approximate nearest-neighbor queries; common index types include HNSW (hierarchical navigable small world) for general use and IVF (inverted file index) for very large collections.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/embeddings-and-vector-search.md`
+
+### vector-search
+A retrieval mechanism that finds the stored documents most semantically similar to a query by computing geometric distance between embedding vectors, returning the top-k closest vectors from the index.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/embeddings-and-vector-search.md`
+
 ---
 
 ## Maintenance
