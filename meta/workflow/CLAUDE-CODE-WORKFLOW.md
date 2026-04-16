@@ -31,8 +31,23 @@ cd ai-dev-mastery
 claude
 ```
 
-Claude Code reads `CLAUDE.md` automatically on startup. You do not need to explain
-the project — it already knows the structure, conventions, and standards.
+You do not need to explain the project in each interaction.
+
+Claude Code is expected to load repository context from:
+
+- `CLAUDE.md`
+- `meta/system-design/REPOSITORY_LAYOUT.md`
+- `meta/system-design/DOCS_LABS_MAP.md`
+- `meta/session/PROJECT_STATUS.md`
+
+These files define:
+
+- repository structure
+- module sequencing and alignment
+- project state
+
+If any of these sources are missing, incomplete, or inconsistent,
+Claude Code should stop and request clarification before proceeding.
 
 ---
 

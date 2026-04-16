@@ -32,8 +32,9 @@ ai-dev-mastery/
 | `docs/` | Learner-facing conceptual documentation |
 | `labs/` | Executable, locally-runnable implementations |
 | `infrastructure/` | Shared runtime services (Docker, Ollama, DBs) |
-| `meta/` | Standards, templates, workflow, system design |
+| `meta/` | Build system (session state, system design, standards, workflow) |
 
+Build system (session state, system design, standards, workflow)
 ---
 
 ## docs/
