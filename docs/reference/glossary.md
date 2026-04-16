@@ -625,6 +625,91 @@ A retrieval mechanism that finds the stored documents most semantically similar 
 - **Origin:** `rag`
 - **Doc:** `docs/rag/embeddings-and-vector-search.md`
 
+### action dispatcher
+The application-side function that receives a tool call from a model response, routes it to the correct function implementation by tool name, executes it, and returns the result as a string to be appended to the message accumulator.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/single-agent-loop.md`
+
+### agent loop
+The repeating perception-decide-act cycle that is the minimal unit of agentic behavior: the model reads the current message history, emits a tool call or final response, the application executes the tool and appends the result, and the cycle repeats until a stop condition is met.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/agent-fundamentals.md`
+
+### agentic application
+An application in which an LLM drives control flow through a sequence of tool calls and decisions, rather than executing a single query-response cycle; the LLM decides what actions to take and when the task is complete.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/agent-fundamentals.md`
+
+### MCP server
+A process that exposes tools and resources to AI applications via the Model Context Protocol, handling tool discovery requests (`tools/list`) and tool invocation requests (`tools/call`) over stdio or HTTP+SSE transport.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/mcp.md`
+
+### MCP tools
+Tool definitions exposed by an MCP server via the `tools/list` protocol operation, returned in a schema format that the client converts to the LLM API's `tools=` parameter shape before the agent loop starts.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/mcp.md`
+
+### message accumulator
+The application-maintained ordered list of messages — system prompt, user task, assistant tool calls, and tool results — passed to the LLM on every loop iteration; it serves as the agent's working memory for the duration of a single task.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/tool-use-loops.md`
+
+### Model Context Protocol
+An open protocol that standardizes how AI applications connect to external tools and resources, defining message formats for tool discovery, invocation, and result return over a local (stdio) or remote (HTTP+SSE) transport.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/mcp.md`
+
+### multi-agent systems
+An architecture in which multiple agents — each with a scoped tool set and isolated context — collaborate on a shared task, with an orchestrator decomposing the task and delegating sub-tasks to specialized subagents.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/multi-agent-systems.md`
+
+### orchestrator
+The coordinating agent in a multi-agent system that receives the original task, decomposes it into sub-tasks, invokes specialized subagents as tool calls, and aggregates their results into a final response; it does not execute domain tools directly.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/multi-agent-systems.md`
+
+### plan-and-execute
+An agent pattern that separates task planning (producing a structured list of steps without executing tools) from task execution (working through the steps with re-planning when a step fails), enabling recovery from unexpected intermediate results.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/agent-patterns.md`
+
+### ReAct pattern
+An agent execution pattern that interleaves explicit reasoning steps ("Thought") with action steps (tool calls) in a repeating Thought → Action → Observation cycle, making the agent's decision rationale visible in the message history.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/agent-patterns.md`
+
+### reflection
+An agent pattern that adds a post-generation evaluation step: after the agent produces a draft output, a second LLM call assesses it against the original task and identifies specific issues, allowing the generator to revise before returning the final answer.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/agent-patterns.md`
+
+### single-agent loop
+The simplest agent structure: one LLM, one tool registry, one action dispatcher, and one message accumulator operating in a perception-decide-act cycle that terminates on `finish_reason == "stop"` or an application-enforced iteration ceiling.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/single-agent-loop.md`
+
+### stop condition
+The criterion that terminates an agent loop: primarily `finish_reason == "stop"` from the LLM API (model emits a text response with no tool calls), and secondarily an application-enforced maximum iteration ceiling that fires regardless of the model's output.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/agent-fundamentals.md`
+
+### subagent
+A specialized agent in a multi-agent system that receives a scoped sub-task from an orchestrator, executes it through its own isolated loop with a narrow tool set, and returns a summarized result; it has no knowledge of the orchestrator's full context.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/multi-agent-systems.md`
+
+### tool registry
+The list of tool declarations (name, description, JSON Schema) passed to the LLM API in the `tools=` parameter; it defines the complete set of capabilities the model can invoke in a given agent loop.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/single-agent-loop.md`
+
+### tool-use loop
+The multi-turn message accumulation protocol for agentic tool interactions: append the assistant message containing tool calls, append one tool result per call with matching `tool_call_id`, repeat until `finish_reason == "stop"`.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/tool-use-loops.md`
+
 ---
 
 ## Maintenance

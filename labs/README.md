@@ -44,6 +44,24 @@ For hardware configuration (GPU, VRAM, model selection) see
 
 ## Runtime prerequisites
 
+### Recommended: Dev Container
+
+The repository ships with a `.devcontainer/` configuration. Opening the repo in
+VS Code with the Dev Containers extension (or GitHub Codespaces) gives you a
+pre-built Python 3.11 environment with all module dependencies already installed.
+
+The container runs `post-create.sh` on first build, which installs every module's
+`requirements.txt` in one step — no manual `pip install` needed.
+
+```
+.devcontainer/
+├── Dockerfile          ← Python 3.11 base image
+├── devcontainer.json   ← VS Code settings, extensions, forwarded ports
+└── post-create.sh      ← pip install -r labs/<module>/requirements.txt × all modules
+```
+
+### Standalone (local Python)
+
 Each module declares its own Python dependencies in `labs/<module>/requirements.txt`.
 Install them before running that module's labs:
 
@@ -52,6 +70,9 @@ pip install -r labs/<module>/requirements.txt
 ```
 
 Python 3.11 or later is required across all modules.
+
+When a new module is added, its `requirements.txt` must also be added to
+`post-create.sh` so the devcontainer stays in sync.
 
 ---
 
@@ -87,7 +108,7 @@ ones. The module README marks which labs produce shared state.
 | [Structured Outputs](../labs/structured-outputs/README.md) | lab-json-mode, lab-function-calling, lab-output-validation | ✅ |
 | [RAG](rag/README.md) | lab-embeddings, lab-chunking-strategies, lab-retrieval-playground, lab-query-pipeline, lab-rag-evaluation | ✅ |
 | [Memory & Context Management](memory-context/README.md) | lab-memory-types, lab-conversation-history, lab-context-management, lab-external-memory, lab-integration | ✅ |
-| AI Agents | — | ⬜ |
+| [AI Agents](ai-agents/README.md) | lab-single-agent-loop, lab-tool-use-loops, lab-multi-agent, lab-agent-patterns, lab-mcp-server, lab-integration | ✅ |
 | Frameworks & Tools | — | ⬜ |
 | AI with Java | — | ⬜ |
 | Evaluation & Testing | — | ⬜ |

@@ -50,7 +50,7 @@ Do not edit manually unless correcting an error.
 | `structured-outputs` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `rag` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `memory-context` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `ai-agents` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| `ai-agents` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `frameworks-tools` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `ai-java` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | — |
 | `evaluation-testing` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -65,5 +65,5 @@ Do not edit manually unless correcting an error.
 
 ## Last updated
 
-Session: fix-hardening — lab hardening pass complete (all 25 labs across 6 modules ✅)
+Session: ai-agents module complete — all 6 labs implemented and validated (PASS ≥9.5 each)
 Date: 2026-04-16
