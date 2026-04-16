@@ -21,7 +21,8 @@ All labs run locally. The required services depend on the module:
 | Profile | Services | Modules |
 |---------|----------|---------|
 | `light` | Ollama + Open WebUI | 01 LLM Fundamentals → 04 Structured Outputs |
-| `full` | Ollama + Open WebUI + ChromaDB | 05 RAG and later |
+| `light` + local ChromaDB | Ollama + Open WebUI + ChromaDB PersistentClient (no Docker) | 06 Memory & Context Management |
+| `full` | Ollama + Open WebUI + ChromaDB server | 05 RAG and later (when Docker ChromaDB is required) |
 
 Start the infrastructure before running any lab:
 
@@ -85,7 +86,7 @@ ones. The module README marks which labs produce shared state.
 | [Prompt Engineering](../labs/prompt-engineering/README.md) | lab-prompt-anatomy, lab-chain-of-thought, lab-few-shot | ✅ |
 | [Structured Outputs](../labs/structured-outputs/README.md) | lab-json-mode, lab-function-calling, lab-output-validation | ✅ |
 | [RAG](rag/README.md) | lab-embeddings, lab-chunking-strategies, lab-retrieval-playground, lab-query-pipeline, lab-rag-evaluation | ✅ |
-| Memory & Context Management | — | ⬜ |
+| [Memory & Context Management](memory-context/README.md) | lab-memory-types, lab-conversation-history, lab-context-management, lab-external-memory, lab-integration | ✅ |
 | AI Agents | — | ⬜ |
 | Frameworks & Tools | — | ⬜ |
 | AI with Java | — | ⬜ |

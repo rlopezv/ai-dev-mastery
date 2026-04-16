@@ -52,6 +52,7 @@ and no learning order. It is consulted throughout the entire tutorial.
 | `observation` | Concept benefits from runtime observation but not deep implementation |
 | `implementation` | Core engineering capability that must be practiced |
 | `integration` | Several topics converge into one larger system behavior |
+| `module-integration` | Module-level lab tied to `architecture.md` — shows how all concepts in the module compose at runtime |
 | `project` | Full end-to-end project (module 16 only) |
 
 ---
@@ -65,6 +66,26 @@ Every topic file must have one explicit mapping decision:
 - `none` → no lab needed, concept-only
 
 Core engineering topics must not remain unmapped.
+
+---
+
+## Module-Level Artifacts
+
+In addition to `lab-<n>/` folders and `shared/`, a module may include:
+
+| Artifact | Path | When to use |
+|----------|------|-------------|
+| `corpus/` | `labs/<module>/corpus/` | Multiple labs operate on the same fixed document set and the learner should read the files before running the labs. See `lab-code-style.md §9` for the full convention. |
+
+A module that uses `corpus/` must document it in its `labs/<module>/README.md`.
+
+Modules with a `corpus/`:
+
+| Module | Status |
+|--------|--------|
+| `rag` | ✅ exists |
+| `frameworks-tools` | ⬜ pending |
+| `evaluation-testing` | ⬜ pending |
 
 ---
 
@@ -104,6 +125,7 @@ Core engineering topics must not remain unmapped.
 | `chain-of-thought.md` | `lab-chain-of-thought` | implementation | required |
 | `prompt-patterns.md` | `lab-prompt-patterns` | implementation | required |
 | `prompt-pitfalls.md` | — | concept-only | none |
+| `architecture.md` | `lab-integration` | module-integration | optional |
 
 ---
 
@@ -115,6 +137,7 @@ Core engineering topics must not remain unmapped.
 | `tool-usage.md` | `lab-tool-usage` | implementation | required |
 | `tool-patterns.md` | `lab-tool-patterns` | implementation | required |
 | `schema-design.md` | `lab-schema-design` | implementation | optional |
+| `architecture.md` | `lab-integration` | module-integration | required |
 
 ---
 
@@ -128,6 +151,9 @@ Core engineering topics must not remain unmapped.
 | `retrieval-strategies.md` | `lab-retrieval-playground` | implementation | required |
 | `context-assembly.md` | `lab-query-pipeline` | implementation | required |
 | `rag-evaluation-and-metrics.md` | `lab-rag-evaluation` | implementation | required |
+| `architecture.md` | `lab-integration` | module-integration | required |
+
+> `lab-query-pipeline` covers partial integration (retrieval + context assembly). `lab-integration` covers the full RAG pipeline end-to-end including chunking, indexing, retrieval, assembly, and generation.
 
 ---
 
@@ -139,6 +165,7 @@ Core engineering topics must not remain unmapped.
 | `conversation-history.md` | `lab-conversation-history` | implementation | required |
 | `context-management.md` | `lab-context-management` | implementation | required |
 | `external-memory.md` | `lab-external-memory` | implementation | optional |
+| `architecture.md` | `lab-integration` | module-integration | required |
 
 ---
 
@@ -151,6 +178,8 @@ Core engineering topics must not remain unmapped.
 | `tool-use-loops.md` | `lab-tool-use-loops` | implementation | required |
 | `multi-agent-systems.md` | `lab-multi-agent` | integration | required |
 | `agent-patterns.md` | `lab-agent-patterns` | implementation | optional |
+| `mcp.md` | `lab-mcp-server` | implementation | required |
+| `architecture.md` | `lab-integration` | module-integration | required |
 
 ---
 
@@ -163,6 +192,7 @@ Core engineering topics must not remain unmapped.
 | `autogen.md` | `lab-autogen` | implementation | optional |
 | `semantic-kernel.md` | `lab-semantic-kernel` | implementation | optional |
 | `framework-comparison.md` | — | concept-only | none |
+| `architecture.md` | `lab-integration` | module-integration | optional |
 
 ---
 
@@ -188,6 +218,7 @@ Core engineering topics must not remain unmapped.
 | `application-testing.md` | `lab-application-testing` | implementation | required |
 | `mocking-and-integration.md` | `lab-mocking` | implementation | required |
 | `contract-testing.md` | `lab-contract-testing` | implementation | optional |
+| `architecture.md` | `lab-integration` | module-integration | required |
 
 ---
 
@@ -200,6 +231,7 @@ Core engineering topics must not remain unmapped.
 | `output-guardrails.md` | `lab-output-guardrails` | implementation | required |
 | `vulnerabilities.md` | `lab-red-teaming` | observation | required |
 | `red-teaming.md` | `lab-red-teaming` | implementation | required |
+| `architecture.md` | `lab-integration` | module-integration | required |
 
 ---
 
@@ -212,6 +244,7 @@ Core engineering topics must not remain unmapped.
 | `prompt-optimization.md` | `lab-prompt-optimization` | implementation | required |
 | `model-selection.md` | — | concept-only | none |
 | `batching.md` | `lab-batching` | implementation | optional |
+| `architecture.md` | `lab-integration` | module-integration | required |
 
 ---
 
@@ -243,6 +276,7 @@ Core engineering topics must not remain unmapped.
 | `prompt-versioning.md` | `lab-prompt-versioning` | implementation | required |
 | `continuous-evaluation.md` | `lab-continuous-eval` | implementation | required |
 | `mlops-patterns.md` | — | concept-only | none |
+| `architecture.md` | `lab-integration` | module-integration | required |
 
 ---
 
@@ -255,6 +289,7 @@ Core engineering topics must not remain unmapped.
 | `agent-system.md` | — | concept-only | none |
 | `multi-agent-platform.md` | — | concept-only | none |
 | `production-llm-api.md` | — | concept-only | none |
+| `mcp-server.md` | — | concept-only | none |
 
 ---
 
@@ -265,3 +300,4 @@ Core engineering topics must not remain unmapped.
 | `rag-assistant` | Python | End-to-end RAG application |
 | `agent-workflow` | Python | Multi-tool agent system |
 | `java-rag-assistant` | Java | RAG variant using Spring AI |
+| `mcp-enterprise-server` | Python | MCP server exposing enterprise tools to an agent |

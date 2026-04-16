@@ -425,6 +425,51 @@ The mechanism by which a model, instead of generating a text response, generates
 - **Origin:** `structured-outputs`
 - **Doc:** `docs/structured-outputs/tool-usage.md`
 
+### context-management
+The set of strategies applied when a conversation history exceeds its token budget: simple truncation (drop oldest turns), sliding window (keep last N turns), and summarization-based compression (replace oldest turns with a model-generated summary).
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/context-management.md`
+
+### conversation-history
+The application-maintained ordered list of prior user and assistant messages passed to the model on every API call to simulate stateful conversation over a stateless API.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/conversation-history.md`
+
+### episodic-memory
+An external memory store entry that records what happened in a past conversation turn or session — a compressed summary of events, decisions, and outcomes — retrieved by semantic similarity to the current query.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/external-memory.md`
+
+### external-memory
+Information persisted in a vector store or database outside the model, embedded for semantic retrieval and injected into the context window on demand; enables recall that survives beyond a single session.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/external-memory.md`
+
+### history-truncation
+The removal of the oldest user-assistant message pairs from the conversation history when the token budget is exceeded; preserves recency at the cost of permanently discarding early context.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/context-management.md`
+
+### in-context-memory
+All information currently present in the active context window — system prompt, conversation history, retrieved documents — that the model can attend to directly during a single inference call.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/memory-types.md`
+
+### memory-compression
+The replacement of a block of older conversation turns with a model-generated summary that preserves key facts, decisions, and constraints in significantly fewer tokens, freeing budget for new turns.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/context-management.md`
+
+### semantic-memory
+An external memory store entry that records a durable fact about an entity — a user preference, an account attribute, a domain fact — updated via upsert when the fact changes rather than appended chronologically.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/external-memory.md`
+
+### sliding-window
+A context management strategy that retains only the most recent N conversation turns, discarding everything older regardless of token count; predictable and zero-cost but loses all early context.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/context-management.md`
+
 ### answer-faithfulness
 A generation quality metric that measures whether every claim in a generated answer is supported by the retrieved context, with no fabricated or ungrounded statements; typically assessed by an LLM-as-judge grader given the context and the answer.
 - **Origin:** `rag`

@@ -27,7 +27,7 @@ ai-dev-mastery/
 | 03 | [Prompt Engineering](docs/prompt-engineering/README.md) | Foundational | ✅ | ✅ |
 | 04 | [Structured Outputs & Tool Usage](docs/structured-outputs/README.md) | Intermediate | ✅ | ✅ |
 | 05 | [RAG](docs/rag/README.md) | Intermediate | ✅ | ✅ |
-| 06 | Memory & Context Management | Intermediate | ⬜ | ⬜ |
+| 06 | [Memory & Context Management](docs/memory-context/README.md) | Intermediate | ✅ | ✅ |
 | 07 | AI Agents | Intermediate | ⬜ | ⬜ |
 | 08 | Frameworks & Tools | Intermediate | ⬜ | ⬜ |
 | 09 | AI with Java | Intermediate | ⬜ | ⬜ |
@@ -90,7 +90,7 @@ The `docs/` directory contains the conceptual foundation for every module.
 | 03 | [Prompt Engineering](labs/prompt-engineering/README.md) | lab-prompt-anatomy, lab-chain-of-thought, lab-few-shot | ✅ |
 | 04 | [Structured Outputs](labs/structured-outputs/README.md) | lab-json-mode, lab-function-calling, lab-output-validation | ✅ |
 | 05 | [RAG](labs/rag/README.md) | lab-embeddings, lab-chunking-strategies, lab-retrieval-playground, lab-query-pipeline, lab-rag-evaluation | ✅ |
-| 06 | Memory & Context Management | — | ⬜ |
+| 06 | [Memory & Context Management](labs/memory-context/README.md) | lab-memory-types, lab-conversation-history, lab-context-management, lab-external-memory, lab-integration | ✅ |
 | 07 | AI Agents | — | ⬜ |
 | 08 | Frameworks & Tools | — | ⬜ |
 | 09 | AI with Java | — | ⬜ |

@@ -10,8 +10,12 @@ under `docs/`.
 
 ## 1. Language
 
-Python unless the module is explicitly Java-focused (`ai-java`, Java variants
-in `real-world-projects`).
+**Programming language:** Python unless the module is explicitly Java-focused
+(`ai-java`, Java variants in `real-world-projects`).
+
+**Human language:** All lab content is written in English — without exception.
+This applies to README files, inline comments, log messages, corpus files,
+and any other learner-facing text produced by or accompanying a lab.
 
 ---
 
@@ -189,10 +193,17 @@ def load_corpus(corpus_dir: pathlib.Path = CORPUS_DIR) -> list[dict]:
 that lists the files and explains why reading them first matters.
 
 **Content rules:**
+
+Corpus files are independent of `docs/`. They are not summaries or mirrors of doc topics —
+they are a shared technical knowledge base for the labs to operate on. Depth is greater
+than in the docs: the learner already knows the domain and should be able to predict
+retrieval results by reading the files.
+
 - Files are plain Markdown. No frontmatter.
-- Content is learner-facing: a human should be able to read and learn from it.
-- Technical depth must be preserved — formulas, complexity bounds, exact terms.
-- Each file covers exactly one concept at the level of the corresponding `docs/` topic.
+- Use `#` for the document title and `##` for major sub-concepts. Structure follows content — no rigid scaffold.
+- Include formulas, algorithm descriptions, complexity bounds, and exact technical terms where relevant. Do not simplify for accessibility.
+- Each file covers a coherent topic or area. It does not need to correspond 1:1 to a `docs/` topic and may span multiple related sub-concepts.
+- Corpus files are not cross-referenced from `docs/` and are not part of the module learning sequence — they exist to make lab outputs observable and predictable.
 
 ---
 

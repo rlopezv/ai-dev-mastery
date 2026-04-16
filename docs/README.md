@@ -44,7 +44,7 @@ the topic document it maps to.
 | [Prompt Engineering](prompt-engineering/README.md) | Prompt structure, chain-of-thought, few-shot, system prompts | ✅ |
 | [Structured Outputs & Tool Usage](structured-outputs/README.md) | JSON schema enforcement, function calling, output validation | ✅ |
 | [RAG](rag/README.md) | Embeddings, chunking, retrieval strategies, context assembly, evaluation | ✅ |
-| Memory & Context Management | Conversation history, external memory stores, context window management | ⬜ |
+| [Memory & Context Management](memory-context/README.md) | Conversation history, token budgets, context management strategies, external memory | ✅ |
 | AI Agents | Tool use, planning, multi-step execution, agent loops | ⬜ |
 | Frameworks & Tools | LangChain, LlamaIndex, orchestration patterns | ⬜ |
 | AI with Java | Spring AI, LangChain4j, Java client patterns | ⬜ |

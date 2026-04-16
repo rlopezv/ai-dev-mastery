@@ -110,6 +110,15 @@ FINAL SCORE = weighted sum (0–10)
 
 * **Severity:** Minor
 
+### LS-6 corpus/ convention is followed (when applicable)
+
+* **Severity:** Major
+* Only applies when the module uses a `corpus/` directory
+* `corpus/` lives at `labs/<module>/corpus/` — not inside individual lab folders
+* `labs/<module>/README.md` includes a "Read the corpus before running the labs" section
+* Each corpus file covers one concept, has no frontmatter, and is written in English
+* `shared/config.py` exposes a `load_corpus()` function following the standard signature
+
 ---
 
 ## 6. Category 2 — Execution Validity

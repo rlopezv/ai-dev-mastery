@@ -36,6 +36,7 @@ Do not edit manually unless correcting an error.
 | `meta/standards/review/review-protocol.md` | ✅ |
 | `meta/workflow/CLAUDE-CODE-WORKFLOW.md` | ✅ |
 | `docs/reference/glossary.md` | 🔄 |
+| `meta/` review pass | ✅ |
 
 ---
 
@@ -48,7 +49,7 @@ Do not edit manually unless correcting an error.
 | `prompt-engineering` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `structured-outputs` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `rag` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `memory-context` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| `memory-context` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `ai-agents` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `frameworks-tools` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `ai-java` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | — |
@@ -64,5 +65,5 @@ Do not edit manually unless correcting an error.
 
 ## Last updated
 
-Session: Fase 4 — rag module complete (all docs ✅, all 5 labs ✅)
+Session: fix-hardening — memory-context module complete (docs + labs ✅)
 Date: 2026-04-16

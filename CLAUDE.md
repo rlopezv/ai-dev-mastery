@@ -154,12 +154,13 @@ If the result is FAIL, fix the issues before finishing.
 
 ## 9. Tasks
 
-**After completing any task — whether listed here or ad-hoc (infrastructure changes,
-config edits, refactors, etc.) — update `meta/session/SESSION-CONTEXT.md` with:**
-- what was done
-- files modified
-- key decisions made
-- pending items for the next session
+**After completing any task — whether listed here or ad-hoc — rewrite
+`meta/session/SESSION-CONTEXT.md` as a compact briefing with three sections:**
+- **Current state** — next module/task, any blockers
+- **Recent decisions** — design decisions from the last 1–2 sessions not yet reflected in `meta/` files
+- **Next task** — the immediate next action
+
+Do not accumulate history. Replace the full content each time. Target: under 20 lines.
 
 ### Write a document
 

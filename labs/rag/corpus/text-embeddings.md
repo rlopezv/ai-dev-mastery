@@ -18,8 +18,6 @@ cosine_similarity(a, b) = (a · b) / (|a| × |b|)
 
 It measures the cosine of the angle between the two vectors. The result ranges from -1 (pointing in opposite directions) to 1 (pointing in the same direction) and is scale-invariant — it ignores vector magnitude, so document length doesn't distort the score. In practice, a score above 0.75 indicates strong semantic overlap; below 0.5 usually means the texts are unrelated for retrieval purposes. Scores between 0.5 and 0.75 are a grey zone where adjacent or partially relevant content tends to sit.
 
-Note that ChromaDB returns cosine *distance* rather than similarity: `distance = 1 − cosine_similarity`. A distance of 0.0 means identical vectors; a distance of 1.0 means orthogonal.
-
 ## Embedding Models Available Locally
 
 Ollama serves several embedding models without requiring a cloud API:

@@ -16,12 +16,26 @@ ai-dev-mastery/
 ├── .devcontainer/
 ├── .env.example
 ├── .gitignore
-├── README.md
+├── README.md                     ← master index (Modules table + Labs table with status)
 ├── docs/
+│   └── README.md                 ← docs section index (document types + module descriptions)
 ├── labs/
+│   └── README.md                 ← labs section index (infrastructure profiles + conventions + module index)
 ├── infrastructure/
 └── meta/
 ```
+
+### README hierarchy
+
+Three README files serve distinct roles and must not duplicate each other:
+
+| File | Audience | Content |
+|------|----------|---------|
+| `README.md` | Entry point for anyone | Module sequence, status (✅/⬜), links to docs and labs |
+| `docs/README.md` | Learners navigating docs | Document types, how to read a module, module descriptions |
+| `labs/README.md` | Learners running labs | Infrastructure profiles, runtime conventions, lab index per module |
+
+Status shown in `README.md` and `labs/README.md` is derived from `meta/session/PROJECT_STATUS.md`, which is the authoritative source.
 
 ---
 
@@ -34,7 +48,6 @@ ai-dev-mastery/
 | `infrastructure/` | Shared runtime services (Docker, Ollama, DBs) |
 | `meta/` | Build system (session state, system design, standards, workflow) |
 
-Build system (session state, system design, standards, workflow)
 ---
 
 ## docs/
