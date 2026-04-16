@@ -20,6 +20,17 @@ from shared.config import (  # noqa: E402
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 log = logging.getLogger(__name__)
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In ReviewSummary, change sentiment type from Literal["positive", "neutral", "negative"] to str
+# - Observe:
+#   * parse success stays 5/5 — Pydantic still returns a typed object
+#   * sentiment may contain non-standard values: "mixed", "somewhat negative", "mostly positive"
+#   * vocabulary bounds are lost — the three-way classification is no longer enforced
+#   * evaluation logic comparing against "positive"/"neutral"/"negative" fails despite correct classification
+
 # ---------------------------------------------------------------------------
 # Schema Registry: Pydantic model as the single source of schema truth
 # Concept: pydantic-model — one declaration drives both the API schema and

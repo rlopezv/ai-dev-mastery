@@ -38,7 +38,8 @@ meta/
 │   │   ├── architecture-template.md   # architecture template
 │   │   ├── implementation-reference-template.md
 │   │   ├── validation-template.md     # validation template
-│   │   └── lab-readme-template.md     # lab README template
+│   │   ├── lab-entry-readme-template.md    # module lab README template (labs/<module>/README.md)
+│   │   └── lab-individual-readme-template.md  # individual lab README template (labs/<module>/lab-xxx/README.md)
 │   ├── validation/
 │   │   ├── docs-checklist.md          # docs validation checklist
 │   │   └── labs-checklist.md          # labs validation checklist

@@ -46,9 +46,30 @@ Aspect                          OpenAI path                          Anthropic p
 ...
 ```
 
+## What to observe
+
+- **Observation 1:** `stop_reason` is `"end_turn"` not `"stop"`. Code that checks `finish_reason == "stop"` (the OpenAI value) will always evaluate to `False` against Anthropic responses.
+- **Observation 2:** `input_tokens` grows each turn as the full history accumulates — same growth pattern as the OpenAI API, despite the different field name.
+- **Observation 3:** the schema table makes the provider differences concrete. Notice that `system=` at the top level cannot simply be renamed to fit the OpenAI messages format.
+
+---
+
 ## Concepts verified
 
-- `system=` is a top-level field in Anthropic — not `{"role": "system", ...}` in messages
-- `content[0].text` is the response text path (not `choices[0].message.content`)
-- `stop_reason: "end_turn"` signals normal completion (not `"stop"`)
-- Strict message alternation: sending two consecutive `user` messages raises `400 Bad Request`
+- [ ] `system=` is a top-level field in Anthropic — not `{"role": "system", ...}` in messages
+- [ ] `content[0].text` is the response text path (not `choices[0].message.content`)
+- [ ] `stop_reason: "end_turn"` signals normal completion (not `"stop"`)
+- [ ] Strict message alternation: sending two consecutive `user` messages raises `400 Bad Request`
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `observe_multi_turn()`, after the first `messages.append({"role": "user", ...})`, add a second user message before the API call: `messages.append({"role": "user", "content": "Also, how is it different from top-p?"})`
+- **Expected degradation:**
+  - Anthropic returns `400 Bad Request` with a message about message role alternation
+  - The script raises `anthropic.BadRequestError` — strict alternation is enforced server-side, not just documented
+
+Remove the extra user message append after the experiment.

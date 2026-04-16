@@ -131,6 +131,36 @@ with `ollama list`.
 
 ---
 
+## What to observe
+
+- **Memory injection:** turns showing `[memory injected]` indicate retrieved episodes with distance ≤ 0.35; early turns will not trigger injection (no stored episodes yet); later turns should trigger it as the store fills
+- **Summarization event:** at least one `SUMMARIZATION applied` line should appear; note the token count before and after — compression reduces it significantly
+- **Recall accuracy:** turns 28–30 answers should name "Jordan", reference the legal document challenge and the target latency, and mention "Redis"; these rely on injected memory, not in-context history
+
+## Concepts verified
+
+- [ ] Memory injection logged on at least one turn after turn 5
+- [ ] Summarization fires at least once before turn 30
+- [ ] Recall turn 28 answer contains "Jordan" and references the legal document review project
+- [ ] Recall turn 30 answer references the target latency and the caching strategy
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `run_integration()`, comment out the `store.add_episode()` call at the end of the loop
+- **Expected degradation:**
+  - No episodes are ever written; `[memory injected]` never appears
+  - Recall turns 28–30 rely entirely on in-context history and summarization
+  - If compression has dropped the early turns, recall fails — model cannot name "Jordan" or recall the Redis caching decision
+  - Shows that the write step of the write-retrieve-inject cycle is required
+
+Restore `store.add_episode()` after the experiment.
+
+---
+
 ## Infrastructure
 
 | Service | Purpose |

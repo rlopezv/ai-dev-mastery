@@ -61,6 +61,18 @@ QUERIES = [
 # BM25 sparse retrieval
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In bm25_retrieve(), remove .lower() from the query tokenization:
+#   change bm25.get_scores(query.lower().split()) to bm25.get_scores(query.split())
+# - Observe:
+#   * BM25 fails on mixed-case queries — query tokens no longer match the lowercased corpus
+#   * exact-term queries that ranked first now score near 0
+#   * the ✓ BM25 outranked dense on ... validation check flips to ✗
+#   * RRF hybrid also degrades for exact-term queries because the BM25 signal collapses
+
 def build_bm25_index(chroma_client) -> tuple:
     """
     Load all chunks from the ChromaDB collection and build a BM25 index.

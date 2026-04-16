@@ -12,6 +12,16 @@ from config import assert_ollama_ready, build_client, complete
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 log = logging.getLogger(__name__)
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - Change COT_MARKER = "Answer:" to COT_MARKER = "ANSWER:"
+# - Observe:
+#   * parse_cot_answer raises ValueError for every problem
+#   * model writes "Answer:" (mixed case), not "ANSWER:"
+#   * CoT correct count drops to 0 — extraction markers must match model output exactly
+
 COT_MARKER = "Answer:"
 
 # ---------------------------------------------------------------------------

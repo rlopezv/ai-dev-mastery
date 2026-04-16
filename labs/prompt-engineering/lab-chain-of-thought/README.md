@@ -43,8 +43,30 @@ python lab-chain-of-thought/main.py
 Results:  Direct 1/3   CoT 3/3
 ```
 
+## What to observe
+
+- **Direct vs CoT:** compare correct counts — CoT should match or exceed direct on all three problems. Problems 2 and 3 are where CoT provides the largest benefit.
+- **Reasoning trace:** read the CoT output before "Answer:" — confirm the model is actually computing intermediate steps, not guessing.
+- **Marker extraction:** if the model omits "Answer:", `parse_cot_answer` raises `ValueError` and the problem is counted as wrong. This makes extraction reliability visible.
+
+---
+
 ## Concepts verified
 
-- CoT correct count ≥ direct correct count on multi-step problems
-- `"Answer:"` marker present in every CoT response
-- `parse_cot_answer` returns clean numeric answer without reasoning trace
+- [ ] CoT correct count ≥ direct correct count on multi-step problems
+- [ ] `"Answer:"` marker present in every CoT response
+- [ ] `parse_cot_answer` returns clean numeric answer without reasoning trace
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** change `COT_MARKER = "Answer:"` to `COT_MARKER = "ANSWER:"`
+- **Expected degradation:**
+  - `parse_cot_answer` raises `ValueError` for every problem — the model writes `"Answer:"` (mixed case), not `"ANSWER:"`
+  - CoT correct count drops to 0; all problems are counted as parse failures
+  - Shows that extraction markers must match the exact case the model produces — the prompt drives the format, not the extractor
+
+Restore `COT_MARKER = "Answer:"` after the experiment.

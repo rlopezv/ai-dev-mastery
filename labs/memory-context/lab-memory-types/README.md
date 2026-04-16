@@ -118,7 +118,7 @@ The retrieval distance is below 0.20. The model's reply correctly names "Alex" a
 
 ---
 
-## What to Look For
+## What to observe
 
 **Truncation timing:** the `*** TRUNCATION ***` log line shows the exact turn where the
 anchor fact leaves the context window. After that point, Observation 1 has no access to it.
@@ -130,6 +130,27 @@ is not well-suited to the query, or that `nomic-embed-text` is not running in Ol
 **Reply quality:** Observation 1 may produce a hallucinated name or an explicit "I don't know".
 Both are valid — what matters is the absence of "Alex" and "Falcon". Observation 2 should
 reproduce the anchor fact verbatim or near-verbatim.
+
+## Concepts verified
+
+- [ ] Observation 1: model cannot recall "Alex" or "Falcon" after truncation
+- [ ] At least one truncation event is logged before the recall question
+- [ ] Observation 2: retrieved distance < 0.20 for the anchor fact
+- [ ] Observation 2: model reply contains "Alex" and "Falcon" via injected memory
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `observation_2_external_memory_recall()`, comment out the `collection.query()` call and set `augmented_system = SYSTEM_PROMPT` (skip injection)
+- **Expected degradation:**
+  - Observation 2 produces the same result as Observation 1 — the model cannot recall "Alex" or "Falcon"
+  - The `[retrieval]` distance line is not printed
+  - The two observations become indistinguishable — showing that retrieval and injection are both required, not just storage
+
+Restore the retrieval and injection code after the experiment.
 
 ---
 

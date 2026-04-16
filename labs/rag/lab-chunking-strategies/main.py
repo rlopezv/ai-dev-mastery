@@ -24,6 +24,17 @@ log = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 CORPUS_DIR = pathlib.Path(__file__).parent.parent / "corpus"
+
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - Change CHUNK_SIZE = 512 to CHUNK_SIZE = 100
+# - Observe:
+#   * chunk count spikes — many small fragments per document
+#   * avg chunk length drops to ~90-100 chars; most chunks contain an incomplete thought
+#   * top-1 similarity falls for paragraph-spanning queries (passage is split)
+#   * the ✓ recursive top-1 ≥ fixed top-1 check may flip to ✗
 CHUNK_SIZE = 512      # target size in characters
 CHUNK_OVERLAP = 64    # overlap between consecutive chunks in characters
 

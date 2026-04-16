@@ -24,6 +24,16 @@ ANCHOR_FACT = "The project is called Nighthawk and it runs on a 16-node Kubernet
 ANCHOR_QUESTION = "What is the project name and how many nodes does the cluster have?"
 
 # 25 filler turns covering distributed systems topics
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In FILLER_TURNS, move ANCHOR_FACT from index 2 (turn 3) to index 22 (turn 23)
+# - Observe:
+#   * all three strategies retain the anchor fact — it falls within the recent window for all
+#   * all three strategies PASS recall — the PASS/FAIL distinction collapses
+#   * the lab no longer demonstrates that only summarization preserves early-context facts
+
 FILLER_TURNS = [
     "What is a service mesh?",
     "How does Istio handle mTLS between services?",

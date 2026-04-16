@@ -106,6 +106,17 @@ def observe_estimate_accuracy(enc: tiktoken.Encoding) -> None:
 # Observation 3 — progressive context fill
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observe_progressive_fill(), remove NUM_PREDICT from the stop condition:
+#   change "total_tokens + NUM_PREDICT + tokens_per_sentence > MAX_FILL_TOKENS"
+#   to    "total_tokens + tokens_per_sentence > MAX_FILL_TOKENS"
+# - Observe:
+#   * Fill loop consumes the full MAX_FILL_TOKENS with no output reservation
+#   * API response is truncated because no tokens remain for generation
+
 def observe_progressive_fill(enc: tiktoken.Encoding, context_limit: int) -> None:
     """
     Build progressively longer prompts and observe how token counts grow.

@@ -117,6 +117,17 @@ def observation_1_in_context_overflow(client) -> None:
     log.info("")
 
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observation_2_external_memory_recall(), comment out the collection.query() call
+#   and set augmented_system = SYSTEM_PROMPT (skip retrieval and injection)
+# - Observe:
+#   * Observation 2 produces the same result as Observation 1 — model cannot recall "Alex" or "Falcon"
+#   * [retrieval] distance line is not printed
+#   * the two observations become indistinguishable — showing that both retrieval and injection are required
+
 # ---------------------------------------------------------------------------
 # Observation 2: external memory preserves anchor fact across overflow
 # ---------------------------------------------------------------------------

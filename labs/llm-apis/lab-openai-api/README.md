@@ -48,8 +48,30 @@ Turn 2 ...
 Turn 3 ...
 ```
 
+## What to observe
+
+- **Observation 1:** `finish_reason` is `"stop"` for normal completion. Check that `response.choices[0].message.content` is populated and that usage fields are non-zero.
+- **Observation 2:** `finish_reason="length"` returns HTTP 200 with a truncated response — not an exception. Code that ignores this field will silently consume incomplete answers.
+- **Observation 3:** `prompt_tokens` grows with each turn because the full message list is resent on every call. The cost accumulates — turn 3 pays for turns 1 and 2 as well.
+
+---
+
 ## Concepts verified
 
-- `finish_reason: "length"` is not an error — it is a signal that requires action
-- `prompt_tokens` grows with each turn because full history is resent
-- Message list is the caller's responsibility to maintain
+- [ ] `finish_reason: "length"` is not an error — it is a signal that requires action
+- [ ] `prompt_tokens` grows with each turn because full history is resent
+- [ ] Message list is the caller's responsibility to maintain
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `observe_multi_turn()`, comment out the line `messages.append({"role": "assistant", "content": reply})`
+- **Expected degradation:**
+  - The conversation loses coherence — the model has no memory of its previous answers
+  - Each turn is answered as a fresh question, regardless of prior exchanges
+  - `prompt_tokens` stops growing because the history is no longer accumulating
+
+Restore the `messages.append` line after the experiment.

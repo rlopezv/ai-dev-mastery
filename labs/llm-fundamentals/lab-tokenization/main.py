@@ -107,6 +107,16 @@ def observe_character_sensitivity(enc: tiktoken.Encoding) -> None:
 # Observation 5 — token budget estimate for a sample prompt
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observe_budget_estimate(), set max_output = 0
+# - Observe:
+#   * All three context limits report "fits: yes" even for prompts
+#     that would overflow at runtime
+#   * Simulates forgetting to reserve output tokens in the budget
+
 def observe_budget_estimate(enc: tiktoken.Encoding) -> None:
     """
     Compute the token cost of a realistic prompt before sending it to an API.

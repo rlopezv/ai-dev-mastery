@@ -17,6 +17,18 @@ log = logging.getLogger(__name__)
 # Test dataset — topic classification (4 classes)
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - Change some EXAMPLES labels to use inconsistent casing:
+#     "economics" → "Economics", "sports" → "Sports" in 2–3 entries
+# - Observe:
+#   * model mirrors inconsistent casing from examples
+#   * predicted == expected fails for capitalized outputs despite correct classification
+#   * accuracy drops even though semantic classification is correct — label format drift
+#     causes evaluation failures
+
 EXAMPLES = [
     ("The central bank raised interest rates by 50 basis points.", "economics"),
     ("The championship match ended in a penalty shootout.", "sports"),

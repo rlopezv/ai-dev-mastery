@@ -117,6 +117,17 @@ def observation_1_single_embedding(client) -> None:
     log.info("✓ Embedding returned a vector of dimension %d", len(vector))
 
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In RELATED_TEXTS, replace both entries with texts from a different domain
+#   (e.g., cooking recipes, sports news)
+# - Observe:
+#   * related avg drops below 0.75 — the ✓ threshold check flips to ✗
+#   * semantic gap collapses — related and unrelated scores converge
+#   * example quality, not just category membership, drives the observable gap
+
 def observation_2_cosine_similarity(client) -> None:
     """
     Observation 2: Compare cosine similarity scores for semantically

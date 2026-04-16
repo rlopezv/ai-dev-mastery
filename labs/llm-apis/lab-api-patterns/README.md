@@ -53,9 +53,31 @@ Response: <answer>
 Both responses are ChatResponse instances — caller code is identical.
 ```
 
+## What to observe
+
+- **Observation 1:** retry delay doubles each attempt (1s → 2s). The third attempt succeeds without any code change — the backoff absorbed the transient failures.
+- **Observation 2:** `input_tokens` is not constant — it grows with each turn because the full history is resent. By turn 5 it includes all 5 exchanges.
+- **Observation 3:** the call site is identical for Ollama and Anthropic — `run_and_print(name, response)` doesn't know which provider produced the result.
+
+---
+
 ## Concepts verified
 
-- Retry logic doubles delay on each attempt and succeeds after injected failures
-- `input_tokens` grows linearly with conversation length — not constant per turn
-- `ChatResponse` provides identical structure from both providers
-- `stop_reason` is normalized: `"end_turn"` (Anthropic) → `"stop"`, `"max_tokens"` → `"length"`
+- [ ] Retry logic doubles delay on each attempt and succeeds after injected failures
+- [ ] `input_tokens` grows linearly with conversation length — not constant per turn
+- [ ] `ChatResponse` provides identical structure from both providers
+- [ ] `stop_reason` is normalized: `"end_turn"` (Anthropic) → `"stop"`, `"max_tokens"` → `"length"`
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `observe_retry_with_backoff()`, change `except RateLimitError:` to `except ValueError:`
+- **Expected degradation:**
+  - The injected `RateLimitError` is not caught — it propagates immediately on the first attempt
+  - No retry occurs; the script raises `openai.RateLimitError` before any backoff
+  - Shows that retry logic must explicitly enumerate the error types it handles — a catch-all `except Exception` would mask non-retryable errors
+
+Restore `except RateLimitError:` after the experiment.

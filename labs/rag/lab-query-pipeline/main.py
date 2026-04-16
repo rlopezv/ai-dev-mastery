@@ -43,6 +43,17 @@ SYSTEM_PROMPT = (
     "context to answer that question.\""
 )
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - Change MIN_SIMILARITY_THRESHOLD = 0.50 to MIN_SIMILARITY_THRESHOLD = 0.0
+# - Observe:
+#   * out-of-scope queries are no longer flagged (threshold never triggers)
+#   * the model receives irrelevant context and may fabricate an answer
+#   * ✓ Out-of-scope query correctly declined disappears or flips to ✗
+#   * similarity score is still printed but no longer gates the pipeline
+
 # Minimum similarity threshold — queries where all retrieved chunks score
 # below this are treated as out-of-scope
 MIN_SIMILARITY_THRESHOLD = 0.50

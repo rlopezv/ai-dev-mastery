@@ -89,6 +89,36 @@ Conversation complete: 50 turns, final token count: XXXX
 
 ---
 
+## What to observe
+
+- **Token growth rate:** count increases each turn as history accumulates; the rate depends on average reply length — longer model replies grow the count faster
+- **Budget ceiling event:** note which turn triggers the ceiling; after the event, the token count drops as the oldest pair is removed, then resumes growing
+- **Threshold marker:** turns with count at ≥ 80% of budget are labeled `THRESHOLD`; the ceiling guard fires on the turn that exceeds the hard limit
+
+## Concepts verified
+
+- [ ] Token count increases each turn
+- [ ] At least one `BUDGET CEILING` event is logged before turn 50
+- [ ] The script completes all 50 turns without `openai.BadRequestError`
+- [ ] Token count after a ceiling event is lower than the count before
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `run_conversation()`, comment out the `if manager.at_ceiling:` block (the truncation guard)
+- **Expected degradation:**
+  - Token count grows unbounded — no pairs are ever dropped
+  - The model eventually returns `openai.BadRequestError` when the context exceeds the API limit
+  - The script raises before completing all 50 turns
+  - Shows why the budget ceiling guard is required for long-running conversations
+
+Restore the ceiling guard after the experiment.
+
+---
+
 ## Infrastructure
 
 | Service | Purpose |

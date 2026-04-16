@@ -48,6 +48,18 @@ def run_1_write(store: MemoryStore, client) -> None:
     log.info("[run 1]   PASS — entries written and immediately retrievable")
 
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In run_2_cross_session_recall(), change the query from "streaming transaction processing"
+#   to "weather forecast"
+# - Observe:
+#   * retrieval distance rises above 0.25 — episode found but with low similarity
+#   * run 2 prints a distance warning instead of PASS
+#   * shows that retrieval quality depends on semantic similarity — unrelated queries
+#     do not reliably surface the stored episode
+
 def run_2_cross_session_recall(store: MemoryStore, client) -> None:
     """
     Run 2 — retrieve the episode written in run 1 without re-writing it.

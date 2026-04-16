@@ -32,6 +32,18 @@ class ContactUnconstrained(BaseModel):
     role: str  # free string — no enum constraint
 
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In ContactConstrained, change role from Literal["engineer", "manager", "executive", "unknown"]
+#   to str | None = None
+# - Observe:
+#   * enum_violations stays 0 — there is no enum to violate
+#   * non-standard values ("director", "CEO", "developer") pass through unchecked
+#   * constrained schema no longer enforces vocabulary bounds on role
+#   * enum_violations metric becomes meaningless as a comparison signal between schemas
+
 # ---------------------------------------------------------------------------
 # Constrained schema: enums, nullable optionals, bounded fields
 # Concept: schema-constraints + pydantic-model — single source for constraints

@@ -107,6 +107,27 @@ Faithfulness mean             : 0.80
 - **MRR reveals ranking quality.** An MRR near 1.0 means the correct chunk is almost always ranked first. An MRR near 0.5 means it is typically ranked second or third.
 - **Faithfulness is independent of retrieval recall.** A high faithfulness score means the model is using the retrieved content correctly — but if recall is low, the context may not have contained the right information in the first place.
 
+## Concepts verified
+
+- [ ] Recall@5 (top_k=10) ≥ Recall@5 (top_k=5) — more candidates improve recall
+- [ ] Precision@5 decreases when top_k increases — more candidates dilute precision
+- [ ] Mean faithfulness ≥ 0.70
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in the second `evaluate_retrieval` call, change `top_k=10` to `top_k=50`
+- **Expected degradation:**
+  - Precision@5 drops dramatically (50 chunks retrieved, only 1–2 from the expected source)
+  - Recall@5 approaches 1.0 — the correct source almost always appears somewhere in 50 results
+  - The contrast makes the recall/precision trade-off extreme and shows why unbounded `top_k` is impractical
+  - Faithfulness may also decline — more irrelevant context increases the chance of hallucination
+
+Restore `top_k=10` after the experiment.
+
 ## About the evaluation set
 
 The 20 questions are drawn directly from the five corpus documents. Each question maps to one source file that contains the answer. Ground truth is defined at the **source file level** — a retrieved chunk is counted as relevant if its `source` metadata field matches the expected source for that question. This is a practical approximation when chunk-level IDs are not pre-labelled.

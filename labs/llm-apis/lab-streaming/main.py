@@ -41,6 +41,17 @@ def build_anthropic_client() -> anthropic.Anthropic | None:
 # Observation 1 — batch vs streaming latency (Ollama)
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observe_latency_comparison(), add "break" inside the stream loop
+#   after collecting 5 chunks, before the stream is fully consumed
+# - Observe:
+#   * assembled text is incomplete — only the first ~5 tokens captured
+#   * Texts match: False — truncated assembly diverges from batch response
+#   * HTTP connection may remain open until server closes it
+
 def observe_latency_comparison() -> None:
     """
     Compare time-to-first-output between batch and streaming modes.

@@ -125,6 +125,18 @@ def observe_model_metadata() -> None:
 # Observation 4 — native /api/chat vs OpenAI-compatible
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observe_native_chat_format(), replace:
+#     data["message"]["content"]
+#   with:
+#     data["choices"][0]["message"]["content"]
+# - Observe:
+#   * KeyError: 'choices' — native format has no choices wrapper
+#   * code written for the OpenAI-compatible path fails on native responses
+
 def observe_native_chat_format() -> None:
     """
     Call /api/chat directly and compare the response shape to the OpenAI schema.

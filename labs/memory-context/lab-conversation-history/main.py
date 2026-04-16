@@ -70,6 +70,17 @@ TURNS = [
 ]
 
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In run_conversation(), comment out the if manager.at_ceiling: block
+# - Observe:
+#   * token count grows unbounded — no pairs are ever dropped
+#   * the model eventually returns openai.BadRequestError when context exceeds the API limit
+#   * the script raises before completing all 50 turns
+#   * shows why the budget ceiling guard is required for long-running conversations
+
 def run_conversation(client) -> None:
     """
     Concept: conversation history — accumulate turns, track tokens, enforce budget ceiling.

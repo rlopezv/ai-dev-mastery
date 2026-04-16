@@ -90,6 +90,20 @@ def call_anthropic(client: anthropic.Anthropic, system: str, messages: list[dict
 # Observation 1 — retry with exponential backoff
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observe_retry_with_backoff(), change:
+#     except RateLimitError:
+#   to:
+#     except ValueError:
+# - Observe:
+#   * injected RateLimitError is not caught — propagates immediately on attempt 1
+#   * no retry occurs; backoff logic never runs
+#   * shows that retry handlers must enumerate specific error types —
+#     a broad except Exception would mask non-retryable errors
+
 def observe_retry_with_backoff() -> None:
     """
     Demonstrate retry logic by injecting artificial RateLimitError on the

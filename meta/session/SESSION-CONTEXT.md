@@ -6,17 +6,19 @@ Portable briefing for cross-tool handoff. Rewritten at the end of every session 
 
 ## Current state
 
-- `memory-context` module: complete — docs ✅, shared module ✅, all 5 labs ✅
-- Next module: `ai-agents` — write-module ai-agents
+- Lab hardening pass complete: all 25 labs across 6 modules updated
+- Each individual lab README now has `## What to observe`, `## Concepts verified`, `## Failure case`
+- Each `main.py` now has a `# FAILURE CASE` comment block at the relevant modification point
+- New templates created: `lab-entry-readme-template.md` (module-level) + `lab-individual-readme-template.md` (per-lab)
+- Next task: write `ai-agents` module
 
 ## Recent decisions
 
-- `SESSION-CONTEXT.md` is a compact portable briefing — rewritten each session, not accumulated
-- `module-integration` lab type added — one per module tied to `architecture.md`, named `lab-integration`
-- MCP integrated without new module: `mcp.md` in `ai-agents`, `lab-mcp-server`, reference architecture, real-world project
-- `corpus/` is per-module technical knowledge base, independent of docs/, deeper than docs content
-- Modules with required integration lab: `structured-outputs`, `rag`, `memory-context`, `evaluation-testing`, `safety-guardrails`, `performance-optimization`, `observability-mlops`, `ai-agents`
-- ChromaDB `PersistentClient` used for cross-session persistence in labs — no Docker beyond `light` profile
+- `## What to observe` added to all lab READMEs (behavioral guidance, not just correctness)
+- `## Concepts verified` uses checkboxes for learner verification
+- `## Failure case` + `# FAILURE CASE` in `main.py` are required in all labs; must be consistent
+- Template naming: `lab-entry-readme-template.md` = module README, `lab-individual-readme-template.md` = per-lab README
+- DA-4 validation rule: `## Failure case` description must match `# FAILURE CASE` block in `main.py`
 
 ## Next task
 

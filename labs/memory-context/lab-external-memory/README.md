@@ -121,7 +121,7 @@ with a retrieval distance ≤ 0.25 — no writes were needed in this session.
 
 ---
 
-## What to Look For
+## What to observe
 
 **Episode distance in run 1:** the distance is 0.0000 because the exact stored
 text is used as the query. In run 2, the query differs ("streaming transaction
@@ -135,6 +135,26 @@ preferences, project state).
 **Cross-session recall failure:** if run 2 reports 0 episodes, the `.chroma/`
 directory was cleared between runs or the PersistentClient path does not match.
 Verify `CHROMA_PATH` in `shared/config.py`.
+
+## Concepts verified
+
+- [ ] Run 1: episode and fact stored; immediate retrieval distance < 0.30
+- [ ] Run 2: episode from run 1 retrieved with distance ≤ 0.25 (cross-session recall)
+- [ ] Run 3: upsert replaces the previous fact value — the updated value is returned, not the original
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `run_2_cross_session_recall()`, change the query string from `"streaming transaction processing"` to `"weather forecast"`
+- **Expected degradation:**
+  - Retrieval distance rises above 0.25 — the episode is found but with low similarity
+  - Run 2 prints a distance warning instead of PASS
+  - Shows that retrieval quality depends on semantic similarity between the query and stored content; an unrelated query does not reliably surface the stored episode
+
+Restore the original query string after the experiment.
 
 ---
 

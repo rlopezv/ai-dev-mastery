@@ -63,6 +63,17 @@ def observe_basic_call(client: anthropic.Anthropic) -> None:
 # Observation 2 — multi-turn conversation with strict alternation
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observe_multi_turn(), after the first messages.append({"role": "user", ...}),
+#   add a second user message before the API call:
+#     messages.append({"role": "user", "content": "Also, how is it different from top-p?"})
+# - Observe:
+#   * anthropic.BadRequestError: 400 — strict alternation is enforced server-side
+#   * alternation is not just a convention — it is a hard API contract
+
 def observe_multi_turn(client: anthropic.Anthropic) -> None:
     """
     Run a 3-turn conversation respecting the user/assistant alternation requirement.

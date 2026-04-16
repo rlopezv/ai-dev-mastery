@@ -196,7 +196,8 @@ meta/
 │   │   ├── reference-architecture-template.md
 │   │   ├── implementation-reference-template.md
 │   │   ├── validation-template.md
-│   │   └── lab-readme-template.md
+│   │   ├── lab-entry-readme-template.md
+│   │   └── lab-individual-readme-template.md
 │   ├── validation/
 │   │   ├── docs-checklist.md
 │   │   └── labs-checklist.md

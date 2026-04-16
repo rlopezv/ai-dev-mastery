@@ -50,9 +50,30 @@ Schema enforcement parse success: 5/5
 All typed objects. No manual json.loads needed.
 ```
 
+## What to observe
+
+- **Observation 1:** simple inputs may parse successfully, but adversarial inputs (long text, special characters) produce prose before the JSON block — the extraction logic fails or requires a heuristic `find("{")` workaround
+- **Observation 2:** JSON mode returns HTTP 200 with valid JSON every time — but `schema_compliant` count may be lower than `parse_success`, showing that syntactic enforcement does not imply structural conformance
+- **Observation 3:** all 5 inputs return typed `ReviewSummary` objects — `sentiment` is always one of the three allowed values, `score` is always 1–5; no manual `json.loads` needed
+
 ## Concepts verified
 
-- Prompt-only JSON fails on adversarial inputs (long text, special characters)
-- JSON mode guarantees syntactic validity but not structural conformance
-- Pydantic schema enforcement returns a typed object from `message.parsed` with zero failures
-- `sentiment` is always one of `["positive", "neutral", "negative"]`; `score` is always 1–5
+- [ ] Prompt-only JSON fails on adversarial inputs (long text, special characters)
+- [ ] JSON mode guarantees syntactic validity but not structural conformance
+- [ ] Pydantic schema enforcement returns a typed object from `message.parsed` with zero failures
+- [ ] `sentiment` is always one of `["positive", "neutral", "negative"]`; `score` is always 1–5
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `ReviewSummary`, remove the `Literal` type from `sentiment` and replace it with `str`
+- **Expected degradation:**
+  - Pydantic still returns a parsed object — parse success stays 5/5
+  - `sentiment` may contain non-standard values such as `"mixed"`, `"somewhat negative"`, or `"mostly positive"`
+  - Vocabulary bounds are lost: the schema no longer enforces the three-way classification
+  - Evaluation code comparing against `"positive"/"neutral"/"negative"` would fail despite correct classification
+
+Restore `Literal["positive", "neutral", "negative"]` after the experiment.

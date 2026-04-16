@@ -20,6 +20,18 @@ RUNS = 5
 # Prompt configurations — one per observation
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In build_complete_prompt(), remove the enumerated options from the format spec:
+#     change "Respond with one word only: positive, negative, or neutral."
+#     to     "Respond with one word only."
+# - Observe:
+#   * model invents its own category labels ("mixed", "ambivalent", "critical")
+#   * unique response count increases even for Observation 1
+#   * format spec must enumerate valid outputs — open-ended instructions allow vocabulary drift
+
 def build_complete_prompt(text: str) -> list[dict]:
     """
     All five components present: system, instruction, context, output format.

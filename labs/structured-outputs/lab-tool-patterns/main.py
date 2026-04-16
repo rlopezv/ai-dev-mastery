@@ -198,6 +198,17 @@ def run_single_tool(client) -> None:
     print(f"  Final: {final.choices[0].message.content!r}")
 
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In run_parallel_tools(), change the loop to process only the first call:
+#   for i, call in enumerate(msg.tool_calls[:1], 1):
+# - Observe:
+#   * only one tool result is appended — the second tool call has no corresponding result
+#   * the final response mentions only one city's weather (incomplete)
+#   * some APIs return an error because an expected tool result is missing from the conversation
+
 # ---------------------------------------------------------------------------
 # Pattern 2: Parallel tools
 # Concept: parallel-tools — multiple tool_calls in one response, 2 round-trips

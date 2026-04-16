@@ -54,9 +54,29 @@ python lab-tool-usage/main.py
 [Anthropic] final response: "The current time in UTC is 12:34:56."
 ```
 
+## What to observe
+
+- **finish_reason gate:** in observations 1 and 2, the first response has `finish_reason="tool_calls"` — this is the branch point; if the model answers in text instead, the tool is never executed
+- **arguments format:** `tool_call.function.arguments` is a JSON string, not a dict — `json.loads` is required before calling the tool function
+- **Anthropic differences:** `stop_reason="tool_use"` instead of `"tool_calls"`; `input` is already a dict; tool result uses `role: "user"` with a `tool_result` content block instead of `role: "tool"`
+
 ## Concepts verified
 
-- `finish_reason == "tool_calls"` gates the tool execution branch
-- `tool_call.function.arguments` is a JSON string requiring `json.loads`
-- Assistant message must be appended before tool result messages
-- Anthropic: `tool_use` block, `input` is already a dict, result uses `role: "user"` with `tool_result` content
+- [ ] `finish_reason == "tool_calls"` gates the tool execution branch
+- [ ] `tool_call.function.arguments` is a JSON string requiring `json.loads`
+- [ ] Assistant message must be appended before tool result messages
+- [ ] Anthropic: `tool_use` block, `input` is already a dict, result uses `role: "user"` with `tool_result` content
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `run_single_tool_cycle()`, comment out the line `messages.append(msg)` (the assistant message append before the tool result)
+- **Expected degradation:**
+  - The API returns an error — a `tool` role message without a preceding assistant message violates the protocol
+  - Typical error: `"messages must alternate between user and assistant"` or a 400 response
+  - The final response is never reached; the function raises before printing step `[3]`
+
+Restore `messages.append(msg)` after the experiment.

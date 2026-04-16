@@ -77,6 +77,28 @@ Prompt: 'The capital of Japan is'
 
 ---
 
+## Concepts verified
+
+- [ ] temperature=0 produces identical output across all runs — observable at Observation 1
+- [ ] temperature=1.0 produces different output across runs — observable at Observation 2
+- [ ] top_k=1 is equivalent to greedy decoding at any temperature — observable at Observation 3
+- [ ] High temperature increases wrong-token selection on factual prompts — observable at Observation 5
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `observe_determinism()`, change `temperature=0.0` to `temperature=0.1`
+- **Expected degradation:**
+  - The `✓ All 3 runs produced identical output` check fails
+  - Outputs vary across runs even at low temperature, showing that only exactly `0.0` guarantees determinism — any positive value reintroduces sampling
+
+Restore `temperature=0.0` after the experiment.
+
+---
+
 ## Configuration
 
 | Variable | Default | Effect |

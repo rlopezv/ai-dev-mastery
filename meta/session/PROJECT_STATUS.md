@@ -65,5 +65,5 @@ Do not edit manually unless correcting an error.
 
 ## Last updated
 
-Session: fix-hardening — memory-context module complete (docs + labs ✅)
+Session: fix-hardening — lab hardening pass complete (all 25 labs across 6 modules ✅)
 Date: 2026-04-16

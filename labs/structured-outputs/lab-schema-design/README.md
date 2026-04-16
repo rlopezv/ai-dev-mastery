@@ -48,9 +48,29 @@ Constrained — parse success: 10/10 | enum violations: 0 | hallucinated optiona
   Conclusion: constraints eliminate enum violations and force None on absent optional fields
 ```
 
+## What to observe
+
+- **Unconstrained:** parse success is 10/10, but `enum_violations > 0` and `hallucinated_optionals > 0` — especially on adversarial inputs with no contact info (inputs 4–5); the model guesses values for absent fields
+- **Constrained:** `enum_violations` drops to 0; optional fields return `None` instead of fabricated values — the schema shape enforces `None` even when the model would otherwise fill in a guess
+
 ## Concepts verified
 
-- `Literal` maps enum to JSON Schema `enum` — eliminates out-of-vocabulary values
-- `str | None = None` returns `None` instead of a hallucinated value when field is absent
-- `Field(max_length=...)` bounds string length
-- Schema constraints do not degrade parse success rate — constrained and unconstrained succeed equally on parseable inputs
+- [ ] `Literal` maps enum to JSON Schema `enum` — eliminates out-of-vocabulary values
+- [ ] `str | None = None` returns `None` instead of a hallucinated value when field is absent
+- [ ] `Field(max_length=...)` bounds string length
+- [ ] Schema constraints do not degrade parse success rate — constrained and unconstrained succeed equally on parseable inputs
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `ContactConstrained`, change `role: Literal["engineer", "manager", "executive", "unknown"] = "unknown"` to `role: str | None = None`
+- **Expected degradation:**
+  - `enum_violations` stays 0 — there is no enum to violate
+  - Non-standard values such as `"director"`, `"developer"`, or `"CEO"` pass through unchecked
+  - The constrained schema no longer enforces vocabulary bounds on `role`
+  - The `enum_violations` metric becomes meaningless as a comparison signal
+
+Restore the `Literal` type on `role` after the experiment.

@@ -73,6 +73,28 @@ Prompt: 'The transformer architecture processes tokens by computing self-attenti
 
 ---
 
+## Concepts verified
+
+- [ ] `prompt_eval_count` is identical across all runs for the same input — observable at Observation 3
+- [ ] `eval_count` never exceeds `num_predict` — observable at Observation 4
+- [ ] `total_duration` scales with `eval_count` on CPU inference — observable at Observation 2
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `observe_output_token_scaling()`, add `1` to the limits list: `for limit in (1, 8, 32, 128)`
+- **Expected degradation:**
+  - `eval_count=1` for `num_predict=1` regardless of prompt — the autoregressive loop stops after a single token
+  - The response is always a single token fragment, never a complete answer
+  - Shows that `num_predict` is a hard ceiling, not a target: the loop stops as soon as it is reached, even mid-sentence
+
+Restore the original limits list after the experiment.
+
+---
+
 ## Configuration
 
 | Variable | Default | Effect |

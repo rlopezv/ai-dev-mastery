@@ -96,6 +96,16 @@ def observe_truncation(client: OpenAI) -> None:
 # Observation 3 — multi-turn conversation
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observe_multi_turn(), comment out:
+#     messages.append({"role": "assistant", "content": reply})
+# - Observe:
+#   * conversation loses coherence — no memory of previous answers
+#   * prompt_tokens stops growing because history is not accumulating
+
 def observe_multi_turn(client: OpenAI) -> None:
     """
     Run a 3-turn conversation by accumulating messages between calls.

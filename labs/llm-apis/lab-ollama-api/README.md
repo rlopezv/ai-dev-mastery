@@ -50,8 +50,29 @@ OpenAI path:    response.choices[0].message.content
 Response text:  <answer>
 ```
 
+## What to observe
+
+- **Observation 1:** response field paths (`choices[0].message.content`, `usage.prompt_tokens`) are identical to a real OpenAI call — only the URL changes.
+- **Observation 3:** metadata fields (`family`, `parameter_size`, `quantization_level`) are only available via native `/api/show`. There is no equivalent in the OpenAI-compatible interface.
+- **Observation 4:** native `/api/chat` puts text at `data["message"]["content"]`; OpenAI-compatible wraps it in `choices[0].message.content`. These are different paths for the same content.
+
+---
+
 ## Concepts verified
 
-- `base_url` + `api_key="ollama"` is the only change needed to redirect OpenAI SDK to Ollama
-- Native endpoints (`/api/tags`, `/api/show`) provide model management not available via compatible interface
-- Native `/api/chat` and OpenAI-compatible interface return the same content at different paths
+- [ ] `base_url` + `api_key="ollama"` is the only change needed to redirect OpenAI SDK to Ollama
+- [ ] Native endpoints (`/api/tags`, `/api/show`) provide model management not available via compatible interface
+- [ ] Native `/api/chat` and OpenAI-compatible interface return the same content at different paths
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `observe_native_chat_format()`, replace `data["message"]["content"]` with `data["choices"][0]["message"]["content"]`
+- **Expected degradation:**
+  - `KeyError: 'choices'` — the native Ollama format has no `choices` wrapper
+  - Shows that the native and OpenAI-compatible paths are mutually exclusive: code written for one format fails silently or crashes on the other
+
+Restore the native path after the experiment.

@@ -49,9 +49,31 @@ Chunk N: delta.content=None     finish_reason='stop'
 Assembled length: NNN chars  Batch length: NNN chars
 ```
 
+## What to observe
+
+- **Observation 1:** streaming first-token time is a fraction of batch total time, while total generation times are similar. The perceived responsiveness difference is real even though throughput is unchanged.
+- **Observation 2:** intermediate chunks have `finish_reason=None`; only the final chunk has `finish_reason` set and `delta.content=None`. Code that reads `content` without a `None` guard will fail on the last chunk.
+- Assembled text length from streaming should be close to the batch response length.
+
+---
+
 ## Concepts verified
 
-- First-token latency is measurably shorter in streaming mode
-- Total generation time is approximately equal in both modes
-- Each chunk delivers a partial delta; the last chunk has `finish_reason` set
-- Assembled streaming text is equivalent to batch response text
+- [ ] First-token latency is measurably shorter in streaming mode
+- [ ] Total generation time is approximately equal in both modes
+- [ ] Each chunk delivers a partial delta; the last chunk has `finish_reason` set
+- [ ] Assembled streaming text is equivalent to batch response text
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `observe_latency_comparison()`, add `break` inside the stream loop after collecting 5 chunks, before fully consuming the stream
+- **Expected degradation:**
+  - `assembled` is incomplete — only the first 5 tokens are captured
+  - `Texts match: False` — truncated assembly does not match the full batch response
+  - The underlying HTTP connection may remain open until the server closes it
+
+Restore the complete stream loop after the experiment.

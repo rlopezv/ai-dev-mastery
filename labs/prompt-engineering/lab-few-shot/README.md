@@ -44,8 +44,30 @@ Accuracy: 6/8 = 75%
 Accuracy: 7/8 = 88%
 ```
 
+## What to observe
+
+- **Zero-shot vs few-shot:** compare accuracy scores across the three runs. The gap is most visible on ambiguous inputs (e.g., a text that could be economics or politics).
+- **Format anchoring:** zero-shot may return full sentences; few-shot anchors the output to a single-word label because the examples show that format. The normalization in `evaluate()` partially compensates, but not for all variations.
+- **Class distribution:** with 3 examples from 4 classes, coverage is uneven. Note whether the under-represented class has lower accuracy.
+
+---
+
 ## Concepts verified
 
-- Accuracy improves with shot count, especially on ambiguous inputs
-- Examples anchor the output to a single-word label format
-- Label leakage is visible if all examples share the same class
+- [ ] Accuracy improves with shot count, especially on ambiguous inputs
+- [ ] Examples anchor the output to a single-word label format
+- [ ] Label leakage is visible if all examples share the same class
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `EXAMPLES`, change some labels to use inconsistent casing — replace `"economics"` with `"Economics"` and `"sports"` with `"Sports"` in 2–3 of the examples
+- **Expected degradation:**
+  - The model mirrors the inconsistent casing from examples: some outputs are `"Economics"`, others `"economics"`
+  - `predicted == expected` fails for outputs with capitalized labels despite correct classification
+  - Accuracy drops even though the model is semantically correct — the label format drift causes evaluation failures
+
+Restore lowercase labels in `EXAMPLES` after the experiment.

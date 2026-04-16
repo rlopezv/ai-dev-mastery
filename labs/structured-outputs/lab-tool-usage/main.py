@@ -101,6 +101,17 @@ def dispatch(tool_name: str, arguments_json: str) -> str:
     return str(result)
 
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In run_single_tool_cycle(), comment out: messages.append(msg)
+#   (the line that appends the assistant message before the tool result)
+# - Observe:
+#   * the API returns an error — tool result without preceding assistant message is invalid
+#   * typical error: "messages must alternate between user and assistant" or HTTP 400
+#   * the function raises before reaching step [3] — final response is never printed
+
 # ---------------------------------------------------------------------------
 # Observation 1: Single tool cycle — get_current_time
 # Concept: tool-call + tool-result — four-phase cycle with finish-reason gate

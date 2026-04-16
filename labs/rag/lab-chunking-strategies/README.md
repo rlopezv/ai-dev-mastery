@@ -121,3 +121,24 @@ Exact scores vary by model version. The ordering pattern — recursive outperfor
 - **The score gap is larger on paragraph-spanning queries.** For queries about facts that flow across a sentence boundary, fixed-size chunking cuts through the relevant passage. Recursive chunking keeps paragraphs together, producing a chunk that contains the full explanation.
 - **For single-sentence facts, strategies converge.** All three strategies tend to produce similar top-1 scores when the answer fits in one sentence — chunking granularity only matters when the answer spans multiple sentences.
 - **The recursive collection is the canonical one** used by subsequent labs. If you want to experiment with a different chunk size, change `CHUNK_SIZE` in `.env` and re-run.
+
+## Concepts verified
+
+- [ ] All 3 collections are queryable after indexing
+- [ ] Chunk counts differ across strategies for the same corpus
+- [ ] Recursive top-1 similarity ≥ fixed top-1 for the paragraph-spanning query
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** change `CHUNK_SIZE = 512` to `CHUNK_SIZE = 100`
+- **Expected degradation:**
+  - Chunk count spikes (many small fragments per document)
+  - Average chunk length drops to ~90–100 chars — most chunks no longer contain a complete thought
+  - Top-1 similarity scores fall for paragraph-spanning queries because the relevant passage is split across multiple tiny chunks
+  - The `✓ recursive top-1 ≥ fixed top-1` check may flip to `✗`
+
+Restore `CHUNK_SIZE = 512` after the experiment (subsequent labs depend on the `chunks_recursive` collection built with the default size).

@@ -115,3 +115,24 @@ I don't have enough information in the provided context to answer that question.
 - **Deduplication removes near-duplicate chunks** — if two chunks from the same document section are retrieved, one is dropped. Watch the "After dedup" count.
 - **Source citations `[N]`** — in-scope answers cite the chunks they draw from. Check whether the cited source matches the expected corpus file.
 - **Out-of-scope decline** — the system prompt instructs the model to say it doesn't know rather than guess. Observe that no fabricated answer appears for the France query.
+
+## Concepts verified
+
+- [ ] In-scope queries include at least one `[N]` source citation in the answer
+- [ ] Out-of-scope query produces a decline response — no hallucinated answer
+- [ ] Token budget is not exceeded for any query (context block fits within budget)
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** change `MIN_SIMILARITY_THRESHOLD = 0.50` to `MIN_SIMILARITY_THRESHOLD = 0.0`
+- **Expected degradation:**
+  - Out-of-scope queries (e.g., "What is the capital of France?") are no longer flagged as out-of-scope
+  - The model receives irrelevant retrieved chunks as context and may fabricate an answer
+  - The `✓ Out-of-scope query correctly declined` check disappears or flips to `✗`
+  - The similarity score is still printed but no longer gates the pipeline
+
+Restore `MIN_SIMILARITY_THRESHOLD = 0.50` after the experiment.

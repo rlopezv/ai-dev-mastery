@@ -117,7 +117,7 @@ into the summary before dropping old turns.
 
 ---
 
-## What to Look For
+## What to observe
 
 **Compression event turns:** the strategy fires when `at_threshold` is True
 (token count ≥ 80% of budget). With the default 8192-token window this may not
@@ -133,6 +133,26 @@ If the recall fails, read the summary message inserted into history — smaller
 models (7B) may omit low-salience facts. Increasing `keep_recent_pairs` in
 `compress_history()` has no effect on recall of early facts; the summary quality
 is the limiting factor.
+
+## Concepts verified
+
+- [ ] Summarization strategy recalls "Nighthawk" and "16" at turn 25 (PASS)
+- [ ] Truncation and sliding window fail recall (FAIL) — anchor from turn 3 was dropped
+- [ ] Summarization latency is higher than truncation (200ms+ vs <1ms)
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `FILLER_TURNS`, move `ANCHOR_FACT` from index 2 (turn 3) to index 22 (turn 23) — near the end of the list
+- **Expected degradation:**
+  - All three strategies retain the anchor fact because it now falls within the recent window
+  - All three strategies PASS recall — the PASS/FAIL distinction collapses
+  - The lab no longer demonstrates that only summarization preserves early-context facts
+
+Restore `ANCHOR_FACT` at index 2 after the experiment.
 
 ---
 

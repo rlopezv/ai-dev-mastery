@@ -111,3 +111,24 @@ Exact similarity values differ by model version and quantization. The ordering a
 - **Score gap**: related texts score ≥ 0.75; unrelated texts score ≤ 0.55. The gap between these ranges is what makes retrieval possible.
 - **Ranking**: the most relevant text for the query appears first. Notice that texts discussing adjacent concepts (attention in retrieval vs. attention in transformers) score higher than fully unrelated texts.
 - **Batch time**: embedding 10 texts in one request is much faster than 10 sequential requests. Note the total time printed.
+
+## Concepts verified
+
+- [ ] Related texts score ≥ 0.75 against the query; unrelated texts score ≤ 0.55
+- [ ] Semantic gap (related avg − unrelated avg) is clearly positive — typically > 0.30
+- [ ] Vector dimension is consistent across all embeddings from the same model (768 for nomic-embed-text)
+- [ ] Corpus ranking places the most topically relevant document at position #1
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `RELATED_TEXTS`, replace both entries with texts from a completely different domain (e.g., cooking recipes, sports news)
+- **Expected degradation:**
+  - Related avg drops below 0.75 — the `✓` threshold check flips to `✗`
+  - The semantic gap between "related" and "unrelated" collapses
+  - Observation 2 shows that example quality, not just category membership, drives the measurable score gap
+
+Restore the original transformer-related texts after the experiment.

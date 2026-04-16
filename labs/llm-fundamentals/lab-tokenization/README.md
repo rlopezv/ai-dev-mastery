@@ -73,6 +73,28 @@ Decoded: 'The quick brown fox jumps over the lazy dog.'
 
 ---
 
+## Concepts verified
+
+- [ ] Token IDs differ for a word with and without a leading space — observable at Observation 3
+- [ ] Non-Latin text costs 2–4× more tokens than equivalent English — observable at Observation 2
+- [ ] A single character change can alter the full token sequence for a word — observable at Observation 4
+- [ ] Token count, not character count, determines API cost and context fit — observable at Observation 5
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `observe_budget_estimate()`, set `max_output = 0`
+- **Expected degradation:**
+  - All three context limits report `fits: yes` even for prompts that would overflow at runtime
+  - Simulates the common mistake of computing only input tokens and forgetting to reserve space for the model's response
+
+Restore `max_output = 256` after the experiment.
+
+---
+
 ## Configuration
 
 No environment variables needed. The tokenizer runs entirely in-process.

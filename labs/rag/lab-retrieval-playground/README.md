@@ -105,3 +105,24 @@ Query: "BM25 saturation function"
 - **Exact-term queries** — queries containing a rare technical phrase ("BM25 saturation function", "RoPE positional encoding") expose dense retrieval's weakness. BM25 finds the term directly.
 - **Semantic queries** — paraphrased queries ("how does the model know word order?") show dense retrieval's strength. BM25 returns nothing useful if the exact words are absent.
 - **RRF is score-scale agnostic** — BM25 scores and cosine similarities live on different scales. RRF uses only rank position, so no calibration is needed.
+
+## Concepts verified
+
+- [ ] BM25 outranks dense on at least one exact-term query
+- [ ] Dense retrieval returns similarity ≥ 0.70 on at least one semantic query
+- [ ] RRF top-1 for an exact-term query matches or improves on BM25 top-1
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `bm25_retrieve()`, remove `.lower()` from the query tokenization: change `bm25.get_scores(query.lower().split())` to `bm25.get_scores(query.split())`
+- **Expected degradation:**
+  - BM25 fails on mixed-case queries — query tokens no longer match the lowercased corpus index
+  - Exact-term queries that would have ranked first now score near 0
+  - The `✓ BM25 outranked dense on ...` validation check flips to `✗`
+  - RRF hybrid also degrades for exact-term queries because the BM25 signal collapses
+
+Restore `.lower()` on both sides after the experiment.

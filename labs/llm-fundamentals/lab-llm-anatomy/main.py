@@ -85,6 +85,17 @@ def observe_token_count_stability(prompt: str, runs: int = 3) -> None:
 # Observation 4 — eval_count scales with num_predict
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observe_output_token_scaling(), add 1 to the limits list:
+#   for limit in (1, 8, 32, 128)
+# - Observe:
+#   * eval_count=1 for all prompts — loop stops after a single token
+#   * Response is always a single token fragment, never a complete sentence
+#   * Shows num_predict is a hard ceiling: generation stops immediately when reached
+
 def observe_output_token_scaling() -> None:
     """
     Request different num_predict values and confirm eval_count reflects them.

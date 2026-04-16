@@ -20,6 +20,16 @@ RUNS = 3
 # Observation 1 — temperature=0 produces deterministic output
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In observe_determinism(), change temperature=0.0 to temperature=0.1
+# - Observe:
+#   * "✓ All 3 runs produced identical output" check fails
+#   * Outputs vary across runs even at low temperature
+#   * Only exactly 0.0 guarantees determinism — any positive value reintroduces sampling
+
 def observe_determinism(prompt: str) -> None:
     """
     Run the same prompt at temperature=0 multiple times.

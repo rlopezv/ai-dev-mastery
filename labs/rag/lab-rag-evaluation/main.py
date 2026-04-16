@@ -184,6 +184,17 @@ def generate_answer(client, query: str, chunks: list[dict]) -> str:
 # Retrieval metrics
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In the second evaluate_retrieval call (in main()), change top_k=10 to top_k=50
+# - Observe:
+#   * Precision@5 drops dramatically (50 chunks retrieved, only 1-2 from expected source)
+#   * Recall@5 approaches 1.0 — correct source almost always appears somewhere in 50 results
+#   * the recall/precision trade-off becomes extreme, showing why unbounded top_k is impractical
+#   * faithfulness may also decline — more irrelevant context increases hallucination risk
+
 def evaluate_retrieval(chroma_client, client,
                        eval_set: list[dict],
                        top_k: int) -> dict:

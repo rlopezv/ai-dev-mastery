@@ -49,8 +49,30 @@ python lab-prompt-anatomy/main.py
   ...
 ```
 
+## What to observe
+
+- **Observation 1 vs 2:** count unique responses — the complete prompt produces the fewest. Format specification is the gating factor, not the system prompt or instruction.
+- **Observation 2:** responses vary in format (single word, full sentence, explanation) even for the same input. The model is not wrong — it simply has no format constraint.
+- **Observation 3:** without an explicit instruction, some runs classify, others describe. The model infers the task from context — sometimes correctly, sometimes not.
+
+---
+
 ## Concepts verified
 
-- Format specification is the component most responsible for output consistency
-- Without instruction, the model may classify or describe — behavior is undefined
-- System prompt affects tone and conciseness, not classification accuracy
+- [ ] Format specification is the component most responsible for output consistency
+- [ ] Without instruction, the model may classify or describe — behavior is undefined
+- [ ] System prompt affects tone and conciseness, not classification accuracy
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `build_complete_prompt()`, remove the enumerated options from the format spec — change `"Respond with one word only: positive, negative, or neutral."` to `"Respond with one word only."`
+- **Expected degradation:**
+  - Model invents its own category labels ("mixed", "ambivalent", "critical")
+  - Unique response count increases even for Observation 1
+  - Shows that format spec must enumerate the valid outputs — open-ended instructions allow vocabulary drift
+
+Restore the original format spec after the experiment.

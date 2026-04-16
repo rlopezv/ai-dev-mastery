@@ -89,6 +89,16 @@ def extract_json(text: str) -> dict:
 # Pattern 3 — Step-by-step instruction
 # ---------------------------------------------------------------------------
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In build_steps_prompt(), reorder the step numbers in the prompt to 1, 3, 2, 4
+# - Observe:
+#   * check_steps_present() still returns True — all four labels appear
+#   * but content is scrambled: correctness issues under "Step 3", performance under "Step 2"
+#   * step numbering enforces section identity, not intended sequence
+
 def build_steps_prompt(code: str) -> list[dict]:
     """
     Concept: prescribing an explicit step sequence ensures all review dimensions

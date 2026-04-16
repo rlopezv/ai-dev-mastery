@@ -45,9 +45,31 @@ Response:
 All steps labeled: ✓
 ```
 
+## What to observe
+
+- **Pattern 1:** the role prompt shapes vocabulary without instructing content. Notice technical terms and trade-off framing appear without being requested explicitly.
+- **Pattern 2:** `check_format()` passes only when JSON is valid AND `sentiment` matches the expected label. A well-formed JSON with wrong sentiment is still a failure.
+- **Pattern 3:** all four step labels appear in order. `check_steps_present()` confirms presence but not order — read the response to verify sequencing.
+
+---
+
 ## Concepts verified
 
-- Role prompt produces domain vocabulary without explicit content instructions
-- Format pattern produces parseable JSON on standard inputs
-- Step pattern labels all four sections including "None identified." for empty ones
-- Benchmark harness reports accuracy as correct/total with failure details
+- [ ] Role prompt produces domain vocabulary without explicit content instructions
+- [ ] Format pattern produces parseable JSON on standard inputs
+- [ ] Step pattern labels all four sections including "None identified." for empty ones
+- [ ] Benchmark harness reports accuracy as correct/total with failure details
+
+---
+
+## Failure case
+
+Modify `main.py` at the `# FAILURE CASE` block and re-run.
+
+- **What to change:** in `build_steps_prompt()`, reorder the step numbers in the prompt to 1, 3, 2, 4
+- **Expected degradation:**
+  - `check_steps_present()` still returns `True` — all four labels appear
+  - But the content is scrambled: correctness issues appear under "Step 3", performance under "Step 2"
+  - Shows that explicit numbering enforces section identity but not section order — the model follows the numbers, not the intended sequence
+
+Restore the original step order (1, 2, 3, 4) after the experiment.

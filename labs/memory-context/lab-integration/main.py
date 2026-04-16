@@ -56,6 +56,18 @@ TURNS = [
 ]
 
 
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - In run_integration(), comment out the store.add_episode() call at the end of the loop
+# - Observe:
+#   * no episodes are ever written; [memory injected] never appears in any turn
+#   * recall turns 28-30 rely entirely on in-context history and summarization
+#   * if compression dropped the early turns, recall fails — model cannot name "Jordan"
+#     or recall the Redis caching decision
+#   * shows that the write step is required for the write-retrieve-inject cycle to work
+
 def run_integration(client) -> None:
     """
     Concept: memory-aware conversational application — combines HistoryManager,

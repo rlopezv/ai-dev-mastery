@@ -187,9 +187,24 @@ FINAL SCORE = weighted sum (0–10)
 
 * **Severity:** Major
 
-### DA-4 Lab README is accurate
+### DA-4 Lab README is accurate and complete
 
 * **Severity:** Major
+* Individual lab README (`labs/<module>/lab-<name>/README.md`) must include all mandatory sections from `lab-individual-readme-template.md` in order:
+  1. Frontmatter
+  2. Overview
+  3. Concepts (table)
+  4. Setup
+  5. Run
+  6. Expected Output
+  7. What to observe
+  8. Concepts verified
+  9. Failure case
+  10. Infrastructure
+* `## What to observe` must contain behavioral guidance specific to the lab's concept — not generic instructions
+* `## Failure case` must name the exact modification and list observable symptoms
+* The modification described in `## Failure case` must match the `# FAILURE CASE` block in `main.py`
+* `## Expected Output` must use real output, not invented values
 
 ### DA-5 Cross-references are valid
 

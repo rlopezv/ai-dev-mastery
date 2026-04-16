@@ -32,9 +32,23 @@ Every lab entry point follows this order:
 # 2. Configuration (constants, env vars)
 # 3. Core logic (functions or classes)
 # 4. Entry point (if __name__ == "__main__")
+
+# --------------------------------------------------
+# FAILURE CASE
+# --------------------------------------------------
+# Failure case:
+# - <specific modification — e.g. "Remove one example from EXAMPLES">
+# - Observe:
+#   * <symptom 1 — e.g. "format drift in outputs">
+#   * <symptom 2 — e.g. "inconsistent labeling">
 ```
 
 No business logic in the entry point. Keep `__main__` as an orchestrator only.
+
+The `# FAILURE CASE` block is a comment scaffold placed immediately after the
+configuration or core logic block it relates to. It is not executable — it guides
+the learner to the exact location for the experiment described in `## Failure case`
+of the lab README. Content must be specific to the lab's concept, not generic.
 
 ---
 
