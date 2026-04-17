@@ -38,6 +38,12 @@ summary: "Explains how to run and understand the labs for this step."
 
 ---
 
+## Navigation
+
+[Labs](../README.md) / <Module Name> Labs
+
+---
+
 ## 1. Overview
 
 What these labs implement, why they exist in this step, and what is NOT covered.

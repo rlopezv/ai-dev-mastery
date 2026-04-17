@@ -40,6 +40,12 @@ summary: "<One sentence: what the lab implements and what it demonstrates.>"
 
 ---
 
+## Navigation
+
+[Labs](../../README.md) / [<Module Name> Labs](../README.md) / <Lab Title>
+
+---
+
 ## Overview
 
 What this lab implements, what the learner will observe, and what is explicitly out of scope.

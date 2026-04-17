@@ -38,6 +38,12 @@ summary: "Describes how components interact within this step."
 
 ---
 
+## Navigation
+
+[Docs](../../README.md) / [<Module Name>](README.md) / Architecture
+
+---
+
 ## 1. System Overview
 
 What system is being described, what problem it solves, and its main components.

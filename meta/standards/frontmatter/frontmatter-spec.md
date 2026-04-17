@@ -274,7 +274,11 @@ path: "docs/05-rag/embeddings-and-vector-search.md"
 
 #### Rule
 
-`level` refers to reader difficulty, not implementation complexity.
+`level` is both a pedagogical classification and a normative execution contract.
+It governs allowed runtime complexity, infrastructure footprint, abstraction layers,
+observability requirements, and acceptable failure surface for the module.
+
+Full contract definition: `meta/system-design/LEVEL_MODE.md`
 
 ---
 

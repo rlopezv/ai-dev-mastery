@@ -44,6 +44,16 @@ All reviews must cover these five categories.
 - Misalignment with other modules or the architecture
 - Conflicts with `docs/reference/glossary.md`
 
+### 1.6 Level Compliance
+
+- Runtime components exceed what the declared level permits
+- Abstraction level inconsistent with level policy
+- Observability requirements not met for the declared level
+- Infrastructure footprint not justified by the learning objective
+- Exception not documented per G-5 (if applicable)
+
+Full contract: `meta/system-design/LEVEL_MODE.md`
+
 ---
 
 ## 2. Issue Severity

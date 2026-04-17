@@ -24,13 +24,14 @@ It does NOT validate repository structure or bootstrap completeness.
 
 ## 2. Validation Model
 
-Validation is performed across five categories:
+Validation is performed across six categories:
 
 1. Structural Compliance
 2. Content Quality
 3. Pedagogical Quality
 4. Engineering Quality
 5. Integration Quality
+6. Level Compliance
 
 Each category includes:
 
@@ -58,8 +59,9 @@ Each check is scored as:
 | Structural Compliance | 10 | 0.25 | 2.5 |
 | Content Quality | 10 | 0.20 | 2.0 |
 | Pedagogical Quality | 10 | 0.20 | 2.0 |
-| Engineering Quality | 10 | 0.20 | 2.0 |
-| Integration Quality | 10 | 0.15 | 1.5 |
+| Engineering Quality | 10 | 0.15 | 1.5 |
+| Integration Quality | 10 | 0.10 | 1.0 |
+| Level Compliance | 10 | 0.10 | 1.0 |
 
 ### 3.3 Final Score
 
@@ -116,7 +118,7 @@ does not auto-fail, but it must be explicitly called out for correction before f
 
 ### SC-3 Required section structure is present
 - **Severity:** Critical
-- **Rule:** The document follows the required internal structure for its type and phase expectations
+- **Rule:** The document follows the required internal structure for its type, including the mandatory `## Navigation` breadcrumb after frontmatter with a correct path to the parent document
 
 ### SC-4 No placeholders or unfinished sections remain
 - **Severity:** Critical
@@ -202,6 +204,7 @@ does not auto-fail, but it must be explicitly called out for correction before f
 
 ## 9. Category 5 — Integration Quality
 
+
 ### IQ-1 Sandbox or implementation alignment is present
 - **Severity:** Major
 - **Rule:** The document aligns with the intended sandbox/runtime model where applicable
@@ -224,7 +227,33 @@ does not auto-fail, but it must be explicitly called out for correction before f
 
 ---
 
-## 10. Scoring Sheet
+## 10. Category 6 — Level Compliance
+
+Full contract: `meta/system-design/LEVEL_MODE.md`
+
+### LC-1 Runtime complexity matches declared level
+- **Severity:** Critical
+- **Rule:** The document does not describe, require, or imply runtime components forbidden by its declared level
+
+### LC-2 Required components are justified by the learning objective
+- **Severity:** Major
+- **Rule:** Every runtime component referenced in the document is justified by what the module teaches
+
+### LC-3 Abstraction level is appropriate for declared level
+- **Severity:** Major
+- **Rule:** The document uses abstraction patterns consistent with the level policy (raw APIs for foundational, transparent frameworks for intermediate, explicit trade-offs for advanced)
+
+### LC-4 Observability requirements are addressed
+- **Severity:** Major
+- **Rule:** The document describes or references sufficient observability for the learner to understand behavior at the declared level
+
+### LC-5 Level exceptions are explicitly documented
+- **Severity:** Critical
+- **Rule:** If the module deviates from the default profile of its level, the exception is documented in this document, the labs README, and the infrastructure README (G-5)
+
+---
+
+## 11. Scoring Sheet
 
 Use the following structure when validating a document.
 
@@ -255,10 +284,15 @@ Use the following structure when validating a document.
 | IQ-3 |  | Major |  |
 | IQ-4 |  | Minor |  |
 | IQ-5 |  | Major |  |
+| LC-1 |  | Critical |  |
+| LC-2 |  | Major |  |
+| LC-3 |  | Major |  |
+| LC-4 |  | Major |  |
+| LC-5 |  | Critical |  |
 
 ---
 
-## 11. Category Calculation Method
+## 12. Category Calculation Method
 
 Each category has 5 checks, each with a max raw score of 2.
 
@@ -285,7 +319,7 @@ Repeat for all categories and sum the results.
 
 ---
 
-## 12. Validation Output Format
+## 13. Validation Output Format
 
 Every validation result SHOULD produce:
 
@@ -311,7 +345,7 @@ REQUIRED FIXES:
 
 ---
 
-## 13. Interpretation Guidelines
+## 14. Interpretation Guidelines
 
 ### PASS does NOT mean perfect
 A document may pass while still containing minor improvements.
@@ -324,7 +358,7 @@ A reviewer MUST explain why a score was assigned whenever a check is scored 0 or
 
 ---
 
-## 14. Non-Compliant Validation Behavior
+## 15. Non-Compliant Validation Behavior
 
 The following are invalid validation behaviors:
 
@@ -336,7 +370,7 @@ The following are invalid validation behaviors:
 
 ---
 
-## 15. Final Rule
+## 16. Final Rule
 
 A learner-facing document is considered accepted only if:
 

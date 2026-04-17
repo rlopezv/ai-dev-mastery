@@ -19,6 +19,19 @@ and any other learner-facing text produced by or accompanying a lab.
 
 ---
 
+## 1a. Abstraction Policy by Level
+
+The allowed abstraction level in lab code is governed by the module's declared level.
+Full contract: `meta/system-design/LEVEL_MODE.md`.
+
+| Level | Abstraction policy |
+|-------|--------------------|
+| `foundational` | Raw APIs only. No framework wrappers. Explicit request/response handling. |
+| `intermediate` | Frameworks allowed when they serve the learning objective, but the underlying mechanism must remain visible. |
+| `advanced` | Higher-level abstractions allowed. Trade-offs between convenience, control, and transparency must be explicit. |
+
+---
+
 ## 2. main.py Structure
 
 Every lab entry point follows this order:

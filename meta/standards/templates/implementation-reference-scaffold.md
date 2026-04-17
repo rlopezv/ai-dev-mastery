@@ -55,6 +55,12 @@ summary: "Explains how concepts and architecture translate into implementation p
 
 ---
 
+## Navigation
+
+[Docs](../../README.md) / [<Module Name>](README.md) / Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 How the architecture components map to concrete tools and interfaces.
@@ -106,8 +112,8 @@ Table only. No setup commands — those belong in `labs/<module>/README.md`.
 
 | Tool | Role | Infrastructure profile |
 |------|------|------------------------|
-| Ollama | LLM runtime | `light` |
-| ChromaDB | Vector store | `full` |
+| Ollama | LLM runtime | `foundational` |
+| ChromaDB | Vector store | `intermediate` |
 
 ---
 

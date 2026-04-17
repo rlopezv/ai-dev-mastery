@@ -26,6 +26,7 @@ Before starting any task, read:
 
 ```
 meta/system-design/REPOSITORY_LAYOUT.md   → full repo structure
+meta/system-design/LEVEL_MODE.md          → normative level contracts (runtime, infrastructure, abstraction)
 meta/system-design/DOCS_LABS_MAP.md       → module sequence and docs↔labs alignment
 meta/session/PROJECT_STATUS.md            → current project progress
 ```
@@ -179,28 +180,31 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 ### Write a module (all docs for a module)
 
 1. Read `meta/system-design/DOCS_LABS_MAP.md` for the module scope
-2. Write documents in this order: README → topics → architecture → implementation-reference → validation
-3. Validate each document before writing the next
-4. Update `docs/reference/glossary.md` with all new concepts
-5. Update `meta/session/PROJECT_STATUS.md`
-6. Update `meta/session/SESSION-CONTEXT.md`
+2. Verify the module's declared level against `meta/system-design/LEVEL_MODE.md` — confirm allowed runtime, abstraction, and infrastructure
+3. Write documents in this order: README → topics → architecture → implementation-reference → validation
+4. Validate each document before writing the next
+5. If the module requires components outside its default level profile, document the exception per LEVEL_MODE G-5 in the module README, `labs/<module>/README.md`, and `infrastructure/README.md`
+6. Update `docs/reference/glossary.md` with all new concepts
+7. Update `meta/session/PROJECT_STATUS.md`
+8. Update `README.md`, `docs/README.md`, and `labs/README.md` with the new module (status, lab names, descriptions)
+9. Update `meta/session/SESSION-CONTEXT.md`
 
 ### Review a document
 
 1. Read the document
 2. Apply `meta/standards/validation/docs-checklist.md`
 3. Produce a structured report following `meta/standards/review/review-protocol.md`
-4. Write the report to `meta/session/review-cache/<filename>.review.md`
+4. Write the report to `meta/session/reports/<filename>.review.md`
 5. Do NOT modify the document
 
 ### Fix a document
 
-1. Check if `meta/session/review-cache/<filename>.review.md` exists and read it
+1. Check if `meta/session/reports/<filename>.review.md` exists and read it
 2. If no cached review exists, perform the review internally first
 3. Apply fixes to the document
 4. Re-validate with `meta/standards/validation/docs-checklist.md`
 5. Write the corrected document to the target path
-6. Delete the review cache file if it exists
+6. Delete the report file if it exists
 7. Update `meta/session/PROJECT_STATUS.md`
 8. Update `meta/session/SESSION-CONTEXT.md`
 
@@ -220,9 +224,56 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 2. Read `meta/standards/writing/lab-code-style.md`
 3. Read `meta/standards/templates/lab-individual-readme-scaffold.md`
 4. Implement `main.py`, `README.md`, and `requests.http` if applicable
-4. Validate with `meta/standards/validation/labs-checklist.md`
-5. Update `meta/session/PROJECT_STATUS.md`
+5. Ensure `labs/<module>/requirements.txt` exists; add a `-r labs/<module>/requirements.txt` line to `.devcontainer/post-create.sh` if not already present
+6. Verify the lab's infrastructure profile matches the module's level policy (LEVEL_MODE); document any exception per G-5
+7. Validate with `meta/standards/validation/labs-checklist.md`
+8. Update `meta/session/PROJECT_STATUS.md`
+9. Update `meta/session/SESSION-CONTEXT.md`
+
+### Write labs (all labs for a module)
+
+1. Read `labs/<module>/README.md` for the lab inventory
+2. Execute "Write a lab" for each required lab in listed order
+3. Verify all `required` labs per `meta/system-design/DOCS_LABS_MAP.md` are complete
+4. Update `meta/session/PROJECT_STATUS.md`
+5. Update `README.md`, `docs/README.md`, and `labs/README.md`
 6. Update `meta/session/SESSION-CONTEXT.md`
+
+### Audit module
+
+1. Read `meta/system-design/LEVEL_MODE.md` for the module's level policy
+2. Validate all `docs/<module>/` files with `meta/standards/validation/docs-checklist.md`
+3. Validate all `labs/<module>/` with `meta/standards/validation/labs-checklist.md`
+4. Check docs↔labs alignment against `meta/system-design/DOCS_LABS_MAP.md`
+5. Check all frontmatter cross-references point to real files
+6. Write report to `meta/session/reports/<module>.audit.md`
+7. Display results — PASS / FAIL per file with severity
+
+### Audit (global)
+
+1. Run "Audit module" for each module marked ✅ in `meta/session/PROJECT_STATUS.md`
+2. Check cross-module prerequisites form a valid DAG (no circular dependencies)
+3. Check terminology consistency across modules against `docs/reference/glossary.md`
+4. Check `README.md`, `docs/README.md`, and `labs/README.md` are in sync with `PROJECT_STATUS.md`
+5. Write report to `meta/session/reports/audit.md`
+6. Report as structured observations — requires human review, not PASS/FAIL
+
+### Enrich
+
+1. Read `meta/session/reports/audit.md` if available, or derive a global view from current state
+2. Apply horizontal navigation improvements: enrich `next` and `related` fields with cross-module references where concepts overlap
+3. Build or update reading paths by audience profile (developer / architect)
+4. Write report of all changes made to `meta/session/reports/enrich.md`
+
+### Dist
+
+Produce a clean learner-facing distribution of the repository in `dist/`.
+
+1. Delete `dist/` if it exists, then recreate it
+2. Copy into `dist/`: `docs/`, `labs/`, `infrastructure/`, `README.md`, `.devcontainer/`, `.env.example`
+3. Do NOT copy: `CLAUDE.md`, `.claude/`, `meta/`, `.work/`, `meta/session/reports/`, `.gitignore`
+4. In `dist/README.md`, remove any references to `CLAUDE.md`, `.claude/`, or `meta/`
+5. Verify all internal links in `dist/` resolve correctly within the dist tree
 
 ---
 
@@ -232,7 +283,18 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 - Shared utilities go in `labs/<module>/shared/` — never in individual labs
 - Entry point is always `main.py`
 - FastAPI labs include a `requests.http` file
-- Infrastructure profile options: `light` (Ollama + API) | `full` (+ ChromaDB)
+- Infrastructure profile options: `foundational` (Ollama + Open WebUI) | `intermediate` (+ ChromaDB) | `advanced` (TBD per module)
+- Each module has exactly one `labs/<module>/requirements.txt`; `.devcontainer/post-create.sh` installs all of them — the devcontainer is the Python runtime
+
+### implementation-reference scope
+
+`implementation-reference.md` covers **design patterns and architectural decisions only**:
+patterns, component mappings, data structures, design-level trade-offs, and failure modes
+caused by wrong design choices.
+
+**Do not** put setup commands, `pip install` instructions, operational failure modes
+(service not running, model not found), or expected lab outputs in `implementation-reference.md`.
+Those belong in `labs/<module>/README.md`.
 
 ---
 
@@ -246,7 +308,7 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 - Do not create lab files without a corresponding `README.md`
 - Do not assume docs↔labs alignment — read `DOCS_LABS_MAP.md`
 - Do not modify existing glossary entries without explicit instruction
-- Do not commit files under `meta/session/review-cache/`
+- Do not commit files under `meta/session/reports/`
 
 ---
 

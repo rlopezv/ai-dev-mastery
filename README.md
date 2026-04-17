@@ -59,7 +59,7 @@ prompt you to reopen inside the container.
 ```bash
 cd infrastructure
 cp .env.example .env
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 ```
 
 See [infrastructure/README.md](infrastructure/README.md) for hardware configuration,

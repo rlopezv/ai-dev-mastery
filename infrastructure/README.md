@@ -1,14 +1,20 @@
 # Infrastructure
 
+## Navigation
+
+[Home](../README.md) / Infrastructure
+
+---
+
 Local environment for running the labs without dependencies on external providers.
 
 ## Services
 
 | Service | Profile | Port | Purpose |
 |---------|---------|------|---------|
-| Ollama | light, full | 11434 | Local LLM runtime |
-| Open WebUI | light, full | 3000 | Web interface for interacting with models |
-| ChromaDB | full | 8000 | Vector database (RAG modules and later) |
+| Ollama | foundational, intermediate | 11434 | Local LLM runtime |
+| Open WebUI | foundational, intermediate | 3000 | Web interface for interacting with models |
+| ChromaDB | intermediate | 8000 | Vector database (RAG modules and later) |
 
 ## Quick start
 
@@ -16,17 +22,17 @@ Local environment for running the labs without dependencies on external provider
 cd infrastructure
 cp .env.example .env
 # Edit .env for your hardware (see configuration section below)
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 ```
 
 ## Profiles
 
 ```bash
 # Modules 01–04 or limited hardware
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 
 # Modules 05 RAG, Agents, Memory (requires ChromaDB)
-docker-compose --profile full up -d
+docker-compose --profile intermediate up -d
 ```
 
 ## Hardware configuration
@@ -101,7 +107,7 @@ curl http://localhost:11434/api/tags | python -m json.tool
 open http://localhost:3000    # macOS
 start http://localhost:3000   # Windows
 
-# ChromaDB (full profile only)
+# ChromaDB (intermediate profile only)
 curl http://localhost:8000/api/v1/heartbeat
 ```
 

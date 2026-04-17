@@ -8,6 +8,9 @@ implementations. It also establishes the order in which modules should be studie
 Module folder names have no numeric prefix. This document is the authoritative
 source for module sequence and docs-to-labs alignment.
 
+Level assignments (foundational / intermediate / advanced) are normative execution
+contracts defined in `meta/system-design/LEVEL_MODE.md`.
+
 ---
 
 ## Reference Content (cross-module, no sequence)

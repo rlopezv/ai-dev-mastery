@@ -89,7 +89,7 @@ FINAL SCORE = weighted sum (0–10)
 ### LS-1 Lab directory structure is correct
 
 * **Severity:** Critical
-* Each lab follows expected folder structure
+* Each lab follows expected folder structure, including the mandatory `## Navigation` breadcrumb in README files with a correct path to the parent labs README
 
 ### LS-2 Lab is isolated
 
@@ -214,6 +214,7 @@ FINAL SCORE = weighted sum (0–10)
 
 ## 9. Category 5 — Engineering Quality
 
+
 ### EQ-1 Real system behavior is represented
 
 * **Severity:** Major
@@ -237,7 +238,38 @@ FINAL SCORE = weighted sum (0–10)
 
 ---
 
-## 10. Validation Output Format
+## 10. Category 6 — Level Compliance
+
+Full contract: `meta/system-design/LEVEL_MODE.md`
+
+### LC-1 Infrastructure profile matches declared level
+
+* **Severity:** Critical
+* The lab uses the profile(s) permitted by the module's declared level (foundational / intermediate / advanced)
+
+### LC-2 Runtime components are justified by the learning objective
+
+* **Severity:** Major
+* Every service or dependency required by the lab is directly justified by what the lab teaches
+
+### LC-3 Abstraction level matches level policy
+
+* **Severity:** Major
+* Lab code follows the abstraction policy for its level: raw APIs for foundational, transparent frameworks for intermediate, explicit trade-offs for advanced
+
+### LC-4 Observability is sufficient for the declared level
+
+* **Severity:** Major
+* Outputs and logs allow the learner to understand behavior at the expected depth for the declared level
+
+### LC-5 Level exceptions are explicitly documented
+
+* **Severity:** Critical
+* If the lab deviates from the default profile of its level, the exception is documented in the lab README, the module labs README, and the infrastructure README (G-5)
+
+---
+
+## 11. Validation Output Format
 
 ```text
 LAB_VALIDATION_RESULT
@@ -261,7 +293,7 @@ REQUIRED FIXES:
 
 ---
 
-## 11. Interpretation Rules
+## 12. Interpretation Rules
 
 ### PASS
 
@@ -275,7 +307,7 @@ REQUIRED FIXES:
 
 ---
 
-## 12. Non-Compliant Validation Behavior
+## 13. Non-Compliant Validation Behavior
 
 Invalid validation includes:
 
@@ -287,7 +319,7 @@ Invalid validation includes:
 
 ---
 
-## 13. Final Rule
+## 14. Final Rule
 
 A lab is considered valid only if:
 

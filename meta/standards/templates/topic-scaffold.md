@@ -37,6 +37,12 @@ summary: "<One-sentence explanation of the topic>"
 
 ---
 
+## Navigation
+
+[Docs](../../README.md) / [<Module Name>](README.md) / <Title>
+
+---
+
 ## 1. Intuition
 
 Provide an immediate mental model. No heavy technical language yet.

@@ -1,5 +1,11 @@
 # Documentation
 
+## Navigation
+
+[Home](../README.md) / Docs
+
+---
+
 The `docs/` directory contains the conceptual foundation for every module. Each module
 has its own directory with a set of documents that explain the what, why, and how before
 you run the labs.
@@ -27,11 +33,15 @@ the topic document it maps to.
 
 | Type | What it contains |
 |------|-----------------|
-| `README.md` | Module scope, concept map, reading order, lab inventory |
+| `README.md` | Module scope, concept map, reading order, lab inventory, engineering takeaways |
 | Topic (`<concept>.md`) | One concept: why it exists, how it works, minimal code example |
 | `architecture.md` | Component diagram, data flows, integration points |
 | `implementation-reference.md` | Concrete patterns, schema definitions, execution flows used across the labs |
 | `validation.md` | Practical tasks, lab criteria, integration scenarios, self-assessment |
+
+Each `README.md` closes with an **Engineering Takeaways** section — an architect-oriented synthesis
+of what the module adds, when to use it, key trade-offs, and common failure modes. The depth of this
+section varies by module level (foundational / intermediate / advanced).
 
 ---
 

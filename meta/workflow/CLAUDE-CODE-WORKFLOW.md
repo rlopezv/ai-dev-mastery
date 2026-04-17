@@ -37,12 +37,14 @@ Claude Code is expected to load repository context from:
 
 - `CLAUDE.md`
 - `meta/system-design/REPOSITORY_LAYOUT.md`
+- `meta/system-design/LEVEL_MODE.md`
 - `meta/system-design/DOCS_LABS_MAP.md`
 - `meta/session/PROJECT_STATUS.md`
 
 These files define:
 
 - repository structure
+- normative level contracts (runtime, infrastructure, abstraction, observability)
 - module sequencing and alignment
 - project state
 
@@ -75,10 +77,15 @@ the following custom commands:
 |---------|-------------|
 | `/write-doc <path>` | Write a single document to the given path |
 | `/write-module <module>` | Write all docs for a module in sequence |
-| `/review-doc <path>` | Review a document and save the report to review-cache |
+| `/write-lab <path>` | Implement a single lab |
+| `/write-labs <module>` | Implement all labs for a module in sequence |
+| `/review-doc <path>` | Review a document and save the report to `meta/session/reports/` |
 | `/fix-doc <path>` | Load cached review, apply fixes, re-validate |
 | `/design-labs <module>` | Design the lab set for a module |
-| `/write-lab <path>` | Implement a single lab |
+| `/audit-module <module>` | Validate docs and labs for a module; write report to `meta/session/reports/` |
+| `/audit` | Global cross-module audit; write report to `meta/session/reports/audit.md` |
+| `/enrich` | Apply horizontal navigation and reading path improvements |
+| `/dist` | Generate a clean learner-facing distribution in `dist/` (no meta/, no .claude/) |
 
 These commands are defined in `.claude/commands/`. Claude Code loads them automatically.
 
@@ -92,9 +99,10 @@ Claude Code treats these files as its operating context:
 |------|---------|
 | `CLAUDE.md` | Rules, conventions, task definitions |
 | `meta/system-design/REPOSITORY_LAYOUT.md` | Where everything lives |
+| `meta/system-design/LEVEL_MODE.md` | Normative level contracts (runtime, infrastructure, abstraction) |
 | `meta/system-design/DOCS_LABS_MAP.md` | Module sequence and docs↔labs alignment |
 | `meta/session/PROJECT_STATUS.md` | Current project progress |
-| `meta/session/review-cache/` | Persisted review reports for /fix-doc |
+| `meta/session/reports/` | Persisted reports from /review-doc, /audit-module, /audit, and /enrich — not committed to git |
 | `meta/standards/templates/` | Document structure for each type |
 | `meta/standards/frontmatter/frontmatter-spec.md` | Frontmatter rules |
 | `meta/standards/writing/writing-style.md` | Prose writing rules |
@@ -129,13 +137,13 @@ Review and fix are designed to work across sessions safely:
 ```
 /review-doc docs/rag/retrieval-strategies.md
   → produces structured report
-  → saves it to meta/session/review-cache/retrieval-strategies.review.md
+  → saves it to meta/session/reports/retrieval-strategies.review.md
 
 /fix-doc docs/rag/retrieval-strategies.md
   → reads the cached report
   → applies fixes
   → re-validates
-  → deletes the cache file
+  → deletes the report file
 ```
 
 If you close and reopen the project between review and fix, the report is still
@@ -184,7 +192,7 @@ meta: update PROJECT_STATUS
 fix(prompt-engineering): correct frontmatter in few-shot.md
 ```
 
-Do not commit files under `meta/session/review-cache/` — they are excluded by `.gitignore`.
+Do not commit files under `meta/session/reports/` — they are excluded by `.gitignore`.
 
 ---
 

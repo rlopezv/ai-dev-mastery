@@ -1,5 +1,11 @@
 # Labs
 
+## Navigation
+
+[Home](../README.md) / Labs
+
+---
+
 The `labs/` directory contains executable labs for every module. Each lab implements
 one concept from the corresponding `docs/` document. Labs in a module build on each
 other — run them in the order listed in the module README.
@@ -20,9 +26,10 @@ All labs run locally. The required services depend on the module:
 
 | Profile | Services | Modules |
 |---------|----------|---------|
-| `light` | Ollama + Open WebUI | 01 LLM Fundamentals → 04 Structured Outputs |
-| `light` + local ChromaDB | Ollama + Open WebUI + ChromaDB PersistentClient (no Docker) | 06 Memory & Context Management |
-| `full` | Ollama + Open WebUI + ChromaDB server | 05 RAG and later (when Docker ChromaDB is required) |
+| `foundational` | Ollama + Open WebUI | 01 LLM Fundamentals → 04 Structured Outputs |
+| `foundational` + local ChromaDB | Ollama + Open WebUI + ChromaDB PersistentClient (no Docker) | 06 Memory & Context Management |
+| `intermediate` | Ollama + Open WebUI + ChromaDB server | 05 RAG and later |
+| `advanced` | TBD — defined progressively from module 10 | 10 Evaluation & Testing → 16 |
 
 Start the infrastructure before running any lab:
 
@@ -31,10 +38,10 @@ cd infrastructure
 cp .env.example .env
 
 # Modules 01–04
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 
 # Module 05 onwards
-docker-compose --profile full up -d
+docker-compose --profile intermediate up -d
 ```
 
 For hardware configuration (GPU, VRAM, model selection) see

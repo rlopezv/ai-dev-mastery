@@ -37,6 +37,12 @@ summary: "<One-sentence description of the system this architecture represents>"
 
 ---
 
+## Navigation
+
+[Docs](../../README.md) / <Architecture Name>
+
+---
+
 ## 1. Problem Statement
 
 What problem does this architecture solve. Who needs it and in what context.
