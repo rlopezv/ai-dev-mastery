@@ -200,10 +200,25 @@ A subword tokenization algorithm that builds a vocabulary by iteratively merging
 - **Origin:** `llm-fundamentals`
 - **Doc:** `docs/llm-fundamentals/tokenization.md`
 
+### GroupChat
+An AutoGen construct that holds a list of `ConversableAgent` participants and is managed by a `GroupChatManager` that selects the next speaker after each message, enabling coordination among three or more agents without manual routing code.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/autogen.md`
+
 ### greedy decoding
 A token selection strategy that always picks the highest-probability token from the model's output distribution, equivalent to setting temperature to 0; deterministic for a fixed model version but prone to repetitive output.
 - **Origin:** `llm-fundamentals`
 - **Doc:** `docs/llm-fundamentals/inference-parameters.md`
+
+### framework abstraction
+The mechanism by which an AI framework wraps raw API calls into higher-level constructs — chains, indices, agents, plugins — that encode recurring patterns and manage state transitions, reducing boilerplate at the cost of added debugging complexity.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/framework-comparison.md`
+
+### framework selection
+The design decision of choosing an AI framework based on how well its primary abstraction matches the dominant engineering concern of the application: orchestration, retrieval, multi-agent coordination, or enterprise integration.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/framework-comparison.md`
 
 ### feed-forward layer
 A two-layer neural network applied independently to each token representation after self-attention, where learned associations and factual patterns are primarily stored.
@@ -265,6 +280,31 @@ The sequence of operations that transforms a text prompt into a generated respon
 - **Origin:** `llm-fundamentals`
 - **Doc:** `docs/llm-fundamentals/architecture.md`
 
+### LangChain
+A Python and JavaScript framework for composing LLM-powered applications through the LCEL Runnable protocol, with built-in support for prompt templating, memory, retrieval, tool use, and agents.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/langchain.md`
+
+### LangChain agent
+A LangChain chain that wraps a tool-calling model in an `AgentExecutor` loop, dispatching tool calls when the model requests them and feeding results back until the model emits a final text response.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/langchain.md`
+
+### LangChain memory
+Session-scoped conversation history attached to a LangChain chain via `RunnableWithMessageHistory`, which reads prior messages from a history store before each call and writes the new exchange after, keyed by session ID.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/langchain.md`
+
+### LCEL
+LangChain Expression Language — the composition syntax that connects Runnables into a pipeline using the `|` operator, supporting lazy evaluation, automatic streaming propagation, and parallel branch execution.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/langchain.md`
+
+### LlamaIndex
+A data framework for connecting LLMs to external document corpora through structured indexing and query pipelines, optimized for production-scale retrieval-augmented generation with built-in support for node parsing, vector stores, and response synthesis.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/llamaindex.md`
+
 ### large language model
 A neural network trained on large text corpora to predict the probability distribution over the next token given a sequence of input tokens, with behavior at inference time determined by weights established during training.
 - **Origin:** `llm-fundamentals`
@@ -284,6 +324,16 @@ A token selection strategy that restricts the sampling pool to the k tokens with
 A token selection strategy that retains the smallest set of tokens whose cumulative probability reaches a threshold p, adapting the pool size to the shape of the distribution rather than fixing a count.
 - **Origin:** `llm-fundamentals`
 - **Doc:** `docs/llm-fundamentals/inference-parameters.md`
+
+### semantic function
+A Semantic Kernel function defined as a prompt template stored in a text file with a companion YAML configuration declaring its name, description, and input variables; rendered with provided values and submitted to the kernel's AI service at invocation time.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/semantic-kernel.md`
+
+### Semantic Kernel
+A Microsoft SDK for integrating AI capabilities into enterprise applications through a kernel that holds registered plugins and AI services, with a planner that composes plugin functions into multi-step workflows at runtime.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/semantic-kernel.md`
 
 ### self-attention
 A mechanism in which each token computes a weighted sum of all other tokens' representations using learned Query, Key, and Value projections, allowing every token to directly attend to every other token in the input.
@@ -425,6 +475,11 @@ The mechanism by which a model, instead of generating a text response, generates
 - **Origin:** `structured-outputs`
 - **Doc:** `docs/structured-outputs/tool-usage.md`
 
+### ConversableAgent
+The core primitive in AutoGen: an agent that can send and receive messages, call tools, execute code, and optionally request human input, configured with a system message, an LLM config, and a human input mode.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/autogen.md`
+
 ### context-management
 The set of strategies applied when a conversation history exceeds its token budget: simple truncation (drop oldest turns), sliding window (keep last N turns), and summarization-based compression (replace oldest turns with a model-generated summary).
 - **Origin:** `memory-context`
@@ -450,10 +505,30 @@ The removal of the oldest user-assistant message pairs from the conversation his
 - **Origin:** `memory-context`
 - **Doc:** `docs/memory-context/context-management.md`
 
+### index
+A LlamaIndex data structure that stores nodes in a retrieval-optimized form — embedding vectors for semantic search, keyword maps for exact match, or sequential lists for full-context retrieval — built once and queried repeatedly through a query engine.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/llamaindex.md`
+
 ### in-context-memory
 All information currently present in the active context window — system prompt, conversation history, retrieved documents — that the model can attend to directly during a single inference call.
 - **Origin:** `memory-context`
 - **Doc:** `docs/memory-context/memory-types.md`
+
+### native function
+A Python (or C#) method decorated with `@kernel_function` in Semantic Kernel, registered with the kernel by name and description, and selectable by the planner for execution alongside semantic functions.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/semantic-kernel.md`
+
+### node
+The unit of content in a LlamaIndex pipeline: a chunk of a source document enriched with metadata, embedding, and optional relationships to parent and child nodes, forming the basis of index construction and retrieval.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/llamaindex.md`
+
+### node parser
+A LlamaIndex component that transforms raw `Document` objects into `Node` objects by splitting text at configurable boundaries (sentence, token count, or hierarchy), producing the chunks that will be indexed and retrieved.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/llamaindex.md`
 
 ### memory-compression
 The replacement of a block of older conversation turns with a model-generated summary that preserves key facts, decisions, and constraints in significantly fewer tokens, freeing budget for new turns.
@@ -479,6 +554,11 @@ A generation quality metric that measures whether every claim in a generated ans
 A generation quality metric that measures whether the generated answer addresses the user's question, independent of whether the answer is grounded; a faithful but off-topic answer scores low on relevance.
 - **Origin:** `rag`
 - **Doc:** `docs/rag/rag-evaluation-and-metrics.md`
+
+### chain
+A LangChain pipeline composed of Runnables connected with the `|` operator via LCEL; each link passes its output as the input to the next, forming a lazy, composable data flow from prompt to response.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/langchain.md`
 
 ### bm25
 A sparse retrieval algorithm that scores documents by a weighted, length-normalized sum of term-frequency and inverse-document-frequency values for each query term; excels at exact-term matching and does not require an embedding model.
@@ -540,6 +620,11 @@ A fixed set of (query, relevant_chunk_ids, expected_answer) triples used to meas
 - **Origin:** `rag`
 - **Doc:** `docs/rag/rag-evaluation-and-metrics.md`
 
+### human-in-the-loop
+A workflow configuration in which a human participant can review, approve, or redirect AI agent actions at defined checkpoints, implemented in AutoGen via the `human_input_mode` parameter on a `UserProxyAgent`.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/autogen.md`
+
 ### hallucination
 A model output that contains statements not supported by the provided context or training data, presented with unwarranted confidence; in RAG systems, reduced by grounding generation in retrieved content and instructing the model to answer only from the provided context.
 - **Origin:** `rag`
@@ -549,6 +634,11 @@ A model output that contains statements not supported by the provided context or
 A retrieval strategy that runs both dense (embedding-based) and sparse (BM25) retrieval and merges the two ranked result lists, recovering candidates that each approach would miss individually.
 - **Origin:** `rag`
 - **Doc:** `docs/rag/retrieval-strategies.md`
+
+### kernel
+The central object in Semantic Kernel that holds all registered AI services, plugins, and memory stores, and routes every function invocation — whether semantic or native — through a unified execution interface.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/semantic-kernel.md`
 
 ### knowledge-grounding
 The property of a generated response whereby every factual claim can be traced to a specific piece of retrieved source content, making the response auditable and its claims verifiable.
@@ -574,6 +664,11 @@ Knowledge encoded in a model's weights during training, always available at infe
 The formatted section of a RAG prompt that contains the numbered, assembled retrieved chunks, presented before the user query and wrapped in framing instructions that direct the model to reason from the provided content.
 - **Origin:** `rag`
 - **Doc:** `docs/rag/context-assembly.md`
+
+### runnable
+The core protocol in LangChain that any composable pipeline component must implement: `invoke`, `stream`, and `batch` methods with a standard input/output contract, enabling components to be composed with LCEL's `|` operator.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/langchain.md`
 
 ### reciprocal-rank-fusion
 A rank aggregation algorithm that merges multiple ranked lists by summing `1/(k + rank)` scores per document across lists, using only rank positions (not raw scores) and therefore robust to score scale differences between retrieval systems.
@@ -625,6 +720,21 @@ A retrieval mechanism that finds the stored documents most semantically similar 
 - **Origin:** `rag`
 - **Doc:** `docs/rag/embeddings-and-vector-search.md`
 
+### abstraction ceiling
+The point at which a tool's or framework's pre-built abstractions no longer cover a requirement, forcing the engineer to work around the abstraction or abandon it; in visual AI workflow tools, reached when a pipeline needs custom logic, non-standard tool results, or per-step observability.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/workflow-tools.md`
+
+### AI workflow tool
+A visual or low-code platform that represents LLM pipelines as node graphs rather than code, abstracting the same patterns as code-level frameworks (LangChain, LlamaIndex) to enable rapid prototyping and access for non-technical teams; examples include Flowise, Langflow, n8n AI nodes, and Microsoft Copilot Studio.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/workflow-tools.md`
+
+### AutoGen
+A Microsoft open-source framework for building multi-agent systems through a conversation abstraction, where `ConversableAgent` instances exchange messages and coordinate to complete tasks without explicit orchestration code.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/autogen.md`
+
 ### action dispatcher
 The application-side function that receives a tool call from a model response, routes it to the correct function implementation by tool name, executes it, and returns the result as a string to be appended to the message accumulator.
 - **Origin:** `ai-agents`
@@ -670,10 +780,30 @@ The coordinating agent in a multi-agent system that receives the original task, 
 - **Origin:** `ai-agents`
 - **Doc:** `docs/ai-agents/multi-agent-systems.md`
 
+### pipeline composition
+The practice of connecting discrete AI processing steps — prompt formatting, model calls, retrieval, parsing, memory — into an ordered data flow using a framework's composition primitives, making the pipeline structure explicit and individual steps replaceable.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/architecture.md`
+
+### planner
+A Semantic Kernel component that selects and sequences registered plugin functions to satisfy a task description; the standard planner (`FunctionChoiceBehavior`) presents all functions to the model as tools and lets the model determine the execution order.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/semantic-kernel.md`
+
+### plugin
+A named collection of related functions registered with a Semantic Kernel kernel, grouping semantic functions (prompt templates) and native functions (Python methods) under a common namespace accessible to the planner.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/semantic-kernel.md`
+
 ### plan-and-execute
 An agent pattern that separates task planning (producing a structured list of steps without executing tools) from task execution (working through the steps with re-planning when a step fails), enabling recovery from unexpected intermediate results.
 - **Origin:** `ai-agents`
 - **Doc:** `docs/ai-agents/agent-patterns.md`
+
+### query engine
+A LlamaIndex component that wraps an index with a full retrieval-synthesis pipeline: it accepts a query string, retrieves the top-k nodes by similarity, applies postprocessors, and returns a synthesized response with source node provenance.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/llamaindex.md`
 
 ### ReAct pattern
 An agent execution pattern that interleaves explicit reasoning steps ("Thought") with action steps (tool calls) in a repeating Thought → Action → Observation cycle, making the agent's decision rationale visible in the message history.
@@ -709,6 +839,56 @@ The list of tool declarations (name, description, JSON Schema) passed to the LLM
 The multi-turn message accumulation protocol for agentic tool interactions: append the assistant message containing tool calls, append one tool result per call with matching `tool_call_id`, repeat until `finish_reason == "stop"`.
 - **Origin:** `ai-agents`
 - **Doc:** `docs/ai-agents/tool-use-loops.md`
+
+### advisor
+A Spring AI call interceptor that wraps the `ChatClient` execution pipeline; built-in advisors include `MessageChatMemoryAdvisor` (conversation history injection), `QuestionAnswerAdvisor` (RAG retrieval and context injection), and `SimpleLoggerAdvisor` (request/response tracing).
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/spring-ai.md`
+
+### AI service
+A LangChain4j abstraction in which a developer-declared Java interface annotated with prompt, memory, and tool bindings is implemented at startup by a generated proxy that routes calls to the underlying model, manages conversation history, invokes tools, and handles RAG retrieval.
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/langchain4j.md`
+
+### ChatClient
+The Spring AI fluent entry point for interacting with a language model; a provider-agnostic call builder that accepts system and user messages, registers advisor interceptors, and executes synchronously via `.call()` or as a reactive stream via `.stream()`.
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/spring-ai.md`
+
+### Java AI ecosystem
+The set of libraries, frameworks, and infrastructure components available to Java engineers for building LLM-powered applications, centered on Spring AI and LangChain4j for API integration and framework-level abstractions above first-party provider SDKs.
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/java-ai-landscape.md`
+
+### Java AI pattern
+The set of implementation idioms Java engineers apply when building LLM applications: interface-driven AI services, Spring-managed LLM clients, reactive streaming via Project Reactor, and dependency injection for model configuration.
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/java-patterns.md`
+
+### LangChain4j
+An independent Java library that ports LangChain's chain, memory, RAG, and agent abstractions to Java, with a type-safe AI service interface that generates implementations from annotated Java interfaces at build time.
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/langchain4j.md`
+
+### LangChain4j memory
+Conversation history management in LangChain4j, implemented as `MessageWindowChatMemory` (last-N-messages) or `TokenWindowChatMemory` (token-budget), scoped per conversation via a `ChatMemoryProvider` function keyed by a session identifier.
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/langchain4j.md`
+
+### LangChain4j RAG
+The LangChain4j retrieval-augmented generation pipeline: an `EmbeddingStoreIngestor` ingests and chunks documents, an `EmbeddingModel` generates vectors, an `EmbeddingStore` holds them, and a `ContentRetriever` queries the store on each AI service call and injects results into the prompt.
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/langchain4j.md`
+
+### Spring AI
+The official Spring Framework project for AI integration, providing a uniform `ChatClient` abstraction over multiple LLM providers (OpenAI, Anthropic, Ollama, Azure OpenAI), Spring Boot auto-configuration, and integrations for vector stores, RAG via advisors, and tool calling.
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/spring-ai.md`
+
+### Spring AI RAG
+The Spring AI retrieval-augmented generation pattern implemented via `QuestionAnswerAdvisor`: the advisor embeds the query, searches the `VectorStore` for top-k documents, injects them into the prompt context before the model call, and runs automatically as part of the `ChatClient` advisor chain.
+- **Origin:** `ai-java`
+- **Doc:** `docs/ai-java/spring-ai.md`
 
 ---
 

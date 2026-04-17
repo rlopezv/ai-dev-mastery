@@ -109,8 +109,8 @@ ones. The module README marks which labs produce shared state.
 | [RAG](rag/README.md) | lab-embeddings, lab-chunking-strategies, lab-retrieval-playground, lab-query-pipeline, lab-rag-evaluation | ✅ |
 | [Memory & Context Management](memory-context/README.md) | lab-memory-types, lab-conversation-history, lab-context-management, lab-external-memory, lab-integration | ✅ |
 | [AI Agents](ai-agents/README.md) | lab-single-agent-loop, lab-tool-use-loops, lab-multi-agent, lab-agent-patterns, lab-mcp-server, lab-integration | ✅ |
-| Frameworks & Tools | — | ⬜ |
-| AI with Java | — | ⬜ |
+| [Frameworks & Tools](frameworks-tools/README.md) | lab-langchain, lab-llamaindex, lab-autogen, lab-semantic-kernel, lab-integration | ✅ |
+| [AI with Java](ai-java/README.md) | — (concept-only) | — |
 | Evaluation & Testing | — | ⬜ |
 | Safety & Guardrails | — | ⬜ |
 | Performance & Optimization | — | ⬜ |

@@ -28,9 +28,9 @@ ai-dev-mastery/
 | 04 | [Structured Outputs & Tool Usage](docs/structured-outputs/README.md) | Intermediate | ✅ | ✅ |
 | 05 | [RAG](docs/rag/README.md) | Intermediate | ✅ | ✅ |
 | 06 | [Memory & Context Management](docs/memory-context/README.md) | Intermediate | ✅ | ✅ |
-| 07 | AI Agents | Intermediate | ⬜ | ⬜ |
-| 08 | Frameworks & Tools | Intermediate | ⬜ | ⬜ |
-| 09 | AI with Java | Intermediate | ⬜ | ⬜ |
+| 07 | [AI Agents](docs/ai-agents/README.md) | Intermediate | ✅ | ✅ |
+| 08 | [Frameworks & Tools](docs/frameworks-tools/README.md) | Intermediate | ✅ | ✅ |
+| 09 | [AI with Java](docs/ai-java/README.md) | Intermediate | ✅ | — |
 | 10 | Evaluation & Testing | Advanced | ⬜ | ⬜ |
 | 11 | Safety & Guardrails | Advanced | ⬜ | ⬜ |
 | 12 | Performance & Optimization | Advanced | ⬜ | ⬜ |
@@ -91,9 +91,9 @@ The `docs/` directory contains the conceptual foundation for every module.
 | 04 | [Structured Outputs](labs/structured-outputs/README.md) | lab-json-mode, lab-function-calling, lab-output-validation | ✅ |
 | 05 | [RAG](labs/rag/README.md) | lab-embeddings, lab-chunking-strategies, lab-retrieval-playground, lab-query-pipeline, lab-rag-evaluation | ✅ |
 | 06 | [Memory & Context Management](labs/memory-context/README.md) | lab-memory-types, lab-conversation-history, lab-context-management, lab-external-memory, lab-integration | ✅ |
-| 07 | AI Agents | — | ⬜ |
-| 08 | Frameworks & Tools | — | ⬜ |
-| 09 | AI with Java | — | ⬜ |
+| 07 | [AI Agents](labs/ai-agents/README.md) | lab-single-agent-loop, lab-tool-use-loops, lab-multi-agent, lab-agent-patterns, lab-mcp-server, lab-integration | ✅ |
+| 08 | [Frameworks & Tools](labs/frameworks-tools/README.md) | lab-langchain, lab-llamaindex, lab-autogen, lab-semantic-kernel, lab-integration | ✅ |
+| 09 | AI with Java | — (concept-only) | — |
 | 10 | Evaluation & Testing | — | ⬜ |
 | 11 | Safety & Guardrails | — | ⬜ |
 | 12 | Performance & Optimization | — | ⬜ |

@@ -51,8 +51,8 @@ Do not edit manually unless correcting an error.
 | `rag` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `memory-context` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `ai-agents` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `frameworks-tools` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| `ai-java` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | — |
+| `frameworks-tools` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `ai-java` | ✅ | ✅ | ✅ | ✅ | ✅ | — |
 | `evaluation-testing` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `safety-guardrails` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | `performance-optimization` | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -65,5 +65,5 @@ Do not edit manually unless correcting an error.
 
 ## Last updated
 
-Session: ai-agents module complete — all 6 labs implemented and validated (PASS ≥9.5 each)
-Date: 2026-04-16
+Session: ai-java module complete — 8 docs written and validated (README, 4 topics, architecture, implementation-reference, validation); 11 glossary terms added; labs/ai-java/README.md created (concept-only)
+Date: 2026-04-17

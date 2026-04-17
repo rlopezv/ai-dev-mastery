@@ -192,6 +192,7 @@ Modules with a `corpus/`:
 | `autogen.md` | `lab-autogen` | implementation | optional |
 | `semantic-kernel.md` | `lab-semantic-kernel` | implementation | optional |
 | `framework-comparison.md` | — | concept-only | none |
+| `workflow-tools.md` | — | concept-only | none |
 | `architecture.md` | `lab-integration` | module-integration | optional |
 
 ---

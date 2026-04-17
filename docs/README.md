@@ -45,9 +45,9 @@ the topic document it maps to.
 | [Structured Outputs & Tool Usage](structured-outputs/README.md) | JSON schema enforcement, function calling, output validation | ✅ |
 | [RAG](rag/README.md) | Embeddings, chunking, retrieval strategies, context assembly, evaluation | ✅ |
 | [Memory & Context Management](memory-context/README.md) | Conversation history, token budgets, context management strategies, external memory | ✅ |
-| AI Agents | Tool use, planning, multi-step execution, agent loops | ⬜ |
-| Frameworks & Tools | LangChain, LlamaIndex, orchestration patterns | ⬜ |
-| AI with Java | Spring AI, LangChain4j, Java client patterns | ⬜ |
+| [AI Agents](ai-agents/README.md) | Tool use, planning, multi-step execution, agent loops | ✅ |
+| [Frameworks & Tools](frameworks-tools/README.md) | LangChain, LlamaIndex, AutoGen, Semantic Kernel, workflow tools | ✅ |
+| [AI with Java](ai-java/README.md) | Spring AI, LangChain4j, Quarkus integration, Java AI patterns | ✅ |
 | Evaluation & Testing | Automated evaluation, regression testing, benchmark design | ⬜ |
 | Safety & Guardrails | Input/output filtering, alignment techniques, red-teaming | ⬜ |
 | Performance & Optimization | Quantization, batching, latency profiling | ⬜ |
