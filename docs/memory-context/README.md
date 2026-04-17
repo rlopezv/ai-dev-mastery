@@ -34,6 +34,12 @@ validation_refs:
 summary: "Introduces the memory model for LLM applications and the strategies for managing conversation state across single and multi-turn interactions."
 ---
 
+## Navigation
+
+[Docs](../README.md) / Memory and Context Management
+
+---
+
 ## 1. Overview
 
 LLM APIs are stateless. Every call starts from zero — the model has no memory of previous
@@ -190,3 +196,62 @@ Run each lab immediately after reading its corresponding topic. The labs share a
 
 Begin with `docs/memory-context/memory-types.md` to understand the memory landscape
 before working with specific implementations.
+
+---
+
+## 11. Engineering Takeaways
+
+### What This Adds
+
+Stateful conversation management — the infrastructure that transforms a stateless API into a coherent multi-turn application. This module introduces token budget engineering, history compression strategies, and external memory stores as first-class system components.
+
+### Engineering Trade-offs
+
+| Decision | Benefit | Cost | When it breaks |
+|----------|---------|------|----------------|
+| Sliding window vs summarization | Simple, deterministic history management | Loses earlier context hard; model may reference forgotten facts | Long sessions with callbacks to early facts; user references session start |
+| In-context memory vs external memory | No retrieval latency; always available | Exhausts context window as session grows | Sessions longer than a few turns; cross-session recall requirements |
+| Aggressive token budget vs loose budget | Lower API cost per call | Risk of truncating important context; behavior changes near boundary | System prompt is long; retrieved chunks are large; both compete for budget |
+| Storing full turns vs compressed summaries | Exact recall | Higher storage and retrieval cost; slower context assembly | High-frequency interactions; limited storage budget |
+
+### When NOT to Use This
+
+- When the application is single-turn only — no history management is needed.
+- When all context fits in a single prompt — external memory adds latency without benefit.
+- When cross-session recall is not required — sliding window with a conservative limit is sufficient.
+
+### Common Failure Modes
+
+- **Failure:** History grows unbounded and exceeds the context window.
+  **Cause:** No token budget check; history list appended on every turn without a length limit.
+  **Signal:** API returns context length exceeded error after N turns; error appears inconsistently based on message length.
+
+- **Failure:** Summarization loses critical facts that the user later references.
+  **Cause:** Compression algorithm is too aggressive; summaries drop specifics (names, numbers, decisions).
+  **Signal:** Model claims it has no record of something the user explicitly stated earlier in the session.
+
+- **Failure:** External memory retrieval returns stale or irrelevant episodes.
+  **Cause:** Embedding index not updated after conversation state changes; similarity threshold too low.
+  **Signal:** Model cites outdated preferences or facts that were corrected in a prior session.
+
+### What Changes vs Traditional Systems
+
+Session state is the engineer's responsibility, not the infrastructure's. In traditional web applications, sessions are managed by the server or a session store — the application logic is stateless. In LLM applications, conversation history is the session state and must be explicitly assembled, bounded, and injected on every call. This moves state management from infrastructure to application code.
+
+### Operational Considerations
+
+- Required: token counter aligned with the provider's tokenizer, history store (in-memory or persistent), optional vector store for external memory.
+- Observable: tokens per turn trend, truncation frequency, external memory hit rate, session length distribution.
+- Cost drivers: long histories increase input token count on every call; external memory adds an embedding call and a vector search per turn.
+- Debugging: log the assembled context (history + system prompt + retrieved memory) and its token count before each API call.
+- Scaling: external memory retrieval latency is additive per turn; cache hot session embeddings where possible.
+
+### Minimal Adoption Heuristic
+
+**Use this when:**
+- The application has more than one conversational turn and coherence across turns is required.
+- Users expect the system to recall what they said earlier in the session or in prior sessions.
+
+**Avoid this when:**
+- Each request is fully self-contained — adding history management increases cost and complexity without benefit.
+- Cross-session recall is not a product requirement — implement it only when the use case demands it, not preemptively.

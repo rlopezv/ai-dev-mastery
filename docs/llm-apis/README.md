@@ -33,6 +33,12 @@ validation_refs:
 summary: "Covers how to interact with LLM providers through their HTTP APIs — OpenAI, Ollama, and Anthropic — and the common patterns that make API-level code robust and portable."
 ---
 
+## Navigation
+
+[Docs](../README.md) / LLM APIs
+
+---
+
 ## 1. Overview
 
 An LLM's intelligence is only accessible through an API call. This step moves from conceptual understanding of how LLMs work to practical ability to invoke them from application code. It covers three providers with different API designs — OpenAI, Ollama, and Anthropic — plus the cross-cutting concerns that apply to all of them: streaming, error handling, and common integration patterns.
@@ -145,7 +151,7 @@ docs/llm-apis/
 | `lab-streaming` | implementation | Consume streaming responses from multiple providers and assemble the token stream client-side |
 | `lab-api-patterns` | implementation | Implement retry with backoff, conversation accumulation, and a provider-switching abstraction |
 
-All labs use the `light` infrastructure profile. `lab-openai-api` and `lab-anthropic-api` require valid API keys in the environment.
+All labs use the `foundational` infrastructure profile. `lab-openai-api` and `lab-anthropic-api` require valid API keys in the environment.
 
 ---
 
@@ -182,3 +188,50 @@ If you only need Ollama for local development, you can skip `lab-openai-api` and
 Begin with the first topic:
 
 → [`docs/llm-apis/openai-api.md`](./openai-api.md)
+
+---
+
+## 11. Engineering Takeaways
+
+### What This Adds
+
+Practical ability to invoke LLMs from application code — handling authentication, message structure, streaming, and error recovery across multiple providers. Every AI capability in subsequent modules resolves to one or more API calls; this module establishes the call contract.
+
+### Engineering Trade-offs
+
+| Decision | Benefit | Cost |
+|----------|---------|------|
+| Provider abstraction layer | Swap providers without code changes | Extra indirection; abstraction may not cover provider-specific features |
+| Streaming vs batch responses | Lower perceived latency for end users | More complex client-side assembly; harder to test |
+| Retry with exponential backoff | Resilience to transient provider errors | Adds latency on failures; masks persistent errors if not bounded |
+
+### When NOT to Use This
+
+- When the problem does not require language generation — a deterministic API or rule engine is cheaper and more predictable.
+- When provider availability or cost is a hard constraint — evaluate feasibility before building the integration layer.
+
+### Common Failure Modes
+
+- **Failure:** Conversation accumulates unbounded and exhausts the context window.
+  **Cause:** History is appended on every turn without a length check or truncation strategy.
+  **Signal:** API returns a context length exceeded error after N turns.
+
+- **Failure:** Role order errors cause unexpected model behavior.
+  **Cause:** Messages sent with incorrect or swapped roles (e.g., system content in user role).
+  **Signal:** Model ignores system instructions or responds as if in a different persona.
+
+- **Failure:** Streaming responses silently dropped.
+  **Cause:** Stream buffer not fully consumed before the response is considered complete.
+  **Signal:** Truncated output; missing end-of-stream event handling.
+
+### What Changes vs Traditional Systems
+
+API calls become the I/O boundary of the system, not internal function calls. The application owns state — every call is stateless on the provider side, so conversation history must be managed explicitly. Authentication and rate limits add operational constraints that do not exist in internal APIs.
+
+### Minimal Adoption Heuristic
+
+**Use this when:**
+- You need to call any LLM provider from application code — this is the foundational interface layer.
+
+**Avoid this when:**
+- You are evaluating whether AI is needed at all — make that decision first using the concepts from `llm-fundamentals`.

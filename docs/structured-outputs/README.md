@@ -34,6 +34,12 @@ validation_refs:
 summary: "Covers how to extract structured data from LLM responses using schema enforcement and function calling — moving from format-spec prompts to guaranteed JSON, typed tool invocations, and composable tool patterns."
 ---
 
+## Navigation
+
+[Docs](../README.md) / Structured Outputs
+
+---
+
 ## 1. Overview
 
 Prompting the model to respond in JSON works most of the time — but not reliably enough for production. A model can deviate from the requested schema on complex inputs, add explanatory prose outside the JSON block, or omit required fields under load. Structured outputs solve this at the API level: the provider validates the response against a declared schema before returning it, making format compliance a guarantee rather than a best-effort instruction.
@@ -177,3 +183,62 @@ docs/structured-outputs/
 ## 10. Next Steps
 
 → [`docs/structured-outputs/structured-outputs.md`](./structured-outputs.md)
+
+---
+
+## 11. Engineering Takeaways
+
+### What This Adds
+
+Schema-enforced responses and typed function calling — the transition from best-effort prompt formatting to API-level guarantees. This module introduces the tool call cycle that underlies all agentic behavior and provides the integration contract between LLM output and downstream system components.
+
+### Engineering Trade-offs
+
+| Decision | Benefit | Cost | When it breaks |
+|----------|---------|------|----------------|
+| JSON mode vs schema enforcement | Faster to set up; broader provider support | No schema guarantee; validation still required in client | Model produces valid JSON that violates schema; downstream parsing fails |
+| Pydantic model vs raw JSON Schema | Type-safe, IDE-supported, auto-serialized | Python-only; schema changes require code changes | Schema drift between model definition and API call; serialization errors |
+| Parallel tool calls vs sequential | Lower latency for independent operations | Harder to debug; results arrive out of expected order | Tool A's result is needed by tool B; parallel execution produces incorrect state |
+| Router pattern vs explicit tool selection | Model selects the right tool; flexible | Model may route incorrectly; silent wrong-tool execution | Input is ambiguous; model picks a plausible but wrong tool without error |
+
+### When NOT to Use This
+
+- When the output is human-readable prose only — schema enforcement adds complexity without benefit.
+- When tool use adds a round-trip per operation and latency is a hard constraint — benchmark first.
+- When the schema is so large that it consumes significant context tokens — prune or split the schema.
+
+### Common Failure Modes
+
+- **Failure:** Tool hallucination — model calls a non-existent tool or invents arguments.
+  **Cause:** Tool descriptions are ambiguous or overlap; model cannot distinguish between them.
+  **Signal:** `tool_calls` content references a tool name not in the registered set.
+
+- **Failure:** Schema too strict — model output consistently fails validation.
+  **Cause:** Schema has too many required fields or overly narrow type constraints for the model to satisfy reliably.
+  **Signal:** High validation failure rate; model often returns partial or coerced JSON.
+
+- **Failure:** Tool result not returned — model generates a second tool call instead of a final answer.
+  **Cause:** Tool result message appended with wrong role or format; model re-enters tool selection loop.
+  **Signal:** Repeated tool calls for the same operation; loop does not terminate on `stop`.
+
+### What Changes vs Traditional Systems
+
+The model becomes a decision-making component in the control flow, not just a text generator. Tool calls express intent, not execution — the application retains responsibility for running tools and returning results. This inverts the traditional request/response model: the LLM drives the sequence, not the caller.
+
+### Operational Considerations
+
+- Required: schema registry or Pydantic model versioning strategy; tool execution sandbox with error handling.
+- Observable: tool call frequency per turn, tool selection distribution, schema validation failure rate.
+- Cost drivers: parallel tool calls increase per-call output token count; sequential chains multiply round-trips.
+- Debugging: log the full `tool_calls` block and each `tool_result` message for every request.
+- Scaling: tool execution latency is additive per sequential step; design for parallel execution where possible.
+
+### Minimal Adoption Heuristic
+
+**Use this when:**
+- Downstream systems require machine-readable, typed output from the model.
+- You are building any form of tool use, function dispatch, or agentic loop.
+
+**Avoid this when:**
+- The response is consumed only by a human — schema enforcement adds latency and complexity without value.
+- A simpler prompt-level format instruction produces reliable enough output for the use case.

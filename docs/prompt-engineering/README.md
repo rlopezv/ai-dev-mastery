@@ -34,6 +34,12 @@ validation_refs:
 summary: "Covers how to structure and write prompts that produce reliable, predictable output — from the anatomy of a prompt to few-shot examples, chain-of-thought reasoning, reusable patterns, and common failure modes."
 ---
 
+## Navigation
+
+[Docs](../README.md) / Prompt Engineering
+
+---
+
 ## 1. Overview
 
 A prompt is the primary control surface for an LLM. Unlike a function call with a fixed signature, a prompt is a piece of text that implicitly encodes task description, context, constraints, output format, and examples — all at once. Getting reliable output requires understanding what each part of a prompt communicates to the model and how the model interprets it.
@@ -146,7 +152,7 @@ docs/prompt-engineering/
 | `lab-chain-of-thought` | implementation | Compare direct answers vs chain-of-thought on multi-step reasoning tasks |
 | `lab-prompt-patterns` | implementation | Implement and test three reusable prompt pattern templates |
 
-All labs use the `light` infrastructure profile. Labs run against Ollama by default; any OpenAI-compatible endpoint works without code changes.
+All labs use the `foundational` infrastructure profile. Labs run against Ollama by default; any OpenAI-compatible endpoint works without code changes.
 
 ---
 
@@ -182,3 +188,53 @@ All labs use the `light` infrastructure profile. Labs run against Ollama by defa
 Begin with the first topic:
 
 → [`docs/prompt-engineering/prompt-anatomy.md`](./prompt-anatomy.md)
+
+---
+
+## 11. Engineering Takeaways
+
+### What This Adds
+
+A structured vocabulary and toolkit for controlling model behavior through text — prompt anatomy, few-shot examples, chain-of-thought, reusable patterns, and failure mode recognition. This is the primary control surface before schema enforcement or fine-tuning is introduced.
+
+### Engineering Trade-offs
+
+| Decision | Benefit | Cost |
+|----------|---------|------|
+| Few-shot examples vs explicit instructions | More reliable output on pattern tasks | Consumes context tokens; brittle when examples don't cover edge cases |
+| Chain-of-thought vs direct answer | Higher accuracy on multi-step reasoning | Longer outputs; higher cost; reasoning steps visible but not verified |
+| Long system prompt vs concise prompt | More constraint on behavior | Higher token cost; model may not honor all constraints simultaneously |
+
+### When NOT to Use This
+
+- When output format is machine-readable and correctness is required — use schema enforcement from `structured-outputs` instead of format specification in the prompt.
+- When the task behavior should be permanent and retraining is feasible — fine-tuning is more reliable than prompt engineering for stable, high-volume tasks.
+- When prompt complexity has grown to the point where prompt changes break other behaviors — this signals a need for structured outputs or retrieval rather than a bigger prompt.
+
+### Common Failure Modes
+
+- **Failure:** Prompt injection — adversarial user input overrides system instructions.
+  **Cause:** User input is concatenated directly into the prompt without sanitization or structural separation.
+  **Signal:** Model ignores system role or executes instructions from user-controlled fields.
+
+- **Failure:** Format drift — model stops following output format instructions on longer conversations.
+  **Cause:** Format instruction is too far in the context from the output generation point.
+  **Signal:** Output format changes after several turns; format constraint only honored at turn 1.
+
+- **Failure:** Ambiguous instructions produce inconsistent behavior.
+  **Cause:** Multiple interpretations of the same instruction are valid; model oscillates between them.
+  **Signal:** Same prompt produces different structural responses across runs.
+
+### What Changes vs Traditional Systems
+
+Behavior is shaped by text, not code. Prompt design is an engineering discipline with testable inputs and observable outputs — but without strict determinism. Changes to a prompt must be treated as code changes: versioned, tested against a representative set, and monitored in production. The mental model shifts from "if input X, do Y" to "if input X, the model is likely to do Y under conditions Z."
+
+### Minimal Adoption Heuristic
+
+**Use this when:**
+- You need to control model output structure, tone, reasoning style, or task specialization without deploying a new model.
+- You are prototyping a behavior before deciding whether fine-tuning is justified.
+
+**Avoid this when:**
+- Output correctness can be enforced at the API level — prefer schema enforcement over format instructions.
+- The prompt has grown beyond what can be reviewed and tested in a single change — this is a signal to restructure, not add more instructions.

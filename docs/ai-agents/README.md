@@ -34,6 +34,12 @@ validation_refs:
 summary: "Introduces the agent model for LLM applications — how autonomous loops, tool invocation, multi-agent coordination, and protocol-based tool integration compose into agentic systems."
 ---
 
+## Navigation
+
+[Docs](../README.md) / AI Agents
+
+---
+
 ## 1. Overview
 
 A single-turn LLM call answers a question. An agent solves a problem. The difference is the
@@ -213,3 +219,62 @@ individual labs.
 
 Begin with `docs/ai-agents/agent-fundamentals.md` to understand why the loop is the
 minimal unit of agentic behavior before examining the specific implementation structures.
+
+---
+
+## 11. Engineering Takeaways
+
+### What This Adds
+
+Autonomous multi-step problem solving — the loop structure where an LLM drives control flow through a sequence of tool calls and decisions rather than responding once and returning. This module introduces orchestration, stop condition design, and multi-agent coordination as architectural concerns.
+
+### Engineering Trade-offs
+
+| Decision | Benefit | Cost | When it breaks |
+|----------|---------|------|----------------|
+| Single-agent loop vs multi-agent system | Simpler to build, debug, and trace | Limited parallelism; single model bottleneck on complex tasks | Tasks requiring specialized expertise across domains; sequential tool constraints |
+| ReAct vs plan-and-execute | Adaptive; recovers from unexpected tool results | Longer token chains; harder to bound execution depth | Tasks with strict step budgets; latency-sensitive workflows |
+| MCP vs direct tool binding | Standardized interface; tools reusable across agents | Additional network hop per tool call; protocol overhead | Latency-critical tool calls; tools that require synchronous in-process execution |
+| Dynamic stop condition vs fixed step limit | Terminates correctly on task completion | Model may hallucinate completion; loop runs longer than expected | Ambiguous task definitions; missing explicit success criteria in the prompt |
+
+### When NOT to Use This
+
+- When the task can be solved in a single LLM call with tool use — a one-shot tool call is not an agent loop.
+- When execution cost or latency cannot be bounded — agent loops can run for unpredictable numbers of steps.
+- When intermediate steps cannot be observed or audited — agentic systems require per-step observability to be debuggable.
+
+### Common Failure Modes
+
+- **Failure:** Infinite loop — agent never reaches a stop condition.
+  **Cause:** Stop condition is ambiguous or the task definition does not include clear completion criteria.
+  **Signal:** Loop runs until a hard step limit or timeout; final answer is never produced.
+
+- **Failure:** Tool hallucination — model calls a tool with fabricated arguments.
+  **Cause:** Tool description is underspecified; model cannot determine correct argument values from context.
+  **Signal:** Tool execution fails with a key error or type error; model retries with the same invalid call.
+
+- **Failure:** Orchestrator loses subagent results — multi-agent aggregation fails silently.
+  **Cause:** Subagent result format is not validated before aggregation; partial failures are not surfaced.
+  **Signal:** Final response is incomplete; orchestrator cites a result that was never returned.
+
+### What Changes vs Traditional Systems
+
+The LLM is no longer a function in a pipeline — it is the control flow itself. The agent decides what to do next; the application executes the decision. This inverts the traditional model where application logic drives execution and the model is a called service. Debugging shifts from stack traces to execution traces: what did the model decide, what did the tool return, why did the loop continue.
+
+### Operational Considerations
+
+- Required: tool registry with error handling, step counter and hard limit, per-step logging, timeout policy.
+- Observable: steps per task, tool call distribution, tool failure rate, loop termination reason (stop vs timeout vs error).
+- Cost drivers: each loop iteration adds input tokens (accumulated history) and output tokens (reasoning + tool call); cost scales super-linearly with loop depth.
+- Debugging: log the full message history at each step; trace tool calls and results independently of the conversation.
+- Scaling: parallel subagent execution reduces wall-clock time but increases concurrent API call load; rate limiting applies per agent.
+
+### Minimal Adoption Heuristic
+
+**Use this when:**
+- The task requires multiple sequential decisions where the next step depends on the result of the previous one.
+- You need the model to select from a set of tools based on runtime context, not a fixed procedure.
+
+**Avoid this when:**
+- The task sequence is fixed and deterministic — a scripted pipeline is cheaper, faster, and easier to test.
+- You cannot instrument per-step observability — an uninstrumented agent loop is a black box that fails silently.

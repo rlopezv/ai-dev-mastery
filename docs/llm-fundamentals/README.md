@@ -26,6 +26,12 @@ validation_refs:
 summary: "Introduces the mechanical foundations of large language models — how they process text, generate output, and can be adapted — establishing the conceptual basis for every subsequent module."
 ---
 
+## Navigation
+
+[Docs](../README.md) / LLM Fundamentals
+
+---
+
 ## 1. Overview
 
 LLMs are probabilistic text completion engines built on the transformer architecture. Before writing a single prompt or API call, an architect must understand what an LLM actually does: it converts text to tokens, processes those tokens through attention layers, and produces a probability distribution over the next token. Every engineering decision downstream — prompt design, context sizing, API selection, RAG retrieval — is a consequence of this mechanism.
@@ -145,7 +151,7 @@ docs/llm-fundamentals/
 | `lab-context-window` | observation | Test context limits by progressively filling the window and observing truncation behavior |
 | `lab-inference-parameters` | observation | Compare generation outputs across temperature, top-k, and top-p settings |
 
-All labs use the `light` infrastructure profile (Ollama + API). No vector database is required.
+All labs use the `foundational` infrastructure profile (Ollama + API). No vector database is required.
 
 ---
 
@@ -180,3 +186,53 @@ If you already have a working understanding of transformer architecture, skip `l
 Begin with the first topic:
 
 → [`docs/llm-fundamentals/llm-architecture.md`](./llm-architecture.md)
+
+---
+
+## 11. Engineering Takeaways
+
+### What This Adds
+
+A mechanical understanding of how LLMs process text, generate output, and respond to runtime controls. This is the conceptual prerequisite for every subsequent engineering decision — prompt structure, API usage, context sizing, retrieval, and agent design all depend on understanding what happens inside the model.
+
+### Engineering Trade-offs
+
+| Decision | Benefit | Cost |
+|----------|---------|------|
+| Temperature 0 for determinism | Reproducible outputs, easier testing | Loses variance; may miss valid phrasings |
+| Larger context window | More history, richer retrieval context | Higher cost per call, higher memory pressure |
+| Fine-tuning vs prompting | Consistent behavior without prompt overhead | Training cost, dataset curation, retraining on changes |
+
+### When NOT to Use This
+
+- When the problem has a deterministic solution expressible in code — an LLM adds cost and unpredictability without benefit.
+- When the data is structured and the task is classification or extraction with a finite label set — rule-based or ML classifiers are more reliable and cheaper.
+- When output correctness must be verifiable and exact — LLM outputs are probabilistic and require validation layers.
+
+### Common Failure Modes
+
+- **Failure:** Context window overflow causes silent truncation.
+  **Cause:** History or documents grow past the model's token limit without length checks.
+  **Signal:** Model appears to "forget" earlier parts of the conversation.
+
+- **Failure:** Unexpected token costs in production.
+  **Cause:** Token count is underestimated because words and tokens do not align.
+  **Signal:** Billing spikes; prompts hitting limits at different lengths than expected.
+
+- **Failure:** Inconsistent output on repeated identical prompts.
+  **Cause:** Temperature or sampling parameters set too high for production use.
+  **Signal:** Same input produces structurally different outputs across runs.
+
+### What Changes vs Traditional Systems
+
+LLMs do not execute logic — they complete text. Behavior is shaped by input (the prompt), not by runtime control flow. The primary control surface moves from code to text. Testing shifts from pass/fail assertions to output distribution checks. Non-determinism is not a bug — it is a design constraint that must be accounted for.
+
+### Minimal Adoption Heuristic
+
+**Use this when:**
+- The task requires reasoning over unstructured text, language generation, or pattern inference that is impractical to encode as rules.
+- You need to evaluate whether AI is the right tool before committing to any framework or provider.
+
+**Avoid this when:**
+- The problem is well-defined and solvable with deterministic logic.
+- You cannot tolerate probabilistic behavior without additional validation layers.
