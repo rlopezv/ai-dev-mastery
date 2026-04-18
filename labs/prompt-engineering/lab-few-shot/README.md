@@ -1,4 +1,27 @@
-# lab-few-shot
+---
+id: "lab-few-shot"
+title: "Few-Shot Prompting"
+type: "lab-readme"
+step: "prompt-engineering"
+path: "labs/prompt-engineering/lab-few-shot/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "few-shot-prompting"
+  - "in-context-learning"
+prerequisites:
+  - "docs/prompt-engineering/few-shot.md"
+related:
+  - "docs/prompt-engineering/README.md"
+summary: "Implementation lab — measures accuracy improvement from zero-shot to three-shot on topic classification, and demonstrates how examples anchor output format."
+---
+
+# Few-Shot Prompting
+## Navigation
+
+[Labs](../../README.md) / [Prompt Engineering — Labs](../README.md) / Few-Shot Prompting
+
+---
 
 **Module:** `prompt-engineering`
 **Type:** implementation

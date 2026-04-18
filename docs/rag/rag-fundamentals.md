@@ -33,6 +33,14 @@ validation_refs:
 summary: "Explains what Retrieval-Augmented Generation is, why it exists, and how it decouples knowledge from model weights to enable grounded generation from external sources."
 ---
 
+# RAG Fundamentals
+
+## Navigation
+
+[Docs](../README.md) / [Retrieval-Augmented Generation](README.md) / RAG Fundamentals
+
+---
+
 ## 1. Intuition
 
 A language model's knowledge is frozen at training time. Ask it about last quarter's earnings report or your company's internal API, and it cannot answer — those facts were never in its training data. One solution is retraining the model, but that is expensive, slow, and has to be repeated every time the knowledge changes.

@@ -24,6 +24,14 @@ validation_refs:
 summary: "Explains what fine-tuning changes in a model's weights, the main approaches, and when fine-tuning is the right choice versus prompt engineering or RAG."
 ---
 
+# Fine-Tuning
+
+## Navigation
+
+[Docs](../README.md) / [LLM Fundamentals](README.md) / Fine-Tuning
+
+---
+
 ## 1. Intuition
 
 A pre-trained LLM is a general-purpose text predictor. Fine-tuning continues its training on a smaller, task-specific dataset to shift its behavior without changing its architecture. The model learns to produce outputs that match the patterns in the training data — consistent formats, domain vocabulary, refusal behaviors — as durable learned patterns in its weights rather than as instructions in every prompt.

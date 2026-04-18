@@ -34,6 +34,14 @@ validation_refs:
 summary: "Describes the system-level architecture of structured output enforcement and tool use, covering the five components, data flows, and the tool call loop."
 ---
 
+# Structured Outputs — Architecture
+
+## Navigation
+
+[Docs](../README.md) / [Structured Outputs](README.md) / Structured Outputs — Architecture
+
+---
+
 ## 1. System Overview
 
 The structured outputs system sits at the boundary between LLM response generation and application logic. Its purpose is to ensure that model output can be consumed programmatically — either as a typed data object (structured output path) or as a dispatched function call (tool use path). Both paths share a common schema declaration layer and converge at a normalized result consumed by application code.

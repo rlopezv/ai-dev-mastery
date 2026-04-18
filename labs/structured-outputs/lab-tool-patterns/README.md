@@ -1,4 +1,28 @@
-# lab-tool-patterns
+---
+id: "lab-tool-patterns"
+title: "Tool Patterns"
+type: "lab-readme"
+step: "structured-outputs"
+path: "labs/structured-outputs/lab-tool-patterns/README.md"
+status: "draft"
+level: "intermediate"
+concepts:
+  - "tool-use"
+  - "parallel-tool-calls"
+  - "sequential-tool-calls"
+prerequisites:
+  - "docs/structured-outputs/tool-patterns.md"
+related:
+  - "docs/structured-outputs/README.md"
+summary: "Implementation lab — benchmarks single, parallel, sequential, and router tool patterns with round-trip counts and observable argument flow between chained calls."
+---
+
+# Tool Patterns
+## Navigation
+
+[Labs](../../README.md) / [Structured Outputs — Labs](../README.md) / Tool Patterns
+
+---
 
 **Module:** `structured-outputs`
 **Type:** implementation

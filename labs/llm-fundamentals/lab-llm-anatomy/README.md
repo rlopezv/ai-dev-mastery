@@ -1,4 +1,28 @@
-# lab-llm-anatomy
+---
+id: "lab-llm-anatomy"
+title: "LLM Anatomy"
+type: "lab-readme"
+step: "llm-fundamentals"
+path: "labs/llm-fundamentals/lab-llm-anatomy/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "inference-pipeline"
+  - "transformer-architecture"
+  - "tokenization"
+prerequisites:
+  - "docs/llm-fundamentals/llm-architecture.md"
+related:
+  - "docs/llm-fundamentals/README.md"
+summary: "Observation lab — makes the transformer inference pipeline measurable via Ollama API telemetry: token counts, timing, and output scaling."
+---
+
+# LLM Anatomy
+## Navigation
+
+[Labs](../../README.md) / [LLM Fundamentals — Labs](../README.md) / LLM Anatomy
+
+---
 
 **Module:** llm-fundamentals  
 **Type:** observation  

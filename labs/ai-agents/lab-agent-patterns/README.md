@@ -23,6 +23,15 @@ related:
 summary: "Implements ReAct, reflection, and plan-and-execute on top of the basic agent loop, making each pattern's structural difference visible in the message history and log output."
 ---
 
+# Agent Patterns
+
+## Navigation
+
+[Labs](../../README.md) / [AI Agents — Labs](../README.md) / Agent Patterns
+
+---
+
+
 ## Overview
 
 This lab demonstrates three agent patterns by running research tasks through each one
@@ -60,7 +69,7 @@ Out of scope: multi-agent coordination, MCP dispatch, parallel tool calls.
 ## Setup
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 pip install -r labs/ai-agents/requirements.txt
 ollama pull mistral
 ```

@@ -31,6 +31,15 @@ validation_refs:
 summary: "Demonstrates the Ollama embedding API, cosine similarity computation, and batch ranking — making vector similarity directly observable before retrieval is introduced."
 ---
 
+# RAG — Lab: Embeddings and Vector Search
+
+## Navigation
+
+[Labs](../../README.md) / [RAG — Labs](../README.md) / RAG — Lab: Embeddings and Vector Search
+
+---
+
+
 ## What this lab demonstrates
 
 This lab makes the embedding mechanism concrete before any retrieval index or vector database is involved. You will:

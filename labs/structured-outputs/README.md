@@ -36,6 +36,15 @@ validation_refs:
 summary: "Four labs that make structured output enforcement and tool use directly observable — schema enforcement reliability, the tool call cycle, tool pattern compositions, and schema constraint design."
 ---
 
+# Structured Outputs — Labs
+
+## Navigation
+
+[Labs](../README.md) / Structured Outputs — Labs
+
+---
+
+
 ## 1. Overview
 
 These labs implement and measure the structured output and tool use mechanisms described in `docs/structured-outputs/`. Each lab isolates one mechanism, runs it against a fixed input set, and produces measurable output that confirms the concept.
@@ -63,7 +72,7 @@ All labs run against Ollama locally using the OpenAI-compatible interface. `lab-
 
 ## 3. Execution Model
 
-All labs use the **`light` infrastructure profile**: Ollama running locally via the OpenAI-compatible interface.
+All labs use the **`foundational` infrastructure profile**: Ollama running locally via the OpenAI-compatible interface.
 
 **Prerequisites:**
 

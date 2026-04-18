@@ -28,6 +28,15 @@ related:
 summary: "Module-integration lab — assembles HistoryManager, summarization compression, and MemoryStore into a 30-turn memory-aware conversational application."
 ---
 
+# Memory-Aware Application — Integration
+
+## Navigation
+
+[Labs](../../README.md) / [Memory and Context Management — Labs](../README.md) / Memory-Aware Application — Integration
+
+---
+
+
 ## Overview
 
 This lab composes all memory-context components into a single working application.
@@ -65,7 +74,7 @@ correctly recalls facts stated early in the conversation.
 ## Setup
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 pip install openai chromadb tiktoken
 ```
 

@@ -32,6 +32,14 @@ validation_refs:
 summary: "Explains how embedding models encode text as dense vectors, how cosine similarity measures semantic proximity, and how vector indexes enable efficient nearest-neighbor retrieval at scale."
 ---
 
+# Embeddings and Vector Search
+
+## Navigation
+
+[Docs](../README.md) / [Retrieval-Augmented Generation](README.md) / Embeddings and Vector Search
+
+---
+
 ## 1. Intuition
 
 Search engines have traditionally matched documents by keyword overlap: a query for "large language model" finds documents containing those exact words. This fails when the document uses synonyms ("foundation model", "transformer-based system") or describes the concept without naming it. Embeddings solve this by mapping text into a geometric space where semantic similarity becomes spatial proximity — texts that mean similar things end up close together, regardless of the words used.

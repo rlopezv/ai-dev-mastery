@@ -36,6 +36,14 @@ validation_refs:
 summary: "Explains how LangChain's LCEL composability model, memory abstractions, and agent integration work and when to apply them."
 ---
 
+# LangChain
+
+## Navigation
+
+[Docs](../README.md) / [Frameworks and Tools](README.md) / LangChain
+
+---
+
 ## 1. Intuition
 
 Think of LangChain as a connector system for LLM operations. A raw LLM call is a function

@@ -31,6 +31,14 @@ validation_refs:
 summary: "Introduces visual and low-code AI workflow tools — Flowise, Langflow, n8n, and Copilot Studio — explaining what they abstract, when they are appropriate, and where they hit their limits."
 ---
 
+# AI Workflow Tools
+
+## Navigation
+
+[Docs](../README.md) / [Frameworks and Tools](README.md) / AI Workflow Tools
+
+---
+
 ## 1. Intuition
 
 The frameworks covered in this module — LangChain, LlamaIndex, AutoGen, Semantic Kernel —

@@ -31,6 +31,14 @@ validation_refs:
 summary: "Explains how the Anthropic Messages API differs structurally from the OpenAI Chat Completions API — particularly the separation of the system prompt and the content block response format."
 ---
 
+# Anthropic API
+
+## Navigation
+
+[Docs](../README.md) / [LLM APIs](README.md) / Anthropic API
+
+---
+
 ## 1. Intuition
 
 The Anthropic Messages API does the same job as the OpenAI Chat Completions API — send a conversation, receive a reply — but with a different schema. The key structural differences are two: the system prompt is a separate top-level field (not a role in messages), and the response content is a list of typed blocks rather than a plain string. Code written for OpenAI does not run against Anthropic without changes.

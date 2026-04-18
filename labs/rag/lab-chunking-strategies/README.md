@@ -33,6 +33,15 @@ validation_refs:
 summary: "Compares fixed-size, sentence-boundary, and recursive chunking strategies by indexing the same corpus three times and measuring top-1 retrieval quality per strategy."
 ---
 
+# RAG — Lab: Document Processing and Chunking
+
+## Navigation
+
+[Labs](../../README.md) / [RAG — Labs](../README.md) / RAG — Lab: Document Processing and Chunking
+
+---
+
+
 ## What this lab demonstrates
 
 Every chunk in the vector store is a retrievable unit — the granularity of your chunks determines how focused each embedding vector is and how well it matches a specific query. This lab makes that trade-off directly observable.

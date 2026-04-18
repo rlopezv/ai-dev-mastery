@@ -1,4 +1,28 @@
-# lab-api-patterns
+---
+id: "lab-api-patterns"
+title: "API Patterns"
+type: "lab-readme"
+step: "llm-apis"
+path: "labs/llm-apis/lab-api-patterns/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "retry-with-backoff"
+  - "provider-abstraction"
+  - "conversation-accumulation"
+prerequisites:
+  - "docs/llm-apis/api-patterns.md"
+related:
+  - "docs/llm-apis/README.md"
+summary: "Implementation lab — demonstrates retry with exponential backoff, conversation token accumulation across turns, and provider abstraction via a normalized ChatResponse dataclass."
+---
+
+# API Patterns
+## Navigation
+
+[Labs](../../README.md) / [LLM APIs — Labs](../README.md) / API Patterns
+
+---
 
 **Module:** `llm-apis`
 **Type:** implementation

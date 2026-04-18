@@ -35,6 +35,14 @@ validation_refs:
 summary: "Defines the completion criteria and self-assessment checklist for the frameworks-tools module."
 ---
 
+# Frameworks and Tools — Validation
+
+## Navigation
+
+[Docs](../README.md) / [Frameworks and Tools](README.md) / Frameworks and Tools — Validation
+
+---
+
 ## 1. Validation Overview
 
 This module introduces four distinct frameworks with distinct abstractions. Completion

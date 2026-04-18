@@ -312,7 +312,24 @@ Those belong in `labs/<module>/README.md`.
 
 ---
 
-## 12. When you are blocked
+## 12. Prefer scripts over direct edits for bulk changes
+
+When a task requires modifying more than ~5 files in a repetitive or mechanical way
+(renaming strings, inserting blocks, reformatting structure), **do not apply the changes
+directly**. Instead:
+
+1. Propose writing a script (Python preferred) that the user can run locally
+2. Place the script in `.work/scripts/<descriptive-name>.py`
+3. Include a brief comment at the top explaining what it does and how to run it
+4. Wait for the user to confirm before writing the script
+
+**The user runs the script locally — Claude does not execute it via Bash.**
+The token saving only exists if execution stays on the user's machine.
+If the user pastes output back, review it and respond; do not re-execute.
+
+---
+
+## 13. When you are blocked
 
 If something is missing or ambiguous, stop and report:
 

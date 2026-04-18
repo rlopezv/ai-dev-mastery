@@ -36,6 +36,14 @@ validation_refs:
 summary: "Describes the component architecture of an agentic system: the single-agent loop, multi-agent topology, and MCP server integration as composable layers."
 ---
 
+# AI Agents — Architecture
+
+## Navigation
+
+[Docs](../README.md) / [AI Agents](README.md) / AI Agents — Architecture
+
+---
+
 ## 1. System Overview
 
 An agentic system is an application in which an LLM drives control flow through a series of

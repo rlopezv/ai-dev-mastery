@@ -31,6 +31,14 @@ validation_refs:
 summary: "Explains why asking a model to reason step-by-step before answering improves accuracy on multi-step tasks, and how to elicit and use intermediate reasoning steps in application code."
 ---
 
+# Chain-of-Thought
+
+## Navigation
+
+[Docs](../README.md) / [Prompt Engineering](README.md) / Chain-of-Thought
+
+---
+
 ## 1. Intuition
 
 An LLM generates one token at a time. When asked a complex question directly, it must compress the entire reasoning chain into the probability distribution for a single answer token — and that compression loses information. Asking it to write out its reasoning first gives the model a scratchpad: each reasoning step becomes input to the next, and the final answer is drawn from a much richer context.

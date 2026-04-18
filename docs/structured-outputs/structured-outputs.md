@@ -32,6 +32,14 @@ validation_refs:
 summary: "Explains how JSON mode and response-format schema enforcement guarantee structured model output at the API level, replacing best-effort format instructions with provider-enforced constraints."
 ---
 
+# Structured Outputs
+
+## Navigation
+
+[Docs](../README.md) / [Structured Outputs](README.md) / Structured Outputs
+
+---
+
 ## 1. Intuition
 
 Asking a model to "respond in JSON" is an instruction, not a contract. On typical inputs it works. On edge cases — long outputs, unusual values, models under load — the response may include prose before the JSON block, omit fields, or produce invalid syntax. JSON mode and response-format schema enforcement move the contract from the prompt to the API: the provider validates and retries internally, and the caller receives a guaranteed-valid response or an explicit error.

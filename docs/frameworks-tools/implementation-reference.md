@@ -40,6 +40,14 @@ validation_refs:
 summary: "Explains how architecture components translate into implementation patterns across LangChain, LlamaIndex, AutoGen, and Semantic Kernel."
 ---
 
+# Frameworks and Tools — Implementation Reference
+
+## Navigation
+
+[Docs](../README.md) / [Frameworks and Tools](README.md) / Frameworks and Tools — Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 > **Note:** This document contains orientative code — structures, interfaces, signatures.

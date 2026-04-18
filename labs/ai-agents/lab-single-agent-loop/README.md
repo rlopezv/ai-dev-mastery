@@ -25,6 +25,15 @@ related:
 summary: "Implements a ceiling-guarded agent loop with stub tools to demonstrate perceive-decide-act iteration, stop conditions, and the iteration ceiling."
 ---
 
+# Single Agent Loop
+
+## Navigation
+
+[Labs](../../README.md) / [AI Agents — Labs](../README.md) / Single Agent Loop
+
+---
+
+
 ## Overview
 
 This lab implements the minimal agent loop: a single LLM connected to two stub tools
@@ -60,7 +69,7 @@ Out of scope: parallel tool calls, multi-agent coordination, live network access
 
 ```bash
 # Start Ollama
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 
 # Install dependencies
 pip install -r labs/ai-agents/requirements.txt

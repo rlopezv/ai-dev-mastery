@@ -37,6 +37,14 @@ validation_refs:
 summary: "Describes the runtime architecture of a memory-aware LLM application, showing how the history manager, token budget calculator, context management strategy, and optional external memory store compose into a single request-response cycle."
 ---
 
+# Memory and Context Management — Architecture
+
+## Navigation
+
+[Docs](../README.md) / [Memory and Context Management](README.md) / Memory and Context Management — Architecture
+
+---
+
 ## 1. System Overview
 
 A memory-aware LLM application wraps the standard stateless API call with a stateful layer

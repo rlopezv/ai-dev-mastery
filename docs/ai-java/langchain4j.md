@@ -33,6 +33,14 @@ validation_refs:
 summary: "Covers LangChain4j's core abstractions — AI services, chat memory, RAG pipeline, and tool integration — as a framework-portable Java implementation of the LangChain pattern."
 ---
 
+# LangChain4j
+
+## Navigation
+
+[Docs](../README.md) / [AI Development in Java](README.md) / LangChain4j
+
+---
+
 ## 1. Intuition
 
 LangChain4j's central insight is that the most common AI interaction pattern in Java is

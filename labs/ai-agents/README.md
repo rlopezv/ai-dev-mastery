@@ -42,6 +42,15 @@ validation_refs:
 summary: "Guides the implementation of agentic systems across six labs covering the single-agent loop, tool-use accumulation, multi-agent coordination, agent patterns, MCP server integration, and full system composition."
 ---
 
+# AI Agents — Labs
+
+## Navigation
+
+[Labs](../README.md) / AI Agents — Labs
+
+---
+
+
 ## 1. Overview
 
 These labs build an agentic system from its smallest unit to a fully composed application.
@@ -98,10 +107,10 @@ client) and `server.py` (the MCP server) must be present in the lab directory.
 | `lab-mcp-server` | ✅ | ✅ (`server.py`) |
 | `lab-integration` | ✅ | ✅ (`server.py`) |
 
-**Start Ollama (light profile):**
+**Start Ollama (foundational profile):**
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 ```
 
 **Install Python dependencies:**

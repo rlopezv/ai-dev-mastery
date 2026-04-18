@@ -37,6 +37,14 @@ validation_refs:
 summary: "Explains how the prompt engineering architecture components map to concrete Python patterns — template functions, response parsers, chain-of-thought extraction, and a test harness — and the design decisions behind each."
 ---
 
+# Prompt Engineering — Implementation Reference
+
+## Navigation
+
+[Docs](../README.md) / [Prompt Engineering](README.md) / Prompt Engineering — Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 The architecture defines four components: prompt builder, API client, response parser, and test harness. In code, the prompt builder is a set of template functions (one per pattern), the API client is the `ChatResponse` abstraction from `llm-apis`, the response parser is a set of typed extraction functions, and the test harness is a loop over a benchmark input set.

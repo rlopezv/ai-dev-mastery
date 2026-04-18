@@ -26,6 +26,15 @@ related:
 summary: "Implements a LlamaIndex retrieval pipeline that builds a persistent VectorStoreIndex in ChromaDB, reloads it without re-ingestion, and demonstrates query engine and retriever decoupling with configurable top_k."
 ---
 
+# LlamaIndex — VectorStoreIndex with ChromaDB, Query Engine, and Retriever
+
+## Navigation
+
+[Labs](../../README.md) / [Frameworks and Tools — Labs](../README.md) / LlamaIndex — VectorStoreIndex with ChromaDB, Query Engine, and Retriever
+
+---
+
+
 ## Overview
 
 This lab builds a LlamaIndex retrieval pipeline in three parts:
@@ -65,8 +74,8 @@ and reranking postprocessors.
 ## Setup
 
 ```bash
-# Start full profile (Ollama + ChromaDB)
-docker-compose --profile full up -d
+# Start intermediate profile (Ollama + ChromaDB)
+docker-compose --profile intermediate up -d
 
 # Pull the model if not already present
 ollama pull mistral

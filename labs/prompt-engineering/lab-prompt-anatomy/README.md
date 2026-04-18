@@ -1,4 +1,28 @@
-# lab-prompt-anatomy
+---
+id: "lab-prompt-anatomy"
+title: "Prompt Anatomy"
+type: "lab-readme"
+step: "prompt-engineering"
+path: "labs/prompt-engineering/lab-prompt-anatomy/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "prompt-anatomy"
+  - "output-format-specification"
+  - "system-prompt"
+prerequisites:
+  - "docs/prompt-engineering/prompt-anatomy.md"
+related:
+  - "docs/prompt-engineering/README.md"
+summary: "Observation lab — isolates the effect of each prompt component by removing them one at a time and measuring output consistency across repeated runs."
+---
+
+# Prompt Anatomy
+## Navigation
+
+[Labs](../../README.md) / [Prompt Engineering — Labs](../README.md) / Prompt Anatomy
+
+---
 
 **Module:** `prompt-engineering`
 **Type:** observation

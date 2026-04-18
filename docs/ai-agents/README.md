@@ -34,6 +34,8 @@ validation_refs:
 summary: "Introduces the agent model for LLM applications — how autonomous loops, tool invocation, multi-agent coordination, and protocol-based tool integration compose into agentic systems."
 ---
 
+# AI Agents
+
 ## Navigation
 
 [Docs](../README.md) / AI Agents

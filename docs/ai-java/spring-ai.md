@@ -33,6 +33,14 @@ validation_refs:
 summary: "Covers Spring AI's core abstractions — ChatClient, prompt templates, advisors, RAG components, and tool calling — as a Spring Boot-native integration layer for LLM APIs."
 ---
 
+# Spring AI
+
+## Navigation
+
+[Docs](../README.md) / [AI Development in Java](README.md) / Spring AI
+
+---
+
 ## 1. Intuition
 
 Spring AI's design goal is to feel like Spring Data or Spring Web: you declare what you

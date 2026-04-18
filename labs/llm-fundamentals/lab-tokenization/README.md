@@ -1,4 +1,28 @@
-# lab-tokenization
+---
+id: "lab-tokenization"
+title: "Tokenization"
+type: "lab-readme"
+step: "llm-fundamentals"
+path: "labs/llm-fundamentals/lab-tokenization/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "tokenization"
+  - "byte-pair-encoding"
+  - "token-vocabulary"
+prerequisites:
+  - "docs/llm-fundamentals/tokenization.md"
+related:
+  - "docs/llm-fundamentals/README.md"
+summary: "Observation lab — makes tokenization behavior directly measurable: encode/decode round-trips, token count variance by language and input type, and leading-space sensitivity."
+---
+
+# Tokenization
+## Navigation
+
+[Labs](../../README.md) / [LLM Fundamentals — Labs](../README.md) / Tokenization
+
+---
 
 **Module:** llm-fundamentals  
 **Type:** observation  

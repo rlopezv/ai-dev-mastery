@@ -1,4 +1,27 @@
-# lab-chain-of-thought
+---
+id: "lab-chain-of-thought"
+title: "Chain of Thought"
+type: "lab-readme"
+step: "prompt-engineering"
+path: "labs/prompt-engineering/lab-chain-of-thought/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "chain-of-thought"
+  - "answer-extraction"
+prerequisites:
+  - "docs/prompt-engineering/chain-of-thought.md"
+related:
+  - "docs/prompt-engineering/README.md"
+summary: "Implementation lab — compares direct vs chain-of-thought accuracy on multi-step word problems and demonstrates answer extraction via a structured marker."
+---
+
+# Chain of Thought
+## Navigation
+
+[Labs](../../README.md) / [Prompt Engineering — Labs](../README.md) / Chain of Thought
+
+---
 
 **Module:** `prompt-engineering`
 **Type:** implementation

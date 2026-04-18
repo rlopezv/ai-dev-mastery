@@ -23,6 +23,15 @@ related:
 summary: "Observation lab — demonstrates in-context memory loss after truncation and external memory recall via ChromaDB embedding retrieval."
 ---
 
+# Memory Types — In-Context vs External
+
+## Navigation
+
+[Labs](../../README.md) / [Memory and Context Management — Labs](../README.md) / Memory Types — In-Context vs External
+
+---
+
+
 ## Overview
 
 This lab makes the difference between in-context and external memory observable.
@@ -55,7 +64,7 @@ overflow the context.
 **Requirements:** Ollama running with `mistral` and `nomic-embed-text` pulled.
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 ```
 
 ```bash
@@ -162,5 +171,5 @@ Restore the retrieval and injection code after the experiment.
 | Ollama (`nomic-embed-text`) | Embedding for storage and retrieval |
 | ChromaDB `EphemeralClient` | In-memory store — no Docker, no persistence |
 
-ChromaDB runs in-process. No `docker-compose` profile beyond `light` is needed.
+ChromaDB runs in-process. No `docker-compose` profile beyond `foundational` is needed.
 The collection is discarded when the script exits.

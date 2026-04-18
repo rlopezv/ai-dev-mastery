@@ -37,6 +37,14 @@ validation_refs:
 summary: "Maps the structured outputs architecture to implementation patterns — schema declaration with Pydantic, tool registry, tool call loop, and parallel result accumulation."
 ---
 
+# Structured Outputs — Implementation Reference
+
+## Navigation
+
+[Docs](../README.md) / [Structured Outputs](README.md) / Structured Outputs — Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 The architecture defines five components: Schema Registry, Request Builder, LLM Provider, Response Validator, and Tool Executor. In implementation:

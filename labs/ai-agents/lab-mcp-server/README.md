@@ -23,6 +23,15 @@ related:
 summary: "Builds an MCP server exposing three tools via the MCP protocol and connects an agent to it via stdio, demonstrating tool discovery, MCP-dispatched tool calls, and equivalence with inline dispatch."
 ---
 
+# MCP Server
+
+## Navigation
+
+[Labs](../../README.md) / [AI Agents — Labs](../README.md) / MCP Server
+
+---
+
+
 ## Overview
 
 This lab has two files: `server.py` (the MCP server) and `main.py` (the agent client).
@@ -56,7 +65,7 @@ Out of scope: HTTP+SSE MCP transport, MCP resources, MCP authentication.
 ## Setup
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 pip install -r labs/ai-agents/requirements.txt
 ollama pull mistral
 

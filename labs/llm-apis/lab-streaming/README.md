@@ -1,4 +1,28 @@
-# lab-streaming
+---
+id: "lab-streaming"
+title: "Streaming"
+type: "lab-readme"
+step: "llm-apis"
+path: "labs/llm-apis/lab-streaming/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "streaming"
+  - "first-token-latency"
+  - "token-delta"
+prerequisites:
+  - "docs/llm-apis/streaming.md"
+related:
+  - "docs/llm-apis/README.md"
+summary: "Implementation lab — measures batch vs streaming first-token latency, demonstrates chunk delta structure, and verifies that assembled streaming text matches the batch response."
+---
+
+# Streaming
+## Navigation
+
+[Labs](../../README.md) / [LLM APIs — Labs](../README.md) / Streaming
+
+---
 
 **Module:** `llm-apis`
 **Type:** implementation

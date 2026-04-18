@@ -1,4 +1,27 @@
-# lab-ollama-api
+---
+id: "lab-ollama-api"
+title: "Ollama API"
+type: "lab-readme"
+step: "llm-apis"
+path: "labs/llm-apis/lab-ollama-api/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "openai-compatible-interface"
+  - "local-inference"
+prerequisites:
+  - "docs/llm-apis/ollama-api.md"
+related:
+  - "docs/llm-apis/README.md"
+summary: "Implementation lab — demonstrates Ollama's OpenAI-compatible interface via base_url override, native model management endpoints, and the difference between native and compatible response shapes."
+---
+
+# Ollama API
+## Navigation
+
+[Labs](../../README.md) / [LLM APIs — Labs](../README.md) / Ollama API
+
+---
 
 **Module:** `llm-apis`
 **Type:** implementation

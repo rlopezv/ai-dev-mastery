@@ -31,6 +31,14 @@ validation_refs:
 summary: "Describes three reusable agent patterns — ReAct, plan-and-execute, and reflection — and the conditions under which each is the right structural choice."
 ---
 
+# Agent Patterns
+
+## Navigation
+
+[Docs](../README.md) / [AI Agents](README.md) / Agent Patterns
+
+---
+
 ## 1. Intuition
 
 A raw agent loop — perceive, decide, act — works for simple tasks but produces opaque and

@@ -32,6 +32,14 @@ validation_refs:
 summary: "Covers how to design JSON Schema and Pydantic models that maximize structured output reliability — field selection, constraint types, enum usage, and nesting trade-offs."
 ---
 
+# Schema Design
+
+## Navigation
+
+[Docs](../README.md) / [Structured Outputs](README.md) / Schema Design
+
+---
+
 ## 1. Intuition
 
 Schema enforcement guarantees the output conforms to a shape, but the shape itself must be designed for the model to fill correctly. A schema that demands fields the input cannot provide, uses unconstrained string types where enums would work, or nests objects four levels deep will produce valid JSON with wrong values. Schema design is the practice of matching the declared contract to what the model can reliably produce from the available input.

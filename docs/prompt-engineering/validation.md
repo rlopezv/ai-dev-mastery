@@ -38,6 +38,14 @@ validation_refs:
 summary: "Defines the conceptual, practical, and lab-level criteria that confirm a learner can write reliable prompts using anatomy components, few-shot examples, chain-of-thought, and reusable patterns."
 ---
 
+# Prompt Engineering — Validation
+
+## Navigation
+
+[Docs](../README.md) / [Prompt Engineering](README.md) / Prompt Engineering — Validation
+
+---
+
 ## 1. Validation Overview
 
 This step is complete when the learner can diagnose a failing prompt by identifying which component is missing or malformed, apply few-shot and chain-of-thought techniques correctly, and implement reusable prompt patterns with measurable accuracy. Validation is practical: it is demonstrated through lab execution and the ability to fix a broken prompt given only its symptoms.

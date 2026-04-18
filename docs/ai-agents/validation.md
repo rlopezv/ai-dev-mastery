@@ -34,6 +34,14 @@ validation_refs:
 summary: "Defines the criteria for validating understanding and implementation of the ai-agents module, covering conceptual reasoning, lab execution, and system integration."
 ---
 
+# AI Agents — Validation
+
+## Navigation
+
+[Docs](../README.md) / [AI Agents](README.md) / AI Agents — Validation
+
+---
+
 ## 1. Validation Overview
 
 At the end of this module, the learner should be able to build an agentic system from

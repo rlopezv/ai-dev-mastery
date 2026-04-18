@@ -1,4 +1,28 @@
-# labs/ai-java/README.md
+---
+id: "ai-java-labs-readme"
+title: "AI Development in Java — Labs"
+type: "lab-readme"
+step: "ai-java"
+path: "labs/ai-java/README.md"
+status: "draft"
+level: "advanced"
+concepts:
+  - "spring-ai"
+  - "langchain4j"
+prerequisites:
+  - "docs/ai-java/README.md"
+related:
+  - "labs/frameworks-tools/README.md"
+summary: "Concept-only module — no executable labs. Documents why Java labs are out of scope and provides Python reference implementations for equivalent patterns."
+---
+
+# AI Development in Java — Labs
+
+## Navigation
+
+[Labs](../README.md) / AI Development in Java — Labs
+
+---
 
 ## Status
 

@@ -33,6 +33,14 @@ validation_refs:
 summary: "Explains how LLM APIs deliver token-by-token responses over persistent HTTP connections using Server-Sent Events, and what changes on the client side when switching from batch to streaming mode."
 ---
 
+# Streaming
+
+## Navigation
+
+[Docs](../README.md) / [LLM APIs](README.md) / Streaming
+
+---
+
 ## 1. Intuition
 
 Without streaming, an API call blocks until the model has generated the entire response — a wait of several seconds for a long reply. With streaming, the model sends each generated token immediately, so the client starts receiving output within milliseconds of the first token being produced. The user sees text appearing progressively, which makes a 10-second generation feel interactive rather than frozen.

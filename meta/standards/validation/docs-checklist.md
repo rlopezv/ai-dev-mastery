@@ -128,6 +128,10 @@ does not auto-fail, but it must be explicitly called out for correction before f
 - **Severity:** Major
 - **Rule:** Required synthesis/comparison tables exist and are not empty
 
+### SC-6 H1 heading is present after frontmatter
+- **Severity:** Critical
+- **Rule:** The first non-empty line after the closing `---` of frontmatter is `# <Title>`, matching the `title` field in frontmatter
+
 ---
 
 ## 6. Category 2 — Content Quality

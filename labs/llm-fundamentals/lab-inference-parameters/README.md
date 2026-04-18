@@ -1,4 +1,29 @@
-# lab-inference-parameters
+---
+id: "lab-inference-parameters"
+title: "Inference Parameters"
+type: "lab-readme"
+step: "llm-fundamentals"
+path: "labs/llm-fundamentals/lab-inference-parameters/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "inference-parameters"
+  - "temperature"
+  - "top-k"
+  - "top-p"
+prerequisites:
+  - "docs/llm-fundamentals/inference-parameters.md"
+related:
+  - "docs/llm-fundamentals/README.md"
+summary: "Observation lab — isolates the effect of temperature, top-k, and top-p by running the same prompt with systematically varied parameters and comparing outputs."
+---
+
+# Inference Parameters
+## Navigation
+
+[Labs](../../README.md) / [LLM Fundamentals — Labs](../README.md) / Inference Parameters
+
+---
 
 **Module:** llm-fundamentals  
 **Type:** observation  

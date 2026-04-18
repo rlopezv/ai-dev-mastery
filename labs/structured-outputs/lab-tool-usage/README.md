@@ -1,4 +1,28 @@
-# lab-tool-usage
+---
+id: "lab-tool-usage"
+title: "Tool Usage"
+type: "lab-readme"
+step: "structured-outputs"
+path: "labs/structured-outputs/lab-tool-usage/README.md"
+status: "draft"
+level: "intermediate"
+concepts:
+  - "tool-use"
+  - "function-calling"
+  - "finish-reason"
+prerequisites:
+  - "docs/structured-outputs/tool-usage.md"
+related:
+  - "docs/structured-outputs/README.md"
+summary: "Implementation lab — demonstrates the full tool call cycle via finish_reason gate, argument extraction, result return, and final response, with side-by-side OpenAI and Anthropic schema differences."
+---
+
+# Tool Usage
+## Navigation
+
+[Labs](../../README.md) / [Structured Outputs — Labs](../README.md) / Tool Usage
+
+---
 
 **Module:** `structured-outputs`
 **Type:** implementation

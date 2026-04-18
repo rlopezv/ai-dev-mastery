@@ -32,6 +32,14 @@ validation_refs:
 summary: "Explains how providing labeled input/output examples inside the prompt causes the model to infer and replicate task behavior without explicit instructions — and when this is more reliable than instruction alone."
 ---
 
+# Few-Shot Prompting
+
+## Navigation
+
+[Docs](../README.md) / [Prompt Engineering](README.md) / Few-Shot Prompting
+
+---
+
 ## 1. Intuition
 
 Telling a model what to do is often less effective than showing it. When you include two or three labeled examples of the task you want performed, the model infers the pattern from those examples and applies it to the new input — even if you never explicitly stated the rule. This is few-shot prompting: teaching by demonstration rather than specification.

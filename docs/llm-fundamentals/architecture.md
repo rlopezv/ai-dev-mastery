@@ -26,6 +26,14 @@ validation_refs:
 summary: "Describes the LLM inference pipeline — from text input through tokenization, context assembly, transformer forward pass, and token sampling — and maps each component to the labs in this module."
 ---
 
+# LLM Fundamentals — Architecture
+
+## Navigation
+
+[Docs](../README.md) / [LLM Fundamentals](README.md) / LLM Fundamentals — Architecture
+
+---
+
 ## 1. System Overview
 
 The system described in this document is the **LLM inference pipeline**: the sequence of operations that transforms a text prompt into a generated response. This is the runtime system exercised by every API call in every subsequent module.

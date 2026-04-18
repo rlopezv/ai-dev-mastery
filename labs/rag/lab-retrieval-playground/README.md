@@ -33,6 +33,15 @@ validation_refs:
 summary: "Compares dense retrieval, BM25 sparse retrieval, and RRF hybrid merge on a fixed query set designed to expose the failure cases of each strategy."
 ---
 
+# RAG — Lab: Retrieval Strategies
+
+## Navigation
+
+[Labs](../../README.md) / [RAG — Labs](../README.md) / RAG — Lab: Retrieval Strategies
+
+---
+
+
 ## What this lab demonstrates
 
 No single retrieval strategy is universally better. Dense retrieval misses rare exact terms; BM25 misses paraphrase and synonymy. This lab runs both against the same index and merges their results, making the complementary failure modes directly observable.

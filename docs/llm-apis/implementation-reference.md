@@ -38,6 +38,14 @@ validation_refs:
 summary: "Explains how the architecture components for LLM API clients map to concrete implementation patterns — SDK usage, schema normalization, conversation management, and retry handling."
 ---
 
+# LLM APIs — Implementation Reference
+
+## Navigation
+
+[Docs](../README.md) / [LLM APIs](README.md) / LLM APIs — Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 The architecture for this module has five components: provider SDK, abstraction layer, conversation manager, retry handler, and LLM provider. In code, the provider SDK is a direct dependency (`openai`, `anthropic`), while the abstraction layer, conversation manager, and retry handler are application-owned patterns — not imported libraries. Each lab implements a subset of these patterns, progressing from raw SDK usage to a fully composed client.

@@ -26,6 +26,15 @@ related:
 summary: "Connects a LlamaIndex VectorStoreIndex retriever to a LangChain LCEL chain with session memory, demonstrating cross-framework pipeline composition over a shared ChromaDB corpus."
 ---
 
+# Frameworks Integration — LangChain + LlamaIndex with Session Memory
+
+## Navigation
+
+[Labs](../../README.md) / [Frameworks and Tools — Labs](../README.md) / Frameworks Integration — LangChain + LlamaIndex with Session Memory
+
+---
+
+
 ## Overview
 
 This lab composes two frameworks into a single retrieval pipeline:
@@ -63,8 +72,8 @@ Out of scope: tool-calling, agentic loops, and production streaming.
 ## Setup
 
 ```bash
-# Start full profile (Ollama + ChromaDB)
-docker-compose --profile full up -d
+# Start intermediate profile (Ollama + ChromaDB)
+docker-compose --profile intermediate up -d
 
 # Pull the model
 ollama pull mistral

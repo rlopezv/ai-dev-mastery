@@ -33,6 +33,8 @@ validation_refs:
 summary: "Covers how to interact with LLM providers through their HTTP APIs — OpenAI, Ollama, and Anthropic — and the common patterns that make API-level code robust and portable."
 ---
 
+# LLM APIs
+
 ## Navigation
 
 [Docs](../README.md) / LLM APIs

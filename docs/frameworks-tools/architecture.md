@@ -38,6 +38,14 @@ validation_refs:
 summary: "Describes how AI framework components compose at system level — from raw API calls through framework abstractions to a complete application pipeline."
 ---
 
+# Frameworks and Tools — Architecture
+
+## Navigation
+
+[Docs](../README.md) / [Frameworks and Tools](README.md) / Frameworks and Tools — Architecture
+
+---
+
 ## 1. System Overview
 
 An AI application built with frameworks sits on three layers. The bottom layer is the

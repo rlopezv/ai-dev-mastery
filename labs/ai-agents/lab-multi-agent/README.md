@@ -23,6 +23,15 @@ related:
 summary: "Builds an orchestrator that delegates research sub-tasks to specialized subagents, demonstrating context isolation, result summarization, and subagent invocation as tool calls."
 ---
 
+# Multi-Agent Systems
+
+## Navigation
+
+[Labs](../../README.md) / [AI Agents — Labs](../README.md) / Multi-Agent Systems
+
+---
+
+
 ## Overview
 
 This lab implements a two-level agent system: an orchestrator that decomposes a research
@@ -55,7 +64,7 @@ Out of scope: MCP tool dispatch, agent patterns, parallel subagent execution.
 ## Setup
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 pip install -r labs/ai-agents/requirements.txt
 ollama pull mistral
 ```

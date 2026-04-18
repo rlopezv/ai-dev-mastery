@@ -30,6 +30,14 @@ validation_refs:
 summary: "Surveys the Java AI ecosystem, identifying the major frameworks and libraries available to enterprise Java engineers and their respective positions in the LLM integration space."
 ---
 
+# The Java AI Ecosystem
+
+## Navigation
+
+[Docs](../README.md) / [AI Development in Java](README.md) / The Java AI Ecosystem
+
+---
+
 ## 1. Intuition
 
 A Java enterprise engineer starting an LLM integration project faces a familiar problem:

@@ -31,6 +31,14 @@ validation_refs:
 summary: "Catalogs the implementation idioms Java engineers apply when building LLM-powered applications: type-safe AI service interfaces, Spring dependency injection for model clients, reactive streaming, and configuration externalization."
 ---
 
+# Java AI Patterns
+
+## Navigation
+
+[Docs](../README.md) / [AI Development in Java](README.md) / Java AI Patterns
+
+---
+
 ## 1. Intuition
 
 The previous topics described what Spring AI and LangChain4j provide. This topic answers

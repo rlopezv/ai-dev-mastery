@@ -31,6 +31,14 @@ validation_refs:
 summary: "Describes the systematic failure modes in prompt design — ambiguity, over-specification, instruction conflict, and prompt injection — and explains why each occurs and how to avoid it."
 ---
 
+# Prompt Pitfalls
+
+## Navigation
+
+[Docs](../README.md) / [Prompt Engineering](README.md) / Prompt Pitfalls
+
+---
+
 ## 1. Intuition
 
 Most prompt failures are not random — they fall into a small number of recurring patterns. Understanding these patterns means you can recognize them by their symptoms and fix them systematically rather than tuning prompts by feel. The four pitfalls in this topic account for the majority of prompt behavior that surprises developers in production.

@@ -49,6 +49,15 @@ validation_refs:
 summary: "Guides the implementation of LangChain, LlamaIndex, AutoGen, and Semantic Kernel applications across five labs, with a shared corpus used by all retrieval labs."
 ---
 
+# Frameworks and Tools — Labs
+
+## Navigation
+
+[Labs](../README.md) / Frameworks and Tools — Labs
+
+---
+
+
 ## 1. Overview
 
 These labs implement concrete applications with each major AI framework covered in the
@@ -114,7 +123,7 @@ scripts via `python main.py` from the lab directory. They call the OpenAI API or
 Ollama instance depending on the `LLM_PROVIDER` environment variable.
 
 `lab-llamaindex` runs as a Python script and requires ChromaDB to be running for index
-persistence. Run it with the `full` profile.
+persistence. Run it with the `intermediate` profile.
 
 **Infrastructure per lab:**
 
@@ -130,10 +139,10 @@ persistence. Run it with the `full` profile.
 
 ```bash
 # Light profile — Ollama only (lab-langchain, lab-autogen, lab-semantic-kernel)
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 
 # Full profile — Ollama + ChromaDB (lab-llamaindex, lab-integration)
-docker-compose --profile full up -d
+docker-compose --profile intermediate up -d
 ```
 
 **Install Python dependencies:**
@@ -322,8 +331,8 @@ key is missing from the `invoke` call. Every call to a chain with history must i
 `config={"configurable": {"session_id": "<id>"}}`. This is not optional.
 
 **LlamaIndex index build fails with ChromaDB connection error.** ChromaDB must be running
-before `lab-llamaindex` is executed. Start the full profile with
-`docker-compose --profile full up -d` and wait for ChromaDB to report healthy before
+before `lab-llamaindex` is executed. Start the intermediate profile with
+`docker-compose --profile intermediate up -d` and wait for ChromaDB to report healthy before
 running the lab.
 
 **LlamaIndex query returns empty results after reload.** The embedding model used at

@@ -39,6 +39,14 @@ validation_refs:
 summary: "Defines the conceptual, practical, and lab-level criteria that confirm a learner has mastered LLM API interaction across providers, streaming, and common patterns."
 ---
 
+# LLM APIs — Validation
+
+## Navigation
+
+[Docs](../README.md) / [LLM APIs](README.md) / LLM APIs — Validation
+
+---
+
 ## 1. Validation Overview
 
 This step is complete when the learner can make API calls to all three providers (OpenAI/Ollama, Anthropic), consume streaming responses, and implement the three core patterns (retry, accumulation, abstraction) in application code. Mastery at this level is practical: it is demonstrated by running code that produces correct results, not by reciting definitions.

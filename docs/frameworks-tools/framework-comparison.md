@@ -33,6 +33,14 @@ validation_refs:
 summary: "Provides structured selection criteria for choosing between LangChain, LlamaIndex, AutoGen, and Semantic Kernel based on use case, team context, and operational requirements."
 ---
 
+# Framework Comparison
+
+## Navigation
+
+[Docs](../README.md) / [Frameworks and Tools](README.md) / Framework Comparison
+
+---
+
 ## 1. Intuition
 
 Selecting an AI framework is not a question of which one is best — it is a question of fit

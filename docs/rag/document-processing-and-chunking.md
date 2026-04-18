@@ -32,6 +32,14 @@ validation_refs:
 summary: "Explains how source documents are loaded, cleaned, and split into retrievable units, covering the trade-offs between chunk size, overlap, and split strategy on retrieval quality."
 ---
 
+# Document Processing and Chunking
+
+## Navigation
+
+[Docs](../README.md) / [Retrieval-Augmented Generation](README.md) / Document Processing and Chunking
+
+---
+
 ## 1. Intuition
 
 A vector database does not store full documents — it stores segments. Retrieval returns segments, not pages. The question is: how do you cut a document so that each segment contains a complete, self-contained thought that matches what a user might query?

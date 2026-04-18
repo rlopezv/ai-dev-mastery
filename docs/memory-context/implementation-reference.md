@@ -38,6 +38,14 @@ validation_refs:
 summary: "Explains the implementation patterns for conversation history management, context budget enforcement, and external memory across the memory-context labs."
 ---
 
+# Memory and Context Management — Implementation Reference
+
+## Navigation
+
+[Docs](../README.md) / [Memory and Context Management](README.md) / Memory and Context Management — Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 The memory-context module is implemented across four labs that each isolate a distinct

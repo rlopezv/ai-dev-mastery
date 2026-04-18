@@ -31,6 +31,14 @@ validation_refs:
 summary: "Explains how Ollama exposes a local LLM runtime with an OpenAI-compatible API, enabling development without cloud API keys, and how to manage models through its native endpoints."
 ---
 
+# Ollama API
+
+## Navigation
+
+[Docs](../README.md) / [LLM APIs](README.md) / Ollama API
+
+---
+
 ## 1. Intuition
 
 Ollama is a local process that downloads and serves open-weight LLMs on your machine. It exposes an HTTP API on `localhost:11434`. Two interfaces exist side by side: a native Ollama API and an OpenAI-compatible endpoint at `/v1/`. The OpenAI-compatible endpoint means any code written against the OpenAI Python SDK runs against Ollama by changing one URL and removing the API key requirement.

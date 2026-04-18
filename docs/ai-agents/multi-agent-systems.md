@@ -31,6 +31,14 @@ validation_refs:
 summary: "Explains why complex tasks require multiple agents, how orchestrators decompose and delegate work to subagents, and the trade-offs between centralized and distributed agent control."
 ---
 
+# Multi-Agent Systems
+
+## Navigation
+
+[Docs](../README.md) / [AI Agents](README.md) / Multi-Agent Systems
+
+---
+
 ## 1. Intuition
 
 A single agent with ten tools is hard to reason about — the model must decide among ten

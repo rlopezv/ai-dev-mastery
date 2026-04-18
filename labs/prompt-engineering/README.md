@@ -35,6 +35,15 @@ validation_refs:
 summary: "Four labs that make prompt engineering techniques directly observable — anatomy component effects, few-shot accuracy improvement, chain-of-thought reasoning, and reusable pattern templates with a benchmark harness."
 ---
 
+# Prompt Engineering — Labs
+
+## Navigation
+
+[Labs](../README.md) / Prompt Engineering — Labs
+
+---
+
+
 ## 1. Overview
 
 These labs implement and measure the prompt engineering techniques described in `docs/prompt-engineering/`. Each lab isolates one technique, runs it against a fixed input set, and produces measurable output that confirms the concept.
@@ -61,7 +70,7 @@ All labs run against Ollama locally. No cloud API keys are required. Results var
 
 ## 3. Execution Model
 
-All labs use the **`light` infrastructure profile**: Ollama running locally via the OpenAI-compatible interface.
+All labs use the **`foundational` infrastructure profile**: Ollama running locally via the OpenAI-compatible interface.
 
 **Prerequisites:**
 

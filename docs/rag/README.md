@@ -33,6 +33,8 @@ validation_refs:
 summary: "Covers Retrieval-Augmented Generation — the pattern of retrieving relevant documents from an external knowledge base and injecting them as context before LLM generation, enabling models to answer from up-to-date or private information."
 ---
 
+# Retrieval-Augmented Generation
+
 ## Navigation
 
 [Docs](../README.md) / Retrieval-Augmented Generation

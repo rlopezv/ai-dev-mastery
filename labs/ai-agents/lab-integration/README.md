@@ -27,6 +27,15 @@ related:
 summary: "Composes orchestrator, ReAct subagent, MCP-backed subagent, and failure handling into a single end-to-end agentic system, verifying that all architecture layers work together."
 ---
 
+# Integration — Full Agent System
+
+## Navigation
+
+[Labs](../../README.md) / [AI Agents — Labs](../README.md) / Integration — Full Agent System
+
+---
+
+
 ## Overview
 
 This is the module integration lab. It assembles all components from the preceding labs
@@ -65,7 +74,7 @@ demonstrating that error propagation does not crash the loop.
 ## Setup
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 pip install -r labs/ai-agents/requirements.txt
 ollama pull mistral
 

@@ -34,6 +34,8 @@ validation_refs:
 summary: "Covers how to extract structured data from LLM responses using schema enforcement and function calling — moving from format-spec prompts to guaranteed JSON, typed tool invocations, and composable tool patterns."
 ---
 
+# Structured Outputs
+
 ## Navigation
 
 [Docs](../README.md) / Structured Outputs

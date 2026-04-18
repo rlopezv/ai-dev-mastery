@@ -34,6 +34,14 @@ validation_refs:
 summary: "Defines the conceptual, practical, and lab-level criteria for completing the memory-context module."
 ---
 
+# Memory and Context Management — Validation
+
+## Navigation
+
+[Docs](../README.md) / [Memory and Context Management](README.md) / Memory and Context Management — Validation
+
+---
+
 ## 1. Validation Overview
 
 This module is complete when the learner can distinguish the four memory mechanisms by

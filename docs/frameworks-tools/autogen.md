@@ -34,6 +34,14 @@ validation_refs:
 summary: "Explains how AutoGen models multi-agent coordination as structured conversation between ConversableAgents and when this abstraction fits production requirements."
 ---
 
+# AutoGen
+
+## Navigation
+
+[Docs](../README.md) / [Frameworks and Tools](README.md) / AutoGen
+
+---
+
 ## 1. Intuition
 
 AutoGen makes multi-agent coordination look like a group chat. Instead of writing explicit

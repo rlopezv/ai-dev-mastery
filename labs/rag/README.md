@@ -40,6 +40,15 @@ validation_refs:
 summary: "Five labs that build the RAG pipeline incrementally — from embedding a single text to running a fully evaluated query pipeline with Precision@k and faithfulness metrics."
 ---
 
+# RAG — Labs
+
+## Navigation
+
+[Labs](../README.md) / RAG — Labs
+
+---
+
+
 ## 1. Overview
 
 These labs implement the RAG pipeline described in `docs/rag/` component by component. Each lab introduces one system layer, and the later labs compose the results of earlier ones. The sequence ends with a complete, measurable pipeline: `lab-query-pipeline` runs end-to-end retrieval and generation, and `lab-rag-evaluation` applies retrieval and generation quality metrics against a fixed evaluation set.
@@ -69,7 +78,7 @@ All five labs are required.
 
 ## 3. Execution Model
 
-All labs use the **`full` infrastructure profile**: Ollama (embedding + generation) plus ChromaDB (in-process persistent).
+All labs use the **`intermediate` infrastructure profile**: Ollama (embedding + generation) plus ChromaDB (in-process persistent).
 
 **Prerequisites:**
 

@@ -32,6 +32,14 @@ validation_refs:
 summary: "Explains how to measure the quality of a RAG pipeline at the retrieval and generation stages, covering precision, recall, faithfulness, and answer relevance metrics with a fixed evaluation dataset."
 ---
 
+# RAG Evaluation and Metrics
+
+## Navigation
+
+[Docs](../README.md) / [Retrieval-Augmented Generation](README.md) / RAG Evaluation and Metrics
+
+---
+
 ## 1. Intuition
 
 A RAG pipeline can fail in two distinct places: it can retrieve the wrong documents, or it can retrieve the right documents but generate the wrong answer. These are different failure modes with different causes and different fixes. Evaluating the pipeline as a black box — "did the user get a correct answer?" — conflates both and makes debugging impossible.

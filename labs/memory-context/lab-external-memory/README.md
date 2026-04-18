@@ -25,6 +25,15 @@ related:
 summary: "Implementation lab — writes and retrieves episodic and semantic memory entries across separate process runs using ChromaDB PersistentClient."
 ---
 
+# External Memory — Episodic and Semantic Storage with ChromaDB
+
+## Navigation
+
+[Labs](../../README.md) / [Memory and Context Management — Labs](../README.md) / External Memory — Episodic and Semantic Storage with ChromaDB
+
+---
+
+
 ## Overview
 
 This lab implements the write-retrieve-inject pattern using ChromaDB's
@@ -57,7 +66,7 @@ the cross-session effect most clearly if you restart the script after run 1.
 ## Setup
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 pip install openai chromadb tiktoken
 ```
 

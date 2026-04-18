@@ -35,6 +35,14 @@ validation_refs:
 summary: "Describes the four memory mechanisms available to LLM applications, their storage locations, lifetimes, and the selection criteria that determine which type to use."
 ---
 
+# Memory Types in LLM Applications
+
+## Navigation
+
+[Docs](../README.md) / [Memory and Context Management](README.md) / Memory Types in LLM Applications
+
+---
+
 ## 1. Intuition
 
 A human conversation relies on multiple kinds of memory simultaneously: what was just said

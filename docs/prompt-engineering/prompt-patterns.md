@@ -33,6 +33,14 @@ validation_refs:
 summary: "Describes three reusable structural templates — role prompting, output format specification, and step-by-step instruction — that encode common task requirements in a testable, repeatable form."
 ---
 
+# Prompt Patterns
+
+## Navigation
+
+[Docs](../README.md) / [Prompt Engineering](README.md) / Prompt Patterns
+
+---
+
 ## 1. Intuition
 
 Most prompt engineering problems fall into a small number of recurring shapes: you need the model to adopt a specific persona, produce a specific structure, or follow a specific process. Rather than redesigning the prompt from scratch each time, these shapes can be templated — the variable parts (the task, the input) are separated from the structural scaffolding (the role, the format, the process). That scaffolding is a prompt pattern.

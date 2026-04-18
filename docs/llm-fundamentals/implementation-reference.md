@@ -29,6 +29,14 @@ validation_refs:
 summary: "Maps the inference pipeline components to their implementation patterns and data structures, and explains the design decisions behind the lab implementations."
 ---
 
+# LLM Fundamentals — Implementation Reference
+
+## Navigation
+
+[Docs](../README.md) / [LLM Fundamentals](README.md) / LLM Fundamentals — Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 The inference pipeline described in `architecture.md` is implemented across two tools: the Ollama HTTP API, which wraps the transformer and sampling stages, and `tiktoken`, which exposes the tokenizer as a standalone library. Each pipeline component maps to a concrete interface that the labs make observable.

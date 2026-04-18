@@ -1,4 +1,27 @@
-# lab-schema-design
+---
+id: "lab-schema-design"
+title: "Schema Design"
+type: "lab-readme"
+step: "structured-outputs"
+path: "labs/structured-outputs/lab-schema-design/README.md"
+status: "draft"
+level: "intermediate"
+concepts:
+  - "schema-design"
+  - "schema-enforcement"
+prerequisites:
+  - "docs/structured-outputs/schema-design.md"
+related:
+  - "docs/structured-outputs/README.md"
+summary: "Implementation lab — compares unconstrained vs constrained Pydantic schemas on adversarial inputs, measuring enum violations and hallucinated optional fields to demonstrate the impact of schema constraints."
+---
+
+# Schema Design
+## Navigation
+
+[Labs](../../README.md) / [Structured Outputs — Labs](../README.md) / Schema Design
+
+---
 
 **Module:** `structured-outputs`
 **Type:** implementation

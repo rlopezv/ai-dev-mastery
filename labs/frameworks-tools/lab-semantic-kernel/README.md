@@ -26,6 +26,15 @@ related:
 summary: "Implements a Semantic Kernel application with native and semantic plugins, demonstrating direct function invocation, planner-based function selection, and explicit chained invocation."
 ---
 
+# Semantic Kernel — Kernel, Plugins, and Planner
+
+## Navigation
+
+[Labs](../../README.md) / [Frameworks and Tools — Labs](../README.md) / Semantic Kernel — Kernel, Plugins, and Planner
+
+---
+
+
 ## Overview
 
 This lab builds a Semantic Kernel application in three parts:

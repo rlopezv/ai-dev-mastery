@@ -35,6 +35,14 @@ validation_refs:
 summary: "Explains how to build and manage a stateful conversation history over a stateless API, including accumulation strategy, token counting, and the point at which truncation becomes necessary."
 ---
 
+# Conversation History
+
+## Navigation
+
+[Docs](../README.md) / [Memory and Context Management](README.md) / Conversation History
+
+---
+
 ## 1. Intuition
 
 A chat completion API call is like a letter: you send the full conversation every time, and

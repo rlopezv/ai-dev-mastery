@@ -37,6 +37,15 @@ validation_refs:
 summary: "Five implementation labs that exercise API interaction with OpenAI, Ollama, and Anthropic — covering request/response mechanics, streaming, and the patterns that make LLM API clients production-grade."
 ---
 
+# LLM APIs — Labs
+
+## Navigation
+
+[Labs](../README.md) / LLM APIs — Labs
+
+---
+
+
 ## 1. Overview
 
 These labs implement the API interaction patterns described in `docs/llm-apis/`. Each lab targets one provider or one cross-cutting pattern. Labs 1–4 are required; lab 5 is optional.
@@ -64,7 +73,7 @@ The progression moves from raw SDK calls (labs 1–3) to transport-level mechani
 
 ## 3. Execution Model
 
-All labs use the **`light` infrastructure profile**. Ollama runs locally. Cloud provider labs require API keys in the environment.
+All labs use the **`foundational` infrastructure profile**. Ollama runs locally. Cloud provider labs require API keys in the environment.
 
 **Prerequisites:**
 

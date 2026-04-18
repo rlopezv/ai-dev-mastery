@@ -25,6 +25,14 @@ validation_refs:
 summary: "Explains what the context window is, how prompt and completion tokens consume it, and the engineering consequences of operating near or at the limit."
 ---
 
+# Context Window
+
+## Navigation
+
+[Docs](../README.md) / [LLM Fundamentals](README.md) / Context Window
+
+---
+
 ## 1. Intuition
 
 The context window is the model's working memory. Every token the model can see during a single generation — system instructions, conversation history, retrieved documents, and the response being built — must fit within a fixed token limit. Nothing outside that limit exists for the model in that call.

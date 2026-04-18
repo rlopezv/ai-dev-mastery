@@ -32,6 +32,8 @@ validation_refs:
 summary: "Introduces the Java AI ecosystem — Spring AI and LangChain4j — and the patterns Java enterprise engineers use to build LLM-powered applications."
 ---
 
+# AI Development in Java
+
 ## Navigation
 
 [Docs](../README.md) / AI Development in Java

@@ -33,6 +33,14 @@ validation_refs:
 summary: "Documents the implementation patterns for Java AI applications: how architecture components map to code constructs, why each pattern is the correct abstraction, and the design decisions behind the Java AI idioms."
 ---
 
+# AI Development in Java — Implementation Reference
+
+## Navigation
+
+[Docs](../README.md) / [AI Development in Java](README.md) / AI Development in Java — Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 This document covers the design reasoning behind Java AI implementation patterns. It does

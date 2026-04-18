@@ -37,9 +37,11 @@ summary: "<One-sentence explanation of the topic>"
 
 ---
 
+# <Title>
+
 ## Navigation
 
-[Docs](../../README.md) / [<Module Name>](README.md) / <Title>
+[Docs](../README.md) / [<Module Name>](README.md) / <Title>
 
 ---
 

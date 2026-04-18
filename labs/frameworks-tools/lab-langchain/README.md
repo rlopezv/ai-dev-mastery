@@ -26,6 +26,15 @@ related:
 summary: "Implements a three-part LangChain application demonstrating LCEL retrieval chain composition, session memory with RunnableWithMessageHistory, and a tool-calling agent with AgentExecutor."
 ---
 
+# LangChain — LCEL Retrieval Chain, Session Memory, and Tool Agent
+
+## Navigation
+
+[Labs](../../README.md) / [Frameworks and Tools — Labs](../README.md) / LangChain — LCEL Retrieval Chain, Session Memory, and Tool Agent
+
+---
+
+
 ## Overview
 
 This lab builds a LangChain application in three parts, each demonstrating a distinct
@@ -64,8 +73,8 @@ LangGraph, and framework-level RAG evaluation.
 ## Setup
 
 ```bash
-# Start Ollama (light profile)
-docker-compose --profile light up -d
+# Start Ollama (foundational profile)
+docker-compose --profile foundational up -d
 
 # Pull the model if not already present
 ollama pull mistral

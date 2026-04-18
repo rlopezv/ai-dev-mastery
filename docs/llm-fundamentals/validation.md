@@ -26,6 +26,14 @@ validation_refs:
 summary: "Defines the conceptual, practical, and lab completion criteria for the llm-fundamentals module."
 ---
 
+# LLM Fundamentals — Validation
+
+## Navigation
+
+[Docs](../README.md) / [LLM Fundamentals](README.md) / LLM Fundamentals — Validation
+
+---
+
 ## 1. Validation Overview
 
 After completing this module, you should be able to reason about LLM behavior at the component level — not just call the API, but explain why it behaves as it does under specific conditions. The target mastery level is **architectural**: given a scenario, identify which pipeline component is involved, predict the consequence, and name the failure mode.

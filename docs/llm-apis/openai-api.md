@@ -33,6 +33,14 @@ validation_refs:
 summary: "Explains the OpenAI Chat Completions API contract — message roles, request structure, response parsing, and token usage — which is the de facto standard interface for LLM interaction."
 ---
 
+# OpenAI API
+
+## Navigation
+
+[Docs](../README.md) / [LLM APIs](README.md) / OpenAI API
+
+---
+
 ## 1. Intuition
 
 Calling an LLM is not a function call with a return value — it is an HTTP request that sends a conversation and receives a continuation. The OpenAI Chat Completions API formalizes this as an ordered list of messages, each labeled with a role, sent to a model endpoint that returns the next assistant message. This shape — messages in, message out — is the interface contract that most of the ecosystem has converged on.

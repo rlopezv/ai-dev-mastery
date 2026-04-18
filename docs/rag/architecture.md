@@ -35,6 +35,14 @@ validation_refs:
 summary: "Describes the components and data flows of a RAG system, covering the offline ingestion pipeline, online query pipeline, and evaluation harness."
 ---
 
+# RAG — Architecture
+
+## Navigation
+
+[Docs](../README.md) / [Retrieval-Augmented Generation](README.md) / RAG — Architecture
+
+---
+
 ## 1. System Overview
 
 A RAG system converts a static corpus of source documents into a queryable knowledge base that augments LLM generation. It solves the problem of LLMs being unable to answer questions about information outside their training data — private corpora, recent events, or domain-specific knowledge.

@@ -38,6 +38,14 @@ validation_refs:
 summary: "Describes the system-level structure of an LLM API client — providers, client layer, abstraction, and conversation state — and how these components interact across batch and streaming call paths."
 ---
 
+# LLM APIs — Architecture
+
+## Navigation
+
+[Docs](../README.md) / [LLM APIs](README.md) / LLM APIs — Architecture
+
+---
+
 ## 1. System Overview
 
 The system described in this step is an application-layer LLM client: the set of components an application needs to make calls to LLM providers, manage conversation state, and handle failures. The client sits between application logic and provider HTTP endpoints. It does not include model internals, infrastructure management, or prompt design — those are addressed in other modules.

@@ -55,9 +55,11 @@ summary: "Explains how concepts and architecture translate into implementation p
 
 ---
 
+# Implementation Reference
+
 ## Navigation
 
-[Docs](../../README.md) / [<Module Name>](README.md) / Implementation Reference
+[Docs](../README.md) / [<Module Name>](README.md) / Implementation Reference
 
 ---
 

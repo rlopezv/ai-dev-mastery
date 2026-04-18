@@ -34,6 +34,14 @@ validation_refs:
 summary: "Defines the conceptual, practical, lab, and integration validation criteria that must be satisfied for the RAG module to be considered complete."
 ---
 
+# RAG — Validation
+
+## Navigation
+
+[Docs](../README.md) / [Retrieval-Augmented Generation](README.md) / RAG — Validation
+
+---
+
 ## 1. Validation Overview
 
 This document defines when the RAG module is complete. A learner has completed this module when they can explain the two-phase RAG pipeline, implement each component, run all five required labs, and reason about quality trade-offs at the retrieval and generation stages.

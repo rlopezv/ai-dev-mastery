@@ -1,4 +1,28 @@
-# lab-structured-outputs
+---
+id: "lab-structured-outputs"
+title: "Structured Outputs"
+type: "lab-readme"
+step: "structured-outputs"
+path: "labs/structured-outputs/lab-structured-outputs/README.md"
+status: "draft"
+level: "intermediate"
+concepts:
+  - "structured-outputs"
+  - "json-mode"
+  - "schema-enforcement"
+prerequisites:
+  - "docs/structured-outputs/structured-outputs.md"
+related:
+  - "docs/structured-outputs/README.md"
+summary: "Implementation lab — compares prompt-only JSON, JSON mode, and Pydantic schema enforcement on adversarial inputs, demonstrating that only schema enforcement guarantees typed objects with zero parse failures."
+---
+
+# Structured Outputs
+## Navigation
+
+[Labs](../../README.md) / [Structured Outputs — Labs](../README.md) / Structured Outputs
+
+---
 
 **Module:** `structured-outputs`
 **Type:** implementation

@@ -26,6 +26,14 @@ validation_refs:
 summary: "Explains how temperature, top-k, and top-p control the probability distribution from which output tokens are sampled, and the engineering trade-offs of each setting."
 ---
 
+# Inference Parameters
+
+## Navigation
+
+[Docs](../README.md) / [LLM Fundamentals](README.md) / Inference Parameters
+
+---
+
 ## 1. Intuition
 
 The transformer's output layer produces a probability distribution over every token in the vocabulary — tens of thousands of candidates, each with an assigned probability. The model does not decide what to say; it computes probabilities, and a sampling algorithm picks the next token from that distribution. Inference parameters are controls on that sampling step, not on the model's internal reasoning.

@@ -34,6 +34,8 @@ validation_refs:
 summary: "Covers how to structure and write prompts that produce reliable, predictable output — from the anatomy of a prompt to few-shot examples, chain-of-thought reasoning, reusable patterns, and common failure modes."
 ---
 
+# Prompt Engineering
+
 ## Navigation
 
 [Docs](../README.md) / Prompt Engineering

@@ -33,6 +33,14 @@ validation_refs:
 summary: "Describes the strategies for keeping conversation history within the token budget — sliding window truncation, summarization-based compression, and hybrid approaches — and the trade-offs each introduces."
 ---
 
+# Context Management
+
+## Navigation
+
+[Docs](../README.md) / [Memory and Context Management](README.md) / Context Management
+
+---
+
 ## 1. Intuition
 
 A conversation accumulates turns. The context window does not grow. At some point, something

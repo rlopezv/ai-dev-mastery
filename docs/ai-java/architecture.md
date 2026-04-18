@@ -33,6 +33,14 @@ validation_refs:
 summary: "Describes how Java AI components compose into a system: Spring AI's advisor pipeline and LangChain4j's AI service proxy, the data flow through each, and the points where they connect to provider APIs and infrastructure."
 ---
 
+# AI Development in Java — Architecture
+
+## Navigation
+
+[Docs](../README.md) / [AI Development in Java](README.md) / AI Development in Java — Architecture
+
+---
+
 ## 1. System Overview
 
 A Java AI application built with Spring AI or LangChain4j is a standard Spring Boot

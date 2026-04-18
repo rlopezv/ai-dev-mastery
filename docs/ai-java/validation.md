@@ -33,6 +33,14 @@ validation_refs:
 summary: "Defines the completion criteria and self-assessment checklist for the ai-java module."
 ---
 
+# AI Development in Java — Validation
+
+## Navigation
+
+[Docs](../README.md) / [AI Development in Java](README.md) / AI Development in Java — Validation
+
+---
+
 ## 1. Validation Overview
 
 This module covers the Java AI ecosystem as a concept-only study. There are no executable

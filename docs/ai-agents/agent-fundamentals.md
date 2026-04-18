@@ -32,6 +32,14 @@ validation_refs:
 summary: "Defines the agent model, distinguishes agents from single-turn LLM calls, and explains why the loop structure is the minimal unit of agentic behavior."
 ---
 
+# Agent Fundamentals
+
+## Navigation
+
+[Docs](../README.md) / [AI Agents](README.md) / Agent Fundamentals
+
+---
+
 ## 1. Intuition
 
 A single LLM call is a function: input in, output out, no memory of what happened before

@@ -38,6 +38,14 @@ validation_refs:
 summary: "Maps architecture components to implementation patterns: tool registry construction, action dispatcher design, message accumulator lifecycle, orchestrator delegation, and MCP client initialization."
 ---
 
+# AI Agents — Implementation Reference
+
+## Navigation
+
+[Docs](../README.md) / [AI Agents](README.md) / AI Agents — Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 > **Note:** This document contains orientative code — structures, interfaces, signatures.

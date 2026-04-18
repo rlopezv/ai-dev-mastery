@@ -38,9 +38,11 @@ summary: "Describes how components interact within this step."
 
 ---
 
+# Architecture
+
 ## Navigation
 
-[Docs](../../README.md) / [<Module Name>](README.md) / Architecture
+[Docs](../README.md) / [<Module Name>](README.md) / Architecture
 
 ---
 

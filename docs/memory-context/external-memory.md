@@ -34,6 +34,14 @@ validation_refs:
 summary: "Explains how to persist conversation episodes and entity facts in a vector store for cross-session recall, covering the write, retrieval, and injection pattern that extends in-context memory beyond a single session."
 ---
 
+# External Memory
+
+## Navigation
+
+[Docs](../README.md) / [Memory and Context Management](README.md) / External Memory
+
+---
+
 ## 1. Intuition
 
 In-context memory resets when the session ends. External memory persists across sessions

@@ -119,6 +119,17 @@ FINAL SCORE = weighted sum (0–10)
 * Each corpus file covers one concept, has no frontmatter, and is written in English
 * `shared/config.py` exposes a `load_corpus()` function following the standard signature
 
+### LS-7 Frontmatter is present and valid
+
+* **Severity:** Critical
+* Every `labs/<module>/README.md` and `labs/<module>/lab-<name>/README.md` includes frontmatter compliant with `meta/standards/templates/lab-entry-readme-scaffold.md` and `meta/standards/templates/lab-individual-readme-scaffold.md` respectively
+* `corpus/` files and utility READMEs (e.g. `shared/`) are exempt
+
+### LS-8 H1 heading is present after frontmatter
+
+* **Severity:** Critical
+* The first non-empty line after the closing `---` of frontmatter is `# <Title>`, matching the `title` field in frontmatter
+
 ---
 
 ## 6. Category 2 — Execution Validity

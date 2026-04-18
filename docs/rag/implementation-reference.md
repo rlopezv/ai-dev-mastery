@@ -38,6 +38,14 @@ validation_refs:
 summary: "Translates RAG architecture components into concrete implementation patterns for ingestion, retrieval, context assembly, and evaluation, with data structures and execution flows for each lab."
 ---
 
+# RAG — Implementation Reference
+
+## Navigation
+
+[Docs](../README.md) / [Retrieval-Augmented Generation](README.md) / RAG — Implementation Reference
+
+---
+
 ## 1. Implementation Overview
 
 The RAG module implements a two-phase pipeline in Python using Ollama for embeddings and generation and ChromaDB for vector storage. All labs run fully locally — no cloud API keys required for core functionality.

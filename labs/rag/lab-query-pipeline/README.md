@@ -34,6 +34,15 @@ validation_refs:
 summary: "Assembles the full RAG query pipeline — embed, retrieve, deduplicate, budget-guard, assemble context, generate — and makes token budget management and out-of-scope handling observable."
 ---
 
+# RAG — Lab: Query Pipeline
+
+## Navigation
+
+[Labs](../../README.md) / [RAG — Labs](../README.md) / RAG — Lab: Query Pipeline
+
+---
+
+
 ## What this lab demonstrates
 
 Individual components — embedding, retrieval, context assembly — work in isolation in the previous labs. Here they are composed into a single `rag_query()` function that runs end-to-end: embed the query, retrieve candidates, deduplicate, select within the token budget, format the context block, and generate a grounded response.

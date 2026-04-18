@@ -32,6 +32,14 @@ validation_refs:
 summary: "Explains the Model Context Protocol as an open standard for connecting AI applications to external tools, how MCP servers expose tools to agents, and why MCP is preferable to ad-hoc tool definitions at scale."
 ---
 
+# Model Context Protocol
+
+## Navigation
+
+[Docs](../README.md) / [AI Agents](README.md) / Model Context Protocol
+
+---
+
 ## 1. Intuition
 
 Without MCP, every agent that needs access to a database, an API, or a file system must

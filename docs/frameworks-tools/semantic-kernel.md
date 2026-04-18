@@ -36,6 +36,14 @@ validation_refs:
 summary: "Explains how Semantic Kernel's kernel, plugin, and planner model integrates AI capabilities into enterprise applications and when this architecture is the right choice."
 ---
 
+# Semantic Kernel
+
+## Navigation
+
+[Docs](../README.md) / [Frameworks and Tools](README.md) / Semantic Kernel
+
+---
+
 ## 1. Intuition
 
 Semantic Kernel (SK) organizes AI capabilities as a service registry. The **kernel** is a

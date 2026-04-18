@@ -33,6 +33,14 @@ validation_refs:
 summary: "Defines conceptual, practical, lab, and integration validation criteria for the structured-outputs step."
 ---
 
+# Structured Outputs — Validation
+
+## Navigation
+
+[Docs](../README.md) / [Structured Outputs](README.md) / Structured Outputs — Validation
+
+---
+
 ## 1. Validation Overview
 
 After completing this step, the learner should be able to:

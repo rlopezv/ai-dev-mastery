@@ -31,6 +31,14 @@ validation_refs:
 summary: "Explains the single-agent loop structure: how a single LLM drives a perception-decide-act cycle with tool dispatch until a stop condition terminates the loop."
 ---
 
+# The Single-Agent Loop
+
+## Navigation
+
+[Docs](../README.md) / [AI Agents](README.md) / The Single-Agent Loop
+
+---
+
 ## 1. Intuition
 
 The single-agent loop is the simplest possible agent: one LLM, one set of tools, and a loop

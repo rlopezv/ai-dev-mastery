@@ -25,6 +25,14 @@ validation_refs:
 summary: "Explains how the transformer architecture converts a token sequence into a probability distribution over the next token through attention and feed-forward layers."
 ---
 
+# LLM Architecture
+
+## Navigation
+
+[Docs](../README.md) / [LLM Fundamentals](README.md) / LLM Architecture
+
+---
+
 ## 1. Intuition
 
 An LLM is a function that takes a sequence of tokens and returns a probability distribution over what token comes next. It has no understanding of truth, no memory between calls, and no access to external knowledge — it is a very large statistical pattern matcher trained on text.

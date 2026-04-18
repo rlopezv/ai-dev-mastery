@@ -1,4 +1,28 @@
-# lab-openai-api
+---
+id: "lab-openai-api"
+title: "OpenAI API"
+type: "lab-readme"
+step: "llm-apis"
+path: "labs/llm-apis/lab-openai-api/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "chat-completions"
+  - "message-roles"
+  - "finish-reason"
+prerequisites:
+  - "docs/llm-apis/openai-api.md"
+related:
+  - "docs/llm-apis/README.md"
+summary: "Implementation lab — demonstrates the Chat Completions request structure, usage metadata, finish_reason detection, and multi-turn conversation via message list accumulation."
+---
+
+# OpenAI API
+## Navigation
+
+[Labs](../../README.md) / [LLM APIs — Labs](../README.md) / OpenAI API
+
+---
 
 **Module:** `llm-apis`
 **Type:** implementation

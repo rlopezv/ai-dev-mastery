@@ -32,6 +32,14 @@ validation_refs:
 summary: "Explains how tool calls and results accumulate in the message history, how parallel and sequential tool patterns extend the basic loop, and how the loop terminates cleanly."
 ---
 
+# Tool-Use Loops
+
+## Navigation
+
+[Docs](../README.md) / [AI Agents](README.md) / Tool-Use Loops
+
+---
+
 ## 1. Intuition
 
 A tool-use loop is a conversation in which one of the participants is a tool. The message

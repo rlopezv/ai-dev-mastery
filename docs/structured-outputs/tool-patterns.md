@@ -32,6 +32,14 @@ validation_refs:
 summary: "Describes four recurring compositions of tool calls — single tool, parallel tools, sequential chain, and router — and the application logic required to implement each."
 ---
 
+# Tool Patterns
+
+## Navigation
+
+[Docs](../README.md) / [Structured Outputs](README.md) / Tool Patterns
+
+---
+
 ## 1. Intuition
 
 A single tool call answers one question. Real applications need more: the model may need two independent data sources at once, or the output of one call may determine the next. These compositions follow four patterns. Knowing the pattern before building the application logic determines how many API round-trips are needed and how the result messages are structured.

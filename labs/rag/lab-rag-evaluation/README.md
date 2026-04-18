@@ -33,6 +33,15 @@ validation_refs:
 summary: "Measures RAG pipeline quality using Precision@k, Recall@k, and LLM-as-judge faithfulness on a fixed 20-question evaluation set, and compares results across top_k=5 and top_k=10."
 ---
 
+# RAG — Lab: Evaluation and Metrics
+
+## Navigation
+
+[Labs](../../README.md) / [RAG — Labs](../README.md) / RAG — Lab: Evaluation and Metrics
+
+---
+
+
 ## What this lab demonstrates
 
 A pipeline that feels like it works may still be broken in ways that only measurement reveals. This lab applies the evaluation framework described in `docs/rag/rag-evaluation-and-metrics.md` to the full pipeline from `lab-query-pipeline`.

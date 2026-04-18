@@ -1,4 +1,27 @@
-# lab-context-window
+---
+id: "lab-context-window"
+title: "Context Window"
+type: "lab-readme"
+step: "llm-fundamentals"
+path: "labs/llm-fundamentals/lab-context-window/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "context-window"
+  - "token-budget"
+prerequisites:
+  - "docs/llm-fundamentals/context-window.md"
+related:
+  - "docs/llm-fundamentals/README.md"
+summary: "Observation lab — measures token budget consumption per prompt component and validates tiktoken estimates against Ollama's reported prompt_eval_count."
+---
+
+# Context Window
+## Navigation
+
+[Labs](../../README.md) / [LLM Fundamentals — Labs](../README.md) / Context Window
+
+---
 
 **Module:** llm-fundamentals  
 **Type:** observation  

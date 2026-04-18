@@ -37,6 +37,14 @@ validation_refs:
 summary: "Explains how LlamaIndex structures retrieval pipelines through indices, nodes, and query engines and when to use it over general-purpose orchestration frameworks."
 ---
 
+# LlamaIndex
+
+## Navigation
+
+[Docs](../README.md) / [Frameworks and Tools](README.md) / LlamaIndex
+
+---
+
 ## 1. Intuition
 
 LlamaIndex is a data framework for LLMs. Where LangChain focuses on composing arbitrary

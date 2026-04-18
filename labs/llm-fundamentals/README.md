@@ -27,6 +27,15 @@ validation_refs:
 summary: "Four observation labs that make each stage of the LLM inference pipeline directly measurable using the Ollama API and tiktoken."
 ---
 
+# LLM Fundamentals — Labs
+
+## Navigation
+
+[Labs](../README.md) / LLM Fundamentals — Labs
+
+---
+
+
 ## 1. Overview
 
 These labs implement four observation exercises, one per pipeline stage. Each lab isolates a single component of the LLM inference pipeline, sends controlled inputs, and prints measurable outputs that confirm the behavior described in the corresponding topic document.
@@ -53,7 +62,7 @@ No application is built. The purpose is direct verification: read a concept, run
 
 ## 3. Execution Model
 
-All labs use the **`light` infrastructure profile**: Ollama running locally. No Docker, no vector database, no external API keys.
+All labs use the **`foundational` infrastructure profile**: Ollama running locally. No Docker, no vector database, no external API keys.
 
 **Prerequisites:**
 

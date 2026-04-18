@@ -33,6 +33,14 @@ validation_refs:
 summary: "Explains the three retrieval paradigms — dense, sparse, and hybrid — and how reranking improves precision by applying a second-pass relevance model to the top-k candidates."
 ---
 
+# Retrieval Strategies
+
+## Navigation
+
+[Docs](../README.md) / [Retrieval-Augmented Generation](README.md) / Retrieval Strategies
+
+---
+
 ## 1. Intuition
 
 A librarian asked "find me something about database transactions" can search two ways: by subject index (look up "transactions, databases") or by flipping through pages looking for familiar concepts. The subject index is fast and precise for known topics — it misses documents that discuss transactions without using the exact term. Browsing is slower but catches synonyms and related ideas.

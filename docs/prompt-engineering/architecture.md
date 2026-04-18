@@ -38,6 +38,14 @@ validation_refs:
 summary: "Describes the system-level architecture of a prompt engineering layer — the components that construct, execute, parse, and test prompts — and how they integrate with the API client layer from llm-apis."
 ---
 
+# Prompt Engineering — Architecture
+
+## Navigation
+
+[Docs](../README.md) / [Prompt Engineering](README.md) / Prompt Engineering — Architecture
+
+---
+
 ## 1. System Overview
 
 The prompt engineering layer sits between application logic and the LLM API client established in `llm-apis`. Its job is to translate a task requirement into a well-formed API request and translate the model's response back into structured application data. The layer has four components: prompt builder, API client (from `llm-apis`), response parser, and prompt test harness.

@@ -26,6 +26,8 @@ validation_refs:
 summary: "Introduces the mechanical foundations of large language models — how they process text, generate output, and can be adapted — establishing the conceptual basis for every subsequent module."
 ---
 
+# LLM Fundamentals
+
 ## Navigation
 
 [Docs](../README.md) / LLM Fundamentals

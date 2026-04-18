@@ -39,6 +39,15 @@ validation_refs:
 summary: "Guides the implementation of memory-aware LLM applications across five labs covering in-context observation, history management, context management strategies, external memory, and full system integration."
 ---
 
+# Memory and Context Management — Labs
+
+## Navigation
+
+[Labs](../README.md) / Memory and Context Management — Labs
+
+---
+
+
 ## 1. Overview
 
 These labs implement the components of a memory-aware LLM application: from a token-bounded
@@ -90,10 +99,10 @@ is started — the labs interact with Ollama directly via the OpenAI-compatible 
 to a local directory (`labs/memory-context/.chroma/`) without requiring a Docker service.
 This enables cross-session persistence with no additional infrastructure beyond Ollama.
 
-**Start Ollama (light profile):**
+**Start Ollama (foundational profile):**
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 ```
 
 **Install Python dependencies:**

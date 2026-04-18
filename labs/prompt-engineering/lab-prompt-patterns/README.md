@@ -1,4 +1,28 @@
-# lab-prompt-patterns
+---
+id: "lab-prompt-patterns"
+title: "Prompt Patterns"
+type: "lab-readme"
+step: "prompt-engineering"
+path: "labs/prompt-engineering/lab-prompt-patterns/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "prompt-patterns"
+  - "role-prompting"
+  - "output-format-specification"
+prerequisites:
+  - "docs/prompt-engineering/prompt-patterns.md"
+related:
+  - "docs/prompt-engineering/README.md"
+summary: "Implementation lab — benchmarks role prompting, output format specification, and step-by-step instruction patterns with measurable accuracy and compliance checks."
+---
+
+# Prompt Patterns
+## Navigation
+
+[Labs](../../README.md) / [Prompt Engineering — Labs](../README.md) / Prompt Patterns
+
+---
 
 **Module:** `prompt-engineering`
 **Type:** implementation

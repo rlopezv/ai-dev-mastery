@@ -25,6 +25,15 @@ related:
 summary: "Implements a two-agent AutoGen task completion loop and a three-agent GroupChat demonstrating conversation-based coordination, tool execution via UserProxyAgent, and termination detection."
 ---
 
+# AutoGen — Two-Agent Conversation and GroupChat
+
+## Navigation
+
+[Labs](../../README.md) / [Frameworks and Tools — Labs](../README.md) / AutoGen — Two-Agent Conversation and GroupChat
+
+---
+
+
 ## Overview
 
 This lab implements two AutoGen conversation patterns:

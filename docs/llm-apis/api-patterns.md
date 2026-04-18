@@ -35,6 +35,14 @@ validation_refs:
 summary: "Describes the recurring implementation patterns for LLM API clients — retry with exponential backoff, conversation history accumulation, and provider abstraction — that make API-level code production-grade."
 ---
 
+# API Patterns
+
+## Navigation
+
+[Docs](../README.md) / [LLM APIs](README.md) / API Patterns
+
+---
+
 ## 1. Intuition
 
 A single working API call is not application code — it is a script. Application code must handle failures, manage conversation state, and remain portable across providers. Three patterns cover most of what separates a one-off API call from a production-grade LLM client: retry with backoff for transient failures, message accumulation for multi-turn conversations, and a thin provider abstraction for portability.

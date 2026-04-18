@@ -23,6 +23,15 @@ related:
 summary: "Implementation lab — builds a 50-turn conversation loop with explicit token tracking and budget ceiling enforcement using HistoryManager."
 ---
 
+# Conversation History — Token-Bounded Multi-Turn Loop
+
+## Navigation
+
+[Labs](../../README.md) / [Memory and Context Management — Labs](../README.md) / Conversation History — Token-Bounded Multi-Turn Loop
+
+---
+
+
 ## Overview
 
 This lab implements a token-bounded multi-turn chat loop using the `HistoryManager`
@@ -50,7 +59,7 @@ by dropping the oldest turn pair whenever the count exceeds the configured limit
 ## Setup
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 pip install openai tiktoken
 ```
 

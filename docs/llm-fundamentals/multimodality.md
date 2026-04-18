@@ -23,6 +23,14 @@ validation_refs:
 summary: "Explains how multimodal models encode non-text inputs into the token embedding space and the engineering consequences for context budgeting, API usage, and system design."
 ---
 
+# Multimodality
+
+## Navigation
+
+[Docs](../README.md) / [LLM Fundamentals](README.md) / Multimodality
+
+---
+
 ## 1. Intuition
 
 A transformer processes sequences of vectors. Text is converted to vectors through tokenization and embedding. Multimodality extends this by converting other input types — images, audio, video — into vectors in the same embedding space before the transformer sees them.

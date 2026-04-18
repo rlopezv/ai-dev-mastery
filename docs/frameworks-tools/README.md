@@ -35,6 +35,8 @@ validation_refs:
 summary: "Introduces the major Python AI frameworks — LangChain, LlamaIndex, AutoGen, and Semantic Kernel — and explains when and why to use each one."
 ---
 
+# Frameworks and Tools
+
 ## Navigation
 
 [Docs](../README.md) / Frameworks and Tools

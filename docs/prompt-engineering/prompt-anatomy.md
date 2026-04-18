@@ -34,6 +34,14 @@ validation_refs:
 summary: "Describes the structural components of a prompt — instruction, context, examples, and output format — and explains what each communicates to the model and how their arrangement affects output."
 ---
 
+# Prompt Anatomy
+
+## Navigation
+
+[Docs](../README.md) / [Prompt Engineering](README.md) / Prompt Anatomy
+
+---
+
 ## 1. Intuition
 
 A prompt is not a single piece of text — it is a composition of distinct functional components. Changing one component while holding others constant produces predictably different output. Understanding which component does what is the prerequisite to writing prompts that work reliably rather than by trial and error.

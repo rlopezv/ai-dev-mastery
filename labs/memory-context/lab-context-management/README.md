@@ -24,6 +24,15 @@ related:
 summary: "Implementation lab — runs the same 25-turn conversation under three context management strategies and measures which strategy best preserves recall of an early-context fact."
 ---
 
+# Context Management — Truncation, Sliding Window, Summarization
+
+## Navigation
+
+[Labs](../../README.md) / [Memory and Context Management — Labs](../README.md) / Context Management — Truncation, Sliding Window, Summarization
+
+---
+
+
 ## Overview
 
 This lab runs three identical 25-turn conversations — one per context management
@@ -57,7 +66,7 @@ when asked about it at turn 25.
 ## Setup
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 pip install openai tiktoken
 ```
 

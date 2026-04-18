@@ -23,6 +23,15 @@ related:
 summary: "Implements the message accumulation protocol for sequential and parallel tool calls, making the role sequence, tool_call_id matching, and per-iteration token count directly observable."
 ---
 
+# Tool-Use Loops
+
+## Navigation
+
+[Labs](../../README.md) / [AI Agents — Labs](../README.md) / Tool-Use Loops
+
+---
+
+
 ## Overview
 
 This lab implements an instrumented agent loop that traces the four-rule message
@@ -57,7 +66,7 @@ Out of scope: multi-agent coordination, agent patterns, MCP.
 ## Setup
 
 ```bash
-docker-compose --profile light up -d
+docker-compose --profile foundational up -d
 pip install -r labs/ai-agents/requirements.txt
 ollama pull mistral
 ```

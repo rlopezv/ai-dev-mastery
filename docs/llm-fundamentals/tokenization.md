@@ -24,6 +24,14 @@ validation_refs:
 summary: "Explains how raw text is converted into token IDs, why token boundaries differ from word boundaries, and the engineering consequences for API cost, context budgeting, and cross-language behavior."
 ---
 
+# Tokenization
+
+## Navigation
+
+[Docs](../README.md) / [LLM Fundamentals](README.md) / Tokenization
+
+---
+
 ## 1. Intuition
 
 A model does not read text. It reads integers. Tokenization is the translation layer between human-readable text and the integer sequences the model actually processes. The model has no concept of words, sentences, or characters — it operates exclusively on token IDs, each of which maps to a vector in the embedding space described in the previous topic.

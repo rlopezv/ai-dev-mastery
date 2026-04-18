@@ -34,6 +34,14 @@ validation_refs:
 summary: "Explains how retrieved chunks are selected, deduplicated, ordered, and assembled into a context block that fits within the model's token budget, and how ordering and framing affect generation quality."
 ---
 
+# Context Assembly
+
+## Navigation
+
+[Docs](../README.md) / [Retrieval-Augmented Generation](README.md) / Context Assembly
+
+---
+
 ## 1. Intuition
 
 Retrieval hands back a ranked list of text chunks. Generation expects a single prompt. Between them lies context assembly: the step that decides which chunks make the cut, in what order they appear, and how they are framed within the prompt.

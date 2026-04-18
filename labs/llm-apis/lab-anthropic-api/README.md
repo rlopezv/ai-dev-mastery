@@ -1,4 +1,28 @@
-# lab-anthropic-api
+---
+id: "lab-anthropic-api"
+title: "Anthropic API"
+type: "lab-readme"
+step: "llm-apis"
+path: "labs/llm-apis/lab-anthropic-api/README.md"
+status: "draft"
+level: "foundational"
+concepts:
+  - "anthropic-messages-api"
+  - "message-roles"
+  - "finish-reason"
+prerequisites:
+  - "docs/llm-apis/anthropic-api.md"
+related:
+  - "docs/llm-apis/README.md"
+summary: "Implementation lab — demonstrates Anthropic Messages API schema differences from OpenAI: system as top-level field, content[0].text response path, stop_reason values, and strict message alternation."
+---
+
+# Anthropic API
+## Navigation
+
+[Labs](../../README.md) / [LLM APIs — Labs](../README.md) / Anthropic API
+
+---
 
 **Module:** `llm-apis`
 **Type:** implementation

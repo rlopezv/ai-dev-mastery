@@ -33,6 +33,14 @@ validation_refs:
 summary: "Explains the tool use mechanism — declaring tools, the model-generated tool call, application execution, and result return — as the foundation of model-driven function invocation."
 ---
 
+# Tool Usage
+
+## Navigation
+
+[Docs](../README.md) / [Structured Outputs](README.md) / Tool Usage
+
+---
+
 ## 1. Intuition
 
 A standard LLM call is a one-shot exchange: you send a message, the model generates text. Tool use changes the shape of the exchange: instead of generating text, the model can generate a function call — a structured object specifying which function to invoke and with what arguments. The application executes that function and sends the result back to the model, which then produces the final response. The model does not execute code; it decides what to call. The application executes and returns.
