@@ -133,9 +133,9 @@ The Anthropic factory requires `system` as a separate argument because it is a t
 
 | Tool | Role | Infrastructure profile |
 |------|------|------------------------|
-| `openai` Python SDK | Client for OpenAI and Ollama (compatible) | `light` |
-| `anthropic` Python SDK | Client for Anthropic Messages API | `light` |
-| Ollama | Local LLM runtime for offline development | `light` |
+| `openai` Python SDK | Client for OpenAI and Ollama (compatible) | `foundational` |
+| `anthropic` Python SDK | Client for Anthropic Messages API | `foundational` |
+| Ollama | Local LLM runtime for offline development | `foundational` |
 | OpenAI API | Cloud provider (requires `OPENAI_API_KEY`) | none (external) |
 | Anthropic API | Cloud provider (requires `ANTHROPIC_API_KEY`) | none (external) |
 

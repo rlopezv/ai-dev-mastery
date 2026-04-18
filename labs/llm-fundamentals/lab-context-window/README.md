@@ -17,41 +17,53 @@ summary: "Observation lab — measures token budget consumption per prompt compo
 ---
 
 # Context Window
+
 ## Navigation
 
 [Labs](../../README.md) / [LLM Fundamentals — Labs](../README.md) / Context Window
 
 ---
 
-**Module:** llm-fundamentals  
-**Type:** observation  
-**Doc:** `docs/llm-fundamentals/context-window.md`
-
----
-
-## What this lab demonstrates
+## Overview
 
 This lab measures token budget consumption before and after sending requests to Ollama. It shows that context window usage is predictable from the tokenizer and that `prompt_eval_count` in the API response confirms the pre-send estimate.
 
-**Observations:**
-1. Token cost broken down per prompt component (system, history, user, output)
-2. Pre-send estimate vs API-reported `prompt_eval_count`
-3. Progressive context fill — how token counts grow as input expands
+**Out of scope:** history truncation strategies, summarization, RAG-style retrieval injection (covered in `memory-context` and `rag`).
 
 ---
 
-## How to run
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `context-window` | `observe_progressive_fill()` — token count grows with each appended sentence, approaching the model limit |
+| `token-budget` | `observe_component_costs()` — each prompt component (system, history, user, output) is counted and summed before the request |
+
+---
+
+## Setup
 
 ```bash
-# From the labs/llm-fundamentals/ directory:
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# Install dependencies (from the module root):
+pip install -r labs/llm-fundamentals/requirements.txt
+```
+
+---
+
+## Run
+
+```bash
+cd labs/llm-fundamentals
 python lab-context-window/main.py
 ```
 
-**Prerequisites:** Ollama running with `llama3.2` loaded. See the module README for setup.
-
 ---
 
-## Expected output
+## Expected Output
 
 ```
 Model: llama3.2  |  Approximate context limit: 128000 tokens
@@ -110,11 +122,9 @@ Restore the original stop condition after the experiment.
 
 ---
 
-## Configuration
+## Infrastructure
 
-| Variable | Default | Effect |
-|----------|---------|--------|
-| `OLLAMA_URL` | `http://localhost:11434` | Ollama server address |
-| `MODEL` | `llama3.2` | Model to use |
-| `NUM_PREDICT` | `64` | Output token budget per request |
-| `MAX_FILL_TOKENS` | `512` | Maximum input tokens during progressive fill |
+| Service | Purpose |
+|---------|---------|
+| Ollama | LLM inference server — provides `prompt_eval_count` to validate pre-send token estimates |
+| tiktoken | Standalone tokenizer — computes component-level token counts before each request |

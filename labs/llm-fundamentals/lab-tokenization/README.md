@@ -18,43 +18,50 @@ summary: "Observation lab — makes tokenization behavior directly measurable: e
 ---
 
 # Tokenization
+
 ## Navigation
 
 [Labs](../../README.md) / [LLM Fundamentals — Labs](../README.md) / Tokenization
 
 ---
 
-**Module:** llm-fundamentals  
-**Type:** observation  
-**Doc:** `docs/llm-fundamentals/tokenization.md`
+## Overview
+
+This lab uses `tiktoken` as a standalone tool — no Ollama required. It makes tokenization behavior directly observable: how text becomes integers, why different input types produce different token counts, and why leading spaces and single-character changes matter.
+
+**Out of scope:** model-specific tokenizers (Llama SentencePiece), tokenization during live inference.
 
 ---
 
-## What this lab demonstrates
+## Concepts
 
-This lab uses `tiktoken` (the OpenAI tokenizer library) as a standalone tool — no Ollama required. It makes tokenization behavior directly observable: how text becomes integers, why different input types produce different token counts, and why leading spaces and single-character changes matter.
-
-**Observations:**
-1. Encode/decode round-trip — tokenization is lossless
-2. Token count varies significantly by input type and language
-3. Leading space changes the token ID for the same word
-4. One character change can cascade through the entire token sequence
-5. Token budget estimation for a realistic prompt
+| Concept | Where it appears |
+|---------|-----------------|
+| `tokenization` | `observe_round_trip()` — encode produces integer IDs; decode reconstructs the original string losslessly |
+| `byte-pair-encoding` | `observe_character_sensitivity()` — one character change shifts BPE merge rules, producing a different ID sequence |
+| `token-vocabulary` | `observe_leading_space()` — `'Paris'` and `' Paris'` map to different vocabulary IDs |
 
 ---
 
-## How to run
+## Setup
 
 ```bash
-# From the labs/llm-fundamentals/ directory:
+# No server required. Install dependencies only:
+pip install -r labs/llm-fundamentals/requirements.txt
+```
+
+---
+
+## Run
+
+```bash
+cd labs/llm-fundamentals
 python lab-tokenization/main.py
 ```
 
-**Prerequisites:** `tiktoken` installed (`pip install tiktoken`). No Ollama needed.
-
 ---
 
-## Expected output
+## Expected Output
 
 ```
 Tokenizer: cl100k_base
@@ -84,23 +91,32 @@ Decoded: 'The quick brown fox jumps over the lazy dog.'
   'tokenization'  → [47058, 2065] (2 tokens)
   'tokenizations' → [47058, 4024] (2 tokens, different second token)
   ...
+
+=== Observation 5: Token budget estimate ===
+  System prompt:   18 tokens
+  User message:    12 tokens
+  Max output:     256 tokens
+  Grand total:    286 tokens
+  Fits in 2048:   yes
+  Fits in 512:    yes
+  Fits in 256:    no
 ```
 
 ---
 
 ## What to observe
 
-- **Observation 2:** Japanese uses 2–4× more tokens than equivalent English content. This directly affects API cost and context window capacity for multilingual applications.
-- **Observation 3:** `'Paris'` and `' Paris'` have different token IDs. String concatenation without careful spacing can produce unexpected tokenization.
-- **Observation 4:** Changing one character changes which BPE merges apply, sometimes producing a completely different token sequence for the rest of the word.
-- **Observation 5:** The budget estimate shows that `grand_total` can exceed common context limits (2048, 4096) even for short-seeming prompts.
+- **Observation 2:** Non-English content costs more tokens than equivalent English. Spanish produces ~10–15% more tokens; Japanese 2–4× more. Both directly affect API cost and context window capacity in multilingual applications.
+- **Observation 3:** `'Paris'` and `' Paris'` have different token IDs. String concatenation without careful spacing produces unexpected tokenization at join boundaries.
+- **Observation 4:** Changing one character changes which BPE merges apply, sometimes producing a different token sequence for the rest of the word.
+- **Observation 5:** The budget estimate shows that `grand_total` can exceed common context limits (256, 512) even for short-seeming prompts once output reservation is included.
 
 ---
 
 ## Concepts verified
 
 - [ ] Token IDs differ for a word with and without a leading space — observable at Observation 3
-- [ ] Non-Latin text costs 2–4× more tokens than equivalent English — observable at Observation 2
+- [ ] Non-Latin text costs more tokens than equivalent English — observable at Observation 2
 - [ ] A single character change can alter the full token sequence for a word — observable at Observation 4
 - [ ] Token count, not character count, determines API cost and context fit — observable at Observation 5
 
@@ -119,6 +135,8 @@ Restore `max_output = 256` after the experiment.
 
 ---
 
-## Configuration
+## Infrastructure
 
-No environment variables needed. The tokenizer runs entirely in-process.
+| Service | Purpose |
+|---------|---------|
+| tiktoken | Standalone tokenizer library — runs in-process, no server required |

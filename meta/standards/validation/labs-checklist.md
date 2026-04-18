@@ -194,9 +194,12 @@ FINAL SCORE = weighted sum (0–10)
 
 * **Severity:** Critical
 
-### DA-3 Naming matches documentation
+### DA-3 Naming matches documentation and glossary
 
 * **Severity:** Major
+* Every term in the `concepts` frontmatter field must be present in `docs/reference/glossary.md`.
+  * If a term is **absent**: add it to the glossary before accepting the lab (per CLAUDE.md §7).
+  * If a term is **present with a different name**: update the lab to use the canonical glossary term — no paraphrases, renamed variants, or abbreviations.
 
 ### DA-4 Lab README is accurate and complete
 

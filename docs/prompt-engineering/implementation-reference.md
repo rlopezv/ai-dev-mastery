@@ -200,8 +200,8 @@ def run_benchmark(
 
 | Tool | Role | Infrastructure profile |
 |------|------|------------------------|
-| `openai` Python SDK | API transport (via Ollama or OpenAI) | `light` |
-| Ollama | Local LLM runtime for offline testing | `light` |
+| `openai` Python SDK | API transport (via Ollama or OpenAI) | `foundational` |
+| Ollama | Local LLM runtime for offline testing | `foundational` |
 | `json` (stdlib) | JSON parsing for format-spec patterns | none |
 
 ---

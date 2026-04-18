@@ -7,7 +7,7 @@ path: "labs/prompt-engineering/lab-prompt-patterns/README.md"
 status: "draft"
 level: "foundational"
 concepts:
-  - "prompt-patterns"
+  - "prompt-pattern"
   - "role-prompting"
   - "output-format-specification"
 prerequisites:
@@ -18,28 +18,43 @@ summary: "Implementation lab — benchmarks role prompting, output format specif
 ---
 
 # Prompt Patterns
+
 ## Navigation
 
 [Labs](../../README.md) / [Prompt Engineering — Labs](../README.md) / Prompt Patterns
 
 ---
 
-**Module:** `prompt-engineering`
-**Type:** implementation
-**Doc:** `docs/prompt-engineering/prompt-patterns.md`
-**Required:** yes
+## Overview
 
-## What this lab demonstrates
+This lab implements three reusable prompt pattern templates as Python functions and tests each against a fixed input set. It includes a benchmark harness that reports format compliance and content accuracy, making pattern performance directly measurable.
 
-- Role prompting: domain-appropriate vocabulary and constraint adherence
-- Output format specification: JSON structure compliance and benchmark accuracy
-- Step-by-step instruction: all labeled steps present in code review output
-- Benchmark harness: accuracy measurement across a fixed test set
+**Out of scope:** combining patterns with few-shot examples (covered in `lab-few-shot`), chain-of-thought answer extraction (covered in `lab-chain-of-thought`).
 
-## Prerequisites
+---
 
-- Ollama running: `ollama serve` + `ollama pull llama3.2`
-- `pip install -r labs/prompt-engineering/requirements.txt`
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `prompt-pattern` | All three observations — each implements one pattern as a template function with typed parameters |
+| `role-prompting` | `build_role_prompt(role, domain, tone, constraint, task)` — the role anchors vocabulary and constraints without specifying content |
+| `output-format-specification` | `build_format_prompt(schema, input_text)` — JSON schema and compliance instruction appended to constrain response structure |
+
+---
+
+## Setup
+
+```bash
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# Install dependencies (from the module root):
+pip install -r labs/prompt-engineering/requirements.txt
+```
+
+---
 
 ## Run
 
@@ -48,7 +63,9 @@ cd labs/prompt-engineering
 python lab-prompt-patterns/main.py
 ```
 
-## Expected output
+---
+
+## Expected Output
 
 ```
 === Pattern 1: Role prompting ===
@@ -69,20 +86,22 @@ Response:
 All steps labeled: ✓
 ```
 
+---
+
 ## What to observe
 
 - **Pattern 1:** the role prompt shapes vocabulary without instructing content. Notice technical terms and trade-off framing appear without being requested explicitly.
-- **Pattern 2:** `check_format()` passes only when JSON is valid AND `sentiment` matches the expected label. A well-formed JSON with wrong sentiment is still a failure.
+- **Pattern 2:** `check_format()` passes only when JSON is valid AND `sentiment` matches the expected label. A well-formed JSON with a wrong sentiment value is still a failure.
 - **Pattern 3:** all four step labels appear in order. `check_steps_present()` confirms presence but not order — read the response to verify sequencing.
 
 ---
 
 ## Concepts verified
 
-- [ ] Role prompt produces domain vocabulary without explicit content instructions
-- [ ] Format pattern produces parseable JSON on standard inputs
-- [ ] Step pattern labels all four sections including "None identified." for empty ones
-- [ ] Benchmark harness reports accuracy as correct/total with failure details
+- [ ] Role prompt produces domain vocabulary without explicit content instructions — observable at Pattern 1 response
+- [ ] Format pattern produces parseable JSON on standard inputs — observable at Pattern 2 accuracy
+- [ ] Step pattern labels all four sections including "None identified." for empty ones — observable at Pattern 3 response
+- [ ] Benchmark harness reports accuracy as correct/total with failure details — observable at Pattern 2 output
 
 ---
 
@@ -97,3 +116,11 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - Shows that explicit numbering enforces section identity but not section order — the model follows the numbers, not the intended sequence
 
 Restore the original step order (1, 2, 3, 4) after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama | Local LLM runtime — serves pattern evaluation requests via the OpenAI-compatible endpoint |

@@ -11,7 +11,7 @@ concepts:
   - "prompt-anatomy"
   - "instruction"
   - "context"
-  - "output-format"
+  - "output-format-specification"
   - "zero-shot-prompting"
 
 prerequisites:

@@ -17,27 +17,42 @@ summary: "Implementation lab — measures accuracy improvement from zero-shot to
 ---
 
 # Few-Shot Prompting
+
 ## Navigation
 
 [Labs](../../README.md) / [Prompt Engineering — Labs](../README.md) / Few-Shot Prompting
 
 ---
 
-**Module:** `prompt-engineering`
-**Type:** implementation
-**Doc:** `docs/prompt-engineering/few-shot.md`
-**Required:** yes
+## Overview
 
-## What this lab demonstrates
+This lab builds a topic classifier using labeled examples in the prompt. It runs the same test set in zero-shot, one-shot, and three-shot configurations and compares accuracy across the three modes, making the accuracy benefit of few-shot prompting directly measurable.
 
-- Zero-shot vs one-shot vs three-shot accuracy on topic classification
-- Consistent output format enforced by example labels
-- Accuracy improvement as shot count increases
+**Out of scope:** chain-of-thought reasoning (covered in `lab-chain-of-thought`), reusable pattern templates (covered in `lab-prompt-patterns`).
 
-## Prerequisites
+---
 
-- Ollama running: `ollama serve` + `ollama pull llama3.2`
-- `pip install -r labs/prompt-engineering/requirements.txt`
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `few-shot-prompting` | `classify(examples, target)` — the shot count is the length of `examples`; zero-shot passes an empty list |
+| `in-context-learning` | `evaluate(shot_count)` — the model infers the classification pattern from examples rather than from explicit task instructions |
+
+---
+
+## Setup
+
+```bash
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# Install dependencies (from the module root):
+pip install -r labs/prompt-engineering/requirements.txt
+```
+
+---
 
 ## Run
 
@@ -46,7 +61,9 @@ cd labs/prompt-engineering
 python lab-few-shot/main.py
 ```
 
-## Expected output
+---
+
+## Expected Output
 
 ```
 === Few-Shot Prompting — Topic Classification ===
@@ -67,6 +84,8 @@ Accuracy: 6/8 = 75%
 Accuracy: 7/8 = 88%
 ```
 
+---
+
 ## What to observe
 
 - **Zero-shot vs few-shot:** compare accuracy scores across the three runs. The gap is most visible on ambiguous inputs (e.g., a text that could be economics or politics).
@@ -77,9 +96,9 @@ Accuracy: 7/8 = 88%
 
 ## Concepts verified
 
-- [ ] Accuracy improves with shot count, especially on ambiguous inputs
-- [ ] Examples anchor the output to a single-word label format
-- [ ] Label leakage is visible if all examples share the same class
+- [ ] Accuracy improves with shot count, especially on ambiguous inputs — observable by comparing accuracy scores across modes
+- [ ] Examples anchor the output to a single-word label format — observable at zero-shot vs few-shot output format
+- [ ] Label leakage is visible if all examples share the same class — observable at Failure case
 
 ---
 
@@ -94,3 +113,11 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - Accuracy drops even though the model is semantically correct — the label format drift causes evaluation failures
 
 Restore lowercase labels in `EXAMPLES` after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama | Local LLM runtime — serves the classification requests via the OpenAI-compatible endpoint |

@@ -160,9 +160,9 @@ Without a cap, the autoregressive loop runs until a stop token is generated. For
 
 | Tool | Role | Scope |
 |------|------|-------|
-| Ollama | LLM runtime — HTTP interface to the transformer and sampling algorithm | `light` profile |
+| Ollama | LLM runtime — HTTP interface to the transformer and sampling algorithm | `foundational` profile |
 | tiktoken | Tokenizer — in-process, no server required | all profiles |
-| requests | HTTP client for Ollama API calls | `light` profile |
+| requests | HTTP client for Ollama API calls | `foundational` profile |
 
 Setup and model download instructions are in `labs/llm-fundamentals/README.md`.
 

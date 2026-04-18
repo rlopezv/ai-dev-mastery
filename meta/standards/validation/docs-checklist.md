@@ -229,6 +229,12 @@ does not auto-fail, but it must be explicitly called out for correction before f
 - **Severity:** Major
 - **Rule:** The document is coherent with what comes before and after in the roadmap
 
+### IQ-6 Concepts are registered in the glossary and use canonical names
+- **Severity:** Major
+- **Rule:** Every term listed in the `concepts` frontmatter field must be present in `docs/reference/glossary.md`.
+  - If a term is **absent**: add it to the glossary before accepting the document (per CLAUDE.md §7).
+  - If a term is **present with a different name**: update the document to use the canonical glossary term — no paraphrases, renamed variants, or abbreviations.
+
 ---
 
 ## 10. Category 6 — Level Compliance

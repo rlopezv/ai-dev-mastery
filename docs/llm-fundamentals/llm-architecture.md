@@ -127,7 +127,7 @@ The Ollama API abstracts the transformer internals, but `eval_count` and `prompt
 - Running the same prompt multiple times to observe output variation caused by sampling
 - Querying available models to see how model metadata is exposed at the API level
 
-The lab uses a locally running `llama3.2` model via the `light` infrastructure profile. No external API keys are required.
+The lab uses a locally running `llama3.2` model via the `foundational` infrastructure profile. No external API keys are required.
 
 ---
 

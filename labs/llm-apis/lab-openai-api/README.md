@@ -7,8 +7,8 @@ path: "labs/llm-apis/lab-openai-api/README.md"
 status: "draft"
 level: "foundational"
 concepts:
-  - "chat-completions"
-  - "message-roles"
+  - "chat-completion-api"
+  - "message-role"
   - "finish-reason"
 prerequisites:
   - "docs/llm-apis/openai-api.md"
@@ -18,30 +18,40 @@ summary: "Implementation lab — demonstrates the Chat Completions request struc
 ---
 
 # OpenAI API
+
 ## Navigation
 
 [Labs](../../README.md) / [LLM APIs — Labs](../README.md) / OpenAI API
 
 ---
 
-**Module:** `llm-apis`
-**Type:** implementation
-**Doc:** `docs/llm-apis/openai-api.md`
-**Required:** yes
+## Overview
 
-## What this lab demonstrates
+This lab sends requests to the OpenAI Chat Completions endpoint and inspects the response structure, usage metadata, and finish_reason signal. It then builds a multi-turn conversation by accumulating messages across calls.
 
-- Chat Completions request structure: `model`, `messages`, `max_tokens`
-- Message role semantics: `system`, `user`, `assistant`
-- Response parsing: `choices[0].message.content`
-- Usage metadata: `prompt_tokens`, `completion_tokens`, `total_tokens`
-- `finish_reason` detection and what `"length"` signals
-- Multi-turn conversation via explicit message list accumulation
+**Out of scope:** streaming (covered in `lab-streaming`), provider abstraction (covered in `lab-api-patterns`).
 
-## Prerequisites
+---
 
-- `OPENAI_API_KEY` set in `.env`
-- `pip install -r labs/llm-apis/requirements.txt`
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `chat-completion-api` | `observe_basic_completion()` — constructs the `model`, `messages`, `max_tokens` request and parses `choices[0].message.content` |
+| `message-role` | `observe_multi_turn()` — `system`, `user`, and `assistant` roles are set explicitly on each message |
+| `finish-reason` | `observe_truncation()` — `max_tokens=5` forces a `finish_reason="length"` response; detection logic issues a warning |
+
+---
+
+## Setup
+
+```bash
+# OPENAI_API_KEY must be set in .env
+# Install dependencies (from the module root):
+pip install -r labs/llm-apis/requirements.txt
+```
+
+---
 
 ## Run
 
@@ -50,7 +60,9 @@ cd labs/llm-apis
 python lab-openai-api/main.py
 ```
 
-## Expected output
+---
+
+## Expected Output
 
 ```
 === Observation 1: Basic chat completion ===
@@ -62,15 +74,21 @@ Usage:         prompt=NN  completion=NN  total=NN
 === Observation 2: Forced truncation (finish_reason=length) ===
 Response (truncated): <partial response>
 finish_reason:        length
-WARNING: response was cut off ...
+WARNING: response was cut off — increase max_tokens or handle truncation
 
 === Observation 3: Multi-turn conversation ===
 Turn 1 — User:      What is temperature in LLM inference?
 Turn 1 — Assistant: <answer>
          prompt_tokens so far: NN
-Turn 2 ...
-Turn 3 ...
+Turn 2 — User:      How does it interact with top_p?
+Turn 2 — Assistant: <answer>
+         prompt_tokens so far: NNN
+Turn 3 — User:      Give a one-line rule of thumb.
+Turn 3 — Assistant: <answer>
+         prompt_tokens so far: NNN
 ```
+
+---
 
 ## What to observe
 
@@ -82,9 +100,9 @@ Turn 3 ...
 
 ## Concepts verified
 
-- [ ] `finish_reason: "length"` is not an error — it is a signal that requires action
-- [ ] `prompt_tokens` grows with each turn because full history is resent
-- [ ] Message list is the caller's responsibility to maintain
+- [ ] `finish_reason: "length"` is not an error — it is a signal that requires action — observable at Observation 2
+- [ ] `prompt_tokens` grows with each turn because full history is resent — observable at Observation 3
+- [ ] Message list is the caller's responsibility to maintain — observable at Observation 3
 
 ---
 
@@ -99,3 +117,11 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - `prompt_tokens` stops growing because the history is no longer accumulating
 
 Restore the `messages.append` line after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| OpenAI API | Cloud LLM provider — `OPENAI_API_KEY` required; provides `finish_reason` and usage metadata per response |

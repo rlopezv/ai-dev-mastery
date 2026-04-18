@@ -18,42 +18,54 @@ summary: "Observation lab — makes the transformer inference pipeline measurabl
 ---
 
 # LLM Anatomy
+
 ## Navigation
 
 [Labs](../../README.md) / [LLM Fundamentals — Labs](../README.md) / LLM Anatomy
 
 ---
 
-**Module:** llm-fundamentals  
-**Type:** observation  
-**Doc:** `docs/llm-fundamentals/llm-architecture.md`
+## Overview
+
+This lab makes the transformer inference pipeline observable through the Ollama API. Behind the simple "send a prompt, get a response" interface, the API reports telemetry that maps directly to pipeline stages. The lab does not build an application — it isolates and measures four properties of the pipeline.
+
+**Out of scope:** streaming, multi-turn conversation, inference parameter tuning.
 
 ---
 
-## What this lab demonstrates
+## Concepts
 
-This lab makes the transformer inference pipeline observable through the Ollama API. It shows that behind the simple "send a prompt, get a response" interface, the API reports detailed telemetry that maps directly to pipeline stages.
-
-**Observations:**
-1. What models are available and their metadata
-2. How a generation request maps to input/output token counts and timing
-3. That `prompt_eval_count` is deterministic for a fixed input
-4. That `eval_count` is bounded by `num_predict`
+| Concept | Where it appears |
+|---------|-----------------|
+| `inference-pipeline` | `observe_single_generation()` — reads `prompt_eval_count`, `eval_count`, `total_duration` from the API response |
+| `transformer-architecture` | `observe_token_count_stability()` — fixed input produces identical `prompt_eval_count` across runs |
+| `tokenization` | `observe_output_token_scaling()` — `eval_count` is bounded by `num_predict`, confirming the autoregressive loop |
 
 ---
 
-## How to run
+## Setup
 
 ```bash
-# From the labs/llm-fundamentals/ directory:
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# Install dependencies (from the module root):
+pip install -r labs/llm-fundamentals/requirements.txt
+```
+
+---
+
+## Run
+
+```bash
+cd labs/llm-fundamentals
 python lab-llm-anatomy/main.py
 ```
 
-**Prerequisites:** Ollama running with `llama3.2` loaded. See the module README for setup.
-
 ---
 
-## Expected output
+## Expected Output
 
 ```
 Setup OK — Ollama reachable, model 'llama3.2' available
@@ -90,9 +102,9 @@ Prompt: 'The transformer architecture processes tokens by computing self-attenti
 
 ## What to observe
 
-- `prompt_eval_count` — number of input tokens processed. Should be consistent across runs for the same prompt.
-- `eval_count` — number of output tokens generated. Should not exceed `num_predict`.
-- `total_duration` — total wall-clock time in nanoseconds. On CPU, this scales with `eval_count`.
+- `prompt_eval_count` — number of input tokens processed. Identical across runs for the same prompt (Observation 3).
+- `eval_count` — number of output tokens generated. Never exceeds `num_predict` (Observation 4).
+- `total_duration` — total wall-clock time in nanoseconds. On CPU, scales with `eval_count`.
 - Observation 4 shows that `eval_count` is capped at `num_predict`, confirming the autoregressive loop terminates on the budget limit.
 
 ---
@@ -119,10 +131,8 @@ Restore the original limits list after the experiment.
 
 ---
 
-## Configuration
+## Infrastructure
 
-| Variable | Default | Effect |
-|----------|---------|--------|
-| `OLLAMA_URL` | `http://localhost:11434` | Ollama server address |
-| `MODEL` | `llama3.2` | Model to use |
-| `NUM_PREDICT` | `128` | Maximum output tokens per request |
+| Service | Purpose |
+|---------|---------|
+| Ollama | LLM inference server — exposes the transformer and autoregressive loop via HTTP |

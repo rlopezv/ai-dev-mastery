@@ -10,6 +10,11 @@ Use the canonical name as defined here. Do not paraphrase or rename existing ent
 
 <!-- Entries are added here alphabetically as modules are written -->
 
+### answer extraction
+The process of parsing the final answer out of a chain-of-thought response that contains both reasoning steps and the answer, typically using a structured marker (e.g., `"Answer:"`) that the prompt instructs the model to place before the final answer.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/chain-of-thought.md`
+
 ### chain-of-thought
 A prompting technique that asks the model to produce intermediate reasoning steps before the final answer, externalizing the reasoning process so each step becomes context for the next and enabling reliable multi-step inference.
 - **Origin:** `prompt-engineering`
@@ -62,6 +67,11 @@ The internal structure of a prompt as a composition of five functional component
 
 ### prompt injection
 An attack in which user-provided content introduces new instructions into the prompt that override or extend the original developer instructions, causing the model to behave outside its intended scope.
+- **Origin:** `prompt-engineering`
+- **Doc:** `docs/prompt-engineering/prompt-pitfalls.md`
+
+### prompt pitfalls
+The four systematic failure modes in prompt design — under-specification, over-specification, instruction conflict, and prompt injection — each with a structural cause and a structural fix.
 - **Origin:** `prompt-engineering`
 - **Doc:** `docs/prompt-engineering/prompt-pitfalls.md`
 
@@ -124,6 +134,11 @@ A typed response unit in the Anthropic Messages API that encapsulates a single p
 The pattern of appending each user message and assistant reply to a growing message list before every subsequent API call, enabling stateful multi-turn conversations over a stateless API.
 - **Origin:** `llm-apis`
 - **Doc:** `docs/llm-apis/api-patterns.md`
+
+### finish reason
+A field in the API response that signals why token generation stopped: `"stop"` means the model reached a natural end; `"length"` means the `max_tokens` limit was hit; other values are provider-specific. A `"length"` finish reason indicates a truncated response — not an error.
+- **Origin:** `llm-apis`
+- **Doc:** `docs/llm-apis/openai-api.md`
 
 ### first-token latency
 The elapsed time between sending an API request and receiving the first token of the response; in streaming mode this is typically under 500ms regardless of response length, whereas in batch mode it grows with total output length.

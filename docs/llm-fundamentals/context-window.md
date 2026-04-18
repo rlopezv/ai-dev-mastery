@@ -135,7 +135,7 @@ else:
 - Tests behavior when `input_tokens + max_tokens` exceeds the model's limit
 - Demonstrates that truncated content produces no error — only a subtly degraded response
 
-The lab uses the `light` infrastructure profile with a locally running Ollama model. Token counting uses `tiktoken` independently of the API call, so cost estimation can be tested without spending tokens.
+The lab uses the `foundational` infrastructure profile with a locally running Ollama model. Token counting uses `tiktoken` independently of the API call, so cost estimation can be tested without spending tokens.
 
 ---
 

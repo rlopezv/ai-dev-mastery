@@ -9,8 +9,8 @@ level: "foundational"
 concepts:
   - "inference-parameters"
   - "temperature"
-  - "top-k"
-  - "top-p"
+  - "top-k-sampling"
+  - "top-p-sampling"
 prerequisites:
   - "docs/llm-fundamentals/inference-parameters.md"
 related:
@@ -19,43 +19,55 @@ summary: "Observation lab — isolates the effect of temperature, top-k, and top
 ---
 
 # Inference Parameters
+
 ## Navigation
 
 [Labs](../../README.md) / [LLM Fundamentals — Labs](../README.md) / Inference Parameters
 
 ---
 
-**Module:** llm-fundamentals  
-**Type:** observation  
-**Doc:** `docs/llm-fundamentals/inference-parameters.md`
+## Overview
+
+This lab runs the same prompts with systematically varied inference parameters and prints outputs side by side. It makes the sampling controls tangible: temperature, top-k, and top-p each produce measurably different outputs on the same model with the same input.
+
+**Out of scope:** `repeat_penalty`, `seed`, provider-specific parameters beyond Ollama.
 
 ---
 
-## What this lab demonstrates
+## Concepts
 
-This lab runs the same prompts with systematically varied inference parameters and prints the outputs side by side. It makes the sampling controls tangible: temperature, top-k, and top-p each produce measurably different outputs on the same model with the same input.
-
-**Observations:**
-1. temperature=0 produces deterministic output across repeated runs
-2. temperature=1.0 produces output variance across repeated runs
-3. top_k restricts the candidate pool (top_k=1 is greedy decoding)
-4. top_p restricts by cumulative probability (low top_p → narrow pool)
-5. Temperature does not improve accuracy on factual prompts
+| Concept | Where it appears |
+|---------|-----------------|
+| `inference-parameters` | `generate()` — `options` block passed to Ollama API on every call |
+| `temperature` | `observe_determinism()` / `observe_variance()` — controls width of the sampling distribution |
+| `top-k-sampling` | `observe_top_k()` — restricts candidate pool to the k highest-probability tokens |
+| `top-p-sampling` | `observe_top_p()` — restricts candidate pool by cumulative probability threshold |
 
 ---
 
-## How to run
+## Setup
 
 ```bash
-# From the labs/llm-fundamentals/ directory:
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# Install dependencies (from the module root):
+pip install -r labs/llm-fundamentals/requirements.txt
+```
+
+---
+
+## Run
+
+```bash
+cd labs/llm-fundamentals
 python lab-inference-parameters/main.py
 ```
 
-**Prerequisites:** Ollama running with `llama3.2` loaded. See the module README for setup.
-
 ---
 
-## Expected output
+## Expected Output
 
 ```
 Model: llama3.2 | num_predict: 64 | runs per observation: 3
@@ -84,6 +96,11 @@ Prompt: 'Once upon a time in a futuristic city,'
   top_k=10   → 'a city powered by...'
   top_k=100  → 'where neon lights...'
 
+=== Observation 4: top_p effect ===
+  top_p=0.1  → 'there existed a society...'   (narrow pool — near-greedy)
+  top_p=0.5  → 'where the lights...'
+  top_p=0.95 → 'a sprawling metropolis...'
+
 === Observation 5: Temperature on a factual prompt ===
 Prompt: 'The capital of Japan is'
 
@@ -96,8 +113,9 @@ Prompt: 'The capital of Japan is'
 
 ## What to observe
 
-- **Observation 1 vs 2:** The same model, same prompt, same `num_predict` — only temperature differs. This isolates the sampling parameter's effect from all other variables.
+- **Observation 1 vs 2:** Same model, same prompt, same `num_predict` — only temperature differs. This isolates the parameter's effect from all other variables.
 - **Observation 3:** `top_k=1` forces greedy decoding regardless of temperature. It behaves identically to temperature=0 because only one token is eligible for sampling.
+- **Observation 4:** Low `top_p` produces near-deterministic output by restricting the pool to the few most probable tokens; high `top_p` allows broader variance. Compare with Observation 3 — both narrow the pool, but top_p adapts to the distribution shape while top_k uses a fixed count.
 - **Observation 5:** Higher temperature on a factual prompt does not improve the answer — it increases the probability of selecting a wrong but plausible token. Low temperature is correct for tasks with a single right answer.
 
 ---
@@ -107,6 +125,7 @@ Prompt: 'The capital of Japan is'
 - [ ] temperature=0 produces identical output across all runs — observable at Observation 1
 - [ ] temperature=1.0 produces different output across runs — observable at Observation 2
 - [ ] top_k=1 is equivalent to greedy decoding at any temperature — observable at Observation 3
+- [ ] Low top_p produces near-deterministic output; high top_p allows variance — observable at Observation 4
 - [ ] High temperature increases wrong-token selection on factual prompts — observable at Observation 5
 
 ---
@@ -124,10 +143,8 @@ Restore `temperature=0.0` after the experiment.
 
 ---
 
-## Configuration
+## Infrastructure
 
-| Variable | Default | Effect |
-|----------|---------|--------|
-| `OLLAMA_URL` | `http://localhost:11434` | Ollama server address |
-| `MODEL` | `llama3.2` | Model to use |
-| `NUM_PREDICT` | `64` | Maximum output tokens per request |
+| Service | Purpose |
+|---------|---------|
+| Ollama | LLM inference server — accepts `options.temperature`, `options.top_k`, `options.top_p` per request |

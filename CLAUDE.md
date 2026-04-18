@@ -246,8 +246,17 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 3. Validate all `labs/<module>/` with `meta/standards/validation/labs-checklist.md`
 4. Check docs↔labs alignment against `meta/system-design/DOCS_LABS_MAP.md`
 5. Check all frontmatter cross-references point to real files
-6. Write report to `meta/session/reports/<module>.audit.md`
-7. Display results — PASS / FAIL per file with severity
+6. Check all `concepts` fields against `docs/reference/glossary.md` (IQ-6 / DA-3)
+7. Separate findings into two categories:
+   - **Static checks** — verifiable without execution (structure, frontmatter, cross-refs, glossary, content quality)
+   - **Execution checks** — require running labs against live infrastructure (EV-1, EV-2, EV-3, BC-1, BC-2, BC-5); mark as PENDING if not run
+8. Write persistent report to `meta/audit/reports/<module>.audit.md` using the structure:
+   - Scope (files audited)
+   - Static Checks (PASS / FAIL per check with notes)
+   - Fixes applied during audit
+   - Execution Checks (PASS / PENDING per check with what to verify)
+   - Overall Status: STATIC_PASS | EXECUTION_PENDING | FULL_PASS
+9. Display summary — PASS / FAIL / PENDING per file with severity
 
 ### Audit (global)
 
@@ -255,12 +264,12 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 2. Check cross-module prerequisites form a valid DAG (no circular dependencies)
 3. Check terminology consistency across modules against `docs/reference/glossary.md`
 4. Check `README.md`, `docs/README.md`, and `labs/README.md` are in sync with `PROJECT_STATUS.md`
-5. Write report to `meta/session/reports/audit.md`
+5. Write persistent report to `meta/audit/reports/global.audit.md`
 6. Report as structured observations — requires human review, not PASS/FAIL
 
 ### Enrich
 
-1. Read `meta/session/reports/audit.md` if available, or derive a global view from current state
+1. Read `meta/audit/reports/global.audit.md` if available, or derive a global view from current state
 2. Apply horizontal navigation improvements: enrich `next` and `related` fields with cross-module references where concepts overlap
 3. Build or update reading paths by audience profile (developer / architect)
 4. Write report of all changes made to `meta/session/reports/enrich.md`

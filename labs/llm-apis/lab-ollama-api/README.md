@@ -7,8 +7,8 @@ path: "labs/llm-apis/lab-ollama-api/README.md"
 status: "draft"
 level: "foundational"
 concepts:
-  - "openai-compatible-interface"
-  - "local-inference"
+  - "openai-compatible-api"
+  - "local-llm-runtime"
 prerequisites:
   - "docs/llm-apis/ollama-api.md"
 related:
@@ -17,30 +17,42 @@ summary: "Implementation lab — demonstrates Ollama's OpenAI-compatible interfa
 ---
 
 # Ollama API
+
 ## Navigation
 
 [Labs](../../README.md) / [LLM APIs — Labs](../README.md) / Ollama API
 
 ---
 
-**Module:** `llm-apis`
-**Type:** implementation
-**Doc:** `docs/llm-apis/ollama-api.md`
-**Required:** yes
+## Overview
 
-## What this lab demonstrates
+This lab targets Ollama as both an OpenAI-compatible endpoint and a native HTTP server. It shows that only a `base_url` change is needed to redirect the OpenAI SDK to Ollama, and it exposes model management and response shape differences that are only visible via the native API.
 
-- OpenAI SDK call against Ollama with `base_url` override
-- Response structure identity with OpenAI (same field paths)
-- Native Ollama model listing via `/api/tags`
-- Model metadata inspection via `/api/show`
-- Native `/api/chat` response shape vs OpenAI-compatible shape
+**Out of scope:** streaming (covered in `lab-streaming`), provider abstraction across multiple backends (covered in `lab-api-patterns`).
 
-## Prerequisites
+---
 
-- Ollama running locally: `ollama serve`
-- Model downloaded: `ollama pull llama3.2`
-- `pip install -r labs/llm-apis/requirements.txt`
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `openai-compatible-api` | `observe_openai_compatible_call()` — OpenAI SDK with `base_url="http://localhost:11434/v1"` and `api_key="ollama"`; response field paths are identical to a real OpenAI call |
+| `local-llm-runtime` | `observe_model_listing()` / `observe_model_metadata()` — native `/api/tags` and `/api/show` endpoints expose model management not available in the compatible interface |
+
+---
+
+## Setup
+
+```bash
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# Install dependencies (from the module root):
+pip install -r labs/llm-apis/requirements.txt
+```
+
+---
 
 ## Run
 
@@ -49,7 +61,9 @@ cd labs/llm-apis
 python lab-ollama-api/main.py
 ```
 
-## Expected output
+---
+
+## Expected Output
 
 ```
 === Observation 1: OpenAI-compatible call via SDK ===
@@ -73,6 +87,8 @@ OpenAI path:    response.choices[0].message.content
 Response text:  <answer>
 ```
 
+---
+
 ## What to observe
 
 - **Observation 1:** response field paths (`choices[0].message.content`, `usage.prompt_tokens`) are identical to a real OpenAI call — only the URL changes.
@@ -83,9 +99,9 @@ Response text:  <answer>
 
 ## Concepts verified
 
-- [ ] `base_url` + `api_key="ollama"` is the only change needed to redirect OpenAI SDK to Ollama
-- [ ] Native endpoints (`/api/tags`, `/api/show`) provide model management not available via compatible interface
-- [ ] Native `/api/chat` and OpenAI-compatible interface return the same content at different paths
+- [ ] `base_url` + `api_key="ollama"` is the only change needed to redirect OpenAI SDK to Ollama — observable at Observation 1
+- [ ] Native endpoints (`/api/tags`, `/api/show`) provide model management not available via compatible interface — observable at Observations 2 and 3
+- [ ] Native `/api/chat` and OpenAI-compatible interface return the same content at different paths — observable at Observation 4
 
 ---
 
@@ -99,3 +115,11 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - Shows that the native and OpenAI-compatible paths are mutually exclusive: code written for one format fails silently or crashes on the other
 
 Restore the native path after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama | Local LLM runtime — serves both OpenAI-compatible (`/v1/chat/completions`) and native (`/api/chat`, `/api/tags`, `/api/show`) endpoints |

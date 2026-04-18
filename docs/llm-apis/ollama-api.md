@@ -97,7 +97,7 @@ The native `/api/chat` format differs slightly from OpenAI's — `message` uses 
 
 ### 2.3 Model management
 
-Models are pulled once and cached locally. The `OLLAMA_MODEL` environment variable in the lab infrastructure defaults to `llama3.2`. The `ollama-init` container in `docker-compose.yml` handles the pull automatically when the stack starts.
+Models are pulled once and cached locally. The `OLLAMA_MODEL` environment variable in the lab infrastructure defaults to `llama3.2`. Run `ollama pull llama3.2` once before starting the labs; Ollama caches the model on disk and reuses it across sessions.
 
 ---
 
@@ -114,7 +114,7 @@ Models are pulled once and cached locally. The `OLLAMA_MODEL` environment variab
 
 ## 4. Engineering Implications
 
-Ollama loads models into RAM (or VRAM if a GPU is available). A 7B model in 4-bit quantization requires approximately 4–5 GB of memory. If the host machine does not have enough free RAM, Ollama will fail to load the model or will fall back to CPU-only inference with significantly degraded throughput. The docker-compose configuration sets `OLLAMA_MEMORY_LIMIT` to cap resource usage.
+Ollama loads models into RAM (or VRAM if a GPU is available). A 7B model in 4-bit quantization requires approximately 4–5 GB of memory. If the host machine does not have enough free RAM, Ollama will fail to load the model or will fall back to CPU-only inference with significantly degraded throughput.
 
 The `OLLAMA_KEEP_ALIVE` parameter controls how long a loaded model stays in memory after the last request. The default in the infrastructure is `24h`. A short keep-alive reduces idle memory usage but adds cold-start latency (5–30 seconds for large models) on the first request of a new session.
 

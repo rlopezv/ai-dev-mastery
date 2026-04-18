@@ -18,28 +18,44 @@ summary: "Implementation lab — demonstrates retry with exponential backoff, co
 ---
 
 # API Patterns
+
 ## Navigation
 
 [Labs](../../README.md) / [LLM APIs — Labs](../README.md) / API Patterns
 
 ---
 
-**Module:** `llm-apis`
-**Type:** implementation
-**Doc:** `docs/llm-apis/api-patterns.md`
-**Required:** no (optional)
+## Overview
 
-## What this lab demonstrates
+This lab implements three reusable patterns that apply regardless of provider: retry with exponential backoff around rate-limit errors, conversation accumulation across multi-turn exchanges, and a provider-abstraction layer that normalizes Ollama and Anthropic responses into a single `ChatResponse` dataclass.
 
-- Retry with exponential backoff: injected failures, doubling delay, success on 3rd attempt
-- Conversation accumulation: 5-turn exchange with observable token cost growth
-- Provider abstraction: `ChatResponse` dataclass, normalized stop reason, identical call site
+**Out of scope:** streaming patterns (covered in `lab-streaming`), raw provider API details (covered in `lab-openai-api`, `lab-anthropic-api`, `lab-ollama-api`).
 
-## Prerequisites
+---
 
-- Ollama running: `ollama serve` + `ollama pull llama3.2`
-- `ANTHROPIC_API_KEY` in `.env` (optional — abstraction observation runs Ollama side only if absent)
-- `pip install -r labs/llm-apis/requirements.txt`
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `retry-with-backoff` | `observe_retry_with_backoff()` — injected `RateLimitError` triggers exponential delay (1s → 2s → success); delay doubles each attempt |
+| `conversation-accumulation` | `observe_conversation_accumulation()` — 5-turn exchange where `input_tokens` grows visibly with each turn as the full message history is resent |
+| `provider-abstraction` | `observe_provider_abstraction()` — `ChatResponse` dataclass normalizes fields from Ollama and Anthropic; `stop_reason` is mapped to a common vocabulary |
+
+---
+
+## Setup
+
+```bash
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# ANTHROPIC_API_KEY in .env is optional — abstraction observation runs Ollama-only if absent
+# Install dependencies (from the module root):
+pip install -r labs/llm-apis/requirements.txt
+```
+
+---
 
 ## Run
 
@@ -48,7 +64,9 @@ cd labs/llm-apis
 python lab-api-patterns/main.py
 ```
 
-## Expected output
+---
+
+## Expected Output
 
 ```
 === Observation 1: Retry with exponential backoff ===
@@ -64,6 +82,7 @@ stop_reason:    stop
 Turn 1  input_tokens=NN   Q: What is a transformer?
         reply: <answer>
 Turn 2  input_tokens=NNN  Q: What role does self-attention play in it?
+        reply: <answer>
 ...
 Token cost grew from turn 1 to turn 5: compare input_tokens above.
 
@@ -77,6 +96,8 @@ Response: <answer>
 Both responses are ChatResponse instances — caller code is identical.
 ```
 
+---
+
 ## What to observe
 
 - **Observation 1:** retry delay doubles each attempt (1s → 2s). The third attempt succeeds without any code change — the backoff absorbed the transient failures.
@@ -87,10 +108,10 @@ Both responses are ChatResponse instances — caller code is identical.
 
 ## Concepts verified
 
-- [ ] Retry logic doubles delay on each attempt and succeeds after injected failures
-- [ ] `input_tokens` grows linearly with conversation length — not constant per turn
-- [ ] `ChatResponse` provides identical structure from both providers
-- [ ] `stop_reason` is normalized: `"end_turn"` (Anthropic) → `"stop"`, `"max_tokens"` → `"length"`
+- [ ] Retry logic doubles delay on each attempt and succeeds after injected failures — observable at Observation 1
+- [ ] `input_tokens` grows linearly with conversation length — not constant per turn — observable at Observation 2
+- [ ] `ChatResponse` provides identical structure from both providers — observable at Observation 3
+- [ ] `stop_reason` is normalized: `"end_turn"` (Anthropic) → `"stop"`, `"max_tokens"` → `"length"` — observable at Observation 3
 
 ---
 
@@ -105,3 +126,12 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - Shows that retry logic must explicitly enumerate the error types it handles — a catch-all `except Exception` would mask non-retryable errors
 
 Restore `except RateLimitError:` after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama | Local LLM runtime — used in the retry and provider abstraction observations |
+| Anthropic API | Cloud LLM provider — optional; used in provider abstraction; skipped if `ANTHROPIC_API_KEY` is absent |

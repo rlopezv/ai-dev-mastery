@@ -8,7 +8,7 @@ status: "draft"
 level: "foundational"
 concepts:
   - "anthropic-messages-api"
-  - "message-roles"
+  - "message-role"
   - "finish-reason"
 prerequisites:
   - "docs/llm-apis/anthropic-api.md"
@@ -18,30 +18,40 @@ summary: "Implementation lab — demonstrates Anthropic Messages API schema diff
 ---
 
 # Anthropic API
+
 ## Navigation
 
 [Labs](../../README.md) / [LLM APIs — Labs](../README.md) / Anthropic API
 
 ---
 
-**Module:** `llm-apis`
-**Type:** implementation
-**Doc:** `docs/llm-apis/anthropic-api.md`
-**Required:** yes
+## Overview
 
-## What this lab demonstrates
+This lab sends requests to the Anthropic Messages API and compares its schema to the OpenAI Chat Completions API. It highlights where field paths, field names, and structural rules differ so that the differences become concrete and memorable.
 
-- `system` as a top-level field, not a message role
-- Response text at `content[0].text`
-- Usage fields: `input_tokens`, `output_tokens`
-- `stop_reason: "end_turn"` for normal completions
-- Strict `user`/`assistant` alternation requirement
-- Side-by-side schema diff table vs OpenAI
+**Out of scope:** streaming (covered in `lab-streaming`), provider abstraction normalization (covered in `lab-api-patterns`).
 
-## Prerequisites
+---
 
-- `ANTHROPIC_API_KEY` set in `.env`
-- `pip install -r labs/llm-apis/requirements.txt`
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `anthropic-messages-api` | `observe_basic_call()` — `system=` as a top-level field; response text at `content[0].text`; usage via `input_tokens` / `output_tokens` |
+| `message-role` | `observe_multi_turn()` — strict `user` / `assistant` alternation enforced server-side; no `system` role in `messages` |
+| `finish-reason` | `observe_basic_call()` — `stop_reason: "end_turn"` for normal completion (Anthropic's equivalent of `finish_reason: "stop"`) |
+
+---
+
+## Setup
+
+```bash
+# ANTHROPIC_API_KEY must be set in .env
+# Install dependencies (from the module root):
+pip install -r labs/llm-apis/requirements.txt
+```
+
+---
 
 ## Run
 
@@ -50,7 +60,9 @@ cd labs/llm-apis
 python lab-anthropic-api/main.py
 ```
 
-## Expected output
+---
+
+## Expected Output
 
 ```
 === Observation 1: Basic Messages API call ===
@@ -63,12 +75,23 @@ Usage:       input=NN  output=NN
 Turn 1 — User:      What is temperature in LLM inference?
 Turn 1 — Assistant: <answer>
          input_tokens so far: NN
-...
+Turn 2 — User:      How does it interact with top_p?
+Turn 2 — Assistant: <answer>
+         input_tokens so far: NNN
+Turn 3 — User:      Give a one-line rule of thumb.
+Turn 3 — Assistant: <answer>
+         input_tokens so far: NNN
 
 === Observation 3: Schema comparison — Anthropic vs OpenAI ===
 Aspect                          OpenAI path                          Anthropic path
-...
+System message                  messages[0] role=system              system= (top-level)
+Response text                   choices[0].message.content           content[0].text
+Stop signal                     finish_reason="stop"                 stop_reason="end_turn"
+Input token count               usage.prompt_tokens                  usage.input_tokens
+Output token count              usage.completion_tokens              usage.output_tokens
 ```
+
+---
 
 ## What to observe
 
@@ -80,10 +103,10 @@ Aspect                          OpenAI path                          Anthropic p
 
 ## Concepts verified
 
-- [ ] `system=` is a top-level field in Anthropic — not `{"role": "system", ...}` in messages
-- [ ] `content[0].text` is the response text path (not `choices[0].message.content`)
-- [ ] `stop_reason: "end_turn"` signals normal completion (not `"stop"`)
-- [ ] Strict message alternation: sending two consecutive `user` messages raises `400 Bad Request`
+- [ ] `system=` is a top-level field in Anthropic — not `{"role": "system", ...}` in messages — observable at Observation 3
+- [ ] `content[0].text` is the response text path (not `choices[0].message.content`) — observable at Observation 3
+- [ ] `stop_reason: "end_turn"` signals normal completion (not `"stop"`) — observable at Observation 1
+- [ ] Strict message alternation: sending two consecutive `user` messages raises `400 Bad Request` — observable at Failure case
 
 ---
 
@@ -97,3 +120,11 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - The script raises `anthropic.BadRequestError` — strict alternation is enforced server-side, not just documented
 
 Remove the extra user message append after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Anthropic API | Cloud LLM provider — `ANTHROPIC_API_KEY` required; enforces strict message alternation and uses `stop_reason` instead of `finish_reason` |

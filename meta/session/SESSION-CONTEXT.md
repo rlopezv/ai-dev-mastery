@@ -6,21 +6,20 @@ Portable briefing for cross-tool handoff. Rewritten at the end of every session 
 
 ## Current state
 
-- Reforma editorial completada en rama `retrofit/editorial-reform`
-  - Fase 6: profile rename (`light`→`foundational`, `full`→`intermediate`) + breadcrumbs en 46 labs
-  - Fase 7a: H1 añadido/corregido en 129 archivos vía `add_h1.py`
-  - Fase 7b: breadcrumbs añadidos en 74 docs/labs vía `add_breadcrumbs.py`
-  - Total: 131 archivos con navegación, 0 bloqueados, 11 sin frontmatter (legítimos)
-- Scripts en `.work/scripts/`: `add_h1.py`, `add_breadcrumbs.py`, `audit_labs_breadcrumbs.py`
-- Checklist actualizado: SC-6 (H1 Critical en docs), LS-7 + LS-8 (frontmatter + H1 Critical en labs)
-- Templates actualizados: H1 rule añadida, paths corregidos (`../README.md`)
+- Rama activa: `retrofit/editorial-reform`
+- Auditoría de módulos **foundational completa** (3/3): `llm-fundamentals`, `llm-apis`, `prompt-engineering` — todos STATIC_PASS / EXECUTION_PENDING
+  - Reports persistentes en `meta/audit/reports/`
+- Módulos **intermediate pendientes de auditar** (6): `structured-outputs`, `rag`, `memory-context`, `ai-agents`, `frameworks-tools`, `ai-java`
 
 ## Recent decisions
 
-- Scripts bulk: proponer en `.work/scripts/`, usuario ejecuta localmente — no Claude vía Bash
-- Dry-run → apply → dry-run es el patrón de validación para scripts de bulk edit
-- 11 archivos sin frontmatter son legítimos: `docs/README.md`, `docs/guides/`, `docs/reference/glossary.md`, `labs/README.md`, `labs/common/shared/`, corpus files
+- Patrón recurrente en cada módulo auditado:
+  - `implementation-reference.md` tiene perfil `light` (legacy) → fix a `foundational`
+  - Todos los lab READMEs individuales necesitaban restructuración al scaffold (secciones Concepts e Infrastructure ausentes)
+- Glossary: entradas añadidas durante la auditoría — `### finish reason`, `### prompt pitfalls`, `### answer extraction`
+- `audit.py` explícitamente diferido: se construye tras completar la auditoría manual de todos los módulos
+- Niveles confirmados: foundational = `llm-fundamentals`, `llm-apis`, `prompt-engineering`; intermediate = los 6 restantes
 
 ## Next task
 
-Fase 8: ejecutar `/audit-module` para cada módulo marcado ✅ en `meta/session/PROJECT_STATUS.md` y consolidar hallazgos en `meta/session/reports/`.
+Iniciar auditoría de módulos intermediate, comenzando por `structured-outputs` — mismo proceso: docs + labs, static checks, fixes, report en `meta/audit/reports/structured-outputs.audit.md`.
