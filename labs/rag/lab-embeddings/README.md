@@ -40,7 +40,7 @@ summary: "Demonstrates the Ollama embedding API, cosine similarity computation, 
 ---
 
 
-## What this lab demonstrates
+## Overview
 
 This lab makes the embedding mechanism concrete before any retrieval index or vector database is involved. You will:
 
@@ -49,6 +49,17 @@ This lab makes the embedding mechanism concrete before any retrieval index or ve
 3. Batch-embed a small corpus and rank all items by similarity to a query — seeing the full distribution that a retrieval step sorts through.
 
 This is the foundation of every lab that follows. The retrieval labs depend on you understanding why cosine similarity scores differ across texts and what score ranges are meaningful.
+
+---
+
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `embedding` | `embed()` — calls the Ollama API and returns a 768-dim dense vector |
+| `cosine-similarity` | `cosine_similarity()` — computes angle-based distance between two vector pairs |
+| `embedding-model` | `EMBED_MODEL` constant — selects which Ollama model generates the vectors |
+| `vector-search` | batch ranking loop — sorts the corpus by cosine similarity to the query |
 
 ---
 
@@ -141,3 +152,11 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - Observation 2 shows that example quality, not just category membership, drives the measurable score gap
 
 Restore the original transformer-related texts after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama (`nomic-embed-text`) | Generates embedding vectors for query text and corpus texts |

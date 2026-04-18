@@ -18,28 +18,44 @@ summary: "Implementation lab — demonstrates the full tool call cycle via finis
 ---
 
 # Tool Usage
+
 ## Navigation
 
 [Labs](../../README.md) / [Structured Outputs — Labs](../README.md) / Tool Usage
 
 ---
 
-**Module:** `structured-outputs`
-**Type:** implementation
-**Doc:** `docs/structured-outputs/tool-usage.md`
-**Required:** yes
+## Overview
 
-## What this lab demonstrates
+This lab implements the complete four-phase tool call cycle — declaration, model call, execution, result return — for two single-tool scenarios on the OpenAI-compatible interface, then reproduces the same cycle on the Anthropic API to make schema differences concrete.
 
-- Observation 1: single-tool cycle with `get_current_time` — finish_reason, argument extraction, result return, final response
-- Observation 2: single-tool cycle with `convert_currency` — multi-argument tool, `json.loads` on arguments
-- Observation 3: Anthropic path for `get_current_time` — `tool_use` content block, `input` as dict, `tool_result` role
+**Out of scope:** parallel and sequential tool patterns (covered in `lab-tool-patterns`), schema constraint design (covered in `lab-schema-design`).
 
-## Prerequisites
+---
 
-- Ollama running: `ollama serve` + `ollama pull llama3.2`
-- `pip install -r labs/structured-outputs/requirements.txt`
-- Anthropic API key in `.env` (observation 3 only, optional)
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `tool-use` | All three observations — tools are declared in the request, the model generates a call, the app executes and returns the result |
+| `function-calling` | `run_single_tool_cycle()` — `tool_calls[0].function.name` and `tool_calls[0].function.arguments` are the OpenAI fields the app reads to dispatch execution |
+| `finish-reason` | `run_single_tool_cycle()` — `finish_reason == "tool_calls"` gates the execution branch; `finish_reason == "stop"` signals the final response |
+
+---
+
+## Setup
+
+```bash
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# ANTHROPIC_API_KEY in .env is optional (observation 3 only)
+# Install dependencies (from the module root):
+pip install -r labs/structured-outputs/requirements.txt
+```
+
+---
 
 ## Run
 
@@ -48,7 +64,9 @@ cd labs/structured-outputs
 python lab-tool-usage/main.py
 ```
 
-## Expected output
+---
+
+## Expected Output
 
 ```
 === Observation 1: Single tool cycle — get_current_time ===
@@ -78,18 +96,22 @@ python lab-tool-usage/main.py
 [Anthropic] final response: "The current time in UTC is 12:34:56."
 ```
 
+---
+
 ## What to observe
 
-- **finish_reason gate:** in observations 1 and 2, the first response has `finish_reason="tool_calls"` — this is the branch point; if the model answers in text instead, the tool is never executed
-- **arguments format:** `tool_call.function.arguments` is a JSON string, not a dict — `json.loads` is required before calling the tool function
-- **Anthropic differences:** `stop_reason="tool_use"` instead of `"tool_calls"`; `input` is already a dict; tool result uses `role: "user"` with a `tool_result` content block instead of `role: "tool"`
+- **Finish-reason gate:** in observations 1 and 2, the first response has `finish_reason="tool_calls"` — this is the branch point; if the model answers in text instead, the tool is never executed.
+- **Arguments format:** `tool_call.function.arguments` is a JSON string, not a dict — `json.loads` is required before calling the tool function.
+- **Anthropic differences:** `stop_reason="tool_use"` instead of `"tool_calls"`; `input` is already a dict; tool result uses `role: "user"` with a `tool_result` content block instead of `role: "tool"`.
+
+---
 
 ## Concepts verified
 
-- [ ] `finish_reason == "tool_calls"` gates the tool execution branch
-- [ ] `tool_call.function.arguments` is a JSON string requiring `json.loads`
-- [ ] Assistant message must be appended before tool result messages
-- [ ] Anthropic: `tool_use` block, `input` is already a dict, result uses `role: "user"` with `tool_result` content
+- [ ] `finish_reason == "tool_calls"` gates the tool execution branch — observable at Observation 1 step [1]
+- [ ] `tool_call.function.arguments` is a JSON string requiring `json.loads` — observable at Observation 2 arguments line
+- [ ] Assistant message must be appended before tool result messages — observable at Failure case
+- [ ] Anthropic: `tool_use` block, `input` is already a dict, result uses `role: "user"` — observable at Observation 3
 
 ---
 
@@ -104,3 +126,12 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - The final response is never reached; the function raises before printing step `[3]`
 
 Restore `messages.append(msg)` after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama | Local LLM runtime — serves tool use requests via the OpenAI-compatible endpoint |
+| Anthropic API | Cloud LLM provider — optional; used in Observation 3 to demonstrate schema differences; skipped if `ANTHROPIC_API_KEY` is absent |

@@ -17,28 +17,42 @@ summary: "Implementation lab — compares unconstrained vs constrained Pydantic 
 ---
 
 # Schema Design
+
 ## Navigation
 
 [Labs](../../README.md) / [Structured Outputs — Labs](../README.md) / Schema Design
 
 ---
 
-**Module:** `structured-outputs`
-**Type:** implementation
-**Doc:** `docs/structured-outputs/schema-design.md`
-**Required:** optional
+## Overview
 
-## What this lab demonstrates
+This lab runs 10 test inputs (including adversarial cases with missing or ambiguous data) through two Pydantic schemas — one unconstrained with plain `str` fields, one constrained with `Literal`, bounded `int`, and optional nullable fields — and measures enum violations and hallucinated optional field values for each.
 
-- Side-by-side comparison of unconstrained vs constrained Pydantic schemas on the same test set
-- Constrained schema uses: `Literal` (enum), `int` with bounds, `str | None` with default, `list[str]`
-- Adversarial inputs: missing fields, unusual formats, multilingual text, very short text
-- Accuracy metrics: parse success rate, enum compliance rate, null-vs-hallucinated rate on optional fields
+**Out of scope:** JSON mode vs schema enforcement comparison (covered in `lab-structured-outputs`), tool declaration and execution (covered in `lab-tool-usage`).
 
-## Prerequisites
+---
 
-- Ollama running: `ollama serve` + `ollama pull llama3.2`
-- `pip install -r labs/structured-outputs/requirements.txt`
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `schema-design` | `ContactConstrained` Pydantic model — field selection, `Literal` enum, `str \| None = None` optional, `Field(max_length=...)` constraint applied to each field |
+| `schema-enforcement` | Both schemas use `client.beta.chat.completions.parse(response_format=...)` — the constrained schema enforces tighter bounds that eliminate enum violations and force `None` on absent fields |
+
+---
+
+## Setup
+
+```bash
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# Install dependencies (from the module root):
+pip install -r labs/structured-outputs/requirements.txt
+```
+
+---
 
 ## Run
 
@@ -47,7 +61,9 @@ cd labs/structured-outputs
 python lab-schema-design/main.py
 ```
 
-## Expected output
+---
+
+## Expected Output
 
 ```
 === Schema comparison: ContactExtraction ===
@@ -71,17 +87,21 @@ Constrained — parse success: 10/10 | enum violations: 0 | hallucinated optiona
   Conclusion: constraints eliminate enum violations and force None on absent optional fields
 ```
 
+---
+
 ## What to observe
 
-- **Unconstrained:** parse success is 10/10, but `enum_violations > 0` and `hallucinated_optionals > 0` — especially on adversarial inputs with no contact info (inputs 4–5); the model guesses values for absent fields
-- **Constrained:** `enum_violations` drops to 0; optional fields return `None` instead of fabricated values — the schema shape enforces `None` even when the model would otherwise fill in a guess
+- **Unconstrained:** parse success is 10/10, but `enum_violations > 0` and `hallucinated_optionals > 0` — especially on adversarial inputs with no contact info (inputs 4–5); the model guesses values for absent fields.
+- **Constrained:** `enum_violations` drops to 0; optional fields return `None` instead of fabricated values — the schema shape enforces `None` even when the model would otherwise fill in a guess.
+
+---
 
 ## Concepts verified
 
-- [ ] `Literal` maps enum to JSON Schema `enum` — eliminates out-of-vocabulary values
-- [ ] `str | None = None` returns `None` instead of a hallucinated value when field is absent
-- [ ] `Field(max_length=...)` bounds string length
-- [ ] Schema constraints do not degrade parse success rate — constrained and unconstrained succeed equally on parseable inputs
+- [ ] `Literal` maps enum to JSON Schema `enum` — eliminates out-of-vocabulary values — observable at enum violations count
+- [ ] `str | None = None` returns `None` instead of a hallucinated value when field is absent — observable at hallucinated optionals count
+- [ ] `Field(max_length=...)` bounds string length — observable at title field length in output
+- [ ] Constraints do not degrade parse success rate — both schemas succeed equally on parseable inputs — observable at parse success row
 
 ---
 
@@ -93,7 +113,14 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
 - **Expected degradation:**
   - `enum_violations` stays 0 — there is no enum to violate
   - Non-standard values such as `"director"`, `"developer"`, or `"CEO"` pass through unchecked
-  - The constrained schema no longer enforces vocabulary bounds on `role`
   - The `enum_violations` metric becomes meaningless as a comparison signal
 
 Restore the `Literal` type on `role` after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama | Local LLM runtime — serves schema comparison requests via the OpenAI-compatible endpoint with Pydantic `response_format` |

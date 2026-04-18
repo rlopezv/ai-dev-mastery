@@ -171,8 +171,9 @@ docs/rag/
 | `lab-retrieval-playground` | implementation | Implement dense retrieval with ChromaDB and observe score distributions |
 | `lab-query-pipeline` | implementation | Build the full query pipeline: embed → retrieve → assemble → generate |
 | `lab-rag-evaluation` | implementation | Measure retrieval precision/recall and answer faithfulness on a fixed evaluation set |
+| `lab-integration` | module-integration | End-to-end pipeline in one self-contained script: ingestion + retrieval + generation |
 
-All five labs are required.
+All six labs are required.
 
 ---
 
@@ -186,7 +187,8 @@ All five labs are required.
 5. Read `retrieval-strategies.md` and run `lab-retrieval-playground`.
 6. Read `context-assembly.md` and run `lab-query-pipeline`.
 7. Read `rag-evaluation-and-metrics.md` and run `lab-rag-evaluation`.
-8. Read `architecture.md` and `implementation-reference.md`.
+8. Read `architecture.md` and run `lab-integration`.
+9. Read `implementation-reference.md`.
 9. Complete `validation.md`.
 
 ---

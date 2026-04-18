@@ -44,7 +44,7 @@ summary: "Defines the conceptual, practical, lab, and integration validation cri
 
 ## 1. Validation Overview
 
-This document defines when the RAG module is complete. A learner has completed this module when they can explain the two-phase RAG pipeline, implement each component, run all five required labs, and reason about quality trade-offs at the retrieval and generation stages.
+This document defines when the RAG module is complete. A learner has completed this module when they can explain the two-phase RAG pipeline, implement each component, run all six required labs, and reason about quality trade-offs at the retrieval and generation stages.
 
 Validation is organized across four levels: conceptual (understanding), practical (implementation ability), lab (execution), and integration (cross-component reasoning).
 
@@ -101,6 +101,7 @@ Validation is organized across four levels: conceptual (understanding), practica
 | `lab-retrieval-playground` | Dense retrieval, BM25 retrieval, and RRF hybrid retrieval all return results; at least one query shows BM25 outperforms dense retrieval for an exact-term query |
 | `lab-query-pipeline` | Full pipeline runs end-to-end; generated response cites at least one source chunk; context block stays within the 8192-token budget |
 | `lab-rag-evaluation` | Evaluation set of ≥ 20 questions is executed; Precision@5 and Recall@5 are computed and printed; LLM-as-judge faithfulness score is computed for ≥ 10 answers |
+| `lab-integration` | Ingestion completes without error; all in-scope demo queries receive a grounded answer with at least one source cited; out-of-scope query is declined; context block stays within token budget for every query |
 
 ---
 
@@ -146,7 +147,7 @@ The RAG module is complete when:
 
 - All seven core concepts in section 2 can be explained accurately and causally.
 - All four practical tasks in section 3 are implemented and produce expected outputs.
-- All five labs in section 4 execute without errors and satisfy their validation criteria.
+- All six labs in section 4 execute without errors and satisfy their validation criteria.
 - All four integration scenarios in section 5 are reasoned through correctly.
 - No failure patterns from section 6 are present in the implementation.
 

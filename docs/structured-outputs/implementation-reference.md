@@ -193,10 +193,10 @@ def sequential_weather_pipeline(client, city_query: str) -> str:
 
 | Tool | Role | Infrastructure profile |
 |------|------|------------------------|
-| Ollama | LLM runtime (llama3.2) | `light` |
-| `openai` SDK | Chat completions + tool use API client | `light` |
-| `pydantic` | Schema declaration + response validation | `light` |
-| `anthropic` SDK | Anthropic Messages API (tool use schema diff) | `light` |
+| Ollama | LLM runtime (llama3.2) | `foundational` |
+| `openai` SDK | Chat completions + tool use API client | `foundational` |
+| `pydantic` | Schema declaration + response validation | `foundational` |
+| `anthropic` SDK | Anthropic Messages API (tool use schema diff) | `foundational` |
 
 ---
 

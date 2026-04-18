@@ -33,11 +33,12 @@ implementation_refs:
   - "labs/rag/lab-retrieval-playground"
   - "labs/rag/lab-query-pipeline"
   - "labs/rag/lab-rag-evaluation"
+  - "labs/rag/lab-integration"
 
 validation_refs:
   - "meta/standards/validation/labs-checklist.md"
 
-summary: "Five labs that build the RAG pipeline incrementally — from embedding a single text to running a fully evaluated query pipeline with Precision@k and faithfulness metrics."
+summary: "Six labs that build the RAG pipeline incrementally — from embedding a single text to a fully evaluated query pipeline and a self-contained end-to-end integration script."
 ---
 
 # RAG — Labs
@@ -51,7 +52,7 @@ summary: "Five labs that build the RAG pipeline incrementally — from embedding
 
 ## 1. Overview
 
-These labs implement the RAG pipeline described in `docs/rag/` component by component. Each lab introduces one system layer, and the later labs compose the results of earlier ones. The sequence ends with a complete, measurable pipeline: `lab-query-pipeline` runs end-to-end retrieval and generation, and `lab-rag-evaluation` applies retrieval and generation quality metrics against a fixed evaluation set.
+These labs implement the RAG pipeline described in `docs/rag/` component by component. Each lab introduces one system layer, and the later labs compose the results of earlier ones. The sequence ends with `lab-integration`, a self-contained end-to-end script that runs ingestion, retrieval, and generation in a single execution without depending on previous labs' collections.
 
 All labs run fully locally using **Ollama** for embeddings and generation and **ChromaDB** for vector storage. No cloud API keys are required.
 
@@ -71,8 +72,9 @@ All labs run fully locally using **Ollama** for embeddings and generation and **
 | `lab-retrieval-playground` | Dense retrieval, BM25 sparse retrieval, RRF hybrid merge; failure cases per strategy | implementation | yes | `retrieval-strategies.md` |
 | `lab-query-pipeline` | Full query pipeline: embed → retrieve → deduplicate → assemble → generate; token budget guard | implementation | yes | `context-assembly.md` |
 | `lab-rag-evaluation` | Precision@k, Recall@k, LLM-as-judge faithfulness; pipeline comparison across top-k values | implementation | yes | `rag-evaluation-and-metrics.md` |
+| `lab-integration` | End-to-end RAG pipeline in one script: ingestion + chunking + indexing + retrieval + assembly + generation | module-integration | yes | `architecture.md` |
 
-All five labs are required.
+All six labs are required.
 
 ---
 
@@ -106,9 +108,10 @@ python lab-chunking-strategies/main.py
 python lab-retrieval-playground/main.py
 python lab-query-pipeline/main.py
 python lab-rag-evaluation/main.py
+python lab-integration/main.py
 ```
 
-Each lab prints structured output to stdout. No server process is started. Labs 3–5 depend on the ChromaDB index built by `lab-chunking-strategies` — run them in order.
+Each lab prints structured output to stdout. No server process is started. Labs 3–5 depend on the ChromaDB index built by `lab-chunking-strategies` — run them in order. `lab-integration` builds its own independent index and can run standalone.
 
 **Checking Ollama is ready:**
 
@@ -132,7 +135,7 @@ labs/rag/corpus/
 └── llm-inference.md
 ```
 
-These five documents are your knowledge base. Read them before running any lab. They are short (400–600 words each) and cover topics from this tutorial. Knowing their content lets you predict which chunks should be retrieved for a given query, understand why certain similarity scores are higher than others, and write the ground-truth evaluation questions in `lab-rag-evaluation` with confidence.
+These five documents are your knowledge base. Read them before running any lab. They are short (400–600 words each) and cover topics from this tutorial. Knowing their content lets you predict which chunks should be retrieved for a given query, understand why certain similarity scores are higher than others, write the ground-truth evaluation questions in `lab-rag-evaluation` with confidence, and verify the in-scope answers produced by `lab-integration`.
 
 In a real RAG system, these files would be your company's documentation, product manuals, or knowledge articles. Here they are fixed so that results are comparable across labs and reproducible across runs.
 
@@ -146,7 +149,7 @@ labs/rag/
 ├── requirements.txt               ← Python dependencies
 ├── shared/
 │   ├── __init__.py
-│   └── config.py                  ← Ollama client, ChromaDB client factory, health check
+│   └── config.py                  ← Ollama client, ChromaDB client factory, load_corpus()
 ├── corpus/                        ← read these before running the labs
 │   ├── transformer-architecture.md
 │   ├── text-embeddings.md
@@ -165,12 +168,15 @@ labs/rag/
 ├── lab-query-pipeline/
 │   ├── README.md
 │   └── main.py
-└── lab-rag-evaluation/
+├── lab-rag-evaluation/
+│   ├── README.md
+│   └── main.py
+└── lab-integration/
     ├── README.md
     └── main.py
 ```
 
-`shared/config.py` provides the Ollama OpenAI client and the ChromaDB PersistentClient. The `corpus/` directory contains the fixed plain-text Markdown files used across all labs. `lab-chunking-strategies` builds the ChromaDB collection from this corpus; later labs read from it.
+`shared/config.py` provides the Ollama OpenAI client and the ChromaDB PersistentClient. The `corpus/` directory contains the fixed plain-text Markdown files used across all labs. `lab-chunking-strategies` builds the ChromaDB collection from this corpus; labs 3–5 read from it. `lab-integration` builds its own independent collection (`rag_integration`) and does not depend on any previous lab.
 
 ---
 
@@ -183,7 +189,7 @@ labs/rag/
 | `docs/rag/retrieval-strategies.md` | `lab-retrieval-playground` |
 | `docs/rag/context-assembly.md` | `lab-query-pipeline` |
 | `docs/rag/rag-evaluation-and-metrics.md` | `lab-rag-evaluation` |
-| `docs/rag/architecture.md` | all labs (pipeline components) |
+| `docs/rag/architecture.md` | `lab-integration` (full pipeline) + all labs (individual components) |
 | `docs/rag/implementation-reference.md` | all labs (patterns and data structures) |
 
 ---
@@ -237,6 +243,15 @@ LLM-as-judge faithfulness scores are printed for ≥ 10 generated answers.
 Mean faithfulness score ≥ 0.70 for a corpus-aligned query set.
 ```
 
+**lab-integration**
+```
+Ingestion phase completes — collection contains N chunks, N > 0.
+All in-scope queries receive a non-empty answer with at least one source cited.
+Out-of-scope query ("What is the capital of France?") produces the decline message.
+Context block token count is below the stated budget for every query.
+Pipeline summary: In-scope + Declined (OOS) = Total queries.
+```
+
 ---
 
 ## 7. Common Issues
@@ -282,7 +297,7 @@ Small models (3B) are unreliable as judges. Use `llama3.2:7b` or larger for the 
 
 ## 9. Next Steps
 
-After completing all five labs and passing the criteria in `docs/rag/validation.md`:
+After completing all six labs and passing the criteria in `docs/rag/validation.md`:
 
 → Proceed to [`labs/memory-context/README.md`](../memory-context/README.md)
 

@@ -63,7 +63,20 @@ Do not edit manually unless correcting an error.
 
 ---
 
+## Audit status
+
+| Module | Audit | Report |
+|--------|-------|--------|
+| `llm-fundamentals` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/llm-fundamentals.audit.md` |
+| `llm-apis` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/llm-apis.audit.md` |
+| `prompt-engineering` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/prompt-engineering.audit.md` |
+| `structured-outputs` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/structured-outputs.audit.md` |
+| `rag` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/rag.audit.md` |
+| `memory-context` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/memory-context.audit.md` |
+
+---
+
 ## Last updated
 
-Session: ai-java module complete — 8 docs written and validated (README, 4 topics, architecture, implementation-reference, validation); 11 glossary terms added; labs/ai-java/README.md created (concept-only)
-Date: 2026-04-17
+Session: memory-context audit complete — STATIC_PASS / EXECUTION_PENDING; 3 glossary entries added (memory-types, memory-retrieval, summarization-based-compression); all 5 labs present and aligned with DOCS_LABS_MAP; all cross-references verified.
+Date: 2026-04-18

@@ -43,7 +43,7 @@ summary: "Assembles the full RAG query pipeline — embed, retrieve, deduplicate
 ---
 
 
-## What this lab demonstrates
+## Overview
 
 Individual components — embedding, retrieval, context assembly — work in isolation in the previous labs. Here they are composed into a single `rag_query()` function that runs end-to-end: embed the query, retrieve candidates, deduplicate, select within the token budget, format the context block, and generate a grounded response.
 
@@ -52,6 +52,18 @@ Two behaviours are tested explicitly:
 2. **Out-of-scope query** — the answer is not in the corpus. The response should decline to answer rather than hallucinate.
 
 **Requires:** the `chunks_recursive` ChromaDB collection built by `lab-chunking-strategies`.
+
+---
+
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `context-assembly` | `assemble_context()` — selects, orders, and formats chunks into the context block |
+| `token-budget` | budget calculation in `assemble_context()` — window minus system prompt, query, and output reserve |
+| `chunk-deduplication` | `deduplicate()` — removes near-duplicate chunks by cosine similarity threshold before assembly |
+| `lost-in-the-middle` | ordering strategy in `assemble_context()` — most relevant chunk placed last for recency bias |
+| `prompt-context-block` | `build_messages()` — numbered `[N]` chunk block injected before the user question |
 
 ---
 
@@ -145,3 +157,13 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - The similarity score is still printed but no longer gates the pipeline
 
 Restore `MIN_SIMILARITY_THRESHOLD = 0.50` after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama (`nomic-embed-text`) | Embeds the user query for retrieval |
+| Ollama (`llama3.2`) | Generates the grounded answer from the assembled context block |
+| ChromaDB (persistent) | Hosts `chunks_recursive` collection built by `lab-chunking-strategies` |

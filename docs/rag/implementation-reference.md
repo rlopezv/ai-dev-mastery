@@ -192,33 +192,23 @@ messages = [
 
 ## 6. Integration with External Systems
 
-**Ollama** — must be running locally before any lab executes:
-```bash
-ollama pull nomic-embed-text
-ollama pull llama3.2
-ollama serve   # already running if Ollama Desktop is installed
-```
+**Ollama** — serves the embedding model and the generation model locally via an OpenAI-compatible REST API.
 
-The embedding endpoint: `POST http://localhost:11434/v1/embeddings`
-The chat endpoint: `POST http://localhost:11434/v1/chat/completions`
-Both are accessed via the OpenAI Python client with `base_url="http://localhost:11434/v1"`.
+- Embedding endpoint: `POST http://localhost:11434/v1/embeddings`
+- Chat endpoint: `POST http://localhost:11434/v1/chat/completions`
+- Client: `OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")`
 
-**ChromaDB** — instantiated in-process:
-```python
-import chromadb
-client = chromadb.Client()  # in-memory
-# or
-client = chromadb.PersistentClient(path="./chroma_db")  # persisted to disk
-```
+The model name used at ingestion time must match the model name used at query time. The embedding model name is stored in ChromaDB collection metadata and validated before each query call.
 
-Persistent storage is required across labs that build an index in one script and query it in another (e.g., `lab-query-pipeline` reading the index built by `lab-chunking-strategies`).
+**ChromaDB** — in-process vector store accessed via `chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)`.
 
-**tiktoken** — used for token counting:
-```python
-import tiktoken
-enc = tiktoken.get_encoding("cl100k_base")  # compatible with llama-class models
-token_count = len(enc.encode(text))
-```
+Persistent storage is required across labs that build an index in one script and query it in another. Each collection stores (id, embedding, document, metadata) tuples and is addressed by name. The HNSW index is built automatically on first insertion.
+
+**tiktoken** — token counting via `tiktoken.get_encoding("cl100k_base")`.
+
+`cl100k_base` (the GPT-4 tokenizer family) is used as a close approximation for `llama3.2`'s SentencePiece tokenizer. It may overestimate token count by 5–10% for common English text — a safe direction that results in slightly smaller context blocks, never overflow.
+
+Setup and operational steps (model pull commands, Ollama startup) are documented in `labs/rag/README.md`.
 
 ---
 

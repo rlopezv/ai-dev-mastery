@@ -450,6 +450,16 @@ Restrictions added to a JSON Schema declaration — such as `enum`, `minimum`, `
 - **Origin:** `structured-outputs`
 - **Doc:** `docs/structured-outputs/schema-design.md`
 
+### schema-design
+The practice of structuring JSON Schema or Pydantic models to maximize structured output reliability — selecting only necessary fields, using enum over unconstrained string, marking absent-able fields optional, and keeping nesting shallow.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/schema-design.md`
+
+### schema-enforcement
+API-level validation of a model response against a declared JSON Schema before the response is returned to the caller; differs from prompt-only format instructions in that violations cause the provider to retry or return an explicit error rather than passing invalid output silently.
+- **Origin:** `structured-outputs`
+- **Doc:** `docs/structured-outputs/structured-outputs.md`
+
 ### sequential-chain
 A tool use pattern in which the application hard-codes a pipeline of tool calls where the output of one step is the input to the next; the model is not involved in step ordering, trading model agency for application predictability.
 - **Origin:** `structured-outputs`
@@ -550,6 +560,16 @@ The replacement of a block of older conversation turns with a model-generated su
 - **Origin:** `memory-context`
 - **Doc:** `docs/memory-context/context-management.md`
 
+### memory-retrieval
+The operation of querying an external memory store — episodic or semantic — using embedding similarity to find entries relevant to the current turn, then injecting the results into the assembled context before generation.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/external-memory.md`
+
+### memory-types
+The taxonomy of four memory mechanisms available to LLM applications: in-context memory (active context window), episodic memory (chronological turn log in an external store), semantic memory (durable entity facts in an external store), and parametric memory (knowledge baked into model weights).
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/memory-types.md`
+
 ### semantic-memory
 An external memory store entry that records a durable fact about an entity — a user preference, an account attribute, a domain fact — updated via upsert when the fact changes rather than appended chronologically.
 - **Origin:** `memory-context`
@@ -557,6 +577,11 @@ An external memory store entry that records a durable fact about an entity — a
 
 ### sliding-window
 A context management strategy that retains only the most recent N conversation turns, discarding everything older regardless of token count; predictable and zero-cost but loses all early context.
+- **Origin:** `memory-context`
+- **Doc:** `docs/memory-context/context-management.md`
+
+### summarization-based-compression
+A context management strategy that replaces a block of older conversation turns with a model-generated summary, preserving key facts at a fraction of the token cost; higher fidelity than truncation but adds a model call per compression event.
 - **Origin:** `memory-context`
 - **Doc:** `docs/memory-context/context-management.md`
 
@@ -580,6 +605,11 @@ A sparse retrieval algorithm that scores documents by a weighted, length-normali
 - **Origin:** `rag`
 - **Doc:** `docs/rag/retrieval-strategies.md`
 
+### bm25-index
+An inverted index over tokenized corpus text built using the BM25 algorithm; stores term-frequency statistics that enable exact-keyword queries without embedding vectors, used alongside a vector index in hybrid retrieval pipelines.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/implementation-reference.md`
+
 ### chunk-deduplication
 The process of identifying and removing near-duplicate chunks from a retrieval candidate list before context assembly, typically by applying a cosine similarity threshold to prevent the same information from occupying multiple slots in the context block.
 - **Origin:** `rag`
@@ -595,6 +625,11 @@ The maximum number of tokens or characters in a single chunk; the primary parame
 - **Origin:** `rag`
 - **Doc:** `docs/rag/document-processing-and-chunking.md`
 
+### chromadb-collection
+A named partition within a ChromaDB vector database that stores embedding vectors, document text, and metadata for a set of chunks; queried by cosine similarity for nearest-neighbor retrieval.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/implementation-reference.md`
+
 ### chunking
 The process of splitting source documents into smaller, retrievable segments whose size and boundaries are tuned to maximize embedding focus and retrieval precision.
 - **Origin:** `rag`
@@ -605,6 +640,11 @@ The pipeline step that selects, deduplicates, orders, and formats retrieved chun
 - **Origin:** `rag`
 - **Doc:** `docs/rag/context-assembly.md`
 
+### context-assembler
+The RAG pipeline component that receives the ranked retrieval candidate list, applies deduplication and token-budget selection, orders the selected chunks, and formats the numbered context block for prompt injection.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/architecture.md`
+
 ### cosine-similarity
 A distance metric between two vectors that measures the cosine of the angle between them, producing a value between -1 and 1; used to rank stored chunk vectors by semantic proximity to a query vector.
 - **Origin:** `rag`
@@ -614,6 +654,11 @@ A distance metric between two vectors that measures the cosine of the angle betw
 A retrieval approach that encodes the query and all corpus chunks as dense embedding vectors and finds the most semantically similar chunks using approximate nearest-neighbor search; captures semantic similarity and paraphrase but may miss rare exact-term matches.
 - **Origin:** `rag`
 - **Doc:** `docs/rag/retrieval-strategies.md`
+
+### document-ingestion-pipeline
+The offline phase of a RAG system that loads source documents, chunks them into retrievable units, generates embedding vectors, and persists them to the vector store; runs once per corpus or incrementally on document updates.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/architecture.md`
 
 ### document-loader
 The ingestion pipeline component that reads source documents from files, databases, or APIs and extracts clean plain text, handling format-specific concerns such as PDF multi-column layout, HTML boilerplate removal, and Markdown header preservation.
@@ -635,6 +680,11 @@ A fixed set of (query, relevant_chunk_ids, expected_answer) triples used to meas
 - **Origin:** `rag`
 - **Doc:** `docs/rag/rag-evaluation-and-metrics.md`
 
+### evaluation-harness
+The component that executes a fixed evaluation dataset against a RAG pipeline, collects retrieved chunk IDs and generated answers, and computes retrieval and generation quality metrics for pipeline comparison.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/architecture.md`
+
 ### human-in-the-loop
 A workflow configuration in which a human participant can review, approve, or redirect AI agent actions at defined checkpoints, implemented in AutoGen via the `human_input_mode` parameter on a `UserProxyAgent`.
 - **Origin:** `frameworks-tools`
@@ -649,6 +699,11 @@ A model output that contains statements not supported by the provided context or
 A retrieval strategy that runs both dense (embedding-based) and sparse (BM25) retrieval and merges the two ranked result lists, recovering candidates that each approach would miss individually.
 - **Origin:** `rag`
 - **Doc:** `docs/rag/retrieval-strategies.md`
+
+### ingestion-pipeline
+The processing sequence that transforms raw source documents into indexed chunks in the vector store, covering document loading, chunking, embedding, and storage; the offline phase of a RAG system.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/implementation-reference.md`
 
 ### kernel
 The central object in Semantic Kernel that holds all registered AI services, plugins, and memory stores, and routes every function invocation — whether semantic or native — through a unified execution interface.
@@ -680,6 +735,11 @@ The formatted section of a RAG prompt that contains the numbered, assembled retr
 - **Origin:** `rag`
 - **Doc:** `docs/rag/context-assembly.md`
 
+### query-pipeline
+The online phase of a RAG system that embeds a user query, retrieves candidate chunks from the vector store, optionally reranks, assembles context within the token budget, and generates a grounded response; runs on every user request.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/architecture.md`
+
 ### runnable
 The core protocol in LangChain that any composable pipeline component must implement: `invoke`, `stream`, and `batch` methods with a standard input/output contract, enabling components to be composed with LCEL's `|` operator.
 - **Origin:** `frameworks-tools`
@@ -689,6 +749,11 @@ The core protocol in LangChain that any composable pipeline component must imple
 A rank aggregation algorithm that merges multiple ranked lists by summing `1/(k + rank)` scores per document across lists, using only rank positions (not raw scores) and therefore robust to score scale differences between retrieval systems.
 - **Origin:** `rag`
 - **Doc:** `docs/rag/retrieval-strategies.md`
+
+### rrf-merge
+The implementation step that applies Reciprocal Rank Fusion to combine dense and sparse retrieval ranked lists into a single merged ranking, without requiring score calibration between the two retrieval systems.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/implementation-reference.md`
 
 ### recursive-chunking
 A chunking strategy that applies a priority-ordered list of split delimiters — paragraph break, sentence boundary, word boundary — and splits on the coarsest delimiter that keeps chunks within the target size, producing chunks that respect natural text structure.
@@ -725,6 +790,11 @@ The number of tokens available for retrieved context in a RAG prompt, calculated
 - **Origin:** `rag`
 - **Doc:** `docs/rag/context-assembly.md`
 
+### token-budget-guard
+An implementation pattern that calculates the remaining token budget before context assembly and drops trailing chunks when the total would exceed the context window, preventing silent API truncation or context overflow errors.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/implementation-reference.md`
+
 ### vector-index
 A data structure that stores embedding vectors and supports efficient approximate nearest-neighbor queries; common index types include HNSW (hierarchical navigable small world) for general use and IVF (inverted file index) for very large collections.
 - **Origin:** `rag`
@@ -734,6 +804,11 @@ A data structure that stores embedding vectors and supports efficient approximat
 A retrieval mechanism that finds the stored documents most semantically similar to a query by computing geometric distance between embedding vectors, returning the top-k closest vectors from the index.
 - **Origin:** `rag`
 - **Doc:** `docs/rag/embeddings-and-vector-search.md`
+
+### vector-store
+A database component that persists embedding vectors alongside chunk text and metadata, and serves approximate nearest-neighbor similarity queries; the central storage layer in a RAG pipeline.
+- **Origin:** `rag`
+- **Doc:** `docs/rag/architecture.md`
 
 ### abstraction ceiling
 The point at which a tool's or framework's pre-built abstractions no longer cover a requirement, forcing the engineer to work around the abstraction or abandon it; in visual AI workflow tools, reached when a pipeline needs custom logic, non-standard tool results, or per-step observability.

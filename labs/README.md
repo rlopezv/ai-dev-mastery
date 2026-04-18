@@ -113,7 +113,7 @@ ones. The module README marks which labs produce shared state.
 | [LLM APIs](../labs/llm-apis/README.md) | lab-chat-completion, lab-streaming, lab-tool-calling | ✅ |
 | [Prompt Engineering](../labs/prompt-engineering/README.md) | lab-prompt-anatomy, lab-chain-of-thought, lab-few-shot | ✅ |
 | [Structured Outputs](../labs/structured-outputs/README.md) | lab-json-mode, lab-function-calling, lab-output-validation | ✅ |
-| [RAG](rag/README.md) | lab-embeddings, lab-chunking-strategies, lab-retrieval-playground, lab-query-pipeline, lab-rag-evaluation | ✅ |
+| [RAG](rag/README.md) | lab-embeddings, lab-chunking-strategies, lab-retrieval-playground, lab-query-pipeline, lab-rag-evaluation, lab-integration | ✅ |
 | [Memory & Context Management](memory-context/README.md) | lab-memory-types, lab-conversation-history, lab-context-management, lab-external-memory, lab-integration | ✅ |
 | [AI Agents](ai-agents/README.md) | lab-single-agent-loop, lab-tool-use-loops, lab-multi-agent, lab-agent-patterns, lab-mcp-server, lab-integration | ✅ |
 | [Frameworks & Tools](frameworks-tools/README.md) | lab-langchain, lab-llamaindex, lab-autogen, lab-semantic-kernel, lab-integration | ✅ |

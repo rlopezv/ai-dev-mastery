@@ -7,7 +7,7 @@ path: "labs/structured-outputs/lab-structured-outputs/README.md"
 status: "draft"
 level: "intermediate"
 concepts:
-  - "structured-outputs"
+  - "structured-output"
   - "json-mode"
   - "schema-enforcement"
 prerequisites:
@@ -18,27 +18,43 @@ summary: "Implementation lab — compares prompt-only JSON, JSON mode, and Pydan
 ---
 
 # Structured Outputs
+
 ## Navigation
 
 [Labs](../../README.md) / [Structured Outputs — Labs](../README.md) / Structured Outputs
 
 ---
 
-**Module:** `structured-outputs`
-**Type:** implementation
-**Doc:** `docs/structured-outputs/structured-outputs.md`
-**Required:** yes
+## Overview
 
-## What this lab demonstrates
+This lab runs five adversarial inputs through three successive approaches to structured model output — prompt-only JSON format instruction, JSON mode, and Pydantic schema enforcement — and compares parse success and schema compliance across all three. It makes the reliability difference between approaches directly measurable.
 
-- Observation 1: prompt-only JSON format instruction — shows parse failures on adversarial inputs
-- Observation 2: JSON mode enabled — syntactic validity guaranteed, shape still model-determined
-- Observation 3: Pydantic schema enforcement — `message.parsed` returns a typed `ReviewSummary` object with zero parse failures
+**Out of scope:** tool use (covered in `lab-tool-usage`), schema constraint design (covered in `lab-schema-design`).
 
-## Prerequisites
+---
 
-- Ollama running: `ollama serve` + `ollama pull llama3.2`
-- `pip install -r labs/structured-outputs/requirements.txt`
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `structured-output` | `observe_schema_enforcement()` — `client.beta.chat.completions.parse(response_format=ReviewSummary)` returns a typed `ReviewSummary` instance; `message.parsed` is the entry point |
+| `json-mode` | `observe_json_mode()` — `response_format={"type": "json_object"}` guarantees syntactically valid JSON but not structural conformance |
+| `schema-enforcement` | `observe_schema_enforcement()` — API enforces the declared schema before returning; `sentiment` is always one of three allowed values; `score` is always 1–5 |
+
+---
+
+## Setup
+
+```bash
+# Ollama must be running with llama3.2 loaded:
+ollama serve
+ollama pull llama3.2
+
+# Install dependencies (from the module root):
+pip install -r labs/structured-outputs/requirements.txt
+```
+
+---
 
 ## Run
 
@@ -47,7 +63,9 @@ cd labs/structured-outputs
 python lab-structured-outputs/main.py
 ```
 
-## Expected output
+---
+
+## Expected Output
 
 ```
 === Observation 1: Prompt-only JSON ===
@@ -74,18 +92,22 @@ Schema enforcement parse success: 5/5
 All typed objects. No manual json.loads needed.
 ```
 
+---
+
 ## What to observe
 
-- **Observation 1:** simple inputs may parse successfully, but adversarial inputs (long text, special characters) produce prose before the JSON block — the extraction logic fails or requires a heuristic `find("{")` workaround
-- **Observation 2:** JSON mode returns HTTP 200 with valid JSON every time — but `schema_compliant` count may be lower than `parse_success`, showing that syntactic enforcement does not imply structural conformance
-- **Observation 3:** all 5 inputs return typed `ReviewSummary` objects — `sentiment` is always one of the three allowed values, `score` is always 1–5; no manual `json.loads` needed
+- **Observation 1:** simple inputs may parse successfully, but adversarial inputs (long text, special characters) produce prose before the JSON block — extraction fails or requires a heuristic `find("{")` workaround.
+- **Observation 2:** JSON mode returns HTTP 200 with valid JSON every time — but `schema_compliant` count may be lower than `parse_success`, showing that syntactic enforcement does not imply structural conformance.
+- **Observation 3:** all 5 inputs return typed `ReviewSummary` objects — `sentiment` is always one of the three allowed values, `score` is always 1–5; no manual `json.loads` needed.
+
+---
 
 ## Concepts verified
 
-- [ ] Prompt-only JSON fails on adversarial inputs (long text, special characters)
-- [ ] JSON mode guarantees syntactic validity but not structural conformance
-- [ ] Pydantic schema enforcement returns a typed object from `message.parsed` with zero failures
-- [ ] `sentiment` is always one of `["positive", "neutral", "negative"]`; `score` is always 1–5
+- [ ] Prompt-only JSON fails on adversarial inputs — observable at Observation 1 parse success rate
+- [ ] JSON mode guarantees syntactic validity but not structural conformance — observable at Observation 2 schema compliance vs parse success
+- [ ] Schema enforcement returns a typed object from `message.parsed` with zero failures — observable at Observation 3
+- [ ] `sentiment` is always one of `["positive", "neutral", "negative"]`; `score` is always 1–5 — observable at Observation 3 output
 
 ---
 
@@ -101,3 +123,11 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - Evaluation code comparing against `"positive"/"neutral"/"negative"` would fail despite correct classification
 
 Restore `Literal["positive", "neutral", "negative"]` after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama | Local LLM runtime — serves structured output requests via the OpenAI-compatible `/beta/chat/completions` endpoint with `response_format` support |

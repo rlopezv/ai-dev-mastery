@@ -42,13 +42,25 @@ summary: "Compares dense retrieval, BM25 sparse retrieval, and RRF hybrid merge 
 ---
 
 
-## What this lab demonstrates
+## Overview
 
 No single retrieval strategy is universally better. Dense retrieval misses rare exact terms; BM25 misses paraphrase and synonymy. This lab runs both against the same index and merges their results, making the complementary failure modes directly observable.
 
 You will run a fixed set of queries — some designed to favour dense retrieval, some to favour BM25 — and compare what each strategy surfaces. The hybrid RRF merge shows how combining both ranked lists recovers candidates that neither alone would rank at the top.
 
 **Requires:** the `chunks_recursive` ChromaDB collection built by `lab-chunking-strategies`.
+
+---
+
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `dense-retrieval` | `dense_retrieve()` — queries ChromaDB by cosine similarity |
+| `sparse-retrieval` | `bm25_retrieve()` — scores corpus texts using `rank_bm25.BM25Okapi` |
+| `hybrid-retrieval` | `hybrid_retrieve()` — runs dense and sparse retrieval then merges results |
+| `reciprocal-rank-fusion` | `rrf_merge()` — combines two ranked lists by summing `1/(k + rank)` per document |
+| `reranking` | commentary in output — concept explained; cross-encoder not implemented to avoid PyTorch dependency |
 
 ---
 
@@ -135,3 +147,12 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - RRF hybrid also degrades for exact-term queries because the BM25 signal collapses
 
 Restore `.lower()` on both sides after the experiment.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama (`nomic-embed-text`) | Generates query embedding for dense retrieval |
+| ChromaDB (persistent) | Hosts `chunks_recursive` collection built by `lab-chunking-strategies` |

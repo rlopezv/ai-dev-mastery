@@ -124,6 +124,33 @@ def assemble_context(chunks: list[dict], query: str,
 
 
 # ---------------------------------------------------------------------------
+# Corpus loading
+# ---------------------------------------------------------------------------
+
+def load_corpus(corpus_dir: str | None = None) -> list[dict]:
+    """
+    Load all .md and .txt files from the corpus directory.
+
+    Returns:
+        list of dicts with 'source' (filename) and 'text' (content) keys,
+        sorted by filename.
+
+    Default corpus_dir: labs/rag/corpus/ (sibling of shared/).
+    """
+    import pathlib
+
+    if corpus_dir is None:
+        corpus_dir = str(pathlib.Path(__file__).parent.parent / "corpus")
+
+    results: list[dict] = []
+    for path in sorted(pathlib.Path(corpus_dir).glob("*.md")):
+        results.append({"source": path.name, "text": path.read_text(encoding="utf-8")})
+    for path in sorted(pathlib.Path(corpus_dir).glob("*.txt")):
+        results.append({"source": path.name, "text": path.read_text(encoding="utf-8")})
+    return results
+
+
+# ---------------------------------------------------------------------------
 # Readiness checks
 # ---------------------------------------------------------------------------
 

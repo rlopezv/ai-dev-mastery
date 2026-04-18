@@ -42,13 +42,25 @@ summary: "Measures RAG pipeline quality using Precision@k, Recall@k, and LLM-as-
 ---
 
 
-## What this lab demonstrates
+## Overview
 
 A pipeline that feels like it works may still be broken in ways that only measurement reveals. This lab applies the evaluation framework described in `docs/rag/rag-evaluation-and-metrics.md` to the full pipeline from `lab-query-pipeline`.
 
 You will run a fixed 20-question evaluation set against two pipeline configurations (top_k=5 and top_k=10), compute Precision@5 and Recall@5 for each, and run LLM-as-judge faithfulness scoring on a subset of the generated answers. The key observation is that Recall@5 improves when top_k increases — demonstrating the recall/precision trade-off at the retrieval stage.
 
 **Requires:** the `chunks_recursive` ChromaDB collection built by `lab-chunking-strategies`.
+
+---
+
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `retrieval-precision` | `evaluate_retrieval()` — `|relevant ∩ retrieved| / k` per query, averaged across all eval questions |
+| `retrieval-recall` | `evaluate_retrieval()` — `|relevant ∩ retrieved| / |relevant|` per query, averaged |
+| `answer-faithfulness` | `judge_faithfulness()` — LLM-as-judge prompt scoring whether the answer is grounded in context |
+| `answer-relevance` | faithfulness judge output — whether the answer addresses the question |
+| `evaluation-dataset` | `EVAL_SET` constant — 20 fixed (query, source_file) pairs used across both top_k comparisons |
 
 ---
 
@@ -140,3 +152,13 @@ Restore `top_k=10` after the experiment.
 ## About the evaluation set
 
 The 20 questions are drawn directly from the five corpus documents. Each question maps to one source file that contains the answer. Ground truth is defined at the **source file level** — a retrieved chunk is counted as relevant if its `source` metadata field matches the expected source for that question. This is a practical approximation when chunk-level IDs are not pre-labelled.
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama (`nomic-embed-text`) | Embeds evaluation queries for retrieval |
+| Ollama (`llama3.2`) | Generates answers from assembled context; also used as LLM-as-judge for faithfulness scoring |
+| ChromaDB (persistent) | Hosts `chunks_recursive` collection built by `lab-chunking-strategies` |

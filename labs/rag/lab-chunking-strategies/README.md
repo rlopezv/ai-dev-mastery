@@ -42,13 +42,25 @@ summary: "Compares fixed-size, sentence-boundary, and recursive chunking strateg
 ---
 
 
-## What this lab demonstrates
+## Overview
 
 Every chunk in the vector store is a retrievable unit — the granularity of your chunks determines how focused each embedding vector is and how well it matches a specific query. This lab makes that trade-off directly observable.
 
 You will apply three chunking strategies to the same five corpus documents, index each strategy into a separate ChromaDB collection, and run a fixed set of queries against all three. The key observation is how top-1 similarity scores differ across strategies for the same query — particularly for queries about facts that span paragraph boundaries.
 
 The recursive collection built here is used by `lab-retrieval-playground`, `lab-query-pipeline`, and `lab-rag-evaluation`. **Run this lab before the others.**
+
+---
+
+## Concepts
+
+| Concept | Where it appears |
+|---------|-----------------|
+| `chunking` | `fixed_chunk()`, `sentence_chunk()`, `recursive_chunk()` — three split strategies applied to the same corpus |
+| `chunk-size` | `CHUNK_SIZE` constant — maximum characters per chunk across all strategies |
+| `chunk-overlap` | `overlap` parameter in `recursive_chunk()` — shared tokens between consecutive chunks |
+| `recursive-chunking` | `recursive_chunk()` — priority-ordered delimiter splitting (paragraph → sentence → word) |
+| `document-loader` | `load_corpus()` — reads `.md` files from the corpus directory |
 
 ---
 
@@ -151,3 +163,12 @@ Modify `main.py` at the `# FAILURE CASE` block and re-run.
   - The `✓ recursive top-1 ≥ fixed top-1` check may flip to `✗`
 
 Restore `CHUNK_SIZE = 512` after the experiment (subsequent labs depend on the `chunks_recursive` collection built with the default size).
+
+---
+
+## Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| Ollama (`nomic-embed-text`) | Embeds chunks for ChromaDB insertion and query-time similarity scoring |
+| ChromaDB (persistent) | Stores three separate collections — one per chunking strategy (`chunks_fixed`, `chunks_sentence`, `chunks_recursive`) |

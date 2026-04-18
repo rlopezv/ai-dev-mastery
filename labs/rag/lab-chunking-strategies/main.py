@@ -14,6 +14,7 @@ from shared.config import (
     build_chroma_client,
     build_client,
     embed_batch,
+    load_corpus,
 )
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -50,23 +51,6 @@ COMPARISON_QUERIES = [
     "How does the KV cache reduce inference cost from O(n²) to O(n)?",
     "What is the difference between top-k and top-p sampling?",
 ]
-
-
-# ---------------------------------------------------------------------------
-# Document loading
-# ---------------------------------------------------------------------------
-
-def load_corpus(corpus_dir: pathlib.Path) -> list[dict]:
-    """
-    Load all .md files from the corpus directory.
-    Returns list of dicts with 'filename' and 'text' keys.
-    """
-    # Concept: document-loader — reads source files and extracts clean text
-    docs = []
-    for path in sorted(corpus_dir.glob("*.md")):
-        text = path.read_text(encoding="utf-8").strip()
-        docs.append({"filename": path.name, "text": text})
-    return docs
 
 
 # ---------------------------------------------------------------------------
@@ -214,10 +198,10 @@ def docs_to_chunks(docs: list[dict],
         chunks = strategy_fn(doc["text"])
         for i, chunk_text in enumerate(chunks):
             all_chunks.append({
-                "id": f"{doc['filename']}__{strategy_name}__{i:04d}",
+                "id": f"{doc['source']}__{strategy_name}__{i:04d}",
                 "text": chunk_text,
                 "metadata": {
-                    "source": doc["filename"],
+                    "source": doc["source"],
                     "strategy": strategy_name,
                     "chunk_index": i,
                 },
@@ -303,14 +287,14 @@ def main() -> None:
         log.error("Corpus directory not found: %s", CORPUS_DIR)
         sys.exit(1)
 
-    docs = load_corpus(CORPUS_DIR)
+    docs = load_corpus()
     if not docs:
         log.error("No .md files found in %s", CORPUS_DIR)
         sys.exit(1)
 
     total_chars = sum(len(d["text"]) for d in docs)
     for d in docs:
-        print(f"Loaded: {d['filename']:<40} ({len(d['text'])} chars)")
+        print(f"Loaded: {d['source']:<40} ({len(d['text'])} chars)")
     print(f"Total: {total_chars} chars across {len(docs)} documents")
 
     # --- Build and index each strategy ---
