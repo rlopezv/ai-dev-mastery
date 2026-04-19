@@ -79,12 +79,13 @@ the following custom commands:
 | `/write-module <module>` | Write all docs for a module in sequence |
 | `/write-lab <path>` | Implement a single lab |
 | `/write-labs <module>` | Implement all labs for a module in sequence |
-| `/review-doc <path>` | Review a document and save the report to `meta/session/reports/` |
+| `/review-doc <path>` | Review a document; save ephemeral report to `meta/session/reports/` (not committed) |
 | `/fix-doc <path>` | Load cached review, apply fixes, re-validate |
 | `/design-labs <module>` | Design the lab set for a module |
-| `/audit-module <module>` | Validate docs and labs for a module; write report to `meta/session/reports/` |
-| `/audit` | Global cross-module audit; write report to `meta/session/reports/audit.md` |
-| `/enrich` | Apply horizontal navigation and reading path improvements |
+| `/audit-doc <path>` | Audit a single document; update `status` in frontmatter and module audit report |
+| `/audit-module <module>` | Audit all docs and labs for a module; write report to `meta/audit/reports/` |
+| `/audit` | Global cross-module audit; write report to `meta/audit/reports/global.audit.md` |
+| `/enrich` | Apply horizontal navigation improvements; write report to `meta/audit/reports/enrich.md` |
 | `/dist` | Generate a clean learner-facing distribution in `dist/` (no meta/, no .claude/) |
 
 These commands are defined in `.claude/commands/`. Claude Code loads them automatically.
@@ -102,7 +103,8 @@ Claude Code treats these files as its operating context:
 | `meta/system-design/LEVEL_MODE.md` | Normative level contracts (runtime, infrastructure, abstraction) |
 | `meta/system-design/DOCS_LABS_MAP.md` | Module sequence and docs↔labs alignment |
 | `meta/session/PROJECT_STATUS.md` | Current project progress |
-| `meta/session/reports/` | Persisted reports from /review-doc, /audit-module, /audit, and /enrich — not committed to git |
+| `meta/audit/reports/` | Persistent audit reports from /audit-doc, /audit-module, /audit, /enrich — committed to git |
+| `meta/session/reports/` | Ephemeral review cache from /review-doc — not committed; consumed by /fix-doc |
 | `meta/standards/templates/` | Document structure for each type |
 | `meta/standards/frontmatter/frontmatter-spec.md` | Frontmatter rules |
 | `meta/standards/writing/writing-style.md` | Prose writing rules |
@@ -132,22 +134,26 @@ Check it at any time:
 
 ## 6. The Review / Fix Flow
 
-Review and fix are designed to work across sessions safely:
+Review and fix are designed to work within a session:
 
 ```
 /review-doc docs/rag/retrieval-strategies.md
-  → produces structured report
-  → saves it to meta/session/reports/retrieval-strategies.review.md
+  → produces structured qualitative report (ISSUE-NN format)
+  → saves it to meta/session/reports/retrieval-strategies.review.md (not committed)
 
 /fix-doc docs/rag/retrieval-strategies.md
-  → reads the cached report
+  → reads the cached report if present
+  → if no cached report, performs the review internally
   → applies fixes
   → re-validates
   → deletes the report file
 ```
 
-If you close and reopen the project between review and fix, the report is still
-there. The repository is the only memory that matters.
+`meta/session/reports/` is not committed to git. Reports do not survive across sessions.
+If you close and reopen the project, `/fix-doc` will regenerate the review internally.
+
+For persistent document-level audit results, use `/audit-doc` instead — it writes to
+`meta/audit/reports/` and updates the document's `status` in frontmatter.
 
 ---
 

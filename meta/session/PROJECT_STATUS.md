@@ -67,15 +67,15 @@ Do not edit manually unless correcting an error.
 
 | Module | Audit | Report |
 |--------|-------|--------|
-| `llm-fundamentals` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/llm-fundamentals.audit.md` |
-| `llm-apis` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/llm-apis.audit.md` |
-| `prompt-engineering` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/prompt-engineering.audit.md` |
-| `structured-outputs` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/structured-outputs.audit.md` |
-| `rag` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/rag.audit.md` |
-| `memory-context` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/memory-context.audit.md` |
-| `ai-agents` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/ai-agents.audit.md` |
-| `frameworks-tools` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/frameworks-tools.audit.md` |
-| `ai-java` | STATIC_PASS | `meta/audit/reports/ai-java.audit.md` |
+| `llm-fundamentals` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/llm-fundamentals.audit.md` |
+| `llm-apis` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/llm-apis.audit.md` |
+| `prompt-engineering` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/prompt-engineering.audit.md` |
+| `structured-outputs` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/structured-outputs.audit.md` |
+| `rag` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/rag.audit.md` |
+| `memory-context` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/memory-context.audit.md` |
+| `ai-agents` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/ai-agents.audit.md` |
+| `frameworks-tools` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/frameworks-tools.audit.md` |
+| `ai-java` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_SKIP | `meta/audit/reports/ai-java.audit.md` |
 
 ---
 

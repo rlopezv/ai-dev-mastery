@@ -18,7 +18,7 @@
 
 ---
 
-## Static Checks
+## Phase 1 — Static
 
 ### Docs — Structural Compliance
 
@@ -58,27 +58,27 @@ The following checks from `meta/standards/validation/docs-checklist.md` were not
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| SC-5 Tables present where required | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-1 Concepts technically correct | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-3 Coverage complete | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-5 Limitations acknowledged | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-1 Explanation progressive | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-2 Reader assumptions appropriate | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-3 Mental models clear | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-4 Examples meaningful | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-5 Tables reduce cognitive load | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-2 Trade-offs identified | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-3 Real system behavior reflected | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-4 Abstract explanation grounded | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-5 Operational risks mentioned | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-1 Sandbox alignment | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-2 Cross-references meaningful | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-4 Validation references present | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-5 Fits roadmap position | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-2 Components justified | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-3 Abstraction level appropriate | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-4 Observability requirements addressed | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-5 Level exceptions documented | SKIP | Not applied in this pass — deferred to cohesion audit |
+| SC-5 Tables present where required | PENDING | Deferred to cohesion audit |
+| CQ-1 Concepts technically correct | PENDING | Deferred to cohesion audit |
+| CQ-3 Coverage complete | PENDING | Deferred to cohesion audit |
+| CQ-5 Limitations acknowledged | PENDING | Deferred to cohesion audit |
+| PQ-1 Explanation progressive | PENDING | Deferred to cohesion audit |
+| PQ-2 Reader assumptions appropriate | PENDING | Deferred to cohesion audit |
+| PQ-3 Mental models clear | PENDING | Deferred to cohesion audit |
+| PQ-4 Examples meaningful | PENDING | Deferred to cohesion audit |
+| PQ-5 Tables reduce cognitive load | PENDING | Deferred to cohesion audit |
+| EQ-2 Trade-offs identified | PENDING | Deferred to cohesion audit |
+| EQ-3 Real system behavior reflected | PENDING | Deferred to cohesion audit |
+| EQ-4 Abstract explanation grounded | PENDING | Deferred to cohesion audit |
+| EQ-5 Operational risks mentioned | PENDING | Deferred to cohesion audit |
+| IQ-1 Sandbox alignment | PENDING | Deferred to cohesion audit |
+| IQ-2 Cross-references meaningful | PENDING | Deferred to cohesion audit |
+| IQ-4 Validation references present | PENDING | Deferred to cohesion audit |
+| IQ-5 Fits roadmap position | PENDING | Deferred to cohesion audit |
+| LC-2 Components justified | PENDING | Deferred to cohesion audit |
+| LC-3 Abstraction level appropriate | PENDING | Deferred to cohesion audit |
+| LC-4 Observability requirements addressed | PENDING | Deferred to cohesion audit |
+| LC-5 Level exceptions documented | PENDING | Deferred to cohesion audit |
 
 ---
 
@@ -96,21 +96,21 @@ The following checks from `meta/standards/validation/docs-checklist.md` were not
 
 ---
 
-## Execution Checks
+## Phase 3 — Execution
 
 Checks that require running the labs against a live Ollama instance.
 
 | Check | Status | What to verify |
 |-------|--------|---------------|
-| EV-1 Lab runs without error | PENDING | `python lab-structured-outputs/main.py` exits 0 |
-| EV-1 Lab runs without error | PENDING | `python lab-tool-usage/main.py` exits 0 |
-| EV-1 Lab runs without error | PENDING | `python lab-tool-patterns/main.py` exits 0 |
-| EV-1 Lab runs without error | PENDING | `python lab-schema-design/main.py` exits 0 (optional lab) |
-| EV-2 Environment reproducible | PENDING | `requirements.txt` installs cleanly; Ollama + `llama3.2` setup works |
-| EV-3 Dependencies resolved | PENDING | `openai>=1.40.0`, `pydantic>=2.0.0`, `anthropic`, `python-dotenv` importable |
-| BC-1 Expected outputs correct | PENDING | `message.parsed` returns typed object; `finish_reason` is `"tool_calls"` on first tool call response; parallel pattern shows `len(msg.tool_calls) >= 2` |
-| BC-2 System behaves as described | PENDING | Schema enforcement parse success 5/5; prompt-only fails on adversarial inputs; sequential chain round-trips = 3 |
-| BC-5 Outputs deterministic enough | PENDING | Router pattern selects correct tool for all 4 query types |
+| EV-1 Lab runs without error | PENDING | Requires live infrastructure — `python lab-structured-outputs/main.py` exits 0 |
+| EV-1 Lab runs without error | PENDING | Requires live infrastructure — `python lab-tool-usage/main.py` exits 0 |
+| EV-1 Lab runs without error | PENDING | Requires live infrastructure — `python lab-tool-patterns/main.py` exits 0 |
+| EV-1 Lab runs without error | PENDING | Requires live infrastructure — `python lab-schema-design/main.py` exits 0 (optional lab) |
+| EV-2 Environment reproducible | PENDING | Requires live infrastructure — `requirements.txt` installs cleanly; Ollama + `llama3.2` setup works |
+| EV-3 Dependencies resolved | PENDING | Requires live infrastructure — `openai>=1.40.0`, `pydantic>=2.0.0`, `anthropic`, `python-dotenv` importable |
+| BC-1 Expected outputs correct | PENDING | Requires live infrastructure — `message.parsed` returns typed object; `finish_reason` is `"tool_calls"` on first tool call response; parallel pattern shows `len(msg.tool_calls) >= 2` |
+| BC-2 System behaves as described | PENDING | Requires live infrastructure — Schema enforcement parse success 5/5; prompt-only fails on adversarial inputs; sequential chain round-trips = 3 |
+| BC-5 Outputs deterministic enough | PENDING | Requires live infrastructure — Router pattern selects correct tool for all 4 query types |
 
 ---
 
@@ -120,6 +120,6 @@ Checks that require running the labs against a live Ollama instance.
 |-----------|--------|
 | Static checks | PASS |
 | Execution checks | PENDING |
-| **Module** | **STATIC_PASS / EXECUTION_PENDING** |
+| **Module** | **STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING** |
 
 Module is not **FULL_PASS** until execution checks are completed against a running Ollama instance with `llama3.2` loaded and valid `ANTHROPIC_API_KEY` for Observation 3 of `lab-tool-usage`.

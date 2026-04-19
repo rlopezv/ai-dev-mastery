@@ -79,6 +79,10 @@ Required fields: `id`, `title`, `type`, `step`, `path`, `status`, `level`,
 Full spec: `meta/standards/frontmatter/frontmatter-spec.md`
 
 Allowed `status` values: `draft` | `review` | `final`
+
+- `draft` — written but not yet audited
+- `review` — Phase 1 (static) audit complete
+- `final` — Phase 2 (cohesion) audit complete
 Allowed `level` values: `foundational` | `intermediate` | `advanced`
 
 No placeholders. No `TBD`. No `...`.
@@ -239,28 +243,55 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 5. Update `README.md`, `docs/README.md`, and `labs/README.md`
 6. Update `meta/session/SESSION-CONTEXT.md`
 
+### Audit a document
+
+Audits a single document and updates its `status` in frontmatter and its rows in the module
+audit report. Use for targeted re-audits after fixes or to advance a document through phases.
+
+1. Read the document
+2. Apply SC-1 to SC-6 and IQ-5, IQ-6 from `meta/standards/validation/docs-checklist.md`
+3. If performing cohesion audit: apply CQ-1 to CQ-5, PQ-1 to PQ-5, EQ-1 to EQ-5, IQ-1 to IQ-4, LC-1 to LC-5
+4. Update `status` in the document's frontmatter:
+   - Static checks all PASS → `status: review`
+   - Cohesion checks all PASS → `status: final`
+5. Update the document's rows in `meta/audit/reports/<module>.audit.md`
+
 ### Audit module
 
+Runs the full module audit in two explicit phases. Report format: `meta/standards/audit/audit-report-format.md`.
+Check result states: PASS | FAIL | FIXED | PENDING | SKIP (see format spec for definitions).
+
+**Phase 1 — Static** (structure, alignment, and glossary — no content reading required):
+
 1. Read `meta/system-design/LEVEL_MODE.md` for the module's level policy
-2. Validate all `docs/<module>/` files with `meta/standards/validation/docs-checklist.md`
-3. Validate all `labs/<module>/` with `meta/standards/validation/labs-checklist.md`
+2. For each doc in `docs/<module>/`: apply SC-1 to SC-6, IQ-5, IQ-6
+3. For each lab README in `labs/<module>/`: check required sections and optional/required alignment
 4. Check docs↔labs alignment against `meta/system-design/DOCS_LABS_MAP.md`
 5. Check all frontmatter cross-references point to real files
-6. Check all `concepts` fields against `docs/reference/glossary.md` (IQ-6 / DA-3)
-7. Separate findings into two categories:
-   - **Static checks** — verifiable without execution (structure, frontmatter, cross-refs, glossary, content quality)
-   - **Execution checks** — require running labs against live infrastructure (EV-1, EV-2, EV-3, BC-1, BC-2, BC-5); mark as PENDING if not run
-8. Write persistent report to `meta/audit/reports/<module>.audit.md` using the structure:
-   - Scope (files audited)
-   - Static Checks (PASS / FAIL per check with notes)
-   - Fixes applied during audit
-   - Execution Checks (PASS / PENDING per check with what to verify)
-   - Overall Status: STATIC_PASS | EXECUTION_PENDING | FULL_PASS
-9. Display summary — PASS / FAIL / PENDING per file with severity
+6. Fix any FAIL findings or flag for human review
+7. Update `status: review` in frontmatter of all docs that pass Phase 1
+8. Write `meta/audit/reports/<module>.audit.md` with Phase 1 results; mark cohesion and execution checks as PENDING
+9. Update Overall Status to `STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING`
+
+**Phase 2 — Cohesion** (reads content for correctness, pedagogy, and engineering quality):
+
+1. For each doc in `docs/<module>/`: apply CQ-1 to CQ-5, PQ-1 to PQ-5, EQ-1 to EQ-5, IQ-1 to IQ-4, LC-1 to LC-5
+2. Fix any FAIL findings or flag for human review
+3. Update `status: final` in frontmatter of all docs that pass Phase 2
+4. Append Phase 2 section to `meta/audit/reports/<module>.audit.md` — do not rewrite Phase 1
+5. Update Overall Status to `STATIC_PASS | COHESION_PASS | EXECUTION_PENDING`
+
+**Phase 3 — Execution** (requires live infrastructure: Ollama running, devcontainer active):
+
+1. For each lab in `labs/<module>/`: run `python lab-<n>/main.py` and verify exit 0
+2. Verify expected output matches what the lab README describes
+3. Fix any lab failures or flag for human review
+4. Fill in `## Phase 3 — Execution` in `meta/audit/reports/<module>.audit.md` — do not rewrite Phase 1 or Phase 2
+5. Update Overall Status to `FULL_PASS`
 
 ### Audit (global)
 
-1. Run "Audit module" for each module marked ✅ in `meta/session/PROJECT_STATUS.md`
+1. Run "Audit module" Phase 1 for each module marked ✅ in `meta/session/PROJECT_STATUS.md`
 2. Check cross-module prerequisites form a valid DAG (no circular dependencies)
 3. Check terminology consistency across modules against `docs/reference/glossary.md`
 4. Check `README.md`, `docs/README.md`, and `labs/README.md` are in sync with `PROJECT_STATUS.md`
@@ -272,7 +303,7 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 1. Read `meta/audit/reports/global.audit.md` if available, or derive a global view from current state
 2. Apply horizontal navigation improvements: enrich `next` and `related` fields with cross-module references where concepts overlap
 3. Build or update reading paths by audience profile (developer / architect)
-4. Write report of all changes made to `meta/session/reports/enrich.md`
+4. Write report of all changes made to `meta/audit/reports/enrich.md`
 
 ### Dist
 

@@ -37,36 +37,40 @@
 
 ---
 
-## Static Checks
+## Phase 1 — Static
 
 ### Docs
 
+> SC and IQ columns reflect static audit results. CQ, PQ, EQ and LC columns were not formally verified — formal cohesion audit pending.
+
 | File | SC | CQ | PQ | EQ | IQ | LC | Result |
 |------|----|----|----|----|----|----|--------|
-| `README.md` | PASS | PASS | PASS | PASS | PASS | PASS | ✅ PASS |
-| `rag-fundamentals.md` | PASS | PASS | PASS | PASS | PASS | PASS | ✅ PASS |
-| `embeddings-and-vector-search.md` | PASS | PASS | PASS | PASS | PASS | PASS | ✅ PASS |
-| `document-processing-and-chunking.md` | PASS | PASS | PASS | PASS | PASS | PASS | ✅ PASS |
-| `retrieval-strategies.md` | PASS | PASS | PASS | PASS | PASS | PASS | ✅ PASS |
-| `context-assembly.md` | PASS | PASS | PASS | PASS | PASS | PASS | ✅ PASS |
-| `rag-evaluation-and-metrics.md` | PASS | PASS | PASS | PASS | PASS | PASS | ✅ PASS |
-| `architecture.md` | PASS | PASS | PASS | PASS | **FAIL** (IQ-6) | PASS | ⚠️ FIXED |
-| `implementation-reference.md` | PASS | PASS | PASS | PASS | **FAIL** (IQ-6) | PASS | ⚠️ FIXED |
-| `validation.md` | PASS | PASS | PASS | PASS | PASS | PASS | ✅ PASS |
+| `README.md` | PASS | SKIP | SKIP | SKIP | PASS | SKIP | ✅ SC/IQ |
+| `rag-fundamentals.md` | PASS | SKIP | SKIP | SKIP | PASS | SKIP | ✅ SC/IQ |
+| `embeddings-and-vector-search.md` | PASS | SKIP | SKIP | SKIP | PASS | SKIP | ✅ SC/IQ |
+| `document-processing-and-chunking.md` | PASS | SKIP | SKIP | SKIP | PASS | SKIP | ✅ SC/IQ |
+| `retrieval-strategies.md` | PASS | SKIP | SKIP | SKIP | PASS | SKIP | ✅ SC/IQ |
+| `context-assembly.md` | PASS | SKIP | SKIP | SKIP | PASS | SKIP | ✅ SC/IQ |
+| `rag-evaluation-and-metrics.md` | PASS | SKIP | SKIP | SKIP | PASS | SKIP | ✅ SC/IQ |
+| `architecture.md` | PASS | SKIP | SKIP | SKIP | **FAIL** (IQ-6) → FIXED | SKIP | ⚠️ FIXED |
+| `implementation-reference.md` | PASS | SKIP | SKIP | SKIP | **FAIL** (IQ-6) → FIXED | SKIP | ⚠️ FIXED |
+| `validation.md` | PASS | SKIP | SKIP | SKIP | PASS | SKIP | ✅ SC/IQ |
 
-**Docs quality summary:** Content, pedagogy, engineering quality, and level compliance are strong across all 10 documents. Two IQ-6 failures fixed during audit.
+**Docs quality summary:** All static checks (SC, IQ-5, IQ-6) pass across 10 documents. Two IQ-6 failures fixed during audit. CQ, PQ, EQ, LC deferred to cohesion audit.
 
 ### Labs
 
+> LS and DA columns reflect static audit results. EQ and LC were not formally verified — formal cohesion audit pending.
+
 | File | LS | DA | EQ | LC | Result |
 |------|----|----|----|----|--------|
-| `README.md` | PASS | PASS | PASS | PASS | ✅ PASS |
-| `lab-embeddings/README.md` | **FAIL** (DA-4) | PASS | PASS | PASS | ⚠️ FIXED |
-| `lab-chunking-strategies/README.md` | **FAIL** (DA-4) | PASS | PASS | PASS | ⚠️ FIXED |
-| `lab-retrieval-playground/README.md` | **FAIL** (DA-4) | PASS | PASS | PASS | ⚠️ FIXED |
-| `lab-query-pipeline/README.md` | **FAIL** (DA-4) | PASS | PASS | PASS | ⚠️ FIXED |
-| `lab-rag-evaluation/README.md` | **FAIL** (DA-4) | PASS | PASS | PASS | ⚠️ FIXED |
-| `shared/config.py` | **FAIL** (LS-6) | — | — | — | ⚠️ FIXED |
+| `README.md` | PASS | PASS | SKIP | SKIP | ✅ LS/DA |
+| `lab-embeddings/README.md` | **FAIL** (DA-4) → FIXED | PASS | SKIP | SKIP | ⚠️ FIXED |
+| `lab-chunking-strategies/README.md` | **FAIL** (DA-4) → FIXED | PASS | SKIP | SKIP | ⚠️ FIXED |
+| `lab-retrieval-playground/README.md` | **FAIL** (DA-4) → FIXED | PASS | SKIP | SKIP | ⚠️ FIXED |
+| `lab-query-pipeline/README.md` | **FAIL** (DA-4) → FIXED | PASS | SKIP | SKIP | ⚠️ FIXED |
+| `lab-rag-evaluation/README.md` | **FAIL** (DA-4) → FIXED | PASS | SKIP | SKIP | ⚠️ FIXED |
+| `shared/config.py` | **FAIL** (LS-6) → FIXED | — | — | — | ⚠️ FIXED |
 
 **Execution checks (EV-1, EV-2, EV-3, BC-1, BC-2, BC-5):** PENDING — not run against live infrastructure.
 
@@ -134,16 +138,16 @@ From `docs/rag/implementation-reference.md`:
 
 ---
 
-## Execution Checks
+## Phase 3 — Execution
 
 | Check | Status | What to verify |
 |-------|--------|----------------|
-| EV-1 All labs run without error | PENDING | `python lab-*/main.py` in order |
-| EV-2 Environment reproducible via documented steps | PENDING | Fresh devcontainer run |
-| EV-3 Dependencies resolve from requirements.txt | PENDING | `pip install -r labs/rag/requirements.txt` |
-| BC-1 Expected outputs are correct | PENDING | Compare output against lab README expected output |
-| BC-2 System behaves as described | PENDING | Verify retrieval scores, dedup, token budget |
-| BC-5 Outputs deterministic enough | PENDING | Run with `TEMPERATURE=0.0` and compare |
+| EV-1 All labs run without error | PENDING | Requires live infrastructure — `python lab-*/main.py` in order |
+| EV-2 Environment reproducible via documented steps | PENDING | Requires live infrastructure — Fresh devcontainer run |
+| EV-3 Dependencies resolve from requirements.txt | PENDING | Requires live infrastructure — `pip install -r labs/rag/requirements.txt` |
+| BC-1 Expected outputs are correct | PENDING | Requires live infrastructure — Compare output against lab README expected output |
+| BC-2 System behaves as described | PENDING | Requires live infrastructure — Verify retrieval scores, dedup, token budget |
+| BC-5 Outputs deterministic enough | PENDING | Requires live infrastructure — Run with `TEMPERATURE=0.0` and compare |
 
 ---
 
@@ -163,8 +167,6 @@ This requires a human decision before the module can be declared fully aligned.
 
 ## Overall Status
 
-**STATIC_PASS / EXECUTION_PENDING**
+**STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING**
 
-All static checks pass after fixes. Content quality across all 10 docs is high — comprehensive Why/How/Code structure, strong engineering implications, real failure modes, no placeholders. The module is well-architected and follows the intermediate level policy correctly (ChromaDB + Ollama are justified by the RAG learning objective).
-
-Execution checks and the `lab-integration` alignment question require human action before `FULL_PASS` can be declared.
+All static checks pass after fixes. CQ, PQ, EQ, and LC checks deferred to formal cohesion audit. The `lab-integration` alignment issue flagged during audit was subsequently resolved (lab created and registered across all relevant files). Execution checks require live infrastructure.

@@ -18,7 +18,7 @@
 
 ---
 
-## Static Checks
+## Phase 1 — Static
 
 ### Structural Compliance
 
@@ -33,54 +33,62 @@
 
 ### Content Quality
 
+> Observations recorded during static pass — formal cohesion audit pending.
+
 | Check | Result | Notes |
 |-------|--------|-------|
-| CQ-1 Concepts technically correct | PASS | Agent loop mechanics, tool call protocol, MCP discovery/invocation, orchestrator/subagent isolation all accurate |
-| CQ-2 Explanations causal | PASS | Docs explain why: why stop condition must be enforced by application, why subagent context must be isolated, why MCP decouples tool ownership |
-| CQ-3 Coverage complete | PASS | All 7 mapped topics covered; agent-fundamentals (concept-only) correctly has no lab |
-| CQ-4 Terminology consistent | PASS | agent loop, tool registry, action dispatcher, message accumulator used consistently across all docs |
-| CQ-5 Limitations acknowledged | PASS | Compounding errors, tool call hallucination, orchestrator bottleneck, MCP server failure modes documented |
+| CQ-1 Concepts technically correct | PENDING | Agent loop mechanics, tool call protocol, MCP invocation observed — formal Phase 2 pending |
+| CQ-2 Explanations causal | PENDING | Causal explanations observed — formal Phase 2 pending |
+| CQ-3 Coverage complete | PENDING | All 7 mapped topics appear covered — formal Phase 2 pending |
+| CQ-4 Terminology consistent | PENDING | Consistent terminology observed during static pass — formal Phase 2 pending |
+| CQ-5 Limitations acknowledged | PENDING | Failure modes appear documented — formal Phase 2 pending |
 
 ### Pedagogical Quality
 
+> Observations recorded during static pass — formal cohesion audit pending.
+
 | Check | Result | Notes |
 |-------|--------|-------|
-| PQ-1 Progressive explanation | PASS | agent-fundamentals → single-agent-loop → tool-use-loops → multi-agent-systems → agent-patterns → mcp → architecture |
-| PQ-2 Reader assumptions appropriate | PASS | Assumes structured-outputs tool use and memory-context — both are prerequisite modules |
-| PQ-3 Mental models clear | PASS | Agent loop as perception-decide-act cycle; orchestrator as task decomposer not executor; MCP as tool ownership boundary |
-| PQ-4 Examples meaningful | PASS | Code examples show real patterns: dispatcher routing, message accumulation protocol, orchestrator-as-tool pattern |
-| PQ-5 Tables reduce cognitive load | PASS | Lab inventory, mapping tables, component tables synthesize key distinctions |
+| PQ-1 Progressive explanation | PENDING | Module sequence observed — formal Phase 2 pending |
+| PQ-2 Reader assumptions appropriate | PENDING | Prerequisite alignment appears correct — formal Phase 2 pending |
+| PQ-3 Mental models clear | PENDING | Conceptual framing observed — formal Phase 2 pending |
+| PQ-4 Examples meaningful | PENDING | Code examples present — formal Phase 2 pending |
+| PQ-5 Tables reduce cognitive load | PENDING | Mapping and component tables present — formal Phase 2 pending |
 
 ### Engineering Quality
 
+> Observations recorded during static pass — formal cohesion audit pending.
+
 | Check | Result | Notes |
 |-------|--------|-------|
-| EQ-1 Engineering implications explicit | PASS | Iteration ceiling enforcement, tool error propagation, context isolation costs all documented |
-| EQ-2 Trade-offs identified | PASS | Single vs multi-agent, parallel vs sequential tool calls, ReAct vs plan-and-execute tradeoffs explicit |
-| EQ-3 Real system behavior reflected | PASS | finish_reason=="stop" as primary stop signal, tool_call_id matching protocol, MCP stdio transport |
-| EQ-4 Abstract explanation grounded | PASS | Every pattern has a code example showing the exact API call sequence |
-| EQ-5 Operational risks mentioned | PASS | Infinite loops, tool hallucination, subagent result quality, MCP process lifecycle |
+| EQ-1 Engineering implications explicit | PENDING | Iteration ceiling and error propagation appear documented — formal Phase 2 pending |
+| EQ-2 Trade-offs identified | PENDING | Trade-offs appear present — formal Phase 2 pending |
+| EQ-3 Real system behavior reflected | PENDING | finish_reason and tool_call_id protocol observed — formal Phase 2 pending |
+| EQ-4 Abstract explanation grounded | PENDING | Code examples present per pattern — formal Phase 2 pending |
+| EQ-5 Operational risks mentioned | PENDING | Failure modes appear listed — formal Phase 2 pending |
 
 ### Integration Quality
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| IQ-1 Sandbox alignment | PASS | All labs run locally with Ollama; MCP labs use stdio transport requiring no external services |
-| IQ-2 Cross-references meaningful | PASS | Meaningful forward/backward references: structured-outputs for tool schemas, memory-context for agent memory |
-| IQ-3 Implementation references concrete | PASS | implementation-reference.md names shared/ files and maps each pattern to code locations |
-| IQ-4 Validation references present | PASS | All docs reference validation.md and/or docs-checklist.md |
+| IQ-1 Sandbox alignment | PENDING | Formal Phase 2 pending |
+| IQ-2 Cross-references meaningful | PENDING | Formal Phase 2 pending |
+| IQ-3 Implementation references concrete | PENDING | Formal Phase 2 pending |
+| IQ-4 Validation references present | PENDING | Formal Phase 2 pending |
 | IQ-5 Fits roadmap position | PASS | Position 7: builds on rag (retrieval as tool) and memory-context (agent memory), precedes frameworks-tools |
 | IQ-6 Concepts in glossary | FIXED | 3 terms missing — added during audit (see Fixes section) |
 
 ### Level Compliance
 
+> Observations recorded during static pass — formal cohesion audit pending.
+
 | Check | Result | Notes |
 |-------|--------|-------|
-| LC-1 Runtime complexity matches INTERMEDIATE | PASS | Ollama only; MCP via stdio; no production orchestration infrastructure |
-| LC-2 Components justified | PASS | shared/loop.py, dispatcher.py, tools.py each directly implement a module concept |
-| LC-3 Abstraction appropriate | PASS | Raw Ollama API, no framework hiding the agent loop mechanics |
-| LC-4 Observability sufficient | PASS | Tool calls logged, iteration count visible, orchestrator delegation logged |
-| LC-5 No level exceptions needed | PASS | Default INTERMEDIATE profile throughout |
+| LC-1 Runtime complexity matches INTERMEDIATE | PENDING | Ollama + stdio MCP profile observed — formal Phase 2 pending |
+| LC-2 Components justified | PENDING | Formal Phase 2 pending |
+| LC-3 Abstraction appropriate | PENDING | Formal Phase 2 pending |
+| LC-4 Observability sufficient | PENDING | Formal Phase 2 pending |
+| LC-5 No level exceptions needed | PENDING | Formal Phase 2 pending |
 
 ---
 
@@ -148,25 +156,26 @@ All three entries added to `docs/reference/glossary.md` in alphabetical order wi
 
 ---
 
-## Execution Checks
+## Phase 3 — Execution
 
 | Check | Status | What to verify |
 |-------|--------|----------------|
-| EV-1 Labs run without error | PENDING | `python lab-single-agent-loop/main.py`, `lab-tool-use-loops/main.py`, `lab-multi-agent/main.py`, `lab-agent-patterns/main.py`, `lab-mcp-server/main.py`, `lab-integration/main.py` |
-| EV-2 Agent loop terminates correctly | PENDING | `lab-single-agent-loop` — must terminate on `finish_reason=="stop"`, not hit iteration ceiling for valid tasks |
-| EV-3 MCP stdio transport works | PENDING | `lab-mcp-server` — server process spawned via subprocess, `tools/list` and `tools/call` respond correctly |
-| BC-1 Orchestrator delegates correctly | PENDING | `lab-multi-agent` — subagent results returned and aggregated; orchestrator does not execute domain tools directly |
-| BC-2 ReAct trace visible in history | PENDING | `lab-agent-patterns` — Thought/Action/Observation pattern appears in message accumulator |
-| BC-5 Integration lab composes all components | PENDING | `lab-integration` — orchestrator + subagents + MCP tools + ReAct all active in one execution |
+| EV-1 Labs run without error | PENDING | Requires live infrastructure — `python lab-single-agent-loop/main.py`, `lab-tool-use-loops/main.py`, `lab-multi-agent/main.py`, `lab-agent-patterns/main.py`, `lab-mcp-server/main.py`, `lab-integration/main.py` |
+| EV-2 Agent loop terminates correctly | PENDING | Requires live infrastructure — `lab-single-agent-loop` — must terminate on `finish_reason=="stop"`, not hit iteration ceiling for valid tasks |
+| EV-3 MCP stdio transport works | PENDING | Requires live infrastructure — `lab-mcp-server` — server process spawned via subprocess, `tools/list` and `tools/call` respond correctly |
+| BC-1 Orchestrator delegates correctly | PENDING | Requires live infrastructure — `lab-multi-agent` — subagent results returned and aggregated; orchestrator does not execute domain tools directly |
+| BC-2 ReAct trace visible in history | PENDING | Requires live infrastructure — `lab-agent-patterns` — Thought/Action/Observation pattern appears in message accumulator |
+| BC-5 Integration lab composes all components | PENDING | Requires live infrastructure — `lab-integration` — orchestrator + subagents + MCP tools + ReAct all active in one execution |
 
 ---
 
 ## Overall Status
 
-**STATIC_PASS | EXECUTION_PENDING**
+**STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING**
 
 - All static checks pass after 3 glossary additions applied during audit.
 - No critical failures found.
+- Cohesion checks (CQ, PQ, EQ, IQ-1 to IQ-4, LC) recorded as observations during static pass — formal cohesion audit pending.
 - All required labs present and aligned with DOCS_LABS_MAP.
 - `lab-agent-patterns` correctly marked optional in both map and labs README.
 - Execution checks pending live infrastructure run.

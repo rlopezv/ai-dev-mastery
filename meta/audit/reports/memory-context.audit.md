@@ -18,7 +18,7 @@
 
 ---
 
-## Static Checks
+## Phase 1 — Static
 
 ### Structural Compliance
 
@@ -33,54 +33,62 @@
 
 ### Content Quality
 
+> Observations recorded during static pass — formal cohesion audit pending.
+
 | Check | Result | Notes |
 |-------|--------|-------|
-| CQ-1 Concepts technically correct | PASS | Token budget formula, truncation mechanics, cosine retrieval, compression trigger logic all correct |
-| CQ-2 Explanations causal | PASS | Every doc explains why/how: why buffer overflow causes API errors, why summarization adds latency, why cold start affects cross-session recall |
-| CQ-3 Coverage complete | PASS | All four memory types, three management strategies, write-retrieve-inject pattern covered |
-| CQ-4 Terminology consistent | PASS | conversation history, token budget, compression threshold, episodic/semantic memory used consistently |
-| CQ-5 Limitations acknowledged | PASS | Stale memory, retrieval miss, cold start, silent truncation, tiktoken approximation error all documented |
+| CQ-1 Concepts technically correct | PENDING | Token budget formula, truncation mechanics, cosine retrieval, compression trigger logic — formal Phase 2 pending |
+| CQ-2 Explanations causal | PENDING | Why/how pattern observed — formal Phase 2 pending |
+| CQ-3 Coverage complete | PENDING | All four memory types and three management strategies appear present — formal Phase 2 pending |
+| CQ-4 Terminology consistent | PENDING | No naming variants detected during static pass — formal Phase 2 pending |
+| CQ-5 Limitations acknowledged | PENDING | Failure modes appear documented — formal Phase 2 pending |
 
 ### Pedagogical Quality
 
+> Observations recorded during static pass — formal cohesion audit pending.
+
 | Check | Result | Notes |
 |-------|--------|-------|
-| PQ-1 Progressive explanation | PASS | Each doc: intuition → mechanism → implementation → implications |
-| PQ-2 Reader assumptions appropriate | PASS | Assumes context window, chat completion API, embeddings — all prerequisite modules |
-| PQ-3 Mental models clear | PASS | Token budget as zero-sum game; compression as information trade-off; external memory as unlimited-but-latency |
-| PQ-4 Examples meaningful | PASS | Code examples show real patterns: HistoryManager, compress_history(), MemoryStore write/retrieve |
-| PQ-5 Tables reduce cognitive load | PASS | Memory type comparison table, strategy comparison table synthesize key distinctions |
+| PQ-1 Progressive explanation | PENDING | Intuition → mechanism → implications structure observed — formal Phase 2 pending |
+| PQ-2 Reader assumptions appropriate | PENDING | Prerequisite alignment appears correct — formal Phase 2 pending |
+| PQ-3 Mental models clear | PENDING | Conceptual framing observed — formal Phase 2 pending |
+| PQ-4 Examples meaningful | PENDING | Code examples present — formal Phase 2 pending |
+| PQ-5 Tables reduce cognitive load | PENDING | Comparison tables present — formal Phase 2 pending |
 
 ### Engineering Quality
 
+> Observations recorded during static pass — formal cohesion audit pending.
+
 | Check | Result | Notes |
 |-------|--------|-------|
-| EQ-1 Engineering implications explicit | PASS | Cost drivers, scaling constraints, operational requirements documented in each doc |
-| EQ-2 Trade-offs identified | PASS | Truncation vs sliding window vs summarization; in-context vs external; async vs sync write |
-| EQ-3 Real system behavior reflected | PASS | Token count approximation error, retrieval latency (10–100ms), compression latency (200–2000ms) |
-| EQ-4 Abstract explanation grounded | PASS | Every strategy has code example and observable behavior |
-| EQ-5 Operational risks mentioned | PASS | Context overflow, stale memory, retrieval miss, hallucinated injection, cold start |
+| EQ-1 Engineering implications explicit | PENDING | Cost drivers and scaling constraints appear documented — formal Phase 2 pending |
+| EQ-2 Trade-offs identified | PENDING | Strategy trade-offs appear present — formal Phase 2 pending |
+| EQ-3 Real system behavior reflected | PENDING | Latency figures and approximation errors observed — formal Phase 2 pending |
+| EQ-4 Abstract explanation grounded | PENDING | Code examples present per strategy — formal Phase 2 pending |
+| EQ-5 Operational risks mentioned | PENDING | Failure modes appear listed — formal Phase 2 pending |
 
 ### Integration Quality
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| IQ-1 Sandbox alignment | PASS | All labs run on local Ollama + optional ChromaDB, no cloud dependencies |
-| IQ-2 Cross-references meaningful | PASS | Docs reference implementation-reference, labs, shared module with specific paths |
-| IQ-3 Implementation references concrete | PASS | Component mapping table in implementation-reference.md names specific shared/ files |
-| IQ-4 Validation references present | PASS | All docs reference validation.md and/or docs-checklist.md |
+| IQ-1 Sandbox alignment | PENDING | Formal Phase 2 pending |
+| IQ-2 Cross-references meaningful | PENDING | Formal Phase 2 pending |
+| IQ-3 Implementation references concrete | PENDING | Formal Phase 2 pending |
+| IQ-4 Validation references present | PENDING | Formal Phase 2 pending |
 | IQ-5 Fits roadmap position | PASS | Position 6: builds on rag (external memory retrieval), precedes ai-agents (planning state) |
 | IQ-6 Concepts in glossary (canonical names) | FIXED | 3 terms were missing — added during audit (see Fixes section) |
 
 ### Level Compliance
 
+> Observations recorded during static pass — formal cohesion audit pending.
+
 | Check | Result | Notes |
 |-------|--------|-------|
-| LC-1 Runtime complexity matches INTERMEDIATE | PASS | Ollama + ChromaDB; no production deployment tooling |
-| LC-2 Components justified | PASS | Token counting essential for budget; vector store essential for cross-session recall |
-| LC-3 Abstraction appropriate | PASS | Transparent wrappers in shared/ — not black-box frameworks |
-| LC-4 Observability sufficient | PASS | Token counts, retrieval distances, compression events all logged |
-| LC-5 No level exceptions needed | PASS | Default INTERMEDIATE profile throughout |
+| LC-1 Runtime complexity matches INTERMEDIATE | PENDING | Ollama + ChromaDB profile observed — formal Phase 2 pending |
+| LC-2 Components justified | PENDING | Formal Phase 2 pending |
+| LC-3 Abstraction appropriate | PENDING | Formal Phase 2 pending |
+| LC-4 Observability sufficient | PENDING | Formal Phase 2 pending |
+| LC-5 No level exceptions needed | PENDING | Formal Phase 2 pending |
 
 ---
 
@@ -147,26 +155,27 @@ All three entries added to `docs/reference/glossary.md` in alphabetical order wi
 
 ---
 
-## Execution Checks
+## Phase 3 — Execution
 
 These checks require running labs against live infrastructure (Ollama + ChromaDB). Not executed during this audit.
 
 | Check | Status | What to verify |
 |-------|--------|----------------|
-| EV-1 Labs run without error | PENDING | `python lab-memory-types/main.py`, `lab-conversation-history/main.py`, `lab-context-management/main.py`, `lab-external-memory/main.py`, `lab-integration/main.py` |
-| EV-2 50-turn conversation loop completes without API error | PENDING | `lab-conversation-history` — must run 50 turns under budget |
-| EV-3 Context strategy recall comparison measurable | PENDING | `lab-context-management` — summarization must recall early facts better than truncation |
-| BC-1 External memory persists across process invocations | PENDING | `lab-external-memory` — session 1 writes fact; session 2 retrieves without restating |
-| BC-2 In-scope/out-of-scope behavior correct in integration | PENDING | `lab-integration` — 30 turns without budget violation, cross-session recall |
-| BC-5 Retrieval distances within stated thresholds | PENDING | `lab-external-memory` — episode retrieval distance < 0.30; semantic retrieval ≤ 0.25 |
+| EV-1 Labs run without error | PENDING | Requires live infrastructure — `python lab-memory-types/main.py`, `lab-conversation-history/main.py`, `lab-context-management/main.py`, `lab-external-memory/main.py`, `lab-integration/main.py` |
+| EV-2 50-turn conversation loop completes without API error | PENDING | Requires live infrastructure — `lab-conversation-history` — must run 50 turns under budget |
+| EV-3 Context strategy recall comparison measurable | PENDING | Requires live infrastructure — `lab-context-management` — summarization must recall early facts better than truncation |
+| BC-1 External memory persists across process invocations | PENDING | Requires live infrastructure — `lab-external-memory` — session 1 writes fact; session 2 retrieves without restating |
+| BC-2 In-scope/out-of-scope behavior correct in integration | PENDING | Requires live infrastructure — `lab-integration` — 30 turns without budget violation, cross-session recall |
+| BC-5 Retrieval distances within stated thresholds | PENDING | Requires live infrastructure — `lab-external-memory` — episode retrieval distance < 0.30; semantic retrieval ≤ 0.25 |
 
 ---
 
 ## Overall Status
 
-**STATIC_PASS | EXECUTION_PENDING**
+**STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING**
 
 - All static checks pass after 3 glossary additions applied during audit.
 - No critical failures found.
+- Cohesion checks (CQ, PQ, EQ, IQ-1 to IQ-4, LC) recorded as observations during static pass — formal cohesion audit pending.
 - All required labs present and aligned with DOCS_LABS_MAP.
 - Execution checks pending live infrastructure run.

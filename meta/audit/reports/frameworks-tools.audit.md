@@ -17,7 +17,7 @@
 
 ---
 
-## Static Checks
+## Phase 1 — Static
 
 ### Structural Compliance
 
@@ -50,30 +50,30 @@ The following checks from `meta/standards/validation/docs-checklist.md` were not
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| CQ-1 Concepts technically correct | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-2 Explanations causal | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-3 Coverage complete | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-4 Terminology consistent | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-5 Limitations acknowledged | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-1 Explanation progressive | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-2 Reader assumptions appropriate | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-3 Mental models clear | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-4 Examples meaningful | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-5 Tables reduce cognitive load | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-1 Engineering implications explicit | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-2 Trade-offs identified | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-3 Real system behavior reflected | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-4 Abstract explanation grounded | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-5 Operational risks mentioned | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-1 Sandbox alignment | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-2 Cross-references meaningful | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-3 Implementation references concrete | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-4 Validation references present | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-1 Runtime complexity matches level | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-2 Components justified | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-3 Abstraction level appropriate | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-4 Observability requirements addressed | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-5 Level exceptions documented | SKIP | Not applied in this pass — deferred to cohesion audit |
+| CQ-1 Concepts technically correct | PENDING | Deferred to cohesion audit |
+| CQ-2 Explanations causal | PENDING | Deferred to cohesion audit |
+| CQ-3 Coverage complete | PENDING | Deferred to cohesion audit |
+| CQ-4 Terminology consistent | PENDING | Deferred to cohesion audit |
+| CQ-5 Limitations acknowledged | PENDING | Deferred to cohesion audit |
+| PQ-1 Explanation progressive | PENDING | Deferred to cohesion audit |
+| PQ-2 Reader assumptions appropriate | PENDING | Deferred to cohesion audit |
+| PQ-3 Mental models clear | PENDING | Deferred to cohesion audit |
+| PQ-4 Examples meaningful | PENDING | Deferred to cohesion audit |
+| PQ-5 Tables reduce cognitive load | PENDING | Deferred to cohesion audit |
+| EQ-1 Engineering implications explicit | PENDING | Deferred to cohesion audit |
+| EQ-2 Trade-offs identified | PENDING | Deferred to cohesion audit |
+| EQ-3 Real system behavior reflected | PENDING | Deferred to cohesion audit |
+| EQ-4 Abstract explanation grounded | PENDING | Deferred to cohesion audit |
+| EQ-5 Operational risks mentioned | PENDING | Deferred to cohesion audit |
+| IQ-1 Sandbox alignment | PENDING | Deferred to cohesion audit |
+| IQ-2 Cross-references meaningful | PENDING | Deferred to cohesion audit |
+| IQ-3 Implementation references concrete | PENDING | Deferred to cohesion audit |
+| IQ-4 Validation references present | PENDING | Deferred to cohesion audit |
+| LC-1 Runtime complexity matches level | PENDING | Deferred to cohesion audit |
+| LC-2 Components justified | PENDING | Deferred to cohesion audit |
+| LC-3 Abstraction level appropriate | PENDING | Deferred to cohesion audit |
+| LC-4 Observability requirements addressed | PENDING | Deferred to cohesion audit |
+| LC-5 Level exceptions documented | PENDING | Deferred to cohesion audit |
 
 ---
 
@@ -151,16 +151,16 @@ All 2 required labs present. All 3 optional labs also present.
 
 ---
 
-## Execution Checks
+## Phase 3 — Execution
 
 | Check | Status | What to verify |
 |-------|--------|----------------|
-| EV-1 Labs run without error | PENDING | `python lab-langchain/main.py`, `lab-llamaindex/main.py`, `lab-autogen/main.py`, `lab-semantic-kernel/main.py`, `lab-integration/main.py` |
-| EV-2 LCEL chain produces output | PENDING | `lab-langchain` — chain invocation returns non-empty response |
-| EV-3 LlamaIndex query returns grounded answer | PENDING | `lab-llamaindex` — query engine answer cites source nodes |
-| BC-1 AutoGen group chat terminates | PENDING | `lab-autogen` — conversation reaches termination condition, not infinite loop |
-| BC-2 Semantic Kernel planner selects correct function | PENDING | `lab-semantic-kernel` — planner routes task to registered plugin function |
-| BC-5 Integration lab composes multiple frameworks | PENDING | `lab-integration` — LangChain + LlamaIndex components compose without conflict |
+| EV-1 Labs run without error | PENDING | Requires live infrastructure — `python lab-langchain/main.py`, `lab-llamaindex/main.py`, `lab-autogen/main.py`, `lab-semantic-kernel/main.py`, `lab-integration/main.py` |
+| EV-2 LCEL chain produces output | PENDING | Requires live infrastructure — `lab-langchain` — chain invocation returns non-empty response |
+| EV-3 LlamaIndex query returns grounded answer | PENDING | Requires live infrastructure — `lab-llamaindex` — query engine answer cites source nodes |
+| BC-1 AutoGen group chat terminates | PENDING | Requires live infrastructure — `lab-autogen` — conversation reaches termination condition, not infinite loop |
+| BC-2 Semantic Kernel planner selects correct function | PENDING | Requires live infrastructure — `lab-semantic-kernel` — planner routes task to registered plugin function |
+| BC-5 Integration lab composes multiple frameworks | PENDING | Requires live infrastructure — `lab-integration` — LangChain + LlamaIndex components compose without conflict |
 
 ---
 

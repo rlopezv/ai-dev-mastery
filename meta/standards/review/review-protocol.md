@@ -10,6 +10,22 @@ The reviewer must not rewrite the document or introduce new content directly.
 
 ---
 
+## Positioning
+
+This protocol is a **human-facing diagnostic instrument**. It is used when a human or Claude Code
+needs a structured qualitative analysis of a single document — typically before running `/fix-doc`.
+
+It is distinct from the audit pipeline:
+
+| Instrument | Used by | Scope | Output |
+|-----------|---------|-------|--------|
+| `review-protocol.md` | `/review-doc` | Single document | Qualitative ISSUE-NN report in `meta/session/reports/` |
+| `docs-checklist.md` | `/audit-doc`, `/audit-module` | Document or module | Scored PASS/FAIL/SKIP table in `meta/audit/reports/` |
+
+Review reports are ephemeral (not committed). Audit reports are persistent (committed).
+
+---
+
 ## 1. Review Categories
 
 All reviews must cover these five categories.
@@ -110,7 +126,7 @@ RECOMMENDED ACTION: ACCEPT | REVISE | REJECT
 ## 5. Reviewer Rules
 
 Must:
-- Cover all five categories
+- Cover all six categories
 - Be explicit and concrete — no generic statements
 - Justify every severity assignment
 - Propose actionable fixes

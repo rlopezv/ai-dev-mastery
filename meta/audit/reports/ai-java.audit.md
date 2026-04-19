@@ -17,7 +17,7 @@
 
 ---
 
-## Static Checks
+## Phase 1 — Static
 
 ### Structural Compliance
 
@@ -49,30 +49,30 @@ The following checks from `meta/standards/validation/docs-checklist.md` were not
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| CQ-1 Concepts technically correct | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-2 Explanations causal | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-3 Coverage complete | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-4 Terminology consistent | SKIP | Not applied in this pass — deferred to cohesion audit |
-| CQ-5 Limitations acknowledged | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-1 Explanation progressive | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-2 Reader assumptions appropriate | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-3 Mental models clear | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-4 Examples meaningful | SKIP | Not applied in this pass — deferred to cohesion audit |
-| PQ-5 Tables reduce cognitive load | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-1 Engineering implications explicit | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-2 Trade-offs identified | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-3 Real system behavior reflected | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-4 Abstract explanation grounded | SKIP | Not applied in this pass — deferred to cohesion audit |
-| EQ-5 Operational risks mentioned | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-1 Sandbox alignment | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-2 Cross-references meaningful | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-3 Implementation references concrete | SKIP | Not applied in this pass — deferred to cohesion audit |
-| IQ-4 Validation references present | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-1 Runtime complexity matches level | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-2 Components justified | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-3 Abstraction level appropriate | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-4 Observability requirements addressed | SKIP | Not applied in this pass — deferred to cohesion audit |
-| LC-5 Level exceptions documented | SKIP | Not applied in this pass — deferred to cohesion audit |
+| CQ-1 Concepts technically correct | PENDING | Deferred to cohesion audit |
+| CQ-2 Explanations causal | PENDING | Deferred to cohesion audit |
+| CQ-3 Coverage complete | PENDING | Deferred to cohesion audit |
+| CQ-4 Terminology consistent | PENDING | Deferred to cohesion audit |
+| CQ-5 Limitations acknowledged | PENDING | Deferred to cohesion audit |
+| PQ-1 Explanation progressive | PENDING | Deferred to cohesion audit |
+| PQ-2 Reader assumptions appropriate | PENDING | Deferred to cohesion audit |
+| PQ-3 Mental models clear | PENDING | Deferred to cohesion audit |
+| PQ-4 Examples meaningful | PENDING | Deferred to cohesion audit |
+| PQ-5 Tables reduce cognitive load | PENDING | Deferred to cohesion audit |
+| EQ-1 Engineering implications explicit | PENDING | Deferred to cohesion audit |
+| EQ-2 Trade-offs identified | PENDING | Deferred to cohesion audit |
+| EQ-3 Real system behavior reflected | PENDING | Deferred to cohesion audit |
+| EQ-4 Abstract explanation grounded | PENDING | Deferred to cohesion audit |
+| EQ-5 Operational risks mentioned | PENDING | Deferred to cohesion audit |
+| IQ-1 Sandbox alignment | PENDING | Deferred to cohesion audit |
+| IQ-2 Cross-references meaningful | PENDING | Deferred to cohesion audit |
+| IQ-3 Implementation references concrete | PENDING | Deferred to cohesion audit |
+| IQ-4 Validation references present | PENDING | Deferred to cohesion audit |
+| LC-1 Runtime complexity matches level | PENDING | Deferred to cohesion audit |
+| LC-2 Components justified | PENDING | Deferred to cohesion audit |
+| LC-3 Abstraction level appropriate | PENDING | Deferred to cohesion audit |
+| LC-4 Observability requirements addressed | PENDING | Deferred to cohesion audit |
+| LC-5 Level exceptions documented | PENDING | Deferred to cohesion audit |
 
 ---
 
@@ -125,7 +125,7 @@ None.
 
 ---
 
-## Execution Checks
+## Phase 3 — Execution
 
 Not applicable — no executable labs in this module.
 
@@ -133,7 +133,7 @@ Not applicable — no executable labs in this module.
 
 ## Overall Status
 
-**STATIC_PASS**
+**STATIC_PASS | COHESION_PENDING | EXECUTION_SKIP**
 
 - All static checks pass with no fixes needed.
 - No labs to execute — module is concept-only by design.

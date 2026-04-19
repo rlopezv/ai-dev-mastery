@@ -26,9 +26,20 @@ It is **not included in the final learner-facing repository**, which consists of
 
 ```text
 meta/
-├── session/        # execution state and continuity
-├── system-design/  # canonical structure and alignment rules
-├── standards/      # contracts, templates, and validation rules
+├── audit/
+│   └── reports/                       # persistent audit reports (committed)
+│       ├── <module>.audit.md          # one per audited module
+│       ├── global.audit.md            # cross-module audit output
+│       └── enrich.md                  # enrich run output
+├── session/                           # execution state and continuity
+│   ├── PROJECT_STATUS.md              # project progress tracker (canonical)
+│   ├── SESSION-CONTEXT.md             # cross-session briefing
+│   ├── WORKPLAN.md                    # phase planner for pending modules
+│   └── reports/                       # ephemeral review cache — NOT committed
+├── system-design/                     # canonical structure and alignment rules
+├── standards/                         # contracts, templates, and validation rules
+│   ├── audit/
+│   │   └── audit-report-format.md    # canonical format for audit reports
 │   ├── frontmatter/
 │   │   └── frontmatter-spec.md        # frontmatter contract (mandatory)
 │   ├── writing/
@@ -38,14 +49,14 @@ meta/
 │   │   ├── architecture-guide.md      # architecture writing guide
 │   │   ├── implementation-reference-guide.md
 │   │   ├── validation-guide.md        # validation writing guide
-│   │   ├── lab-entry-readme-guide.md       # module lab README writing guide (labs/<module>/README.md)
-│   │   └── lab-individual-readme-guide.md  # individual lab README writing guide (labs/<module>/lab-xxx/README.md)
+│   │   ├── lab-entry-readme-guide.md
+│   │   └── lab-individual-readme-guide.md
 │   ├── validation/
 │   │   ├── docs-checklist.md          # docs validation checklist
 │   │   └── labs-checklist.md          # labs validation checklist
 │   └── review/
-│       └── review-protocol.md         # review protocol
-└── workflow/       # operational model (Claude Code usage)
+│       └── review-protocol.md         # human-facing diagnostic protocol
+└── workflow/                          # operational model (Claude Code usage)
 ```
 
 ---
