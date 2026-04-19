@@ -1,1 +1,1 @@
-Execute the "Dist" procedure defined in CLAUDE.md §9.
+Execute the procedure defined in meta/workflow/procedures/dist.md

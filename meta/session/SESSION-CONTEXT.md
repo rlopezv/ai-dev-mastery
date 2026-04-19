@@ -6,21 +6,18 @@ Portable briefing for cross-tool handoff. Rewritten at the end of every session 
 
 ## Current state
 
-- Rama activa: `meta/editorial-reform`
-- Proceso editorial completamente revisado y corregido (bugs + gaps + UX)
-- Reforma editorial lista para commitear y cerrar la rama
+- Rama activa: `meta/procedure-extraction`
+- Procedure extraction completo: 13 ficheros en `meta/workflow/procedures/`, CLAUDE.md §9 reducido a tabla, 13 command files actualizados, `REPOSITORY_LAYOUT.md` y `CLAUDE-CODE-WORKFLOW.md` actualizados
+- llm-fundamentals: COHESION_PASS. 8 módulos restantes en COHESION_PENDING.
 
 ## Recent decisions
 
-- `PENDING.md` creado en `meta/session/` — fichero persistente de intervención humana (Execute / Review / Decide)
-- `/pending` command añadido — lee PENDING.md y muestra items pendientes agrupados
-- `HUMAN_ACTION_REQUIRED` — convención de output cuando Claude añade items a PENDING.md
-- `audit-module` Phase 1 step 9 y Phase 2 step 2 ahora actualizan PENDING.md automáticamente
-- `audit-module` Phase 3 comprueba infraestructura antes de proceder; si no disponible → PENDING Execute
-- `fix-doc` step 4: conflictos de glosario van a PENDING Decide en lugar de modificar el glosario
-- `CLAUDE.md §2`: PENDING.md añadido a la lista de ficheros a leer al inicio de sesión
+- Bug en `sync-frontmatter-status.py` corregido: quoted YAML status values
+- Separación política (CLAUDE.md) / procedimiento (`meta/workflow/procedures/`) / invocación (`.claude/commands/`)
+- `.claude/commands/` son ahora one-line delegators; los pasos reales están en `meta/workflow/procedures/`
+- `REPOSITORY_LAYOUT.md` actualizado: árbol `meta/workflow/procedures/`, `PENDING.md` en session, descripción `.claude/commands/`
 
 ## Next task
 
-Commitear la rama `meta/editorial-reform` y hacer PR a master.
-Luego: Phase 2 cohesion audit de los 9 módulos en COHESION_PENDING.
+Commit + PR de la rama `meta/procedure-extraction` a master.
+Luego continuar con `/audit-module llm-apis`.

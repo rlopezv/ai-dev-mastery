@@ -1,1 +1,1 @@
-Execute the "Write a document" procedure defined in CLAUDE.md §9 for the document at: $ARGUMENTS
+Execute the procedure defined in meta/workflow/procedures/write-doc.md for the document at: $ARGUMENTS

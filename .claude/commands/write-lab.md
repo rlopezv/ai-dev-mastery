@@ -1,1 +1,1 @@
-Execute the "Write a lab" procedure defined in CLAUDE.md §9 for the lab at: $ARGUMENTS
+Execute the procedure defined in meta/workflow/procedures/write-lab.md for the lab at: $ARGUMENTS

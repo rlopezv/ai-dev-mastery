@@ -3,7 +3,8 @@
 ## Purpose
 
 This document explains how to work with Claude Code in this repository day to day.
-It is the practical companion to `CLAUDE.md`, which defines the rules and task steps.
+It is the practical companion to `CLAUDE.md`, which defines rules and conventions.
+Step-by-step task procedures live in `meta/workflow/procedures/`.
 
 ---
 
@@ -89,7 +90,61 @@ the following custom commands:
 | `/dist` | Generate a clean learner-facing distribution in `dist/` (no meta/, no .claude/) |
 | `/pending` | Show all items in `meta/session/PENDING.md` awaiting human intervention (execute labs, manual review, decisions) |
 
-These commands are defined in `.claude/commands/`. Claude Code loads them automatically.
+These commands are defined in `.claude/commands/` as one-line delegators. Claude Code loads them automatically.
+Actual procedure steps live in `meta/workflow/procedures/` — edit those files to change behavior.
+
+### Command architecture
+
+Each invocation passes through three layers:
+
+```
+User
+  /audit-module llm-apis
+          │
+          ▼
+.claude/commands/audit-module.md          ← invocation layer (one-line delegator)
+  "Execute the procedure defined in
+   meta/workflow/procedures/audit-module.md
+   for module: llm-apis"
+          │
+          ▼
+meta/workflow/procedures/audit-module.md  ← procedure layer (actual steps)
+  Phase 1 — Static
+  Phase 2 — Cohesion
+  Phase 3 — Execution
+          │
+    ┌─────┼──────────────────┐
+    ▼     ▼                  ▼
+meta/     docs/<module>/     meta/session/
+standards/ *.md              PROJECT_STATUS.md
+templates/ labs/<module>/    PENDING.md
+validation/                  audit/reports/
+```
+
+To change what a command does: edit `meta/workflow/procedures/<command>.md`.
+To add a new command: create the procedure file, add the delegator in `.claude/commands/`, and register it in CLAUDE.md §9.
+
+### Procedure groups
+
+Procedures differ in what they read and write. Three groups:
+
+```
+Authoring                   Audit / quality             Delivery
+─────────────────────────   ─────────────────────────   ──────────────────────
+/write-doc                  /audit-doc                  /dist
+/write-module               /audit-module               /enrich
+/write-lab                  /audit
+/write-labs                 /review-doc
+/design-labs                /fix-doc
+                            /pending
+
+Writes to:                  Writes to:                  Writes to:
+  docs/<module>/              meta/audit/reports/         dist/
+  labs/<module>/              meta/session/reports/       meta/audit/reports/
+  docs/reference/             frontmatter status          enrich.md
+  glossary.md                 PENDING.md
+  PROJECT_STATUS.md           PROJECT_STATUS.md
+```
 
 ---
 
@@ -109,6 +164,7 @@ Claude Code treats these files as its operating context:
 | `meta/session/WORKPLAN.md` | Phase tracker for modules 10–16; includes status summary of modules 1–9 |
 | `meta/session/SESSION-CONTEXT.md` | Cross-session briefing — rewritten at the end of every task |
 | `meta/session/PENDING.md` | Items awaiting human intervention — execute labs, manual review, decisions |
+| `meta/workflow/procedures/` | Step-by-step procedure for each slash command |
 | `meta/standards/templates/` | Document structure for each type |
 | `meta/standards/frontmatter/frontmatter-spec.md` | Frontmatter rules |
 | `meta/standards/writing/writing-style.md` | Prose writing rules |

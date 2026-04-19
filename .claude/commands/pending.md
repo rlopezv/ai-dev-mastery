@@ -1,1 +1,1 @@
-Execute the "Pending" procedure defined in CLAUDE.md §9.
+Execute the procedure defined in meta/workflow/procedures/pending.md

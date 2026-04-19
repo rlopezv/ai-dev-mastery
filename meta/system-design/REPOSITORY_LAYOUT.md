@@ -187,6 +187,7 @@ meta/
 ├── session/
 │   ├── PROJECT_STATUS.md         ← project progress tracker (canonical)
 │   ├── SESSION-CONTEXT.md        ← cross-session briefing
+│   ├── PENDING.md                ← items awaiting human intervention (execute / review / decide)
 │   ├── WORKPLAN.md               ← phase planner for pending modules
 │   └── reports/                  ← ephemeral review cache (NOT committed)
 ├── standards/
@@ -216,7 +217,21 @@ meta/
 │   ├── DOCS_LABS_MAP.md
 │   └── LEVEL_MODE.md
 └── workflow/
-    └── CLAUDE-CODE-WORKFLOW.md
+    ├── CLAUDE-CODE-WORKFLOW.md   ← practical guide for working with Claude Code in this repo
+    └── procedures/               ← step-by-step procedures for each slash command
+        ├── write-doc.md
+        ├── write-module.md
+        ├── write-lab.md
+        ├── write-labs.md
+        ├── design-labs.md
+        ├── review-doc.md
+        ├── fix-doc.md
+        ├── audit-doc.md
+        ├── audit-module.md
+        ├── audit-global.md
+        ├── enrich.md
+        ├── dist.md
+        └── pending.md
 ```
 
 ### meta/audit/reports/
@@ -233,8 +248,9 @@ This folder is excluded from git — see `.gitignore`. Reports do not survive ac
 
 ## .claude/commands/
 
-Custom slash commands for Claude Code. Each file is a markdown prompt
-invokable with `/command-name` from the Claude Code CLI.
+Custom slash commands for Claude Code. Each file is a one-line delegator
+invokable with `/command-name` from the Claude Code CLI. Actual procedure
+steps live in `meta/workflow/procedures/` — edit those files to change behavior.
 
 ```text
 .claude/commands/
@@ -249,7 +265,8 @@ invokable with `/command-name` from the Claude Code CLI.
 ├── audit-module.md
 ├── audit.md
 ├── enrich.md
-└── dist.md
+├── dist.md
+└── pending.md
 ```
 
 ---

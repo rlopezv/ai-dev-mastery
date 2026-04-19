@@ -1,1 +1,1 @@
-Execute the "Write labs" procedure defined in CLAUDE.md §9 for module: $ARGUMENTS
+Execute the procedure defined in meta/workflow/procedures/write-labs.md for module: $ARGUMENTS

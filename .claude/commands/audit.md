@@ -1,1 +1,1 @@
-Execute the "Audit (global)" procedure defined in CLAUDE.md §9.
+Execute the procedure defined in meta/workflow/procedures/audit-global.md

@@ -1,1 +1,1 @@
-Execute the "Design labs for a module" procedure defined in CLAUDE.md §9 for module: $ARGUMENTS
+Execute the procedure defined in meta/workflow/procedures/design-labs.md for module: $ARGUMENTS

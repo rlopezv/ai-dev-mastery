@@ -1,1 +1,1 @@
-Execute the "Audit module" procedure defined in CLAUDE.md §9 for module: $ARGUMENTS
+Execute the procedure defined in meta/workflow/procedures/audit-module.md for module: $ARGUMENTS
