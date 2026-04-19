@@ -4,7 +4,7 @@ title: "LLM Fundamentals"
 type: "step-readme"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/README.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "large-language-model"

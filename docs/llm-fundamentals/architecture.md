@@ -4,7 +4,7 @@ title: "LLM Fundamentals — Architecture"
 type: "architecture"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/architecture.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "inference-pipeline"

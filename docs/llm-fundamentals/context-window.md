@@ -4,7 +4,7 @@ title: "Context Window"
 type: "topic"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/context-window.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "context-window"

@@ -4,7 +4,7 @@ title: "Multimodality"
 type: "topic"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/multimodality.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "multimodality"

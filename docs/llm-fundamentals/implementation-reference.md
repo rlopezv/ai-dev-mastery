@@ -4,7 +4,7 @@ title: "LLM Fundamentals — Implementation Reference"
 type: "implementation-reference"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/implementation-reference.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "inference-pipeline"

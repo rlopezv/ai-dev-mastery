@@ -67,7 +67,7 @@ Do not edit manually unless correcting an error.
 
 | Module | Audit | Report |
 |--------|-------|--------|
-| `llm-fundamentals` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/llm-fundamentals.audit.md` |
+| `llm-fundamentals` | STATIC_PASS \| COHESION_PASS \| EXECUTION_PENDING | `meta/audit/reports/llm-fundamentals.audit.md` |
 | `llm-apis` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/llm-apis.audit.md` |
 | `prompt-engineering` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/prompt-engineering.audit.md` |
 | `structured-outputs` | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING | `meta/audit/reports/structured-outputs.audit.md` |
@@ -81,5 +81,5 @@ Do not edit manually unless correcting an error.
 
 ## Last updated
 
-Session: Static audit pass complete for all 9 intermediate modules (llm-fundamentals through ai-java). frameworks-tools: 4 glossary entries added. ai-java: STATIC_PASS, no labs, no glossary additions needed. Second pass with /audit-module (cohesion checks) pending.
+Session: Cohesion audit (Phase 2) complete for llm-fundamentals — COHESION_PASS. All 10 docs pass all checks; status updated to `final`. Script bug fixed: sync-frontmatter-status.py now handles quoted YAML status values. 8 modules remain in COHESION_PENDING.
 Date: 2026-04-19

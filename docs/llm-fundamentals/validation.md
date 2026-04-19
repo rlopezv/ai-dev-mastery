@@ -4,7 +4,7 @@ title: "LLM Fundamentals — Validation"
 type: "validation"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/validation.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "large-language-model"

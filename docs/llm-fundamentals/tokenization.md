@@ -4,7 +4,7 @@ title: "Tokenization"
 type: "topic"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/tokenization.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "tokenization"

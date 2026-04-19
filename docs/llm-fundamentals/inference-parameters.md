@@ -4,7 +4,7 @@ title: "Inference Parameters"
 type: "topic"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/inference-parameters.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "inference-parameters"

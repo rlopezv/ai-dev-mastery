@@ -4,7 +4,7 @@ title: "Fine-Tuning"
 type: "topic"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/fine-tuning.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "fine-tuning"

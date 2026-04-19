@@ -96,6 +96,55 @@ The following checks from `meta/standards/validation/docs-checklist.md` were not
 
 ---
 
+## Phase 2 — Cohesion
+
+Covers content correctness, pedagogical quality, engineering quality, integration quality, and level compliance. Applied to all 10 docs.
+
+**Audit date:** 2026-04-19
+**Auditor:** Claude Sonnet 4.6
+
+### Cohesion checks — all docs
+
+| Check | Status | Notes |
+|-------|--------|-------|
+| CQ-1 Concepts technically correct | PASS | All topics: transformer, BPE, attention, autoregressive loop, inference parameters, LoRA, vision encoder — technically accurate throughout |
+| CQ-2 Explanations causal | PASS | Already confirmed in Phase 1 |
+| CQ-3 Coverage complete | PASS | Every doc fulfills its declared scope; all frontmatter `concepts` fields fully covered |
+| CQ-4 Terminology consistent | PASS | Already confirmed in Phase 1 |
+| CQ-5 Limitations acknowledged | PASS | Every topic and architecture doc has a dedicated Failure Modes / Limitations section |
+| PQ-1 Explanation progressive | PASS | Intuition → Why → How → Engineering → Failure modes in all topic docs |
+| PQ-2 Reader assumptions appropriate | PASS | No deep ML assumed; analogies (RAM buffer, codec, biased coin flip) appropriate for Java architects |
+| PQ-3 Mental models clear | PASS | Concept map in README, component diagrams in architecture.md, analogy-per-topic pattern consistent |
+| PQ-4 Examples meaningful | PASS | Code examples reference concrete labs; decision tables are actionable |
+| PQ-5 Tables reduce cognitive load | PASS | Synthesis tables used for component breakdowns, parameter references, lab mappings |
+| EQ-1 Engineering implications explicit | PASS | Already confirmed in Phase 1 |
+| EQ-2 Trade-offs identified | PASS | Temperature/diversity, context cost, fine-tuning maintenance burden, resolution/token trade-offs |
+| EQ-3 Real system behavior reflected | PASS | Ollama API fields (`prompt_eval_count`, `eval_count`), tiktoken encoding, provider-specific limits referenced throughout |
+| EQ-4 Abstract explanation grounded | PASS | All abstractions anchored to concrete tool interfaces or observable behaviors |
+| EQ-5 Operational risks mentioned | PASS | Silent truncation, hallucination, tokenizer mismatch, parameter interaction, data contamination — all covered |
+| IQ-1 Sandbox alignment | PASS | Foundational profile (Ollama only) consistent across all docs; concept-only topics correctly declare no runtime requirement |
+| IQ-2 Cross-references meaningful | PASS | Inter-module references (RAG, memory-context, agents) correctly motivated by the concept being covered |
+| IQ-3 Implementation references concrete | PASS | Already confirmed in Phase 1 |
+| IQ-4 Validation references present | PASS | All docs reference `docs-checklist.md`; validation.md also references `labs-checklist.md` |
+| IQ-5 Fits roadmap position | PASS | Already confirmed in Phase 1 |
+| LC-2 Components justified | PASS | Ollama, tiktoken, and requests justified by pedagogical role in each doc |
+| LC-3 Abstraction level appropriate | PASS | Raw APIs throughout; no framework wrappers introduced |
+| LC-4 Observability requirements addressed | PASS | Labs map directly to pipeline components; observables (token counts, variance, budget arithmetic) explicitly stated |
+| LC-5 Level exceptions documented | PASS | No exceptions from foundational profile; concept-only topics (fine-tuning, multimodality) explicitly state no lab |
+| SC-5 Tables present where required | PASS | All docs include required synthesis/comparison tables |
+
+### Fixes applied during Phase 2
+
+None required. All 10 documents passed all cohesion checks.
+
+### Frontmatter sync
+
+`python .work/scripts/sync-frontmatter-status.py llm-fundamentals final` — 10 files updated `draft → final`. No WARN lines.
+
+> **Script bug fixed:** The script was not updating files because `status` values use YAML quoted strings (`"draft"`) but the comparison list had unquoted strings. Fixed by stripping quotes in `sync_status()`.
+
+---
+
 ## Phase 3 — Execution
 
 Checks that require running the labs against a live Ollama instance.
@@ -119,7 +168,8 @@ Checks that require running the labs against a live Ollama instance.
 | Dimension | Status |
 |-----------|--------|
 | Static checks | PASS |
+| Cohesion checks | PASS |
 | Execution checks | PENDING |
-| **Module** | **STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING** |
+| **Module** | **STATIC_PASS \| COHESION_PASS \| EXECUTION_PENDING** |
 
 Module is not **FULL_PASS** until execution checks are completed against a running Ollama instance with `llama3.2` loaded.

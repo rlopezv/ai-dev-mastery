@@ -4,7 +4,7 @@ title: "LLM Architecture"
 type: "topic"
 step: "llm-fundamentals"
 path: "docs/llm-fundamentals/llm-architecture.md"
-status: "draft"
+status: "final"
 level: "foundational"
 concepts:
   - "transformer-architecture"
