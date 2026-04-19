@@ -19,7 +19,7 @@ and any other learner-facing text produced by or accompanying a lab.
 
 ---
 
-## 1a. Abstraction Policy by Level
+## 2. Abstraction Policy by Level
 
 The allowed abstraction level in lab code is governed by the module's declared level.
 Full contract: `meta/system-design/LEVEL_MODE.md`.
@@ -32,7 +32,7 @@ Full contract: `meta/system-design/LEVEL_MODE.md`.
 
 ---
 
-## 2. main.py Structure
+## 3. main.py Structure
 
 Every lab entry point follows this order:
 
@@ -65,7 +65,7 @@ of the lab README. Content must be specific to the lab's concept, not generic.
 
 ---
 
-## 3. Configuration
+## 4. Configuration
 
 Load configuration from environment variables. Never hardcode URLs, ports, or API keys.
 
@@ -80,7 +80,7 @@ Use `.env.example` to document all required variables.
 
 ---
 
-## 4. Comments
+## 5. Comments
 
 Two types of comments are expected:
 
@@ -99,7 +99,7 @@ No commented-out code. No TODO comments in published labs.
 
 ---
 
-## 5. Observability
+## 6. Observability
 
 Every lab must produce visible output that confirms correct behavior.
 Use `print` for simple labs, `logging` for labs with multiple steps or external calls.
@@ -117,7 +117,7 @@ not just that the script ran.
 
 ---
 
-## 6. Error Handling
+## 7. Error Handling
 
 Handle errors at the boundary with external services (Ollama, ChromaDB, APIs).
 Do not wrap internal logic in broad try/except.
@@ -132,7 +132,7 @@ except ConnectionError as e:
 
 ---
 
-## 7. requests.http
+## 8. requests.http
 
 For FastAPI labs only. One file per lab, named `requests.http`.
 
@@ -157,7 +157,7 @@ Rules:
 
 ---
 
-## 8. shared/
+## 9. shared/
 
 Code in `shared/` must be genuinely reusable across labs in the module.
 Do not move code to `shared/` prematurely.
@@ -174,7 +174,7 @@ Only `shared/` is a valid cross-lab dependency.
 
 ---
 
-## 9. corpus/ convention
+## 10. corpus/ convention
 
 Use a `corpus/` directory at the module level when a lab set requires a fixed
 knowledge base — a set of documents that the learner reads before running the labs
@@ -234,7 +234,7 @@ retrieval results by reading the files.
 
 ---
 
-## 10. What to Avoid
+## 11. What to Avoid
 
 | Anti-pattern | Why |
 |--------------|-----|

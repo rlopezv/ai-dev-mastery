@@ -274,6 +274,7 @@ Use the following structure when validating a document.
 | SC-3 |  | Critical |  |
 | SC-4 |  | Critical |  |
 | SC-5 |  | Major |  |
+| SC-6 |  | Critical |  |
 | CQ-1 |  | Critical |  |
 | CQ-2 |  | Major |  |
 | CQ-3 |  | Major |  |
@@ -294,6 +295,7 @@ Use the following structure when validating a document.
 | IQ-3 |  | Major |  |
 | IQ-4 |  | Minor |  |
 | IQ-5 |  | Major |  |
+| IQ-6 |  | Major |  |
 | LC-1 |  | Critical |  |
 | LC-2 |  | Major |  |
 | LC-3 |  | Major |  |
@@ -304,28 +306,34 @@ Use the following structure when validating a document.
 
 ## 12. Category Calculation Method
 
-Each category has 5 checks, each with a max raw score of 2.
+Each check scores 0–2. The max raw score per category equals the number of checks × 2.
 
-So each category has:
-
-```text
-MAX RAW SCORE = 10
-```
+| Category | Checks | Max Raw | Weight | Max Weighted |
+|----------|--------|---------|--------|--------------|
+| Structural Compliance | 6 (SC-1..SC-6) | 12 | 0.25 | 2.5 |
+| Content Quality | 5 (CQ-1..CQ-5) | 10 | 0.20 | 2.0 |
+| Pedagogical Quality | 5 (PQ-1..PQ-5) | 10 | 0.20 | 2.0 |
+| Engineering Quality | 5 (EQ-1..EQ-5) | 10 | 0.15 | 1.5 |
+| Integration Quality | 6 (IQ-1..IQ-6) | 12 | 0.10 | 1.0 |
+| Level Compliance | 5 (LC-1..LC-5) | 10 | 0.10 | 1.0 |
 
 To calculate a weighted category score:
 
 ```text
-CATEGORY SCORE = (raw score / 10) × category weight × 10
+CATEGORY SCORE = (raw score / max raw score) × max weighted score
 ```
 
-Example:
+Examples:
 
 ```text
-Structural Compliance raw = 8/10
-Weighted = (8/10) × 2.5 = 2.0
+Structural Compliance raw = 10/12
+Weighted = (10/12) × 2.5 = 2.08
+
+Content Quality raw = 8/10
+Weighted = (8/10) × 2.0 = 1.6
 ```
 
-Repeat for all categories and sum the results.
+Repeat for all categories and sum the results. Maximum total = 10.0.
 
 ---
 

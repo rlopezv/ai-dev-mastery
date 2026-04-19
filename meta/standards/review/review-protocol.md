@@ -124,9 +124,9 @@ MINOR ISSUES:
 RECOMMENDED ACTION: ACCEPT | REVISE | REJECT
 ```
 
-**ACCEPT** — no critical issues, score ≥ 8. Minor issues may remain.
-**REVISE** — major issues present, document is recoverable.
-**REJECT** — critical issues that require structural rework.
+**ACCEPT** — no critical issues, at most one major issue. Minor issues may remain.
+**REVISE** — two or more major issues present, document is recoverable.
+**REJECT** — one or more critical issues that require structural rework.
 
 ---
 

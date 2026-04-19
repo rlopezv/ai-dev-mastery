@@ -145,6 +145,8 @@ embedding = model.encode("What is RAG?")
 
 ## 8. Section Length
 
+These rules apply to `topic` documents (§4.1). Other document types follow their template structure.
+
 - Intuition: 2–4 sentences. Short by design.
 - Explanation: as long as needed, structured in the three parts defined above
 - Tables: no minimum, but every row must be meaningful

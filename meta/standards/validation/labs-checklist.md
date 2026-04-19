@@ -25,13 +25,14 @@ meta/standards/validation/docs-checklist.md
 
 ## 2. Validation Model
 
-Lab validation is based on five categories:
+Lab validation is based on six categories:
 
 1. Structural Integrity
 2. Execution Validity
 3. Behavioral Correctness
 4. Documentation Alignment
 5. Engineering Quality
+6. Level Compliance
 
 ---
 
@@ -49,20 +50,32 @@ Each check is scored:
 
 ### 3.2 Category Weights
 
-| Category                | Weight |
-| ----------------------- | ------ |
-| Structural Integrity    | 0.20   |
-| Execution Validity      | 0.25   |
-| Behavioral Correctness  | 0.25   |
-| Documentation Alignment | 0.15   |
-| Engineering Quality     | 0.15   |
+| Category | Checks | Max Raw | Weight | Max Weighted |
+|----------|--------|---------|--------|--------------|
+| Structural Integrity    | 8 (LS-1..LS-8) | 16 | 0.15 | 1.5 |
+| Execution Validity      | 5 (EV-1..EV-5) | 10 | 0.25 | 2.5 |
+| Behavioral Correctness  | 5 (BC-1..BC-5) | 10 | 0.25 | 2.5 |
+| Documentation Alignment | 5 (DA-1..DA-5) | 10 | 0.10 | 1.0 |
+| Engineering Quality     | 5 (EQ-1..EQ-5) | 10 | 0.10 | 1.0 |
+| Level Compliance        | 5 (LC-1..LC-5) | 10 | 0.15 | 1.5 |
 
 ---
 
 ### 3.3 Final Score
 
 ```text
-FINAL SCORE = weighted sum (0–10)
+CATEGORY SCORE = (raw score / max raw score) × max weighted score
+FINAL SCORE = sum of all category scores (0–10)
+```
+
+Examples:
+
+```text
+Structural Integrity raw = 12/16
+Weighted = (12/16) × 1.5 = 1.125
+
+Execution Validity raw = 9/10
+Weighted = (9/10) × 2.5 = 2.25
 ```
 
 ---
@@ -283,7 +296,49 @@ Full contract: `meta/system-design/LEVEL_MODE.md`
 
 ---
 
-## 11. Validation Output Format
+## 11. Scoring Sheet
+
+Use the following structure when validating a lab.
+
+| Check | Score (0/1/2) | Severity | Notes |
+|-------|----------------|----------|-------|
+| LS-1 |  | Critical |  |
+| LS-2 |  | Major |  |
+| LS-3 |  | Major |  |
+| LS-4 |  | Critical |  |
+| LS-5 |  | Minor |  |
+| LS-6 |  | Major |  |
+| LS-7 |  | Critical |  |
+| LS-8 |  | Critical |  |
+| EV-1 |  | Critical |  |
+| EV-2 |  | Critical |  |
+| EV-3 |  | Critical |  |
+| EV-4 |  | Major |  |
+| EV-5 |  | Major |  |
+| BC-1 |  | Critical |  |
+| BC-2 |  | Critical |  |
+| BC-3 |  | Major |  |
+| BC-4 |  | Major |  |
+| BC-5 |  | Major |  |
+| DA-1 |  | Critical |  |
+| DA-2 |  | Critical |  |
+| DA-3 |  | Major |  |
+| DA-4 |  | Major |  |
+| DA-5 |  | Minor |  |
+| EQ-1 |  | Major |  |
+| EQ-2 |  | Minor |  |
+| EQ-3 |  | Minor |  |
+| EQ-4 |  | Major |  |
+| EQ-5 |  | Major |  |
+| LC-1 |  | Critical |  |
+| LC-2 |  | Major |  |
+| LC-3 |  | Major |  |
+| LC-4 |  | Major |  |
+| LC-5 |  | Critical |  |
+
+---
+
+## 12. Validation Output Format
 
 ```text
 LAB_VALIDATION_RESULT
@@ -307,7 +362,7 @@ REQUIRED FIXES:
 
 ---
 
-## 12. Interpretation Rules
+## 13. Interpretation Rules
 
 ### PASS
 
@@ -321,7 +376,7 @@ REQUIRED FIXES:
 
 ---
 
-## 13. Non-Compliant Validation Behavior
+## 14. Non-Compliant Validation Behavior
 
 Invalid validation includes:
 
@@ -333,7 +388,7 @@ Invalid validation includes:
 
 ---
 
-## 14. Final Rule
+## 15. Final Rule
 
 A lab is considered valid only if:
 

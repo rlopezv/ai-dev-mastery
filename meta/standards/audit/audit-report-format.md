@@ -194,14 +194,31 @@ None. (if no fixes were needed)
 Present after Phase 1 as a placeholder with all checks PENDING. Filled in when live
 infrastructure is available (Ollama running, devcontainer active).
 
+Phase 3 checks map to `meta/standards/validation/labs-checklist.md` categories:
+
+| labs-checklist category | Check IDs applied in Phase 3 |
+|-------------------------|-------------------------------|
+| Execution Validity | EV-1, EV-2, EV-3, EV-4, EV-5 |
+| Behavioral Correctness | BC-1, BC-2, BC-3, BC-4, BC-5 |
+
+Structural Integrity (LS-*), Documentation Alignment (DA-*), Engineering Quality (EQ-*),
+and Level Compliance (LC-*) are applied in Phase 1 (static) for labs.
+
 ```markdown
 ## Phase 3 — Execution
 
 | Check | Status | What to verify |
 |-------|--------|----------------|
 | EV-1 Labs run without error | PENDING | Requires live infrastructure — `python lab-<n>/main.py` exits 0 |
-| EV-2 ...                    | PENDING | Requires live infrastructure |
-| BC-1 ...                    | PENDING | Requires live infrastructure |
+| EV-2 Environment reproducible | PENDING | Requires live infrastructure |
+| EV-3 Dependencies resolved | PENDING | Requires live infrastructure |
+| EV-4 Entry points functional | PENDING | Requires live infrastructure |
+| EV-5 No hidden manual steps | PENDING | Requires live infrastructure |
+| BC-1 Expected outputs correct | PENDING | Requires live infrastructure |
+| BC-2 System behaves as described | PENDING | Requires live infrastructure |
+| BC-3 Edge cases handled | PENDING | Requires live infrastructure |
+| BC-4 Failure modes visible | PENDING | Requires live infrastructure |
+| BC-5 Outputs deterministic enough | PENDING | Requires live infrastructure |
 ```
 
 ---
@@ -222,6 +239,8 @@ Valid status combinations:
 |---------------|---------|
 | `STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING` | Phase 1 complete, phases 2 and 3 not started |
 | `STATIC_PASS \| COHESION_PASS \| EXECUTION_PENDING` | Phases 1 and 2 complete, labs not run |
+| `STATIC_PASS \| COHESION_PENDING \| EXECUTION_SKIP` | Phase 1 complete, module has no labs |
+| `STATIC_PASS \| COHESION_PASS \| EXECUTION_SKIP` | Phases 1 and 2 complete, module has no labs |
 | `FULL_PASS` | All three phases complete and passing |
 
 ---

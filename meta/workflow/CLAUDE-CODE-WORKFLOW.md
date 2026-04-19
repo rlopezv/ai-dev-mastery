@@ -87,6 +87,7 @@ the following custom commands:
 | `/audit` | Global cross-module audit; write report to `meta/audit/reports/global.audit.md` |
 | `/enrich` | Apply horizontal navigation improvements; write report to `meta/audit/reports/enrich.md` |
 | `/dist` | Generate a clean learner-facing distribution in `dist/` (no meta/, no .claude/) |
+| `/pending` | Show all items in `meta/session/PENDING.md` awaiting human intervention (execute labs, manual review, decisions) |
 
 These commands are defined in `.claude/commands/`. Claude Code loads them automatically.
 
@@ -107,6 +108,7 @@ Claude Code treats these files as its operating context:
 | `meta/session/reports/` | Ephemeral review cache from /review-doc — not committed; consumed by /fix-doc |
 | `meta/session/WORKPLAN.md` | Phase tracker for modules 10–16; includes status summary of modules 1–9 |
 | `meta/session/SESSION-CONTEXT.md` | Cross-session briefing — rewritten at the end of every task |
+| `meta/session/PENDING.md` | Items awaiting human intervention — execute labs, manual review, decisions |
 | `meta/standards/templates/` | Document structure for each type |
 | `meta/standards/frontmatter/frontmatter-spec.md` | Frontmatter rules |
 | `meta/standards/writing/writing-style.md` | Prose writing rules |

@@ -29,6 +29,7 @@ meta/system-design/REPOSITORY_LAYOUT.md   → full repo structure
 meta/system-design/LEVEL_MODE.md          → normative level contracts (runtime, infrastructure, abstraction)
 meta/system-design/DOCS_LABS_MAP.md       → module sequence and docs↔labs alignment
 meta/session/PROJECT_STATUS.md            → current project progress
+meta/session/PENDING.md                   → items awaiting human intervention from prior sessions
 ```
 
 These files are your source of truth for structure, alignment, and state.
@@ -169,18 +170,33 @@ If the result is FAIL, fix the issues before finishing.
 
 Do not accumulate history. Replace the full content each time. Target: under 20 lines.
 
+**When a task generates items requiring human intervention**, append them to
+`meta/session/PENDING.md` under the appropriate section (`## Execute`, `## Review`,
+or `## Decide`) and emit a `HUMAN_ACTION_REQUIRED` block at the end of the response:
+
+```
+HUMAN_ACTION_REQUIRED
+ITEMS ADDED TO PENDING.md:
+- [Execute] <module> — <what to run and why>
+- [Review] <file> — <reason for escalation>
+- [Decide] <topic> — <what needs deciding>
+```
+
+Only emit this block when items are actually added. Do not emit it speculatively.
+
 ### Write a document
 
 1. Read `meta/system-design/DOCS_LABS_MAP.md` to understand scope
 2. Read the appropriate template from `meta/standards/templates/`
 3. Read `meta/standards/frontmatter/frontmatter-spec.md`
 4. Read `meta/standards/writing/writing-style.md`
-5. Write the full document
-6. Check `concepts` against `docs/reference/glossary.md` and update it
-7. Validate with `meta/standards/validation/docs-checklist.md`
-8. Write to the target path
-9. Update `meta/session/PROJECT_STATUS.md`
-10. Update `meta/session/SESSION-CONTEXT.md`
+5. Read existing docs in the same module to confirm terminological consistency before writing
+6. Write the full document
+7. Check `concepts` against `docs/reference/glossary.md` and update it
+8. Validate with `meta/standards/validation/docs-checklist.md`
+9. Write to the target path
+10. Update `meta/session/PROJECT_STATUS.md`
+11. Update `meta/session/SESSION-CONTEXT.md`
 
 ### Write a module (all docs for a module)
 
@@ -207,11 +223,12 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 1. Check if `meta/session/reports/<filename>.review.md` exists and read it
 2. If no cached review exists, perform the review internally first
 3. Apply fixes to the document
-4. Re-validate with `meta/standards/validation/docs-checklist.md`
-5. Write the corrected document to the target path
-6. Delete the report file if it exists
-7. Update `meta/session/PROJECT_STATUS.md` only if the fix advances the document's `status` (e.g., from `draft` to `review`)
-8. Update `meta/session/SESSION-CONTEXT.md`
+4. Check any new concepts introduced by fixes against `docs/reference/glossary.md`; add missing entries; if an existing entry conflicts with the document's usage, append to `meta/session/PENDING.md` under `## Decide` rather than modifying the glossary
+5. Re-validate with `meta/standards/validation/docs-checklist.md`
+6. Write the corrected document to the target path
+7. Delete the report file if it exists
+8. Update `meta/session/PROJECT_STATUS.md` only if the fix advances the document's `status` (e.g., from `draft` to `review`)
+9. Update `meta/session/SESSION-CONTEXT.md`
 
 ### Design labs for a module
 
@@ -274,15 +291,15 @@ Check result states: PASS | FAIL | FIXED | PENDING | SKIP (see format spec for d
 3. For each lab README in `labs/<module>/`: check required sections and optional/required alignment
 4. Check docs↔labs alignment against `meta/system-design/DOCS_LABS_MAP.md`
 5. Check all frontmatter cross-references point to real files
-6. Fix any FAIL findings or flag for human review
+6. Fix any FAIL findings or flag for human review — for items that cannot be resolved without human input, append to `meta/session/PENDING.md` under `## Review`
 7. Run `python .work/scripts/sync-frontmatter-status.py <module> review` to update frontmatter; verify output shows no unexpected WARN lines
 8. Write `meta/audit/reports/<module>.audit.md` with Phase 1 results; mark cohesion and execution checks as PENDING
-9. Update Overall Status to `STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING` (use `EXECUTION_SKIP` for modules with no labs)
+9. Update Overall Status to `STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING` (use `EXECUTION_SKIP` for modules with no labs); for modules with labs, also append to `meta/session/PENDING.md` under `## Execute`
 
 **Phase 2 — Cohesion** (reads content for correctness, pedagogy, and engineering quality):
 
 1. For each doc in `docs/<module>/`: apply CQ-1 to CQ-5, PQ-1 to PQ-5, EQ-1 to EQ-5, IQ-1 to IQ-4, LC-1 to LC-5
-2. Fix any FAIL findings or flag for human review
+2. Fix any FAIL findings or flag for human review — for items that cannot be resolved without human input, append to `meta/session/PENDING.md` under `## Review`
 3. Run `python .work/scripts/sync-frontmatter-status.py <module> final` to update frontmatter; verify output shows no unexpected WARN lines
 4. Append Phase 2 section to `meta/audit/reports/<module>.audit.md` — do not rewrite Phase 1
 5. Update Overall Status to `STATIC_PASS | COHESION_PASS | EXECUTION_PENDING`
@@ -295,11 +312,24 @@ Check result states: PASS | FAIL | FIXED | PENDING | SKIP (see format spec for d
 
 **Phase 3 — Execution** (requires live infrastructure: Ollama running, devcontainer active):
 
+If infrastructure is not available in the current session: append this module to
+`meta/session/PENDING.md` under `## Execute` and emit `HUMAN_ACTION_REQUIRED`. Do not proceed.
+
 1. For each lab in `labs/<module>/`: run `python lab-<n>/main.py` and verify exit 0
 2. Verify expected output matches what the lab README describes
-3. Fix any lab failures or flag for human review
+3. Fix any lab failures or flag for human review — unfixable failures go to `meta/session/PENDING.md` under `## Review`
 4. Fill in `## Phase 3 — Execution` in `meta/audit/reports/<module>.audit.md` — do not rewrite Phase 1 or Phase 2
 5. Update Overall Status to `FULL_PASS`
+6. Remove this module's `## Execute` entry from `meta/session/PENDING.md`
+
+### Pending
+
+Show items awaiting human intervention accumulated across sessions.
+
+1. Read `meta/session/PENDING.md`
+2. Display unchecked items grouped by section: `## Execute` / `## Review` / `## Decide`
+3. Report count per section and total
+4. Do NOT modify the file — items are cleared by the user or automatically when the corresponding command completes (e.g., Phase 3 removes its `## Execute` entry)
 
 ### Audit (global)
 
