@@ -7,19 +7,15 @@ Portable briefing for cross-tool handoff. Rewritten at the end of every session 
 ## Current state
 
 - Rama activa: `retrofit/editorial-reform`
-- Auditoría foundational completa (3/3): `llm-fundamentals`, `llm-apis`, `prompt-engineering`
-- Auditoría intermediate en progreso (3/6 completos): `structured-outputs`, `rag`, `memory-context` — todos STATIC_PASS / EXECUTION_PENDING
-- Módulos intermediate pendientes de auditar (3): `ai-agents`, `frameworks-tools`, `ai-java`
+- Auditoría estática completa para los 9 módulos intermediate (llm-fundamentals → ai-java): todos STATIC_PASS / EXECUTION_PENDING (ai-java: STATIC_PASS sin labs)
+- Glossary entries añadidas en esta sesión: 13 términos en 4 módulos (memory-context ×3, ai-agents ×3, frameworks-tools ×4, ai-java ×0)
+- Correcciones rag aplicadas: lab-integration añadido en labs/README.md, labs/rag/README.md (×6 secciones), docs/rag/validation.md; lab-chunking-strategies refactorizado para usar shared load_corpus() con clave 'source'
 
 ## Recent decisions
 
-- **rag — correcciones post-auditoría:**
-  - `lab-integration` añadido en todos los lugares que faltaban: `labs/README.md`, `labs/rag/README.md` (frontmatter `implementation_refs`, `summary`, §1, §3, §4, §9), `docs/rag/README.md`, `docs/rag/validation.md` (§1, §4, §7)
-  - `lab-chunking-strategies/main.py` refactorizado para usar `load_corpus()` de `shared/config.py` (clave `'source'` en lugar de `'filename'` local)
-  - Patrón aprendido: ante cualquier cambio estructural (añadir/quitar lab), hacer grep de contadores y listas en todos los archivos afectados antes de cerrar la tarea
-- **memory-context audit:** STATIC_PASS. 3 glossary entries added: `memory-types`, `memory-retrieval`, `summarization-based-compression`.
-- Execution checks remain PENDING para todos los módulos auditados — requiere Ollama + ChromaDB en vivo.
+- **Scope de auditoría estática vs. cohesión:** la pasada actual cubre solo validación estática (frontmatter, H1, glossary IQ-6, DOCS_LABS_MAP, cross-refs, secciones de labs). La cohesión (code-doc alignment, lab outputs) queda para segunda pasada con /audit-module.
+- **Patrón aprendido:** antes de cerrar cualquier tarea estructural (añadir/quitar lab), hacer grep de contadores y listas en todos los archivos afectados. Evita ciclos de re-review.
 
 ## Next task
 
-Auditar módulo `ai-agents` — mismo proceso: leer LEVEL_MODE, validar docs + labs, check alineación DOCS_LABS_MAP, check IQ-6 glossary, aplicar fixes, escribir `meta/audit/reports/ai-agents.audit.md`.
+Segunda pasada con `/audit-module` aplicando cohesión completa — empezar por el módulo que el usuario indique. Execution checks siguen PENDING (requieren Ollama + ChromaDB en vivo).

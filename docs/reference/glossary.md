@@ -235,6 +235,11 @@ The design decision of choosing an AI framework based on how well its primary ab
 - **Origin:** `frameworks-tools`
 - **Doc:** `docs/frameworks-tools/framework-comparison.md`
 
+### framework trade-offs
+The set of engineering tensions introduced by adopting an AI framework: reduced boilerplate vs. added debugging complexity, faster initial delivery vs. abstraction ceiling risk, opinionated conventions vs. flexibility for non-standard requirements.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/framework-comparison.md`
+
 ### feed-forward layer
 A two-layer neural network applied independently to each token representation after self-attention, where learned associations and factual patterns are primarily stored.
 - **Origin:** `llm-fundamentals`
@@ -555,6 +560,11 @@ A LlamaIndex component that transforms raw `Document` objects into `Node` object
 - **Origin:** `frameworks-tools`
 - **Doc:** `docs/frameworks-tools/llamaindex.md`
 
+### retriever
+A LlamaIndex component that accepts a query string and returns the top-k most relevant `Node` objects from an index, decoupling the retrieval strategy (vector similarity, keyword, hybrid) from the synthesis step.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/llamaindex.md`
+
 ### memory-compression
 The replacement of a block of older conversation turns with a model-generated summary that preserves key facts, decisions, and constraints in significantly fewer tokens, freeing budget for new turns.
 - **Origin:** `memory-context`
@@ -820,6 +830,16 @@ A visual or low-code platform that represents LLM pipelines as node graphs rathe
 - **Origin:** `frameworks-tools`
 - **Doc:** `docs/frameworks-tools/workflow-tools.md`
 
+### agent conversation
+The AutoGen interaction model in which two or more `ConversableAgent` instances exchange messages in a structured turn sequence, with each agent deciding whether to reply, call a tool, or terminate based on its system prompt and the accumulated message history.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/autogen.md`
+
+### visual pipeline builder
+A drag-and-drop interface within an AI workflow tool that allows users to construct LLM pipelines by connecting pre-built node components — prompts, models, retrievers, memory — without writing code.
+- **Origin:** `frameworks-tools`
+- **Doc:** `docs/frameworks-tools/workflow-tools.md`
+
 ### AutoGen
 A Microsoft open-source framework for building multi-agent systems through a conversation abstraction, where `ConversableAgent` instances exchange messages and coordinate to complete tasks without explicit orchestration code.
 - **Origin:** `frameworks-tools`
@@ -837,6 +857,11 @@ The repeating perception-decide-act cycle that is the minimal unit of agentic be
 
 ### agentic application
 An application in which an LLM drives control flow through a sequence of tool calls and decisions, rather than executing a single query-response cycle; the LLM decides what actions to take and when the task is complete.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/agent-fundamentals.md`
+
+### autonomy
+The degree to which an agent decides its own action sequence — which tools to call, in what order, and when to stop — without hard-coded procedural control; higher autonomy increases capability but also increases the risk of compounding errors across loop iterations.
 - **Origin:** `ai-agents`
 - **Doc:** `docs/ai-agents/agent-fundamentals.md`
 
@@ -864,6 +889,11 @@ An open protocol that standardizes how AI applications connect to external tools
 An architecture in which multiple agents — each with a scoped tool set and isolated context — collaborate on a shared task, with an orchestrator decomposing the task and delegating sub-tasks to specialized subagents.
 - **Origin:** `ai-agents`
 - **Doc:** `docs/ai-agents/multi-agent-systems.md`
+
+### multi-turn tool use
+The pattern in which a single agent loop iteration involves multiple sequential tool calls — each appended to the message accumulator before the next — allowing the model to chain dependent tool results within one user request.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/tool-use-loops.md`
 
 ### orchestrator
 The coordinating agent in a multi-agent system that receives the original task, decomposes it into sub-tasks, invokes specialized subagents as tool calls, and aggregates their results into a final response; it does not execute domain tools directly.
@@ -924,6 +954,11 @@ A specialized agent in a multi-agent system that receives a scoped sub-task from
 The list of tool declarations (name, description, JSON Schema) passed to the LLM API in the `tools=` parameter; it defines the complete set of capabilities the model can invoke in a given agent loop.
 - **Origin:** `ai-agents`
 - **Doc:** `docs/ai-agents/single-agent-loop.md`
+
+### tool result accumulation
+The protocol of appending each tool call and its result to the message accumulator in the correct role sequence (`assistant` → `tool`) before the next model call, preserving the full interaction history so the model can reason over prior results.
+- **Origin:** `ai-agents`
+- **Doc:** `docs/ai-agents/tool-use-loops.md`
 
 ### tool-use loop
 The multi-turn message accumulation protocol for agentic tool interactions: append the assistant message containing tool calls, append one tool result per call with matching `tool_call_id`, repeat until `finish_reason == "stop"`.

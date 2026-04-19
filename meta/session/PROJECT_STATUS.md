@@ -73,10 +73,13 @@ Do not edit manually unless correcting an error.
 | `structured-outputs` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/structured-outputs.audit.md` |
 | `rag` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/rag.audit.md` |
 | `memory-context` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/memory-context.audit.md` |
+| `ai-agents` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/ai-agents.audit.md` |
+| `frameworks-tools` | STATIC_PASS / EXECUTION_PENDING | `meta/audit/reports/frameworks-tools.audit.md` |
+| `ai-java` | STATIC_PASS | `meta/audit/reports/ai-java.audit.md` |
 
 ---
 
 ## Last updated
 
-Session: memory-context audit complete — STATIC_PASS / EXECUTION_PENDING; 3 glossary entries added (memory-types, memory-retrieval, summarization-based-compression); all 5 labs present and aligned with DOCS_LABS_MAP; all cross-references verified.
-Date: 2026-04-18
+Session: Static audit pass complete for all 9 intermediate modules (llm-fundamentals through ai-java). frameworks-tools: 4 glossary entries added. ai-java: STATIC_PASS, no labs, no glossary additions needed. Second pass with /audit-module (cohesion checks) pending.
+Date: 2026-04-19

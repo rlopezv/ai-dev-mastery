@@ -52,6 +52,34 @@
 | DA-4 README sections match scaffold | PASS | All 4 lab READMEs restructured to scaffold after fixes |
 | DA-3 Concept names match glossary | PASS | Fixed: see Fixes applied section |
 
+### Checks Not Applied in This Pass
+
+The following checks from `meta/standards/validation/docs-checklist.md` were not applied in this static-only pass. They are deferred to the cohesion audit (`/audit-module`).
+
+| Check | Result | Notes |
+|-------|--------|-------|
+| SC-5 Tables present where required | SKIP | Not applied in this pass — deferred to cohesion audit |
+| CQ-1 Concepts technically correct | SKIP | Not applied in this pass — deferred to cohesion audit |
+| CQ-3 Coverage complete | SKIP | Not applied in this pass — deferred to cohesion audit |
+| CQ-5 Limitations acknowledged | SKIP | Not applied in this pass — deferred to cohesion audit |
+| PQ-1 Explanation progressive | SKIP | Not applied in this pass — deferred to cohesion audit |
+| PQ-2 Reader assumptions appropriate | SKIP | Not applied in this pass — deferred to cohesion audit |
+| PQ-3 Mental models clear | SKIP | Not applied in this pass — deferred to cohesion audit |
+| PQ-4 Examples meaningful | SKIP | Not applied in this pass — deferred to cohesion audit |
+| PQ-5 Tables reduce cognitive load | SKIP | Not applied in this pass — deferred to cohesion audit |
+| EQ-2 Trade-offs identified | SKIP | Not applied in this pass — deferred to cohesion audit |
+| EQ-3 Real system behavior reflected | SKIP | Not applied in this pass — deferred to cohesion audit |
+| EQ-4 Abstract explanation grounded | SKIP | Not applied in this pass — deferred to cohesion audit |
+| EQ-5 Operational risks mentioned | SKIP | Not applied in this pass — deferred to cohesion audit |
+| IQ-1 Sandbox alignment | SKIP | Not applied in this pass — deferred to cohesion audit |
+| IQ-2 Cross-references meaningful | SKIP | Not applied in this pass — deferred to cohesion audit |
+| IQ-4 Validation references present | SKIP | Not applied in this pass — deferred to cohesion audit |
+| IQ-5 Fits roadmap position | SKIP | Not applied in this pass — deferred to cohesion audit |
+| LC-2 Components justified | SKIP | Not applied in this pass — deferred to cohesion audit |
+| LC-3 Abstraction level appropriate | SKIP | Not applied in this pass — deferred to cohesion audit |
+| LC-4 Observability requirements addressed | SKIP | Not applied in this pass — deferred to cohesion audit |
+| LC-5 Level exceptions documented | SKIP | Not applied in this pass — deferred to cohesion audit |
+
 ---
 
 ## Fixes Applied During Audit
