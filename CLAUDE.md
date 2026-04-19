@@ -83,6 +83,7 @@ Allowed `status` values: `draft` | `review` | `final`
 - `draft` — written but not yet audited
 - `review` — Phase 1 (static) audit complete
 - `final` — Phase 2 (cohesion) audit complete
+
 Allowed `level` values: `foundational` | `intermediate` | `advanced`
 
 No placeholders. No `TBD`. No `...`.
@@ -209,7 +210,7 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 4. Re-validate with `meta/standards/validation/docs-checklist.md`
 5. Write the corrected document to the target path
 6. Delete the report file if it exists
-7. Update `meta/session/PROJECT_STATUS.md`
+7. Update `meta/session/PROJECT_STATUS.md` only if the fix advances the document's `status` (e.g., from `draft` to `review`)
 8. Update `meta/session/SESSION-CONTEXT.md`
 
 ### Design labs for a module
@@ -248,13 +249,18 @@ Do not accumulate history. Replace the full content each time. Target: under 20 
 Audits a single document and updates its `status` in frontmatter and its rows in the module
 audit report. Use for targeted re-audits after fixes or to advance a document through phases.
 
+**Does NOT update Overall Status** — that is the exclusive responsibility of `/audit-module`.
+After using `/audit-doc` on multiple documents, run "Phase 2 — Finalization" (see below) to
+recalculate Overall Status without re-auditing.
+
 1. Read the document
-2. Apply SC-1 to SC-6 and IQ-5, IQ-6 from `meta/standards/validation/docs-checklist.md`
-3. If performing cohesion audit: apply CQ-1 to CQ-5, PQ-1 to PQ-5, EQ-1 to EQ-5, IQ-1 to IQ-4, LC-1 to LC-5
-4. Update `status` in the document's frontmatter:
+2. Determine the audit phase from the document's current `status`: `draft` → apply Phase 1; `review` → apply Phase 2 (cohesion). Override if the user specifies a phase explicitly.
+3. Phase 1: apply SC-1 to SC-6 and IQ-5, IQ-6 from `meta/standards/validation/docs-checklist.md`
+4. Phase 2 (cohesion): apply CQ-1 to CQ-5, PQ-1 to PQ-5, EQ-1 to EQ-5, IQ-1 to IQ-4, LC-1 to LC-5
+5. Update `status` in the document's frontmatter:
    - Static checks all PASS → `status: review`
    - Cohesion checks all PASS → `status: final`
-5. Update the document's rows in `meta/audit/reports/<module>.audit.md`
+6. Update the document's rows in `meta/audit/reports/<module>.audit.md` — do not touch Overall Status
 
 ### Audit module
 
@@ -269,17 +275,23 @@ Check result states: PASS | FAIL | FIXED | PENDING | SKIP (see format spec for d
 4. Check docs↔labs alignment against `meta/system-design/DOCS_LABS_MAP.md`
 5. Check all frontmatter cross-references point to real files
 6. Fix any FAIL findings or flag for human review
-7. Update `status: review` in frontmatter of all docs that pass Phase 1
+7. Run `python .work/scripts/sync-frontmatter-status.py <module> review` to update frontmatter; verify output shows no unexpected WARN lines
 8. Write `meta/audit/reports/<module>.audit.md` with Phase 1 results; mark cohesion and execution checks as PENDING
-9. Update Overall Status to `STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING`
+9. Update Overall Status to `STATIC_PASS | COHESION_PENDING | EXECUTION_PENDING` (use `EXECUTION_SKIP` for modules with no labs)
 
 **Phase 2 — Cohesion** (reads content for correctness, pedagogy, and engineering quality):
 
 1. For each doc in `docs/<module>/`: apply CQ-1 to CQ-5, PQ-1 to PQ-5, EQ-1 to EQ-5, IQ-1 to IQ-4, LC-1 to LC-5
 2. Fix any FAIL findings or flag for human review
-3. Update `status: final` in frontmatter of all docs that pass Phase 2
+3. Run `python .work/scripts/sync-frontmatter-status.py <module> final` to update frontmatter; verify output shows no unexpected WARN lines
 4. Append Phase 2 section to `meta/audit/reports/<module>.audit.md` — do not rewrite Phase 1
 5. Update Overall Status to `STATIC_PASS | COHESION_PASS | EXECUTION_PENDING`
+
+**Phase 2 — Finalization** (use after targeted `/audit-doc` re-audits, not after a full Phase 2 run):
+
+1. Read all Phase 2 rows in `meta/audit/reports/<module>.audit.md`
+2. If all checks are PASS or FIXED (no FAIL, no PENDING) → update Overall Status to `STATIC_PASS | COHESION_PASS | EXECUTION_PENDING`
+3. If any FAIL remains → leave Overall Status as `COHESION_PENDING` and list the failing checks
 
 **Phase 3 — Execution** (requires live infrastructure: Ollama running, devcontainer active):
 

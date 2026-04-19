@@ -20,11 +20,26 @@ Each module progresses through five phases in order:
 | 5. Cohesion audit | Run `/audit-module` Phase 2; fix CQ/PQ/EQ/LC failures; update `status: final` |
 
 Execution checks (live infrastructure) are tracked separately in the audit report.
-Modules 1–9 are complete — see `PROJECT_STATUS.md` for their audit status.
 
 ---
 
-## Phase 3 — Advanced modules
+## Modules 1–9 — Complete
+
+| Module | Docs | Labs | Audit |
+|--------|------|------|-------|
+| `llm-fundamentals` | ✅ | ✅ | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING |
+| `llm-apis` | ✅ | ✅ | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING |
+| `prompt-engineering` | ✅ | ✅ | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING |
+| `structured-outputs` | ✅ | ✅ | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING |
+| `rag` | ✅ | ✅ | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING |
+| `memory-context` | ✅ | ✅ | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING |
+| `ai-agents` | ✅ | ✅ | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING |
+| `frameworks-tools` | ✅ | ✅ | STATIC_PASS \| COHESION_PENDING \| EXECUTION_PENDING |
+| `ai-java` | ✅ | — | STATIC_PASS \| COHESION_PENDING \| EXECUTION_SKIP |
+
+---
+
+## Modules 10–16 — Pending
 
 ### 10. evaluation-testing
 

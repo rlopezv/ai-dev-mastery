@@ -82,7 +82,7 @@ the following custom commands:
 | `/review-doc <path>` | Review a document; save ephemeral report to `meta/session/reports/` (not committed) |
 | `/fix-doc <path>` | Load cached review, apply fixes, re-validate |
 | `/design-labs <module>` | Design the lab set for a module |
-| `/audit-doc <path>` | Audit a single document; update `status` in frontmatter and module audit report |
+| `/audit-doc <path>` | Audit a single document; update `status` in frontmatter and rows in the module audit report — does not update Overall Status |
 | `/audit-module <module>` | Audit all docs and labs for a module; write report to `meta/audit/reports/` |
 | `/audit` | Global cross-module audit; write report to `meta/audit/reports/global.audit.md` |
 | `/enrich` | Apply horizontal navigation improvements; write report to `meta/audit/reports/enrich.md` |
@@ -105,6 +105,8 @@ Claude Code treats these files as its operating context:
 | `meta/session/PROJECT_STATUS.md` | Current project progress |
 | `meta/audit/reports/` | Persistent audit reports from /audit-doc, /audit-module, /audit, /enrich — committed to git |
 | `meta/session/reports/` | Ephemeral review cache from /review-doc — not committed; consumed by /fix-doc |
+| `meta/session/WORKPLAN.md` | Phase tracker for modules 10–16; includes status summary of modules 1–9 |
+| `meta/session/SESSION-CONTEXT.md` | Cross-session briefing — rewritten at the end of every task |
 | `meta/standards/templates/` | Document structure for each type |
 | `meta/standards/frontmatter/frontmatter-spec.md` | Frontmatter rules |
 | `meta/standards/writing/writing-style.md` | Prose writing rules |
@@ -241,11 +243,10 @@ Claude Code shows context usage during a session. When it reaches 70–90%, run:
 This compresses the session context without losing the working state.
 Relevant when writing full modules in a single session.
 
-### Keep CLAUDE.md under 500 lines
+### Keep CLAUDE.md concise
 
-Context bloat is a real problem. The current `CLAUDE.md` is ~150 lines — keep it that way.
-If new rules are needed, prefer updating the referenced standards files
-rather than adding content to `CLAUDE.md` directly.
+Context bloat is a real problem. If new rules are needed, prefer updating the referenced
+standards files rather than adding content to `CLAUDE.md` directly.
 
 ---
 

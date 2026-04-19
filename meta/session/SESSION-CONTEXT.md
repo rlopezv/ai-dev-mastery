@@ -7,32 +7,32 @@ Portable briefing for cross-tool handoff. Rewritten at the end of every session 
 ## Current state
 
 - Rama activa: `meta/editorial-reform`
-- Revisión del modelo de auditoría completada parcialmente esta sesión:
-  - **PENDING** restaurado como estado distinto de SKIP (PENDING = se hará; SKIP = no aplica)
-  - `audit-report-format.md`: 5 estados, PENDING vs SKIP disambiguado, Phase 3 section añadida
-  - `CLAUDE.md`: estado PENDING, Phase 3 procedure, Overall Status actualizado
-  - `PROJECT_STATUS.md`: 9 filas con formato `STATIC_PASS | COHESION_PENDING | EXECUTION_xxx`
-  - 9 reports migrados al formato canónico via `.work/scripts/migrate-audit-reports.py`
-- Cambios pendientes de commitear (lo hace el usuario)
-
----
+- Revisión del sistema de auditoría y del procedimiento editorial completada
+- Todos los cambios pendientes de commitear (lo hace el usuario)
 
 ## Recent decisions
 
-- PENDING = deferred (se aplicará en fase posterior o cuando haya infra); SKIP = genuinely not applicable
-- ai-java → EXECUTION_SKIP (no hay labs); resto → EXECUTION_PENDING
-- `## Execution Checks` → `## Phase 3 — Execution`; procedure definido en CLAUDE.md
-- Observation rows (ai-agents/rag/memory-context): SKIP → PENDING con nota "formal Phase 2 pending"
+- PENDING = deferred; SKIP = genuinely not applicable
+- `/audit-doc` no toca Overall Status — solo rows + frontmatter
+- Phase 2 Finalization = procedimiento ligero post-`/audit-doc` para recalcular Overall Status
+- `sync-frontmatter-status.py <module> <review|final>` — script bulk-update frontmatter
+- `audit-doc` determina la fase por `status` del doc (`draft`→Phase 1, `review`→Phase 2)
+- `review-protocol.md` ahora cubre 7 categorías (añadida §1.6 Integration para IQ-1..4)
+- `fix-doc` step 7: PROJECT_STATUS update condicional a que avance el `status` del doc
 
----
+## Archivos modificados (sin commitear)
 
-## Puntos pendientes del modelo (de 6, quedan 3)
-
-2. **`status` en frontmatter es manual** — sin verificación explícita ni script
-3. **`/audit-doc` puede crear drift** — actualiza filas pero no Overall Status del report
-6. **WORKPLAN y PROJECT_STATUS con granularidades incompatibles** — no hay sync point definido
+- `CLAUDE.md`
+- `meta/standards/audit/audit-report-format.md`
+- `meta/standards/review/review-protocol.md`
+- `meta/workflow/CLAUDE-CODE-WORKFLOW.md`
+- `meta/session/PROJECT_STATUS.md`
+- `meta/session/WORKPLAN.md`
+- `.work/scripts/migrate-audit-reports.py`
+- `.work/scripts/sync-frontmatter-status.py`
+- `meta/audit/reports/` (9 reports migrados)
 
 ## Next task
 
-Resolver punto 2 (script o procedimiento para verificar/actualizar `status` en frontmatter masivamente),
-luego punto 3 (decidir si `/audit-doc` debe actualizar Overall Status y cómo), luego punto 6.
+Revisión del proceso editorial completo para cerrarlo — revisar writing-style.md,
+lab-code-style.md, templates y su alineamiento con los procedimientos actualizados.

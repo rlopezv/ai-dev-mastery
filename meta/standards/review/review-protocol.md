@@ -28,7 +28,7 @@ Review reports are ephemeral (not committed). Audit reports are persistent (comm
 
 ## 1. Review Categories
 
-All reviews must cover these five categories.
+All reviews must cover these seven categories.
 
 ### 1.1 Conceptual
 
@@ -60,7 +60,14 @@ All reviews must cover these five categories.
 - Misalignment with other modules or the architecture
 - Conflicts with `docs/reference/glossary.md`
 
-### 1.6 Level Compliance
+### 1.6 Integration
+
+- Sandbox or runtime components described do not match the module's level profile (IQ-1)
+- Cross-references (`next`, `related`, `prerequisites`) point to non-existent or irrelevant files (IQ-2)
+- References to labs or implementation files are vague or missing (IQ-3)
+- `validation_refs` in frontmatter is empty or points to a non-existent file (IQ-4)
+
+### 1.7 Level Compliance
 
 - Runtime components exceed what the declared level permits
 - Abstraction level inconsistent with level policy
@@ -86,7 +93,7 @@ Full contract: `meta/system-design/LEVEL_MODE.md`
 
 ```text
 ISSUE-NN
-CATEGORY:     Conceptual | Pedagogical | Engineering | Structural | Consistency
+CATEGORY:     Conceptual | Pedagogical | Engineering | Structural | Consistency | Integration | Level Compliance
 SEVERITY:     Critical | Major | Minor
 LOCATION:     <section name or line reference>
 DESCRIPTION:  <what is wrong>
@@ -126,7 +133,7 @@ RECOMMENDED ACTION: ACCEPT | REVISE | REJECT
 ## 5. Reviewer Rules
 
 Must:
-- Cover all six categories
+- Cover all seven categories
 - Be explicit and concrete — no generic statements
 - Justify every severity assignment
 - Propose actionable fixes
